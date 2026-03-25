@@ -1,0 +1,18 @@
+{
+	"soundCatapult":{
+		"type":"sound",
+		"files":["catapult.mp3"]
+	},
+	"soundGiantCrossbow":{
+		"type":"sound",
+		"files":["giantCrossbow.mp3"]
+	},
+	"soundRocket":{
+		"type":"sound",
+		"files":["rocket1.mp3","rocket2.mp3","rocket3.mp3"]
+	},
+	"soundWater":{
+		"type":"sound",
+		"files":["water.mp3"]
+	}
+}

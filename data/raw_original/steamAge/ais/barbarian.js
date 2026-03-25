@@ -1,0 +1,45 @@
+{
+	"AI_Barbarian":{
+		"type":"ai",
+		"rate":1,
+		"name":{"EN":"barbarian",
+				"FR":"barbare",
+				"DE":"Barbar",
+				"JP":"蛮族"},
+		"lock":true,
+		"orders":[
+			{"endingAge":"stoneAge","item":"cookedMeat"},
+			{"endingAge":"ironAge","item":"steak"},
+			{"item":"beer"},
+			{"item":"busterSword"},
+			{"endingAge":"steamAge","item":"broadSword"},
+			{"endingAge":"etherAge","item":"battleAxe"},
+			{"endingAge":"goldenAge","item":"twoHandedSword"},
+			{"item":"stoneAxe","endingAge":"ironAge","quantity":2},
+			{"item":"club","endingAge":"stoneAge","quantity":2},
+			
+			{"resurrectTower":"totem",		"endingAge":"stoneAge"},
+			{"resurrectTower":"soulsStatue","endingAge":"ironAge"},
+			{"resurrectTower":"chapel"},
+			
+			{"item":"bandage"},
+			{"endingAge":"stoneAge","item":"ointment"},
+			{"item":"shellArmor"},
+			{"endingAge":"etherAge","item":"chainmail"},
+			{"endingAge":"goldenAge","item":"chainShirt"},
+			{"endingAge":"steamAge","item":"longMail"},
+			{"endingAge":"ironAge","item":"woodenArmor"},
+			{"item":"chainLeggings"},
+			{"item":"spikedHelmet"},
+			{"endingAge":"steamAge","item":"cabasset"},
+			{"endingAge":"goldenAge","item":"ironChapel"},
+			{"endingAge":"ironAge","item":"woodenHelmet"},
+			{"endingAge":"etherAge","item":"chainCap"},
+			{"item":"mountWarHorse"},
+			{"item":"studdedLeatherGloves"},
+			{"quantity":2,"item":"strengthRing"},
+			{"item":"steelBelt"},
+			{"house":"militaryCasemat"}
+		]
+	}
+}

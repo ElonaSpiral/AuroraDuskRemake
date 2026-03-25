@@ -1,0 +1,46 @@
+{
+	"AI_viking":{
+		"type":"ai",
+		"rate":1,
+		"name":{"EN":"viking",
+				"FR":"viking",
+				"DE":"wikinger",
+				"JP":"バイキング"},
+		"lock":true,
+		"orders":[
+			{"item":"cookedMeat"},
+			{"item":"ointment"},
+			{"item":"club","endingAge":"stoneAge"},
+			{"item":"stoneAxe","endingAge":"ironAge"},
+			{"item":"battleAxe","endingAge":"etherAge"},
+			{"item":"warAxe","endingAge":"goldenAge"},
+			{"item":"twoHandedAxe","endingAge":"steamAge"},
+			{"item":"steelAxe"},
+			
+			{"resurrectTower":"totem"},
+			
+			{"item":"woodenShield","endingAge":"ironAge"},
+			{"item":"smallShield","endingAge":"goldenAge"},
+			{"item":"smallShield","startingAge":"steamAge"},
+			{"defenseTower":"advWoodenTower","quantity":2},
+			{"defenseTower":"woodenTower","quantity":2,"endingAge":"stoneAge"},
+			{"item":"leatherArmor","endingAge":"ironAge"},
+			{"item":"studdedLeatherArmor"},
+			{"item":"studdedLeatherCap"},
+			{"item":"leatherCap","endingAge":"ironAge"},
+			{"item":"mountWarHorse"},
+			{"item":"studdedLeatherGloves"},
+			{"item":"leatherGloves","endingAge":"ironAge"},
+			{"item":"beltOfGiantStrength"},
+			{"item":"leatherBelt","endingAge":"etherAge"},
+			{"item":"bootsOfTheNorth"},
+			{"item":"studdedBoots","endingAge":"steamAge"},
+			{"item":"furShoes","endingAge":"ironAge"},
+			{"item":"amuletOfProtection"},
+			{"quantity":2,"item":"strengthRing"},
+			{"house":"stoneHouse"},
+			{"house":"woodenShack","endingAge":"ironAge"},
+			{"house":"skinTipi","endingAge":"stoneAge"}
+		]
+	}
+}

@@ -1,0 +1,57 @@
+{
+	"AI_engineer":{
+		"type":"ai",
+		"rate":1,
+		"name":{
+			"EN":"engineer",
+			"FR":"ingénieur",
+			"JP":"技師"
+		},
+		"lock":true,
+		"orders":[
+			{"endingAge":"ironAge","item":"furShoes"},
+			{"endingAge":"goldenAge","item":"chainLeggings"},
+			{"item":"sevenPlacesBoots"},
+			{"item":"amuletOfCheetah"},
+			{"quantity":1,"item":"beer"},
+			{"endingAge":"ironAge","item":"bread"},
+			{"endingAge":"stoneAge","item":"cookedMeat"},
+			
+			{"resurrectTower":"totem",		"endingAge":"stoneAge"},
+			{"resurrectTower":"soulsStatue","endingAge":"ironAge"},
+			{"resurrectTower":"chapel"},
+			
+			{"defenseTower":"stoneTower","quantity":4},
+			{"defenseTower":"cannonTower","quantity":2},
+			{"item":"sniperRifle"},
+			{"endingAge":"steamAge","item":"rifle"},
+			{"endingAge":"ironAge","item":"blowgun"},
+			{"endingAge":"etherAge","item":"crossbow"},
+			{"endingAge":"goldenAge","item":"heavyCrossbow"},
+			{"item":"bolts","endingAge":"goldenAge","quantity":40},
+			{"quantity":50,"item":"cartridges"},
+			{"item":"darts","endingAge":"ironAge","quantity":30},
+			{"endingAge":"ironAge","item":"woodenArmor"},
+			{"item":"shellArmor"},
+			{"endingAge":"steamAge","item":"longMail"},
+			{"endingAge":"goldenAge","item":"chainShirt"},
+			{"endingAge":"etherAge","item":"chainmail"},
+			{"item":"battleHelmet"},
+			{"endingAge":"steamAge","item":"cabasset"},
+			{"endingAge":"goldenAge","item":"ironChapel"},
+			{"endingAge":"etherAge","item":"chainCap"},
+			{"endingAge":"ironAge","item":"woodenHelmet"},
+			{"item":"studdedLeatherGloves"},
+			{"quantity":2,"item":"ringOfProtection"},
+			{"item":"steelBelt"},
+			{"house":"militaryCasemat"},
+			{"house":"skinTipi","endingAge":"ironAge"},
+			{"house":"stoneHouse","endingAge":"steamAge"},
+			{"monster":"heavyCannon","quantity":5},
+			{"endingAge":"steamAge","monster":"bombard","quantity":5},
+			{"endingAge":"goldenAge","monster":"catapult","quantity":5},
+			{"endingAge":"etherAge","monster":"siegeScorpion","quantity":5},
+			{"defenseTower":"stoneTower","quantity":15}
+		]
+	}
+}

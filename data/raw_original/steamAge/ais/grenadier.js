@@ -1,0 +1,53 @@
+{
+	"AI_grenadier":{
+		"type":"ai",
+		"rate":1,
+		"name":{
+			"EN":"grenadier",
+			"FR":"grenadier",
+			"JP":"擲弾兵"
+		},
+		"lock":true,
+		"orders":[
+			{"endingAge":"ironAge","item":"furShoes"},
+			{"item":"sevenPlacesBoots"},
+			{"endingAge":"goldenAge","item":"chainLeggings"},
+			
+			{"resurrectTower":"totem",		"endingAge":"stoneAge"},
+			{"resurrectTower":"soulsStatue","endingAge":"ironAge"},
+			{"resurrectTower":"chapel"},
+			
+			{"item":"amuletOfCheetah"},
+			{"quantity":10,"item":"beer"},
+			{"endingAge":"ironAge","item":"bread"},
+			{"endingAge":"stoneAge","item":"cookedMeat"},
+			{"defenseTower":"stoneTower","quantity":2},
+			{"defenseTower":"cannonTower","quantity":2},
+			{"quantity":30,"item":"handGrenade"},
+			{"quantity":30,"item":"sphericalGrenade"},
+			{"item":"javelin","endingAge":"goldenAge","quantity":50},
+			{"item":"stoneJavelin","endingAge":"etherAge","quantity":50},
+			{"item":"assegai","endingAge":"stoneAge","quantity":50},
+			{"item":"shellArmor"},
+			{"endingAge":"steamAge","item":"longMail"},
+			{"endingAge":"goldenAge","item":"chainShirt"},
+			{"endingAge":"ironAge","item":"woodenArmor"},
+			{"endingAge":"etherAge","item":"chainmail"},
+			{"item":"battleHelmet"},
+			{"endingAge":"steamAge","item":"cabasset"},
+			{"endingAge":"goldenAge","item":"ironChapel"},
+			{"endingAge":"etherAge","item":"chainCap"},
+			{"endingAge":"ironAge","item":"woodenHelmet"},
+			{"item":"studdedLeatherGloves"},
+			{"quantity":2,"item":"ringOfProtection"},
+			{"item":"steelBelt"},
+			{"item":"backMissileLauncher"},
+			{"quantity":20,"item":"microRockets"},
+			{"house":"militaryCasemat"},
+			{"house":"stoneHouse","endingAge":"steamAge"},
+			{"house":"skinTipi","endingAge":"ironAge"},
+			{"defenseTower":"sniperTower","quantity":5},
+			{"defenseTower":"artillery","quantity":5}
+		]
+	}
+}

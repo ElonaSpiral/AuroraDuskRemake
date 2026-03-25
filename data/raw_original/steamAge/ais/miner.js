@@ -1,0 +1,57 @@
+{
+	"AI_miner":{
+		"type":"ai",
+		"rate":1,
+		"name":{"EN":"miner",
+				"FR":"mineur",
+				"DE":"bergmann",
+				"JP":"鉱夫"},
+		"lock":true,
+		"orders":[
+			{"item":"meatloaf"},
+			{"item":"boiledMeat","endingAge":"goldenAge"},
+			{"item":"meatPie","endingAge":"etherAge"},
+			{"item":"bread","endingAge":"ironAge"},
+			{"item":"cookedMeat","endingAge":"stoneAge"},
+			{"item":"mushroomSoup"},
+			
+			{"resurrectTower":"totem",		"endingAge":"stoneAge"},
+			{"resurrectTower":"soulsStatue","endingAge":"ironAge"},
+			{"resurrectTower":"chapel"},
+			
+			{"defenseTower":"woodenTower",		"quantity":2,	"endingAge":"stoneAge"},
+			{"defenseTower":"advWoodenTower",	"quantity":2,	"endingAge":"ironAge"},
+			{"defenseTower":"stoneTower",		"quantity":2},
+			
+			{"item":"pickaxe"},
+			{"item":"stoneHammer","endingAge":"ironAge"},
+			{"item":"club","endingAge":"stoneAge"},
+			{"item":"woodenBucket"},
+			{"item":"wickerBasket","endingAge":"ironAge"},
+			{"item":"furCoat","endingAge":"ironAge"},
+			{"item":"medievalTunic"},
+			{"quantity":3,"landRessource":"rock"},
+			{"quantity":2,"landRessource":"ironOre"},
+			{"landRessource":"crystalsOre"},
+			{"landRessource":"sulfurOre"},
+			{"landRessource":"goldenOre"},
+			{"quantity":2,"landRessource":"coalOre"},
+			{"item":"boots"},
+			{"item":"sandals","endingAge":"ironAge"},
+			{"item":"furShoes","endingAge":"stoneAge"},
+			{"house":"twoFloorsHouse"},
+			{"house":"stoneHouse","endingAge":"steamAge"},
+			{"house":"woodenShack","endingAge":"ironAge"},
+			{"house":"hut","endingAge":"stoneAge"},
+			{"item":"backpack"},
+			{"defenseTower":"stoneTower","endingAge":"goldenAge"},
+			{"defenseTower":"woodenTower","endingAge":"stoneAge"},
+			{"defenseTower":"advWoodenTower","endingAge":"ironAge"},
+			{"defenseTower":"cannonTower"},
+			{"item":"partialHelmet"},
+			{"item":"glovesOfStrength"},
+			{"item":"leatherGloves","endingAge":"steamAge"},
+			{"item":"leatherBelt"}
+		]
+	}
+}
