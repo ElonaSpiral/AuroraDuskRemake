@@ -1,0 +1,362 @@
+[gd_scene load_steps=3 format=3 uid="uid://aurora_charcreate"]
+
+[ext_resource type="Script" path="res://scripts/CharacterCreationScene.gd" id="1_script"]
+[ext_resource type="Theme"  path="res://theme/ElinTheme.tres"              id="2_theme"]
+
+; ──────────────────────────────────────────────────────────────
+;  CharacterCreationScene shell — three columns
+;
+;  Root
+;  ├── BgBase / BgVignette
+;  ├── TitleLabel
+;  ├── MainHBox  (3 columns: form+lore | stats | reserved for future appearance)
+;  │   ├── LeftCol
+;  │   │   ├── FormPanel  — Name / Race / Gender / Job / Expertise
+;  │   │   └── LorePanel  — Race lore text
+;  │   ├── MidCol
+;  │   │   └── StatPanel  — Starting characteristics
+;  │   └── RightCol  (placeholder — appearance / perks future expansion)
+;  ├── BottomBar  — error label + Confirm button
+;  └── BackPanel  — bottom-left back button
+; ──────────────────────────────────────────────────────────────
+
+[node name="CharacterCreationScene" type="Control"]
+layout_mode    = 3
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+theme          = ExtResource("2_theme")
+script         = ExtResource("1_script")
+
+; ── Backgrounds ───────────────────────────────────────────────
+[node name="BgBase" type="ColorRect" parent="."]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+color          = Color(0.110, 0.088, 0.062, 1.0)
+mouse_filter   = 2
+
+[node name="BgVignette" type="ColorRect" parent="."]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+color          = Color(0.0, 0.0, 0.0, 0.28)
+mouse_filter   = 2
+
+; ── Title ─────────────────────────────────────────────────────
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode           = 1
+anchors_preset        = -1
+anchor_left           = 0.0
+anchor_top            = 0.0
+anchor_right          = 1.0
+anchor_bottom         = 0.0
+offset_top            = 10.0
+offset_bottom         = 62.0
+size_flags_horizontal = 3
+text                  = "CREATE A CHARACTER"
+horizontal_alignment  = 1
+theme_override_font_sizes/font_size = 44
+theme_override_colors/font_color    = Color(0.420, 0.243, 0.071, 1.0)
+
+; ── Three-column main area ────────────────────────────────────
+[node name="MainHBox" type="HBoxContainer" parent="."]
+layout_mode    = 1
+anchors_preset = -1
+anchor_left    = 0.02
+anchor_top     = 0.09
+anchor_right   = 0.98
+anchor_bottom  = 0.88
+theme_override_constants/separation = 14
+
+; ══════════ LEFT COLUMN ══════════════════════════════════════
+
+[node name="LeftCol" type="VBoxContainer" parent="MainHBox"]
+layout_mode              = 2
+size_flags_horizontal    = 3
+size_flags_stretch_ratio = 1.1
+theme_override_constants/separation = 10
+
+; ── Form Panel ────────────────────────────────────────────────
+[node name="FormPanel" type="PanelContainer" parent="MainHBox/LeftCol"]
+layout_mode = 2
+
+[node name="FormMargin" type="MarginContainer" parent="MainHBox/LeftCol/FormPanel"]
+layout_mode = 2
+theme_override_constants/margin_left   = 18
+theme_override_constants/margin_top    = 14
+theme_override_constants/margin_right  = 18
+theme_override_constants/margin_bottom = 14
+
+[node name="FormVBox" type="VBoxContainer" parent="MainHBox/LeftCol/FormPanel/FormMargin"]
+layout_mode                         = 2
+theme_override_constants/separation = 10
+
+; Name row
+[node name="NameRow" type="HBoxContainer" parent="MainHBox/LeftCol/FormPanel/FormMargin/FormVBox"]
+layout_mode                         = 2
+theme_override_constants/separation = 12
+
+[node name="NameLbl" type="Label" parent="MainHBox/LeftCol/FormPanel/FormMargin/FormVBox/NameRow"]
+layout_mode = 2
+text        = "Name:"
+custom_minimum_size = Vector2(100, 0)
+vertical_alignment  = 1
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color    = Color(0.420, 0.243, 0.071, 1.0)
+
+[node name="TxtName" type="LineEdit" parent="MainHBox/LeftCol/FormPanel/FormMargin/FormVBox/NameRow"]
+layout_mode           = 2
+size_flags_horizontal = 3
+placeholder_text      = "Enter a name..."
+custom_minimum_size   = Vector2(0, 38)
+theme_override_font_sizes/font_size = 20
+
+; Race row
+[node name="RaceRow" type="HBoxContainer" parent="MainHBox/LeftCol/FormPanel/FormMargin/FormVBox"]
+layout_mode                         = 2
+theme_override_constants/separation = 12
+
+[node name="RaceLbl" type="Label" parent="MainHBox/LeftCol/FormPanel/FormMargin/FormVBox/RaceRow"]
+layout_mode         = 2
+text                = "Race:"
+custom_minimum_size = Vector2(100, 0)
+vertical_alignment  = 1
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color    = Color(0.420, 0.243, 0.071, 1.0)
+
+[node name="OptRace" type="OptionButton" parent="MainHBox/LeftCol/FormPanel/FormMargin/FormVBox/RaceRow"]
+layout_mode           = 2
+size_flags_horizontal = 3
+custom_minimum_size   = Vector2(0, 38)
+theme_override_font_sizes/font_size = 20
+
+; Gender row
+[node name="GenderRow" type="HBoxContainer" parent="MainHBox/LeftCol/FormPanel/FormMargin/FormVBox"]
+layout_mode                         = 2
+theme_override_constants/separation = 12
+
+[node name="GenderLbl" type="Label" parent="MainHBox/LeftCol/FormPanel/FormMargin/FormVBox/GenderRow"]
+layout_mode         = 2
+text                = "Gender:"
+custom_minimum_size = Vector2(100, 0)
+vertical_alignment  = 1
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color    = Color(0.420, 0.243, 0.071, 1.0)
+
+[node name="OptGender" type="OptionButton" parent="MainHBox/LeftCol/FormPanel/FormMargin/FormVBox/GenderRow"]
+layout_mode           = 2
+size_flags_horizontal = 3
+custom_minimum_size   = Vector2(0, 38)
+theme_override_font_sizes/font_size = 20
+
+; Job row
+[node name="JobRow" type="HBoxContainer" parent="MainHBox/LeftCol/FormPanel/FormMargin/FormVBox"]
+layout_mode                         = 2
+theme_override_constants/separation = 12
+
+[node name="JobLbl" type="Label" parent="MainHBox/LeftCol/FormPanel/FormMargin/FormVBox/JobRow"]
+layout_mode         = 2
+text                = "Job:"
+custom_minimum_size = Vector2(100, 0)
+vertical_alignment  = 1
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color    = Color(0.420, 0.243, 0.071, 1.0)
+
+[node name="OptJob" type="OptionButton" parent="MainHBox/LeftCol/FormPanel/FormMargin/FormVBox/JobRow"]
+layout_mode           = 2
+size_flags_horizontal = 3
+custom_minimum_size   = Vector2(0, 38)
+theme_override_font_sizes/font_size = 20
+
+; Expertise row
+[node name="ExpertiseRow" type="HBoxContainer" parent="MainHBox/LeftCol/FormPanel/FormMargin/FormVBox"]
+layout_mode                         = 2
+theme_override_constants/separation = 12
+
+[node name="ExpertiseLbl" type="Label" parent="MainHBox/LeftCol/FormPanel/FormMargin/FormVBox/ExpertiseRow"]
+layout_mode         = 2
+text                = "Expertise:"
+custom_minimum_size = Vector2(100, 0)
+vertical_alignment  = 1
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color    = Color(0.420, 0.243, 0.071, 1.0)
+
+[node name="OptExpertise" type="OptionButton" parent="MainHBox/LeftCol/FormPanel/FormMargin/FormVBox/ExpertiseRow"]
+layout_mode           = 2
+size_flags_horizontal = 3
+custom_minimum_size   = Vector2(0, 38)
+theme_override_font_sizes/font_size = 20
+
+; ── Lore Panel ────────────────────────────────────────────────
+[node name="LorePanel" type="PanelContainer" parent="MainHBox/LeftCol"]
+layout_mode          = 2
+size_flags_vertical  = 3
+
+[node name="LoreMargin" type="MarginContainer" parent="MainHBox/LeftCol/LorePanel"]
+layout_mode = 2
+theme_override_constants/margin_left   = 16
+theme_override_constants/margin_top    = 12
+theme_override_constants/margin_right  = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="LoreScroll" type="ScrollContainer" parent="MainHBox/LeftCol/LorePanel/LoreMargin"]
+layout_mode            = 2
+size_flags_vertical    = 3
+horizontal_scroll_mode = 0
+
+[node name="LoreLbl" type="Label" parent="MainHBox/LeftCol/LorePanel/LoreMargin/LoreScroll"]
+layout_mode           = 2
+size_flags_horizontal = 3
+autowrap_mode         = 3
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color    = Color(0.300, 0.190, 0.080, 1.0)
+
+; ══════════ MIDDLE COLUMN — Starting Characteristics ══════════
+
+[node name="MidCol" type="VBoxContainer" parent="MainHBox"]
+layout_mode              = 2
+size_flags_horizontal    = 3
+size_flags_stretch_ratio = 0.85
+
+[node name="StatPanel" type="PanelContainer" parent="MainHBox/MidCol"]
+layout_mode         = 2
+size_flags_vertical = 3
+
+[node name="StatMargin" type="MarginContainer" parent="MainHBox/MidCol/StatPanel"]
+layout_mode = 2
+theme_override_constants/margin_left   = 16
+theme_override_constants/margin_top    = 12
+theme_override_constants/margin_right  = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="StatScroll" type="ScrollContainer" parent="MainHBox/MidCol/StatPanel/StatMargin"]
+layout_mode            = 2
+size_flags_vertical    = 3
+horizontal_scroll_mode = 0
+
+[node name="StatVBox" type="VBoxContainer" parent="MainHBox/MidCol/StatPanel/StatMargin/StatScroll"]
+layout_mode                         = 2
+size_flags_horizontal               = 3
+theme_override_constants/separation = 3
+
+; ══════════ RIGHT COLUMN — Additional Bonuses + Appearance ═════
+
+[node name="RightCol" type="VBoxContainer" parent="MainHBox"]
+layout_mode              = 2
+size_flags_horizontal    = 3
+size_flags_stretch_ratio = 0.85
+
+[node name="RightPanel" type="PanelContainer" parent="MainHBox/RightCol"]
+layout_mode         = 2
+size_flags_vertical = 3
+
+[node name="RightMargin" type="MarginContainer" parent="MainHBox/RightCol/RightPanel"]
+layout_mode = 2
+theme_override_constants/margin_left   = 16
+theme_override_constants/margin_top    = 12
+theme_override_constants/margin_right  = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="RightVBox" type="VBoxContainer" parent="MainHBox/RightCol/RightPanel/RightMargin"]
+layout_mode                         = 2
+size_flags_vertical                 = 3
+theme_override_constants/separation = 6
+
+; ── Additional Bonuses section ────────────────────────────────
+[node name="BonusesHeader" type="Label" parent="MainHBox/RightCol/RightPanel/RightMargin/RightVBox"]
+layout_mode = 2
+text        = "Additional bonuses:"
+theme_override_font_sizes/font_size = 19
+theme_override_colors/font_color    = Color(0.420, 0.243, 0.071, 1.0)
+
+[node name="BonusesSep" type="HSeparator" parent="MainHBox/RightCol/RightPanel/RightMargin/RightVBox"]
+layout_mode = 2
+
+[node name="BonusesText" type="Label" parent="MainHBox/RightCol/RightPanel/RightMargin/RightVBox"]
+layout_mode  = 2
+text         = "None"
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color    = Color(0.490, 0.390, 0.240, 0.85)
+
+[node name="BonusGap" type="Control" parent="MainHBox/RightCol/RightPanel/RightMargin/RightVBox"]
+layout_mode         = 2
+custom_minimum_size = Vector2(0, 8)
+
+; ── Appearance section ────────────────────────────────────────
+[node name="AppearanceSection" type="VBoxContainer" parent="MainHBox/RightCol/RightPanel/RightMargin/RightVBox"]
+layout_mode                         = 2
+size_flags_vertical                 = 3
+theme_override_constants/separation = 4
+
+[node name="AppearanceHeader" type="Label" parent="MainHBox/RightCol/RightPanel/RightMargin/RightVBox/AppearanceSection"]
+layout_mode = 2
+text        = "Appearance:"
+theme_override_font_sizes/font_size = 19
+theme_override_colors/font_color    = Color(0.420, 0.243, 0.071, 1.0)
+
+[node name="AppearanceSep" type="HSeparator" parent="MainHBox/RightCol/RightPanel/RightMargin/RightVBox/AppearanceSection"]
+layout_mode = 2
+
+; AppearanceBox is a plain Control — the StickFigure is added here by script
+[node name="AppearanceBox" type="Control" parent="MainHBox/RightCol/RightPanel/RightMargin/RightVBox/AppearanceSection"]
+layout_mode              = 2
+size_flags_horizontal    = 3
+size_flags_vertical      = 3
+custom_minimum_size      = Vector2(0, 120)
+
+; ── Customise button (placeholder) ────────────────────────────
+[node name="BtnCustomise" type="Button" parent="MainHBox/RightCol/RightPanel/RightMargin/RightVBox"]
+layout_mode         = 2
+custom_minimum_size = Vector2(0, 40)
+text                = "Customise Appearance"
+disabled            = true
+theme_override_font_sizes/font_size = 18
+
+; ── Bottom bar — error label + Confirm ───────────────────────
+[node name="BottomBar" type="HBoxContainer" parent="."]
+layout_mode    = 1
+anchors_preset = -1
+anchor_left    = 0.02
+anchor_top     = 1.0
+anchor_right   = 0.98
+anchor_bottom  = 1.0
+offset_top     = -68.0
+offset_bottom  = -12.0
+theme_override_constants/separation = 14
+
+[node name="LblError" type="Label" parent="BottomBar"]
+layout_mode           = 2
+size_flags_horizontal = 3
+size_flags_vertical   = 3
+text                  = ""
+vertical_alignment    = 1
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color    = Color(0.600, 0.100, 0.050, 1.0)
+
+[node name="BtnConfirm" type="Button" parent="BottomBar"]
+layout_mode         = 2
+custom_minimum_size = Vector2(200, 48)
+text                = "✓  CONFIRM"
+theme_override_font_sizes/font_size = 22
+
+; ── Back button — bottom-left ─────────────────────────────────
+[node name="BackPanel" type="PanelContainer" parent="."]
+layout_mode   = 1
+anchor_left   = 0.0
+anchor_top    = 1.0
+anchor_right  = 0.0
+anchor_bottom = 1.0
+offset_left   = 20.0
+offset_top    = -70.0
+offset_right  = 260.0
+offset_bottom = -12.0
+z_index       = 2
+
+[node name="BtnBack" type="Button" parent="BackPanel"]
+layout_mode         = 2
+custom_minimum_size = Vector2(220, 48)
+text                = "BACK"
+theme_override_font_sizes/font_size = 22

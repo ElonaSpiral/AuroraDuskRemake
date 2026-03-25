@@ -1,0 +1,3035 @@
+{
+  "_comment": "Resource item definitions. Used by crafting, gathering, and economy systems. 'maxQuantity' keys refer to the skill used to gather it. 'value' = base trade value. 'gain' = stat granted on use. Speech lines (zero/lack/out/full) are shown to the player.",
+  "_source": "base=resources1.js + expansion=resources2.js",
+  "silverCoin": {
+    "type": "ressource",
+    "no": 0,
+    "maxQuantity": "infinity",
+    "disableRawMaterial": true,
+    "value": 1,
+    "sellResource": true,
+    "picture": {
+      "file": "silverCoin.png"
+    },
+    "name": {
+      "EN": "silver coins",
+      "FR": "pièces d'argent",
+      "DE": "Silber Münze",
+      "JP": "銀貨"
+    },
+    "description": {
+      "EN": "Use silver coins to trade resources at the market.",
+      "FR": "Les pièces d'argent permettent d'acheter et de vendre des ressources au marché.",
+      "DE": "Silber Münzen dienen dazu Rohstoffe zu kaufen oder Soldaten anzuheuern.",
+      "JP": "市場などで用いる交易資源です。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any silver coins."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de pièces d'argent."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine Silber Münze."
+        ]
+      },
+      "JP": {
+        "D": [
+          "銀貨を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough silver coins."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de pièces d'argent."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Silber Münzen."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な銀貨がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of silver coins."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de pièces d'argent."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all meine Silber Münzen verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "銀貨が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too many silver coins."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de pièces d'argent."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viele Silber Münzen!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "銀貨はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "medicinalHerbs": {
+    "type": "ressource",
+    "no": 1,
+    "maxQuantity": {
+      "picking": 1
+    },
+    "value": 0.25,
+    "picture": {
+      "file": "medicinalHerbs.png"
+    },
+    "gain": {
+      "health": 3
+    },
+    "name": {
+      "EN": "medicinal herbs",
+      "FR": "herbes médicinales",
+      "DE": "Heilkräuter",
+      "JP": "薬草"
+    },
+    "description": {
+      "EN": "Use medicinal herbs to restore your health.",
+      "FR": "Les herbes médicinales permettent de récupérer de la santé.",
+      "DE": "Heilkräuter stellen bei verzehr Lebenspunkte wieder her.",
+      "JP": "薬品調合用途などだけでなく、直接利用して体力の回復もできます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any medicinal herbs."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas d'herbes médicinales."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine Heilkräuter."
+        ]
+      },
+      "JP": {
+        "D": [
+          "薬草を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough medicinal herbs."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez d'herbes médicinales."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Heilkräuter."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な薬草がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of medicinal herbs."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus d'herbes médicinales."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all meine Heilkräuter verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "薬草が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too many medicinal herbs."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum d'herbes médicinales."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viele Heilkräuter!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "薬草はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "fruits": {
+    "type": "ressource",
+    "no": 2,
+    "maxQuantity": {
+      "picking": 1
+    },
+    "value": 0.25,
+    "picture": {
+      "file": "fruits.png"
+    },
+    "gain": {
+      "stamina": 2
+    },
+    "name": {
+      "EN": "fruits",
+      "FR": "fruits",
+      "DE": "blaubeeren",
+      "JP": "果物"
+    },
+    "description": {
+      "EN": "Eat fruits to restore your stamina.",
+      "FR": "Les fruits permettent de récupérer de l'énergie.",
+      "DE": "Köstliche blaubeeren die Ausdauer wiederherstellen.",
+      "JP": "調理用途だけでなく、食べて持久力の回復もできます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any fruits."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de fruit."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine blaubeeren."
+        ]
+      },
+      "JP": {
+        "D": [
+          "果物を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough fruits."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de fruits."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug blaubeeren."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な果物がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of fruits."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de fruits."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all meine blaubeeren verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "果物が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too many fruits."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de fruits."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viele blaubeeren!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "果物はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "mushroom": {
+    "type": "ressource",
+    "no": 3,
+    "maxQuantity": {
+      "picking": 1
+    },
+    "value": 0.25,
+    "picture": {
+      "file": "mushroom.png"
+    },
+    "gain": {
+      "mana": 3
+    },
+    "name": {
+      "EN": "mushroom",
+      "FR": "champignon",
+      "DE": "Pilz",
+      "JP": "きのこ"
+    },
+    "description": {
+      "EN": "Eat mushrooms to restore your mana.",
+      "FR": "Les champignons permettent de récupérer de la mana.",
+      "DE": "Genießbare Pilze zum wiederherstellen von Mana.",
+      "JP": "調理用途だけでなく、食べて魔力の回復もできます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any mushrooms."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de champignons."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine Pilze."
+        ]
+      },
+      "JP": {
+        "D": [
+          "きのこを持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough mushrooms."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de champignons."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Pilze."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分なきのこがないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of mushrooms."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de champignons."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all meine Pilze verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "きのこが尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too many mushrooms."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de champignons."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viele Pilze!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "きのこはこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "wood": {
+    "type": "ressource",
+    "no": 4,
+    "maxQuantity": {
+      "woodcutting": 1
+    },
+    "value": 0.25,
+    "picture": {
+      "file": "wood.png"
+    },
+    "name": {
+      "EN": "wood",
+      "FR": "bois",
+      "DE": "Holz",
+      "JP": "木材"
+    },
+    "description": {
+      "EN": "Use wood to construct workshops and buildings.",
+      "FR": "Le bois permet de fabriquer des ateliers et des bâtiments.",
+      "DE": "Holz wird zum bauen von Werkstätten und Gebäuden verwendet.",
+      "JP": "工房設備や建物の建築、厚板の製造などに用いられます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any wood."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de bois."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe kein Holz."
+        ]
+      },
+      "JP": {
+        "D": [
+          "木材を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough wood."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de bois."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Holz."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な木材がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          " have run out of wood."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de bois."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all mein Holz verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "木材が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much wood."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de bois."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viel Holz!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "木材はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "rawMeat": {
+    "type": "ressource",
+    "no": 5,
+    "maxQuantity": {
+      "hunting": 1
+    },
+    "value": 0.25,
+    "picture": {
+      "file": "meat.png"
+    },
+    "name": {
+      "EN": "raw meat",
+      "FR": "viande crue",
+      "DE": "Rohes Fleisch",
+      "JP": "生肉"
+    },
+    "description": {
+      "EN": "Raw meat must be cooked to restore your stamina.",
+      "FR": "La viande crue doit être cuite pour permettre de récupérer de l'énergie.",
+      "DE": "Rohes Fleisch sollte vor dem verzehr verarbeitet werden.",
+      "JP": "調理することで、持久力を回復する料理を作ることができます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any raw meat."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de viande crue."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe kein Rohes Fleisch."
+        ]
+      },
+      "JP": {
+        "D": [
+          "生肉を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough raw meat."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de viande crue."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Rohes Fleisch."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な生肉がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of raw meat."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de viande crue."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all mein Rohes Fleisch verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "生肉が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much raw meat."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de viande crue."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viel Rohes Fleisch!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "生肉はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "animalSkins": {
+    "type": "ressource",
+    "no": 6,
+    "maxQuantity": {
+      "hunting": 1
+    },
+    "value": 0.25,
+    "picture": {
+      "file": "animalSkins.png"
+    },
+    "name": {
+      "EN": "animal skin",
+      "FR": "peau animale",
+      "DE": "Tierhaut",
+      "JP": "生皮"
+    },
+    "description": {
+      "EN": "Use animal skin to manufacture leather and parchment.",
+      "FR": "Les peaux animales permettent de fabriquer du cuir et des parchemins.",
+      "DE": "Tierhaut wird zum herstellen von Leder und Pergamenten benötigt",
+      "JP": "なめし革や羊皮紙の製造などに用いられます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any animal skin."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de peaux animales."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine Tierhaut."
+        ]
+      },
+      "JP": {
+        "D": [
+          "生皮を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough animal skin."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de peaux animales."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Tierhaut."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な生皮がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of animal skin."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de peau animale."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all meine Tierhaut verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "生皮が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much animal skin."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de peaux animales."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viel Tierhaut!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "生皮はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "leather": {
+    "type": "ressource",
+    "no": 7,
+    "maxQuantity": {
+      "tanning": 1
+    },
+    "value": 2,
+    "picture": {
+      "file": "leather.png"
+    },
+    "name": {
+      "EN": "leather",
+      "FR": "cuir",
+      "DE": "Leder",
+      "JP": "なめし革"
+    },
+    "description": {
+      "EN": "Use leather to manufacture boots, gloves and light armours.",
+      "FR": "Le cuir permet de fabriquer des bottes, des gants et des armures légères.",
+      "DE": "Leder wird zum Herstellen von Schuhen, Handschuhen oder Leichter Rüstung verwendet.",
+      "JP": "長靴や手袋、軽鎧の製造などに用いられます。製革所にて生皮から加工できます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any leather."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de cuir."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe kein Leder."
+        ]
+      },
+      "JP": {
+        "D": [
+          "なめし革を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough leather."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de cuir."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Leder."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分ななめし革がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of leather."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de cuir."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all mein Leder verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "なめし革が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much leather."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de cuir."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viel Leder!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "なめし革はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "plank": {
+    "type": "ressource",
+    "age": "stoneAge",
+    "no": 8,
+    "maxQuantity": {
+      "sawing": 1
+    },
+    "value": 2,
+    "picture": {
+      "file": "plank.png"
+    },
+    "name": {
+      "EN": "plank",
+      "FR": "planche",
+      "DE": "Bretter",
+      "JP": "厚板"
+    },
+    "description": {
+      "EN": "Use planks to construct workshops and buildings.",
+      "FR": "Les planches permettent de construire des ateliers et des bâtiments.",
+      "DE": "Bretter werden überwiegend zum Bauen verwendet.",
+      "JP": "工房設備や建物の建築などに用いられます。鋸台にて木材から加工できます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any planks."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de planches."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine Bretter."
+        ]
+      },
+      "JP": {
+        "D": [
+          "厚板を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough plank."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de planches."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Bretter."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な厚板がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of planks."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de planches."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all meine Bretter verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "厚板が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too many planks."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de planches."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viele Bretter!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "厚板はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "stone": {
+    "type": "ressource",
+    "age": "stoneAge",
+    "no": 9,
+    "maxQuantity": {
+      "stonecutting": 1
+    },
+    "value": 1,
+    "picture": {
+      "file": "stone.png"
+    },
+    "name": {
+      "EN": "stone",
+      "FR": "pierre",
+      "DE": "Steine",
+      "JP": "石材"
+    },
+    "description": {
+      "EN": "Use stone to manufacture cut stone.",
+      "FR": "La pierre permet de fabriquer de la pierre taillée.",
+      "DE": "Steine werden meist weiterverarbeitet zu Ziegelstein",
+      "JP": "切石の製造などに用いられます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any stone."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de pierre."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine Steine."
+        ]
+      },
+      "JP": {
+        "D": [
+          "石材を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough stone."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de pierre."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Steine."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な石材がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of stone."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de pierre."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all meine Steine verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "石材が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much stone."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de pierre."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viele Steine!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "石材はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "freeStone": {
+    "type": "ressource",
+    "age": "stoneAge",
+    "no": 10,
+    "maxQuantity": {
+      "stonecutting": 1
+    },
+    "value": 4,
+    "picture": {
+      "file": "freeStone.png"
+    },
+    "name": {
+      "EN": "cut stone",
+      "FR": "pierres taillées",
+      "DE": "Ziegelstein",
+      "JP": "切石"
+    },
+    "description": {
+      "EN": "Use cut stone to construct workshops and buildings.",
+      "FR": "Les pierres taillées permettent de construire des ateliers et des bâtiments.",
+      "DE": "Ziegelsteine werden überwiegend zum bauen verwendet.",
+      "JP": "工房設備や建物の建築などに用いられます。石切場にて石材から加工できます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any cut stone."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de pierres taillées."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe kein Ziegelstein."
+        ]
+      },
+      "JP": {
+        "D": [
+          "切石を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough cut stone."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de pierres taillées."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Ziegelsteine."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な切石がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of cut stone."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de pierres taillées."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all meine Ziegelsteine verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "切石が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much cut stone."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de pierres taillées."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viele Ziegelsteine."
+        ]
+      },
+      "JP": {
+        "D": [
+          "切石はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "grain": {
+    "type": "ressource",
+    "age": "stoneAge",
+    "no": 11,
+    "maxQuantity": {
+      "harvesting": 1
+    },
+    "value": 1,
+    "picture": {
+      "file": "grain.png"
+    },
+    "name": {
+      "EN": "grain",
+      "FR": "céréales",
+      "DE": "Getreide",
+      "JP": "小麦"
+    },
+    "description": {
+      "EN": "Use grain to manufacture flour and beer.",
+      "FR": "Les céréales permettent de fabriquer de la farine et de la bière.",
+      "DE": "Getreide wird zur weiterverarbeitung oder zur Züchtung von Pferden verwendet.",
+      "JP": "小麦粉やビールの製造などに用いられます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any grain."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de céréales."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe kein Getreide."
+        ]
+      },
+      "JP": {
+        "D": [
+          "小麦を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough grain."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de céréales."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Getreide."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な小麦がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of grain."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de céréales."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all mein Getreide verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "小麦が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much grain."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de céréales."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viel Getreide!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "小麦はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "flour": {
+    "type": "ressource",
+    "age": "stoneAge",
+    "no": 12,
+    "maxQuantity": {
+      "harvesting": 1
+    },
+    "value": 4,
+    "picture": {
+      "file": "flour.png"
+    },
+    "name": {
+      "EN": "flour",
+      "FR": "farine",
+      "DE": "Mehl",
+      "JP": "小麦粉"
+    },
+    "description": {
+      "EN": "Use flour to bake bread.",
+      "FR": "La farine permet de faire du pain.",
+      "DE": "Mehl wird meistens verarbeitet zu leckerem Brot.",
+      "JP": "パンの調理などに用いられます。風車小屋にて小麦から加工できます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any flour."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de farine."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe kein Mehl."
+        ]
+      },
+      "JP": {
+        "D": [
+          "小麦粉を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough flour."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de farine."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Mehl."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な小麦粉がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of flour."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de farine."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all mein Mehl verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "小麦粉が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much flour."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de farine."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viel Mehl!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "小麦粉はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "wool": {
+    "type": "ressource",
+    "age": "stoneAge",
+    "no": 13,
+    "maxQuantity": {
+      "sheepShearing": 1
+    },
+    "value": 1,
+    "picture": {
+      "file": "wool.png"
+    },
+    "name": {
+      "EN": "wool",
+      "FR": "laine",
+      "DE": "Wolle",
+      "JP": "羊毛"
+    },
+    "description": {
+      "EN": "Use wool to manufacture fabric.",
+      "FR": "La laine permet de fabriquer du tissu.",
+      "DE": "Wolle wird zu Stoff verarbeitet.",
+      "JP": "主に織物の製造に用いられます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any wool."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de laine."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine Wolle"
+        ]
+      },
+      "JP": {
+        "D": [
+          "羊毛を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough wool."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de laine."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Wolle"
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な羊毛がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of wool."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de laine."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all meine Wolle verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "羊毛が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much wool."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de laine."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viel Wolle!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "羊毛はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "fabric": {
+    "type": "ressource",
+    "age": "stoneAge",
+    "no": 14,
+    "maxQuantity": {
+      "weaving": 1
+    },
+    "value": 4,
+    "picture": {
+      "file": "fabric.png"
+    },
+    "name": {
+      "EN": "fabric",
+      "FR": "tissu",
+      "DE": "Stoffrolle",
+      "JP": "織物"
+    },
+    "description": {
+      "EN": "Use fabric to manufacture clothes.",
+      "FR": "Le tissu permet de fabriquer des vêtements.",
+      "DE": "Stoffrollen werden bei der Herstellung von Kleidung verwendet.",
+      "JP": "衣服の製造などに用いられます。織機にて羊毛から加工できます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any fabric."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de tissu."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine Stoffrollen."
+        ]
+      },
+      "JP": {
+        "D": [
+          "織物を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough fabric."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de tissu."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Stoffrollen."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な織物がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of fabric."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de tissu."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all meine Stoffrollen verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "織物が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much fabric."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de tissu."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viele Stoffrollen!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "織物はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "iron": {
+    "type": "ressource",
+    "age": "ironAge",
+    "no": 15,
+    "maxQuantity": {
+      "mining": 1
+    },
+    "value": 2,
+    "picture": {
+      "file": "iron.png"
+    },
+    "name": {
+      "EN": "raw iron",
+      "FR": "fer brut",
+      "DE": "Eisen",
+      "JP": "原鉄"
+    },
+    "description": {
+      "EN": "Use raw iron to manufacture cast iron.",
+      "FR": "Le fer brut permet de fabriquer des lingots de fonte.",
+      "DE": "Eisen wird überwiegend zu Eisenbarren verarbeitet.",
+      "JP": "鋳鉄や鋼鉄の製造に用いられます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any raw iron."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de fer brut."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe kein EIsen."
+        ]
+      },
+      "JP": {
+        "D": [
+          "原鉄を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough raw iron."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de fer brut."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Eisen."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な原鉄がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of raw iron."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de fer brut."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all mein Eisen verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "原鉄が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much raw iron."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de fer brut."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viel Eisen!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "原鉄はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "castIron": {
+    "type": "ressource",
+    "age": "ironAge",
+    "no": 16,
+    "maxQuantity": {
+      "metalSmelting": 1
+    },
+    "value": 6,
+    "picture": {
+      "file": "castIron.png"
+    },
+    "name": {
+      "EN": "cast iron",
+      "FR": "lingot de fonte",
+      "DE": "Eisenbarren",
+      "JP": "鋳鉄"
+    },
+    "description": {
+      "EN": "Use cast iron to manufacture weapons and armours.",
+      "FR": "Les lingots de fonte permettent de fabriquer des armes et armures.",
+      "DE": "Eisenbarren werden bei der Herstellung von Waffen und Rüstungen verwendet.",
+      "JP": "武器や鎧の製造などに用いられます。鋳造所にて原鉄から加工できます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any cast iron."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de lingots de fonte."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine Eisenbarren."
+        ]
+      },
+      "JP": {
+        "D": [
+          "鋳鉄を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough cast iron."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de lingots de fonte."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Eisenbarren."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な鋳鉄がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of cast iron."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de fonte."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all meine Eisenbarren verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "鋳鉄が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much cast iron."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de lingots de fonte."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viele Eisenbarren!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "鋳鉄はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "crystals": {
+    "type": "ressource",
+    "age": "etherAge",
+    "no": 17,
+    "maxQuantity": {
+      "mining": 1
+    },
+    "value": 3,
+    "picture": {
+      "file": "crystals.png"
+    },
+    "name": {
+      "EN": "crystal",
+      "FR": "cristal",
+      "DE": "Kristalle",
+      "JP": "水晶"
+    },
+    "description": {
+      "EN": "Use crystal to manufacture magic items.",
+      "FR": "Les cristaux permettent de fabriquer de l'équipement magique.",
+      "DE": "Kristalle werden für die Herstellung von Magischen Gegenständen benötigt.",
+      "JP": "魔法のアイテムの製造などに用いられます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any crystal."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de cristal."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine Kristalle."
+        ]
+      },
+      "JP": {
+        "D": [
+          "水晶を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough crystal."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de cristaux."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Kristalle."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な水晶がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of crystal."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de cristal."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all meine Kristalle verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "水晶が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much crystal."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de cristaux."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viele Kristalle!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "水晶はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "parchment": {
+    "type": "ressource",
+    "age": "etherAge",
+    "no": 18,
+    "maxQuantity": {
+      "tanning": 1
+    },
+    "value": 2,
+    "picture": {
+      "file": "parchment.png"
+    },
+    "name": {
+      "EN": "parchment",
+      "FR": "parchemin",
+      "DE": "Pergament",
+      "JP": "羊皮紙"
+    },
+    "description": {
+      "EN": "Use parchments to create spell scrolls. You can make them at the tannery workshop.",
+      "FR": "Les parchemins permettent de fabriquer des parchemins de sorts. Vous pouvez les fabriquer à l'atelier de tannerie.",
+      "DE": "Pergamente werden zu Magischen Spruchrollen verarbeitet. Sie können sie in der Gerbereiwerkstatt herstellen.",
+      "JP": "魔法のスクロールの製造などに用いられます。製革所にて生皮から加工できます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any parchments."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de parchemin."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine Pergamente."
+        ]
+      },
+      "JP": {
+        "D": [
+          "羊皮紙を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough parchments."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de parchemins."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Pergamente."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な羊皮紙がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of parchments."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de parchemins."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all meine Pergamente verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "羊皮紙が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too many parchments."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de parchemins."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viele Pergamente!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "羊皮紙はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "paper": {
+    "type": "ressource",
+    "age": "goldenAge",
+    "no": 19,
+    "maxQuantity": {
+      "papermaking": 1
+    },
+    "value": 4,
+    "picture": {
+      "file": "paper.png"
+    },
+    "name": {
+      "EN": "paper",
+      "FR": "papier",
+      "DE": "Papier",
+      "JP": "紙"
+    },
+    "description": {
+      "EN": "Use paper to create spell books.",
+      "FR": "Le papier permet de fabriquer des livres de sorts.",
+      "DE": "Papier wird benötigt um Magische Bücher herzustellen.",
+      "JP": "呪文書の製造などに用いられます。製紙場にて羊毛もしくは木材から加工できます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any paper."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de papier."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe kein Papier."
+        ]
+      },
+      "JP": {
+        "D": [
+          "紙を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough paper."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de papier."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Papier."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な紙がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of paper."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de papier."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all mein Papier verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "紙が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much paper."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de papier."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viel Papier!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "紙はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "sulfur": {
+    "type": "ressource",
+    "age": "goldenAge",
+    "no": 20,
+    "maxQuantity": {
+      "mining": 1
+    },
+    "value": 3,
+    "picture": {
+      "file": "sulfur.png"
+    },
+    "name": {
+      "EN": "sulphur",
+      "FR": "soufre",
+      "DE": "Schwefel",
+      "JP": "硫黄"
+    },
+    "description": {
+      "EN": "Use sulphur to manufacture firearm ammo.",
+      "FR": "Le soufre permet de fabriquer des munitions d'armes à feu.",
+      "DE": "Schwefel wird bei der Herstellung von Schusswaffen Munition verwendet.",
+      "JP": "銃器の弾薬製造などに用いられます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any sulphur."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de soufre."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe kein Schwefel."
+        ]
+      },
+      "JP": {
+        "D": [
+          "硫黄を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough sulphur."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de soufre."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Schwefel."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な硫黄がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have used up my sulphur."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de soufre."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all mein Schwefel verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "硫黄が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much sulphur."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de soufre."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viel Schwefel!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "硫黄はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "gold": {
+    "type": "ressource",
+    "age": "goldenAge",
+    "no": 21,
+    "maxQuantity": {
+      "mining": 1
+    },
+    "value": 3,
+    "picture": {
+      "file": "gold.png"
+    },
+    "name": {
+      "EN": "raw gold",
+      "FR": "or brut",
+      "DE": "Gold",
+      "JP": "金原料"
+    },
+    "description": {
+      "EN": "Use raw gold to manufacture gold bars.",
+      "FR": "L'or brut permet de fabriquer des lingots d'or.",
+      "DE": "Gold wird überwiegend zu Goldbarren verarbeitet.",
+      "JP": "棒金の製造に用いられます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any raw gold."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas d'or brut."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe kein Gold."
+        ]
+      },
+      "JP": {
+        "D": [
+          "金原料を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough raw gold."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez d'or brut."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Gold."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な金原料がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of raw gold."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus d'or brut."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all mein Gold verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "金原料が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much raw gold."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum d'or brut."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viel Gold!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "金原料はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "goldBar": {
+    "type": "ressource",
+    "age": "goldenAge",
+    "no": 22,
+    "maxQuantity": {
+      "metalSmelting": 1
+    },
+    "value": 10,
+    "picture": {
+      "file": "goldBar.png"
+    },
+    "name": {
+      "EN": "gold bar",
+      "FR": "lingot d'or",
+      "DE": "Goldbarren",
+      "JP": "棒金"
+    },
+    "description": {
+      "EN": "Use gold bars to manufacture jewels.",
+      "FR": "Les lingots d'or permettent de fabriquer des bijoux.",
+      "DE": "Goldbarren werden zu Wertvollen gegenständen wie z.B Schmuck verarbeitet.",
+      "JP": "宝石細工の製造などに用いられます。鋳造所にて金原料から加工できます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any gold bars."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de lingots d'or."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine Goldbarren."
+        ]
+      },
+      "JP": {
+        "D": [
+          "棒金を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I do not have enough gold bar."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de lingots d'or."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Goldbarren."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な棒金がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I don't have enough gold bars."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de lingots d'or."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe all meine Goldbarren verbraucht."
+        ]
+      },
+      "JP": {
+        "D": [
+          "棒金が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too many gold bars."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de lingots d'or."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe viel zu viele Goldbarren!"
+        ]
+      },
+      "JP": {
+        "D": [
+          "棒金はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "water": {
+    "type": "ressource",
+    "age": "stoneAge",
+    "no": 10.5,
+    "maxQuantity": {
+      "picking": 1
+    },
+    "value": 0.25,
+    "picture": {
+      "file": "water.png"
+    },
+    "gain": {
+      "stamina": 3
+    },
+    "name": {
+      "EN": "water",
+      "FR": "eau",
+      "DE": "Wasser",
+      "JP": "水"
+    },
+    "description": {
+      "EN": "You can drink water or use it for cooking.",
+      "FR": "L'eau peut être bue ou utilisée en cuisine.",
+      "DE": "Wasser kann getrunken und in der Küche serviert werden.",
+      "JP": "調理用途だけでなく、飲んで持久力の回復もできます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any water."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas d'eau."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe kein Wasser."
+        ]
+      },
+      "JP": {
+        "D": [
+          "水を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough water."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez d'eau."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Wasser."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な水がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of water."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus d'eau."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe kein Wasser."
+        ]
+      },
+      "JP": {
+        "D": [
+          "水が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much water."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum d'eau."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe das Maximum an Wasser."
+        ]
+      },
+      "JP": {
+        "D": [
+          "水はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "milk": {
+    "type": "ressource",
+    "age": "stoneAge",
+    "no": 10.75,
+    "maxQuantity": {
+      "breeding": 1
+    },
+    "value": 1,
+    "picture": {
+      "file": "milk.png"
+    },
+    "gain": {
+      "stamina": 6
+    },
+    "name": {
+      "EN": "milk",
+      "FR": "lait",
+      "DE": "Milch",
+      "JP": "牛乳"
+    },
+    "description": {
+      "EN": "You can drink milk or use it for cooking.",
+      "FR": "Le lait peut être bu ou utilisé en cuisine.",
+      "DE": "Milch kann getrunken und in der Küche serviert werden.",
+      "JP": "調理用途だけでなく、飲んで持久力の回復もできます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any milk."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de lait."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine Milch."
+        ]
+      },
+      "JP": {
+        "D": [
+          "牛乳を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough milk."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de lait."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Milch."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な牛乳がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of milk."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de lait."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine Milch mehr."
+        ]
+      },
+      "JP": {
+        "D": [
+          "牛乳が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much milk."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de lait."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe das Maximum an Milch."
+        ]
+      },
+      "JP": {
+        "D": [
+          "牛乳はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "coal": {
+    "type": "ressource",
+    "age": "steamAge",
+    "no": 23,
+    "maxQuantity": {
+      "mining": 1
+    },
+    "value": 3,
+    "picture": {
+      "file": "coal.png"
+    },
+    "name": {
+      "EN": "coal",
+      "FR": "charbon",
+      "DE": "Kohle",
+      "JP": "石炭"
+    },
+    "description": {
+      "EN": "Use coal to manufacture steel.",
+      "FR": "Le charbon permet de fabriquer de l'acier.",
+      "DE": "Kohle wird verwendet, um Stahl zu machen.",
+      "JP": "鋼鉄の製造などに用いられます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any coal."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas de charbon."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine Kohle."
+        ]
+      },
+      "JP": {
+        "D": [
+          "石炭を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough coal."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez de charbon."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Kohle."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な石炭がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of coal."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus de charbon."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keine Kohle mehr."
+        ]
+      },
+      "JP": {
+        "D": [
+          "石炭が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much coal."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum de charbon."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe das Maximum an Kohle."
+        ]
+      },
+      "JP": {
+        "D": [
+          "石炭はこれ以上持てないな。"
+        ]
+      }
+    }
+  },
+  "steel": {
+    "type": "ressource",
+    "age": "steamAge",
+    "no": 24,
+    "maxQuantity": {
+      "metalSmelting": 1
+    },
+    "value": 7,
+    "picture": {
+      "file": "steel.png"
+    },
+    "name": {
+      "EN": "steel",
+      "FR": "acier",
+      "DE": "Stahl",
+      "JP": "鋼鉄"
+    },
+    "description": {
+      "EN": "Use steel to manufacture advanced items.",
+      "FR": "L'acier permet de fabriquer des équipements évolués.",
+      "DE": "Stahl macht es möglich, fortschrittliche Ausrüstung herzustellen.",
+      "JP": "先進的な物品の製造に用いられます。鋳造所にて原鉄および石炭から加工できます。"
+    },
+    "zero": {
+      "EN": {
+        "D": [
+          "I don't have any steel."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas d'acier."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keinen Stahl."
+        ]
+      },
+      "JP": {
+        "D": [
+          "鋼鉄を持ってないな。"
+        ]
+      }
+    },
+    "lack": {
+      "EN": {
+        "D": [
+          "I don't have enough steel."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai pas assez d'acier."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe nicht genug Stahl."
+        ]
+      },
+      "JP": {
+        "D": [
+          "十分な鋼鉄がないな。"
+        ]
+      }
+    },
+    "out": {
+      "EN": {
+        "D": [
+          "I have run out of steel."
+        ]
+      },
+      "FR": {
+        "D": [
+          "Je n'ai plus d'acier."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe keinen Stahl mehr."
+        ]
+      },
+      "JP": {
+        "D": [
+          "鋼鉄が尽きた。"
+        ]
+      }
+    },
+    "full": {
+      "EN": {
+        "D": [
+          "I have too much steel."
+        ]
+      },
+      "FR": {
+        "D": [
+          "J'ai le maximum d'acier."
+        ]
+      },
+      "DE": {
+        "D": [
+          "Ich habe das Maximum an Stahl."
+        ]
+      },
+      "JP": {
+        "D": [
+          "鋼鉄はこれ以上持てないな。"
+        ]
+      }
+    }
+  }
+}

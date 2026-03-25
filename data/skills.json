@@ -1,0 +1,738 @@
+{
+  "building": {
+    "id": "building",
+    "name": "building",
+    "category": "craft",
+    "base_stat": "strength",
+    "order": 0
+  },
+  "repairing": {
+    "id": "repairing",
+    "name": "repairing",
+    "category": "craft",
+    "base_stat": "endurance",
+    "order": 1
+  },
+  "forestry": {
+    "id": "forestry",
+    "name": "forestry",
+    "category": "craft",
+    "base_stat": "willpower",
+    "order": 2
+  },
+  "picking": {
+    "id": "picking",
+    "name": "gathering",
+    "category": "craft",
+    "base_stat": "rapidity",
+    "order": 3
+  },
+  "woodcutting": {
+    "id": "woodcutting",
+    "name": "woodcutting",
+    "category": "craft",
+    "base_stat": "strength",
+    "order": 4
+  },
+  "zoology": {
+    "id": "zoology",
+    "name": "zoology",
+    "category": "craft",
+    "base_stat": "willpower",
+    "order": 5
+  },
+  "hunting": {
+    "id": "hunting",
+    "name": "hunting",
+    "category": "craft",
+    "base_stat": "address",
+    "order": 6
+  },
+  "tanning": {
+    "id": "tanning",
+    "name": "tanning",
+    "category": "craft",
+    "base_stat": "address",
+    "order": 7
+  },
+  "sawing": {
+    "id": "sawing",
+    "name": "sawing",
+    "category": "craft",
+    "base_stat": "strength",
+    "order": 8
+  },
+  "lithology": {
+    "id": "lithology",
+    "name": "lithology",
+    "category": "craft",
+    "base_stat": "intelligence",
+    "order": 9
+  },
+  "stonecutting": {
+    "id": "stonecutting",
+    "name": "stonecutting",
+    "category": "craft",
+    "base_stat": "strength",
+    "order": 10
+  },
+  "sculpting": {
+    "id": "sculpting",
+    "name": "sculpting",
+    "category": "craft",
+    "base_stat": "address",
+    "order": 11
+  },
+  "farming": {
+    "id": "farming",
+    "name": "farming",
+    "category": "craft",
+    "base_stat": "willpower",
+    "order": 12
+  },
+  "harvesting": {
+    "id": "harvesting",
+    "name": "harvesting",
+    "category": "craft",
+    "base_stat": "rapidity",
+    "order": 13
+  },
+  "bakery": {
+    "id": "bakery",
+    "name": "bakery",
+    "category": "craft",
+    "base_stat": "rapidity",
+    "order": 14
+  },
+  "bowsCrafting": {
+    "id": "bowsCrafting",
+    "name": "bow crafting",
+    "category": "craft",
+    "base_stat": "address",
+    "order": 15
+  },
+  "alcohols": {
+    "id": "alcohols",
+    "name": "alcohol",
+    "category": "craft",
+    "base_stat": "address",
+    "order": 16
+  },
+  "breeding": {
+    "id": "breeding",
+    "name": "breeding",
+    "category": "craft",
+    "base_stat": "willpower",
+    "order": 17
+  },
+  "sheepShearing": {
+    "id": "sheepShearing",
+    "name": "sheep shearing",
+    "category": "craft",
+    "base_stat": "rapidity",
+    "order": 18
+  },
+  "weaving": {
+    "id": "weaving",
+    "name": "weaving",
+    "category": "craft",
+    "base_stat": "rapidity",
+    "order": 19
+  },
+  "sewing": {
+    "id": "sewing",
+    "name": "dressmaking",
+    "category": "craft",
+    "base_stat": "address",
+    "order": 20
+  },
+  "shoemaking": {
+    "id": "shoemaking",
+    "name": "shoemaking",
+    "category": "craft",
+    "base_stat": "address",
+    "order": 21
+  },
+  "prospecting": {
+    "id": "prospecting",
+    "name": "prospecting",
+    "category": "craft",
+    "base_stat": "willpower",
+    "order": 22
+  },
+  "mining": {
+    "id": "mining",
+    "name": "mining",
+    "category": "craft",
+    "base_stat": "endurance",
+    "order": 23
+  },
+  "metalSmelting": {
+    "id": "metalSmelting",
+    "name": "metal smelting",
+    "category": "craft",
+    "base_stat": "endurance",
+    "order": 24
+  },
+  "weaponsForging": {
+    "id": "weaponsForging",
+    "name": "weapons forging",
+    "category": "craft",
+    "base_stat": "strength",
+    "order": 25
+  },
+  "crossbowsForging": {
+    "id": "crossbowsForging",
+    "name": "crossbow forging",
+    "category": "craft",
+    "base_stat": "address",
+    "order": 26
+  },
+  "armorsForging": {
+    "id": "armorsForging",
+    "name": "armour forging",
+    "category": "craft",
+    "base_stat": "endurance",
+    "order": 27
+  },
+  "firearmsForging": {
+    "id": "firearmsForging",
+    "name": "firearm forging",
+    "category": "craft",
+    "base_stat": "address",
+    "order": 28
+  },
+  "gemmology": {
+    "id": "gemmology",
+    "name": "gemmology",
+    "category": "craft",
+    "base_stat": "intelligence",
+    "order": 29
+  },
+  "apothecary": {
+    "id": "apothecary",
+    "name": "apothecary",
+    "category": "craft",
+    "base_stat": "willpower",
+    "order": 30
+  },
+  "enchantment": {
+    "id": "enchantment",
+    "name": "enchantment",
+    "category": "craft",
+    "base_stat": "intelligence",
+    "order": 31
+  },
+  "papermaking": {
+    "id": "papermaking",
+    "name": "papermaking",
+    "category": "craft",
+    "base_stat": "intelligence",
+    "order": 32
+  },
+  "goldsmithery": {
+    "id": "goldsmithery",
+    "name": "goldsmithery",
+    "category": "craft",
+    "base_stat": "address",
+    "order": 33
+  },
+  "lightWeapons": {
+    "id": "lightWeapons",
+    "name": "light weapons",
+    "category": "proficiency",
+    "base_stat": "address",
+    "order": 34
+  },
+  "edgedWeapons": {
+    "id": "edgedWeapons",
+    "name": "edged weapons",
+    "category": "proficiency",
+    "base_stat": "strength",
+    "order": 35
+  },
+  "bluntWeapons": {
+    "id": "bluntWeapons",
+    "name": "blunt weapons",
+    "category": "proficiency",
+    "base_stat": "strength",
+    "order": 36
+  },
+  "axes": {
+    "id": "axes",
+    "name": "axes",
+    "category": "proficiency",
+    "base_stat": "strength",
+    "order": 37
+  },
+  "polearms": {
+    "id": "polearms",
+    "name": "polearms",
+    "category": "proficiency",
+    "base_stat": "strength",
+    "order": 38
+  },
+  "bows": {
+    "id": "bows",
+    "name": "bows",
+    "category": "proficiency",
+    "base_stat": "address",
+    "order": 40
+  },
+  "shootingWeapons": {
+    "id": "shootingWeapons",
+    "name": "shooting weapons",
+    "category": "proficiency",
+    "base_stat": "address",
+    "order": 41
+  },
+  "firearms": {
+    "id": "firearms",
+    "name": "firearms",
+    "category": "proficiency",
+    "base_stat": "address",
+    "order": 42
+  },
+  "shields": {
+    "id": "shields",
+    "name": "shields",
+    "category": "proficiency",
+    "base_stat": "endurance",
+    "order": 43
+  },
+  "lightArmors": {
+    "id": "lightArmors",
+    "name": "light armours",
+    "category": "proficiency",
+    "base_stat": "rapidity",
+    "order": 44
+  },
+  "mediumArmors": {
+    "id": "mediumArmors",
+    "name": "medium armours",
+    "category": "proficiency",
+    "base_stat": "endurance",
+    "order": 45
+  },
+  "heavyArmors": {
+    "id": "heavyArmors",
+    "name": "heavy armours",
+    "category": "proficiency",
+    "base_stat": "endurance",
+    "order": 46
+  },
+  "clothes": {
+    "id": "clothes",
+    "name": "clothes",
+    "category": "proficiency",
+    "base_stat": "rapidity",
+    "order": 47
+  },
+  "gloves": {
+    "id": "gloves",
+    "name": "gloves",
+    "category": "proficiency",
+    "base_stat": "address",
+    "order": 48
+  },
+  "shoes": {
+    "id": "shoes",
+    "name": "shoes",
+    "category": "proficiency",
+    "base_stat": "rapidity",
+    "order": 49
+  },
+  "shamanicMagic": {
+    "id": "shamanicMagic",
+    "name": "shamanic magic",
+    "category": "proficiency",
+    "base_stat": "willpower",
+    "order": 50
+  },
+  "druidicMagic": {
+    "id": "druidicMagic",
+    "name": "druidic magic",
+    "category": "proficiency",
+    "base_stat": "willpower",
+    "order": 51
+  },
+  "pyrotechnicMagic": {
+    "id": "pyrotechnicMagic",
+    "name": "pyrotechnic magic",
+    "category": "proficiency",
+    "base_stat": "intelligence",
+    "order": 52
+  },
+  "conjuration": {
+    "id": "conjuration",
+    "name": "conjuration",
+    "category": "proficiency",
+    "base_stat": "willpower",
+    "order": 53
+  },
+  "repressiveMagic": {
+    "id": "repressiveMagic",
+    "name": "repressive magic",
+    "category": "proficiency",
+    "base_stat": "intelligence",
+    "order": 54
+  },
+  "redemptiveMagic": {
+    "id": "redemptiveMagic",
+    "name": "redemptive magic",
+    "category": "proficiency",
+    "base_stat": "willpower",
+    "order": 55
+  },
+  "magicClothes": {
+    "id": "magicClothes",
+    "name": "magic clothes",
+    "category": "proficiency",
+    "base_stat": "willpower",
+    "order": 56
+  },
+  "jewellery": {
+    "id": "jewellery",
+    "name": "jewellery",
+    "category": "proficiency",
+    "base_stat": "charisma",
+    "order": 57
+  },
+  "golemology": {
+    "id": "golemology",
+    "name": "golemology",
+    "category": "craft",
+    "base_stat": "intelligence",
+    "order": 58
+  },
+  "trading": {
+    "id": "trading",
+    "name": "trading",
+    "category": "craft",
+    "base_stat": "charisma",
+    "order": 59
+  },
+  "conscription": {
+    "id": "conscription",
+    "name": "conscription",
+    "category": "craft",
+    "base_stat": "charisma",
+    "order": 60
+  },
+  "fortification": {
+    "id": "fortification",
+    "name": "fortification",
+    "category": "craft",
+    "base_stat": "strength",
+    "order": 61
+  },
+  "belts": {
+    "type": "skill",
+    "no": 33.6,
+    "category": "proficiency",
+    "defaultScore": "endurance",
+    "name": {
+      "EN": "belts",
+      "FR": "ceintures",
+      "JP": "ベルト"
+    },
+    "jobM": {
+      "EN": "expert in belts",
+      "FR": "expert en ceintures",
+      "JP": "ベルトの取扱"
+    },
+    "jobF": {
+      "EN": "expert in belts",
+      "FR": "experte en ceintures",
+      "JP": "ベルトの取扱"
+    },
+    "_source": "steamAge"
+  },
+  "butchery": {
+    "type": "skill",
+    "no": 13.5,
+    "category": "craft",
+    "defaultScore": "endurance",
+    "name": {
+      "EN": "butchery",
+      "FR": "boucherie",
+      "JP": "精肉"
+    },
+    "jobM": {
+      "EN": "butcher",
+      "FR": "boucher",
+      "JP": "精肉業者"
+    },
+    "jobF": {
+      "EN": "butcher",
+      "FR": "bouchère",
+      "JP": "精肉業者"
+    },
+    "_source": "steamAge"
+  },
+  "chaoticMagic": {
+    "type": "skill",
+    "no": 55.25,
+    "category": "proficiency",
+    "defaultScore": "intelligence",
+    "name": {
+      "EN": "chaotic magic",
+      "FR": "magie chaotique",
+      "JP": "混沌魔術"
+    },
+    "jobM": {
+      "EN": "chaos mage",
+      "FR": "mage du chaos",
+      "JP": "混沌魔術師"
+    },
+    "jobF": {
+      "EN": "chaos mage",
+      "FR": "magicienne du chaos",
+      "JP": "混沌魔術師"
+    },
+    "_source": "steamAge"
+  },
+  "leatherwork": {
+    "type": "skill",
+    "no": 21.5,
+    "category": "craft",
+    "defaultScore": "address",
+    "name": {
+      "EN": "leatherwork",
+      "FR": "maroquinerie",
+      "JP": "革細工"
+    },
+    "jobM": {
+      "EN": "leatherworker",
+      "FR": "maroquinier",
+      "JP": "革細工師"
+    },
+    "jobF": {
+      "EN": "leatherworker",
+      "FR": "maroquinière",
+      "JP": "革細工師"
+    },
+    "_source": "steamAge"
+  },
+  "necromanticMagic": {
+    "type": "skill",
+    "no": 55.5,
+    "category": "proficiency",
+    "defaultScore": "willpower",
+    "name": {
+      "EN": "necromantic magic",
+      "FR": "magie nécromantique",
+      "JP": "死霊術"
+    },
+    "jobM": {
+      "EN": "necromancer",
+      "FR": "nécromancien",
+      "JP": "ネクロマンシー"
+    },
+    "jobF": {
+      "EN": "necromancer",
+      "FR": "nécromancienne",
+      "JP": "ネクロマンシー"
+    },
+    "_source": "steamAge"
+  },
+  "riding": {
+    "type": "skill",
+    "no": 33.75,
+    "category": "proficiency",
+    "defaultScore": "rapidity",
+    "name": {
+      "EN": "riding",
+      "FR": "équitation",
+      "JP": "騎乗"
+    },
+    "jobM": {
+      "EN": "horseman",
+      "FR": "cavalier",
+      "JP": "騎手"
+    },
+    "jobF": {
+      "EN": "horsewoman",
+      "FR": "cavalière",
+      "JP": "騎手"
+    },
+    "_source": "steamAge"
+  },
+  "throwingWeapons": {
+    "type": "skill",
+    "no": 39,
+    "category": "proficiency",
+    "defaultScore": "address",
+    "name": {
+      "EN": "throwing weapons",
+      "FR": "armes de jet",
+      "JP": "投擲武器"
+    },
+    "jobM": {
+      "EN": "expert in throwing weapons",
+      "FR": "expert en armes de jet",
+      "JP": "投擲武器の取扱"
+    },
+    "jobF": {
+      "EN": "expert in throwing weapons",
+      "FR": "experte en armes de jet",
+      "JP": "投擲武器の取扱"
+    },
+    "_source": "steamAge"
+  },
+  "tools": {
+    "type": "skill",
+    "no": 33.5,
+    "category": "proficiency",
+    "defaultScore": "rapidity",
+    "name": {
+      "EN": "tools",
+      "FR": "outils",
+      "JP": "道具"
+    },
+    "jobM": {
+      "EN": "expert in tools",
+      "FR": "expert en outils",
+      "JP": "道具の取扱"
+    },
+    "jobF": {
+      "EN": "expert in tools",
+      "FR": "experte en outils",
+      "JP": "道具の取扱"
+    },
+    "_source": "steamAge"
+  },
+  "cloaks": {
+    "type": "skill",
+    "no": 33.7,
+    "category": "proficiency",
+    "defaultScore": "rapidity",
+    "name": {
+      "EN": "cloaks",
+      "FR": "capes",
+      "JP": "外套"
+    },
+    "jobM": {
+      "EN": "expert in cloaks",
+      "FR": "expert en capes",
+      "JP": "外套の取扱"
+    },
+    "jobF": {
+      "EN": "expert in cloaks",
+      "FR": "experte en capes",
+      "JP": "外套の取扱"
+    },
+    "_source": "steamAge"
+  },
+  "powerArmors": {
+    "type": "skill",
+    "no": 46.5,
+    "category": "proficiency",
+    "defaultScore": "endurance",
+    "name": {
+      "EN": "power armours",
+      "FR": "armures assistées",
+      "JP": "パワーアーマー"
+    },
+    "jobM": {
+      "EN": "expert in power armours",
+      "FR": "expert en armures assistées",
+      "JP": "パワーアーマーの取扱"
+    },
+    "jobF": {
+      "EN": "expert in power armours",
+      "FR": "experte en armures assistées",
+      "JP": "パワーアーマーの取扱"
+    },
+    "_source": "steamAge"
+  },
+  "militaryEngineering": {
+    "type": "skill",
+    "no": 27.25,
+    "category": "craft",
+    "defaultScore": "intelligence",
+    "name": {
+      "EN": "military engineering",
+      "FR": "ingénierie militaire",
+      "JP": "軍事工学"
+    },
+    "jobM": {
+      "EN": "military engineer",
+      "FR": "ingénieur militaire",
+      "JP": "工兵"
+    },
+    "jobF": {
+      "EN": "military engineer",
+      "FR": "ingénieure militaire",
+      "JP": "工兵"
+    },
+    "_source": "steamAge"
+  },
+  "powerArmorsForging": {
+    "type": "skill",
+    "no": 27.5,
+    "category": "craft",
+    "defaultScore": "endurance",
+    "name": {
+      "EN": "power armours mechanics",
+      "FR": "mécaniques d'armures assistées",
+      "JP": "パワーアーマー整備"
+    },
+    "jobM": {
+      "EN": "power armours mechanic",
+      "FR": "mécanicien d'amures assistées",
+      "JP": "パワーアーマー整備工"
+    },
+    "jobF": {
+      "EN": "power armours mechanic",
+      "FR": "mécanicienne d'amures assistées",
+      "JP": "パワーアーマー整備工"
+    },
+    "_source": "steamAge"
+  },
+  "toolsForging": {
+    "type": "skill",
+    "no": 24.5,
+    "category": "craft",
+    "defaultScore": "strength",
+    "name": {
+      "EN": "tools forging",
+      "FR": "forgeage d'outils",
+      "JP": "道具鍛冶"
+    },
+    "jobM": {
+      "EN": "tools forger",
+      "FR": "forgeur d'outils",
+      "JP": "道具職人"
+    },
+    "jobF": {
+      "EN": "tools forger",
+      "FR": "forgeuse d'outils",
+      "JP": "道具職人"
+    },
+    "_source": "steamAge"
+  },
+  "training": {
+    "type": "skill",
+    "no": 16.5,
+    "category": "craft",
+    "defaultScore": "charisma",
+    "name": {
+      "EN": "pet training",
+      "FR": "dressage",
+      "JP": "ペット調教"
+    },
+    "jobM": {
+      "EN": "pet trainer",
+      "FR": "dresseur",
+      "JP": "ペット調教師"
+    },
+    "jobF": {
+      "EN": "pet trainer",
+      "FR": "dresseuse",
+      "JP": "ペット調教師"
+    },
+    "_source": "steamAge"
+  },
+  "_comment": " | 14 expansion skills added from steamAge/skills/skills2.js"
+}

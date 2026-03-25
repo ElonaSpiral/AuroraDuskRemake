@@ -1,0 +1,285 @@
+[gd_scene load_steps=3 format=3 uid="uid://aurora_main_menu"]
+
+[ext_resource type="Script" path="res://scripts/MainMenu.gd"   id="1_script"]
+[ext_resource type="Theme"  path="res://theme/ElinTheme.tres"  id="2_theme"]
+
+; ──────────────────────────────────────────────────────────────
+;  MainMenu — Aurora Dusk: Steam Age
+;
+;  Title / subtitle / tagline use layout_mode=1 with full-width
+;  anchors (anchor_right=1.0) so they stay centred at any
+;  window size or when maximised.
+; ──────────────────────────────────────────────────────────────
+
+[node name="MainMenu" type="Control"]
+layout_mode    = 3
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+theme          = ExtResource("2_theme")
+script         = ExtResource("1_script")
+
+; ── Background ────────────────────────────────────────────────
+; Dark fallback colour — shown instantly before images load
+[node name="BgBase" type="ColorRect" parent="."]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+color          = Color(0.072, 0.055, 0.040, 1.0)
+mouse_filter   = 2
+
+; ImageLayerManager builds layers here from data/ui_images.json → "main_menu"
+[node name="BgLayers" type="Control" parent="."]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+mouse_filter   = 2
+
+; ── Steam particles ───────────────────────────────────────────
+[node name="SteamParticles" type="CPUParticles2D" parent="."]
+position             = Vector2(180, 900)
+amount               = 55
+lifetime             = 4.5
+speed_scale          = 0.65
+direction            = Vector2(0.2, -1.0)
+spread               = 28.0
+gravity              = Vector2(0, -16)
+initial_velocity_min = 28.0
+initial_velocity_max = 52.0
+scale_amount_min     = 6.0
+scale_amount_max     = 14.0
+color                = Color(0.85, 0.82, 0.78, 0.16)
+
+; ── Decorative horizontal rules (anchor-based) ────────────────
+[node name="LineTop" type="ColorRect" parent="."]
+layout_mode   = 1
+anchors_preset = -1
+anchor_left   = 0.0
+anchor_top    = 0.0
+anchor_right  = 1.0
+anchor_bottom = 0.0
+offset_top    = 72.0
+offset_bottom = 74.0
+color         = Color(0.380, 0.259, 0.125, 0.50)
+mouse_filter  = 2
+
+[node name="LineBottom" type="ColorRect" parent="."]
+layout_mode   = 1
+anchors_preset = -1
+anchor_left   = 0.0
+anchor_top    = 1.0
+anchor_right  = 1.0
+anchor_bottom = 1.0
+offset_top    = -74.0
+offset_bottom = -72.0
+color         = Color(0.380, 0.259, 0.125, 0.50)
+mouse_filter  = 2
+
+; ── Decorative gears ──────────────────────────────────────────
+[node name="Gears" type="Control" parent="."]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+mouse_filter   = 2
+
+[node name="GearLeft" type="TextureRect" parent="Gears"]
+layout_mode   = 0
+offset_left   = -80.0
+offset_top    = 820.0
+offset_right  = 200.0
+offset_bottom = 1100.0
+modulate      = Color(0.380, 0.259, 0.125, 0.28)
+pivot_offset  = Vector2(140, 140)
+
+[node name="GearRight" type="TextureRect" parent="Gears"]
+layout_mode   = 0
+offset_left   = 1720.0
+offset_top    = -80.0
+offset_right  = 2000.0
+offset_bottom = 200.0
+modulate      = Color(0.380, 0.259, 0.125, 0.22)
+pivot_offset  = Vector2(140, 140)
+
+; ── Title area — ANCHOR-BASED (full width) ────────────────────
+; anchor_right=1.0 ensures the container spans the full width
+; at any resolution, so horizontal_alignment=CENTER works correctly.
+[node name="TitleArea" type="VBoxContainer" parent="."]
+layout_mode    = 1
+anchors_preset = -1
+anchor_left    = 0.0
+anchor_top     = 0.0
+anchor_right   = 1.0
+anchor_bottom  = 0.0
+offset_top     = 88.0
+offset_bottom  = 330.0
+alignment      = 1
+
+[node name="TitleLabel" type="Label" parent="TitleArea"]
+layout_mode           = 2
+size_flags_horizontal = 3
+text                  = "AURORA DUSK"
+horizontal_alignment  = 1
+theme_override_font_sizes/font_size      = 94
+theme_override_colors/font_color         = Color(0.940, 0.800, 0.380, 1.0)
+theme_override_colors/font_shadow_color  = Color(0.0, 0.0, 0.0, 0.85)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+
+[node name="SubtitleLabel" type="Label" parent="TitleArea"]
+layout_mode           = 2
+size_flags_horizontal = 3
+text                  = "STEAM  AGE"
+horizontal_alignment  = 1
+theme_override_font_sizes/font_size      = 44
+theme_override_colors/font_color         = Color(0.780, 0.590, 0.200, 1.0)
+theme_override_colors/font_shadow_color  = Color(0.0, 0.0, 0.0, 0.7)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+
+[node name="TitleDivider" type="ColorRect" parent="TitleArea"]
+layout_mode           = 2
+custom_minimum_size   = Vector2(600, 2)
+size_flags_horizontal = 4
+color                 = Color(0.780, 0.590, 0.200, 0.70)
+
+; ── Tagline — ANCHOR-BASED (full width) ──────────────────────
+[node name="TaglineLabel" type="Label" parent="."]
+layout_mode    = 1
+anchors_preset = -1
+anchor_left    = 0.0
+anchor_top     = 0.0
+anchor_right   = 1.0
+anchor_bottom  = 0.0
+offset_top     = 330.0
+offset_bottom  = 376.0
+size_flags_horizontal = 3
+text                 = "Build. Survive. Evolve."
+horizontal_alignment = 1
+theme_override_font_sizes/font_size  = 25
+theme_override_colors/font_color     = Color(0.620, 0.530, 0.370, 0.80)
+
+; ── Menu buttons — 2×3 grid, anchored to lower portion of screen ─
+; anchor_top=0.46 to anchor_bottom=0.84 keeps the bottom row
+; approximately 1/5 of the screen from the bottom at any size.
+; CenterContainer centres the GridContainer horizontally & vertically
+; within the anchor region regardless of window size.
+[node name="ButtonsArea" type="Control" parent="."]
+layout_mode    = 1
+anchors_preset = -1
+anchor_left    = 0.0
+anchor_top     = 0.44
+anchor_right   = 1.0
+anchor_bottom  = 0.86
+mouse_filter   = 2
+
+[node name="ButtonsCenter" type="CenterContainer" parent="ButtonsArea"]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+
+[node name="ButtonGrid" type="GridContainer" parent="ButtonsArea/ButtonsCenter"]
+layout_mode = 2
+columns     = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 12
+
+[node name="BtnStart" type="Button" parent="ButtonsArea/ButtonsCenter/ButtonGrid"]
+layout_mode         = 2
+custom_minimum_size = Vector2(280, 52)
+text                = "  ▶  START GAME"
+pivot_offset        = Vector2(140, 26)
+theme_override_font_sizes/font_size = 18
+
+[node name="BtnLoad" type="Button" parent="ButtonsArea/ButtonsCenter/ButtonGrid"]
+layout_mode         = 2
+custom_minimum_size = Vector2(280, 52)
+text                = "  ⬙  LOAD GAME"
+pivot_offset        = Vector2(140, 26)
+theme_override_font_sizes/font_size = 18
+
+[node name="BtnCharacters" type="Button" parent="ButtonsArea/ButtonsCenter/ButtonGrid"]
+layout_mode         = 2
+custom_minimum_size = Vector2(280, 52)
+text                = "  ◉  CHARACTERS"
+pivot_offset        = Vector2(140, 26)
+theme_override_font_sizes/font_size = 18
+
+[node name="BtnOptions" type="Button" parent="ButtonsArea/ButtonsCenter/ButtonGrid"]
+layout_mode         = 2
+custom_minimum_size = Vector2(280, 52)
+text                = "  ⚙  OPTIONS"
+pivot_offset        = Vector2(140, 26)
+theme_override_font_sizes/font_size = 18
+
+[node name="BtnCredits" type="Button" parent="ButtonsArea/ButtonsCenter/ButtonGrid"]
+layout_mode         = 2
+custom_minimum_size = Vector2(280, 52)
+text                = "  ★  CREDITS"
+pivot_offset        = Vector2(140, 26)
+theme_override_font_sizes/font_size = 18
+
+[node name="BtnExit" type="Button" parent="ButtonsArea/ButtonsCenter/ButtonGrid"]
+layout_mode         = 2
+custom_minimum_size = Vector2(280, 43)
+text                = "  ✕  EXIT"
+pivot_offset        = Vector2(140, 21)
+theme_override_font_sizes/font_size    = 17
+theme_override_colors/font_color       = Color(0.545, 0.228, 0.071, 1.0)
+theme_override_colors/font_hover_color = Color(0.700, 0.250, 0.070, 1.0)
+
+; ── Footer (anchor-based to bottom corners) ───────────────────
+[node name="FooterLabel" type="Label" parent="."]
+layout_mode    = 1
+anchors_preset = -1
+anchor_left    = 0.0
+anchor_top     = 1.0
+anchor_right   = 0.0
+anchor_bottom  = 1.0
+offset_left    = 20.0
+offset_top     = -32.0
+offset_right   = 660.0
+offset_bottom  = -8.0
+text           = "© Aurora Dusk Team  |  Godot 4 Recreation"
+theme_override_font_sizes/font_size = 17
+theme_override_colors/font_color    = Color(0.380, 0.259, 0.125, 0.55)
+
+[node name="VersionLabel" type="Label" parent="."]
+layout_mode    = 1
+anchors_preset = -1
+anchor_left    = 1.0
+anchor_top     = 1.0
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+offset_left    = -220.0
+offset_top     = -32.0
+offset_right   = -20.0
+offset_bottom  = -8.0
+text           = "v0.1.0-alpha"
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 17
+theme_override_colors/font_color    = Color(0.380, 0.259, 0.125, 0.55)
+
+; ── Debug button — bottom-right, above version label ──────────
+; Intentionally small and muted — not part of the main menu flow.
+[node name="BtnDebug" type="Button" parent="."]
+layout_mode    = 1
+anchors_preset = -1
+anchor_left    = 1.0
+anchor_top     = 1.0
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+offset_left    = -110.0
+offset_top     = -72.0
+offset_right   = -12.0
+offset_bottom  = -38.0
+text           = "⚙ DEBUG"
+theme_override_font_sizes/font_size    = 14
+theme_override_colors/font_color       = Color(0.490, 0.390, 0.240, 0.55)
+theme_override_colors/font_hover_color = Color(0.940, 0.800, 0.380, 0.90)
+z_index        = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

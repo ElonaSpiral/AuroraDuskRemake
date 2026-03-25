@@ -1,0 +1,80 @@
+{
+  "_comment": "UI image layer definitions for Aurora Dusk: Steam Age. Edit 'file' to swap any image — the game reads this at startup. Set 'file' to null to skip a layer.",
+
+  "image_root": "res://assets/images/",
+
+  "_stretch_options": {
+    "keep_aspect_covered":  "Fill the screen, crop edges if needed. Aspect ratio preserved. (Recommended for backgrounds.)",
+    "keep_aspect_centered": "Fit inside the screen, letterbox/pillarbox if needed. Aspect ratio preserved.",
+    "stretch":              "Stretch to fill exactly, ignoring aspect ratio.",
+    "keep":                 "Original pixel size, top-left anchored.",
+    "keep_centered":        "Original pixel size, centred."
+  },
+
+  "_blend_options": {
+    "normal": "Standard alpha blending.",
+    "add":    "Additive — black pixels (0,0,0) become invisible. Use for images with a pure-black background instead of real transparency."
+  },
+
+  "screens": {
+
+    "loading": {
+      "_comment": "Shown at startup while the game boots. Fades in → holds → fades out.",
+      "layers": [
+        {
+          "id":      "loader_image",
+          "file":    "loader.jpg",
+          "stretch": "keep_aspect_covered",
+          "blend":   "normal",
+          "opacity": 1.0
+        }
+      ]
+    },
+
+    "main_menu": {
+      "_comment": "Main menu background layers, drawn bottom to top.",
+      "layers": [
+        {
+          "id":      "background",
+          "file":    "bg2.jpg",
+          "stretch": "keep_aspect_covered",
+          "blend":   "normal",
+          "opacity": 1.0
+        },
+        {
+          "id":      "character",
+          "file":    "home.png",
+          "stretch": "keep_aspect_covered",
+          "blend":   "add",
+          "_note":   "home.png has a pure-black background (no real alpha). ADD blending makes black transparent.",
+          "opacity": 1.0
+        },
+        {
+          "id":      "vignette",
+          "file":    null,
+          "color":   [0.0, 0.0, 0.0, 0.45],
+          "_note":   "Darkening overlay. Set opacity to 0 to disable."
+        }
+      ]
+    },
+
+    "game_mode": {
+      "_comment": "Background for the mode-selection screen.",
+      "layers": [
+        {
+          "id":      "background",
+          "file":    "bg2.jpg",
+          "stretch": "keep_aspect_covered",
+          "blend":   "normal",
+          "opacity": 1.0
+        },
+        {
+          "id":      "vignette",
+          "file":    null,
+          "color":   [0.0, 0.0, 0.0, 0.42]
+        }
+      ]
+    }
+
+  }
+}

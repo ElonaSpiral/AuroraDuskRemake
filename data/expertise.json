@@ -1,0 +1,79 @@
+{
+  "none": {
+    "id": "none",
+    "name": "None",
+    "description": "No particular expertise chosen.",
+    "skill_modifiers": {}
+  },
+  "swordsmanship": {
+    "id": "swordsmanship",
+    "name": "Swordsmanship",
+    "description": "Mastery of bladed melee weapons.",
+    "skill_modifiers": {
+      "swords": 15,
+      "edgedWeapons": 10,
+      "lightWeapons": 10
+    }
+  },
+  "archery": {
+    "id": "archery",
+    "name": "Archery",
+    "description": "Expert use of bows and ranged weapons.",
+    "skill_modifiers": {
+      "bows": 15,
+      "bowsCrafting": 10,
+      "hunting": 10
+    }
+  },
+  "spellcasting": {
+    "id": "spellcasting",
+    "name": "Spellcasting",
+    "description": "Focused study of offensive magic.",
+    "skill_modifiers": {
+      "conjuration": 15,
+      "enchantment": 10,
+      "pyrotechnicMagic": 10
+    }
+  },
+  "stealth": {
+    "id": "stealth",
+    "name": "Stealth",
+    "description": "Moving unseen and striking from the shadows.",
+    "skill_modifiers": {
+      "picking": 15,
+      "lightWeapons": 10,
+      "lightArmours": 10
+    }
+  },
+  "healing": {
+    "id": "healing",
+    "name": "Healing",
+    "description": "Expertise in medical and restorative arts.",
+    "skill_modifiers": {
+      "apothecary": 15,
+      "redemptiveMagic": 10,
+      "zoology": 5
+    }
+  },
+  "crafting": {
+    "id": "crafting",
+    "name": "Crafting",
+    "description": "Skilled in producing tools and goods.",
+    "skill_modifiers": {
+      "building": 10,
+      "repairing": 10,
+      "weaponsForging": 10,
+      "armorsForging": 10
+    }
+  },
+  "trading": {
+    "id": "trading",
+    "name": "Trading",
+    "description": "Expert negotiator and merchant.",
+    "skill_modifiers": {
+      "trading": 20,
+      "goldsmithery": 10,
+      "conscription": 10
+    }
+  }
+}

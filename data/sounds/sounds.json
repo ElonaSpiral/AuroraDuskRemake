@@ -1,0 +1,170 @@
+{
+  "_comment": "Sound effect group definitions. Each group has a list of audio files; the game picks one randomly when the sound is triggered. Files are in assets/sounds/. base=sounds1.js, expansion=sounds2.js.",
+  "_note": "Audio files (.mp3) require Godot import OR use AudioStreamMP3.load_from_buffer() via FileAccess for import-free loading.",
+  "soundBlowgun": {
+    "type": "sound",
+    "files": [
+      "blowgun.mp3"
+    ]
+  },
+  "soundBottle": {
+    "type": "sound",
+    "files": [
+      "bottle.mp3"
+    ]
+  },
+  "soundBow": {
+    "type": "sound",
+    "files": [
+      "bow1.mp3",
+      "bow2.mp3"
+    ]
+  },
+  "soundBuilding": {
+    "type": "sound",
+    "files": [
+      "building1.mp3",
+      "building2.mp3",
+      "building3.mp3",
+      "building4.mp3",
+      "building5.mp3",
+      "building6.mp3",
+      "building7.mp3",
+      "building8.mp3",
+      "building9.mp3"
+    ]
+  },
+  "soundCannon": {
+    "type": "sound",
+    "files": [
+      "cannon1.mp3",
+      "cannon2.mp3"
+    ]
+  },
+  "soundCristal": {
+    "type": "sound",
+    "files": [
+      "cristal1.mp3",
+      "cristal2.mp3"
+    ]
+  },
+  "soundCrossbow": {
+    "type": "sound",
+    "files": [
+      "crossbow1.mp3"
+    ]
+  },
+  "soundGun": {
+    "type": "sound",
+    "files": [
+      "gun1.mp3"
+    ]
+  },
+  "soundIronSteam": {
+    "type": "sound",
+    "files": [
+      "ironSteam1.mp3",
+      "ironSteam2.mp3",
+      "ironSteam3.mp3"
+    ]
+  },
+  "soundMineral": {
+    "type": "sound",
+    "files": [
+      "mineral.mp3"
+    ]
+  },
+  "soundPaper": {
+    "type": "sound",
+    "files": [
+      "paper.mp3"
+    ]
+  },
+  "soundPick": {
+    "type": "sound",
+    "files": [
+      "pick1.mp3",
+      "pick2.mp3",
+      "pick3.mp3",
+      "pick4.mp3",
+      "pick5.mp3",
+      "pick6.mp3"
+    ]
+  },
+  "soundPlant": {
+    "type": "sound",
+    "files": [
+      "plant1.mp3"
+    ]
+  },
+  "soundRock": {
+    "type": "sound",
+    "files": [
+      "rock1.mp3",
+      "rock2.mp3",
+      "rock3.mp3"
+    ]
+  },
+  "soundSaw": {
+    "type": "sound",
+    "files": [
+      "saw1.mp3",
+      "saw2.mp3",
+      "saw3.mp3",
+      "saw4.mp3",
+      "saw5.mp3",
+      "saw6.mp3"
+    ]
+  },
+  "soundThrow": {
+    "type": "sound",
+    "files": [
+      "throw1.mp3"
+    ]
+  },
+  "soundTree": {
+    "type": "sound",
+    "files": [
+      "tree1.mp3",
+      "tree2.mp3",
+      "tree3.mp3",
+      "tree4.mp3",
+      "tree5.mp3",
+      "tree6.mp3"
+    ]
+  },
+  "soundVegetable": {
+    "type": "sound",
+    "files": [
+      "vegetable1.mp3",
+      "vegetable2.mp3",
+      "vegetable3.mp3"
+    ]
+  },
+  "soundCatapult": {
+    "type": "sound",
+    "files": [
+      "catapult.mp3"
+    ]
+  },
+  "soundGiantCrossbow": {
+    "type": "sound",
+    "files": [
+      "giantCrossbow.mp3"
+    ]
+  },
+  "soundRocket": {
+    "type": "sound",
+    "files": [
+      "rocket1.mp3",
+      "rocket2.mp3",
+      "rocket3.mp3"
+    ]
+  },
+  "soundWater": {
+    "type": "sound",
+    "files": [
+      "water.mp3"
+    ]
+  }
+}

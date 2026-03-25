@@ -1,0 +1,194 @@
+{
+  "human": {
+    "id": "human",
+    "name": "human",
+    "description": "Humans represent the dominant people.\nTheir advanced technique in civil engineering allows them to build impressive fortified cities. For centuries, due to their ability to kill each other, humans have revolutionised military tactics and exceeded those of all the other races combined.\n\nThey have average characteristics. This is the most versatile breed, but they lack specialisation. As a result, they will never be the best in any field.\n\nPlaying with a human is the best choice for new players who discover the game.",
+    "characteristics": {
+      "health": 100,
+      "stamina": 100,
+      "mana": 100,
+      "attack": 100,
+      "defense": 100,
+      "strength": 100,
+      "endurance": 100,
+      "address": 100,
+      "rapidity": 100,
+      "intelligence": 100,
+      "willpower": 100,
+      "charisma": 100,
+      "speed": 5
+    },
+    "skill_modifiers": {}
+  },
+  "elf": {
+    "id": "elf",
+    "name": "elf",
+    "description": "Elves are forest dwellers.\nThey look like humans, but are more slender, with faces with fine features and long spiked ears. Due to the expansion of human cities, many elves were forced to leave their native forests and live among men. Over generations, they eventually lost their magical gifts.\n\nElves are gifted in magic and archery. They are weak in melee combat and better with a bow or magic spells.\n\nPlayers who choose an elf make good second-line defenders. The elves are a fragile breed, so you should play cautiously during battles.",
+    "characteristics": {
+      "health": 80,
+      "stamina": 100,
+      "mana": 120,
+      "attack": 100,
+      "defense": 100,
+      "strength": 80,
+      "endurance": 80,
+      "address": 120,
+      "rapidity": 100,
+      "intelligence": 100,
+      "willpower": 120,
+      "charisma": 100,
+      "speed": 5
+    },
+    "skill_modifiers": {
+      "zoology": 20,
+      "forestry": 20,
+      "lithology": -20,
+      "prospecting": -20,
+      "bows": 20,
+      "firearms": -20
+    }
+  },
+  "half_elf": {
+    "id": "half_elf",
+    "name": "half elf",
+    "description": "The halves elves are both elven and human.\nThey have a human body structure and long ears.\n\nHalf-elves are hardened city dwellers. They live among humans as though they were their peers. They share their lifestyle and customs.\n\nIf you hesitate between an elf or a human, half-elves are a good choice. They remain relatively polyvalent. Even if a half elf is better with range weapons or with magical powers, they are decent melee fighters.",
+    "characteristics": {
+      "health": 90,
+      "stamina": 100,
+      "mana": 110,
+      "attack": 100,
+      "defense": 100,
+      "strength": 90,
+      "endurance": 90,
+      "address": 110,
+      "rapidity": 100,
+      "intelligence": 100,
+      "willpower": 110,
+      "charisma": 100,
+      "speed": 5
+    },
+    "skill_modifiers": {}
+  },
+  "dwarf": {
+    "id": "dwarf",
+    "name": "dwarf",
+    "description": "Dwarves are half-men.\nThey often live in mines where they extract valuable minerals for blacksmiths and jewellers. In cities, they easily find work as a blacksmiths or warriors.\n\nDwarves are slow but powerful melee fighters specialised in axes and hammers. They don't have any talent with precision weapons, except for firearms. They are also limited in magic.\n\nThis choice of character is perfect to fight on the front line. Dwarves are tough, but they are slow  and they can hardly run away from a battle.",
+    "characteristics": {
+      "health": 120,
+      "stamina": 120,
+      "mana": 80,
+      "attack": 100,
+      "defense": 100,
+      "strength": 120,
+      "endurance": 120,
+      "address": 80,
+      "rapidity": 80,
+      "intelligence": 100,
+      "willpower": 100,
+      "charisma": 100,
+      "speed": 4.5
+    },
+    "skill_modifiers": {
+      "alcohols": 20,
+      "prospecting": 20,
+      "mining": 20,
+      "metalSmelting": 20,
+      "weaponsForging": 20,
+      "armorsForging": 20,
+      "firearmsForging": 20,
+      "gemmology": 20,
+      "goldsmithery": 20,
+      "bluntWeapons": 20,
+      "axes": 20,
+      "firearms": 20,
+      "picking": -20,
+      "tanning": -20,
+      "forestry": -20,
+      "zoology": -20,
+      "hunting": -20,
+      "farming": -20,
+      "harvesting": -20,
+      "bakery": -20,
+      "breeding": -20,
+      "bows": -20,
+      "pyrotechnicMagic": -20,
+      "redemptiveMagic": -20
+    }
+  },
+  "feline": {
+    "id": "feline",
+    "name": "feline",
+    "description": "Felines are half-men, half-cat creatures.\nThey are peaceful, they enjoy cooking, partying and eating all kinds of foods. In society, they often play the role of servants, but they know how to fight with their claws out.\n\nFelines are very fast. They are specialised in light weapons and range weapons. They have no interest in wearing heavy armours, so they focus on light ones.\n\nA feline is a third-line character who uses his advantages in crafting to supply other fighting forces. If a feline is in danger, he can easily stay away, due to his huge movement speed.",
+    "characteristics": {
+      "health": 80,
+      "stamina": 120,
+      "mana": 100,
+      "attack": 80,
+      "defense": 100,
+      "strength": 80,
+      "endurance": 80,
+      "address": 120,
+      "rapidity": 120,
+      "intelligence": 100,
+      "willpower": 100,
+      "charisma": 100,
+      "speed": 6
+    },
+    "skill_modifiers": {
+      "hunting": 20,
+      "bakery": 20,
+      "breeding": 20,
+      "alcohols": 20,
+      "shoemaking": -20,
+      "lithology": -20,
+      "stonecutting": -20,
+      "prospecting": -20
+    }
+  },
+  "colossus": {
+    "id": "colossus",
+    "name": "colossus",
+    "description": "Colossus are men of great size.\nThey are aggressive creatures who live in remote mountains. When colossus need to express their violence, they go to town where big guys always find their place.\n\nColossus are very strong and very resistant, but their magical abilities are very limited. They are ideal warriors. As for crafting, they are good at smashing stones.\n\nA colossus is a character specifically designed for physical combat and to rush into the brawl. They are penalised in activities that require dexterity or a brain.",
+    "characteristics": {
+      "health": 140,
+      "stamina": 80,
+      "mana": 60,
+      "attack": 120,
+      "defense": 100,
+      "strength": 140,
+      "endurance": 140,
+      "address": 80,
+      "rapidity": 80,
+      "intelligence": 80,
+      "willpower": 80,
+      "charisma": 100,
+      "speed": 5
+    },
+    "skill_modifiers": {
+      "building": 20,
+      "lithology": 20,
+      "stonecutting": 20,
+      "repairing": -20,
+      "forestry": -20,
+      "picking": -20,
+      "bluntWeapons": 20,
+      "lightWeapons": -20,
+      "golemology": 20,
+      "conscription": -20
+    }
+  },
+  "astalan": {
+    "id": "astalan",
+    "name": {
+      "EN": "astalan",
+      "FR": "astalan",
+      "DE": "astalan",
+      "JP": "アスタラン"
+    },
+    "playable_ids": [
+      "astalanM"
+    ],
+    "_source": "steamAge expansion",
+    "_note": "Astalans transferred their souls into golem bodies. Expert in mineral/golem skills, weak in organic/nature skills. Single-sex race (M only in expansion)."
+  }
+}

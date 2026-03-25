@@ -1,0 +1,125 @@
+{
+  "none": {
+    "id": "none",
+    "name": "None",
+    "description": "No job selected. A generalist with no particular specialty.",
+    "skill_modifiers": {}
+  },
+  "warrior": {
+    "id": "warrior",
+    "name": "Warrior",
+    "description": "A trained fighter specialised in melee combat.",
+    "skill_modifiers": {
+      "swords": 15,
+      "axes": 10,
+      "bluntWeapons": 10,
+      "heavyArmours": 15,
+      "shields": 10,
+      "building": -10
+    }
+  },
+  "ranger": {
+    "id": "ranger",
+    "name": "Ranger",
+    "description": "A wilderness scout skilled with ranged weapons and survival.",
+    "skill_modifiers": {
+      "bows": 20,
+      "hunting": 15,
+      "forestry": 10,
+      "zoology": 10,
+      "lightArmours": 10,
+      "heavyArmours": -15
+    }
+  },
+  "mage": {
+    "id": "mage",
+    "name": "Mage",
+    "description": "A student of arcane arts, weak in melee but powerful at range.",
+    "skill_modifiers": {
+      "conjuration": 20,
+      "enchantment": 15,
+      "pyrotechnicMagic": 15,
+      "magicClothes": 10,
+      "lightWeapons": -10,
+      "heavyArmours": -20
+    }
+  },
+  "rogue": {
+    "id": "rogue",
+    "name": "Rogue",
+    "description": "A nimble trickster who strikes fast and disappears into the shadows.",
+    "skill_modifiers": {
+      "lightWeapons": 20,
+      "picking": 15,
+      "hunting": 10,
+      "lightArmours": 10,
+      "heavyArmours": -20,
+      "conscription": -10
+    }
+  },
+  "cleric": {
+    "id": "cleric",
+    "name": "Cleric",
+    "description": "A holy warrior who heals allies and smites enemies with divine power.",
+    "skill_modifiers": {
+      "redemptiveMagic": 20,
+      "mediumArmours": 10,
+      "shields": 10,
+      "bluntWeapons": 10,
+      "repressiveMagic": 10,
+      "axes": -10
+    }
+  },
+  "blacksmith": {
+    "id": "blacksmith",
+    "name": "Blacksmith",
+    "description": "A master of metalwork, forging weapons and armour.",
+    "skill_modifiers": {
+      "weaponsForging": 20,
+      "armorsForging": 20,
+      "metalSmelting": 15,
+      "mining": 10,
+      "prospecting": 10,
+      "bows": -10
+    }
+  },
+  "alchemist": {
+    "id": "alchemist",
+    "name": "Alchemist",
+    "description": "A scholar of substances, brewing potions and concoctions.",
+    "skill_modifiers": {
+      "apothecary": 20,
+      "alcohols": 15,
+      "lithology": 10,
+      "zoology": 10,
+      "farming": 10,
+      "bluntWeapons": -10
+    }
+  },
+  "merchant": {
+    "id": "merchant",
+    "name": "Merchant",
+    "description": "A shrewd trader who deals in goods and resources.",
+    "skill_modifiers": {
+      "trading": 20,
+      "conscription": 10,
+      "goldsmithery": 10,
+      "jewellery": 10,
+      "axes": -10,
+      "heavyArmours": -10
+    }
+  },
+  "farmer": {
+    "id": "farmer",
+    "name": "Farmer",
+    "description": "A skilled cultivator of the land and keeper of animals.",
+    "skill_modifiers": {
+      "farming": 20,
+      "harvesting": 15,
+      "breeding": 15,
+      "bakery": 10,
+      "forestry": 10,
+      "axes": -5
+    }
+  }
+}

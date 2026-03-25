@@ -1,0 +1,1959 @@
+{
+  "_comment": "Resources that exist as entities on the map (animals, plants, terrain deposits). 'rate' = spawn weight. Some drop resources on death via 'death.createResource'.",
+  "_source": "base=landResources1.js + expansion=landResources2.js",
+  "medicinalPlant": {
+    "type": "landRessource",
+    "age": "woodenAge",
+    "no": 0,
+    "picture": {
+      "file": "medicinalPlant.png",
+      "file50": "medicinalPlant50.atf",
+      "file100": "medicinalPlant100.atf",
+      "file200": "medicinalPlant200.atf"
+    },
+    "name": {
+      "EN": "medicinal plant",
+      "FR": "plantes médicinales",
+      "DE": "Heilkraut",
+      "JP": "薬用植物"
+    },
+    "description": {
+      "EN": "Medicinal plants provide medicinal herbs to restore your health.",
+      "FR": "Les plantes médicinales fournissent des herbes médicinales qui permettent de regagner de la santé.",
+      "DE": "Das Heilkraut stellt Heilkräuter zur verfügung welche man zum heilen verwenden kann.",
+      "JP": "体力の回復や薬品調合などに用いる薬草を入手することができます。"
+    },
+    "rate": 25,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 25
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "forestry",
+      "xpSkill": {
+        "forestry": 25
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 25
+      },
+      "prebuild": {
+        "id": "sprout",
+        "time": 12.5,
+        "anim": "pop"
+      }
+    },
+    "quantity": 25,
+    "produce": [
+      {
+        "time": 0.5,
+        "gainRessource": {
+          "medicinalHerbs": 1
+        },
+        "sound": "soundVegetable",
+        "anim": "shake",
+        "bonusSkill": "picking",
+        "costPrimaryCharacteristic": {
+          "stamina": 1
+        },
+        "xpSecondaryCharacteristic": {
+          "strength": 1
+        },
+        "xpSkill": {
+          "picking": 1
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 32,
+    "height": 32
+  },
+  "bush": {
+    "type": "landRessource",
+    "age": "woodenAge",
+    "no": 1,
+    "picture": {
+      "file": "bush.png",
+      "file50": "bush50.atf",
+      "file100": "bush100.atf",
+      "file200": "bush200.atf"
+    },
+    "name": {
+      "EN": "bush",
+      "FR": "buisson",
+      "DE": "Beeren strauch",
+      "JP": "茂み"
+    },
+    "description": {
+      "EN": "Bushes provide fruits to restore your stamina.",
+      "FR": "Le buisson fournit des fruits qui permettent de regagner de l'énergie.",
+      "DE": "Vom Beeren strauch bekommt man köstliche blaubeeren zum auffüllen der Ausdauer.",
+      "JP": "持久力の回復や調理に用いる果物を入手することができます。"
+    },
+    "rate": 20,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 20
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "forestry",
+      "xpSkill": {
+        "forestry": 20
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 20
+      },
+      "prebuild": {
+        "id": "sprout",
+        "time": 10,
+        "anim": "pop"
+      }
+    },
+    "quantity": 20,
+    "produce": [
+      {
+        "time": 0.5,
+        "gainRessource": {
+          "fruits": 1
+        },
+        "sound": "soundVegetable",
+        "anim": "shake",
+        "bonusSkill": "picking",
+        "xpSecondaryCharacteristic": {
+          "rapidity": 1
+        },
+        "xpSkill": {
+          "picking": 1
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 32,
+    "height": 32
+  },
+  "mushroomsPlant": {
+    "type": "landRessource",
+    "age": "woodenAge",
+    "no": 2,
+    "picture": {
+      "file": "mushroomsPlant.png",
+      "file100": "mushroomsPlant100.atf"
+    },
+    "name": {
+      "EN": "mushrooms plant",
+      "FR": "pousses de champignons",
+      "DE": "Pilzstrauch",
+      "JP": "きのこの苗木"
+    },
+    "description": {
+      "EN": "Mushrooms plants provide mushrooms to restore your mana.",
+      "FR": "Les pousses de champignons fournissent des champignons qui permettent de regagner de la mana.",
+      "DE": "Der Pilzstrauch bietet genießbare Pilze zum auffüllen des Manas.",
+      "JP": "魔力の回復や調理に用いるきのこを入手することができます。"
+    },
+    "rate": 15,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 5
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "forestry",
+      "xpSkill": {
+        "forestry": 5
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 5
+      },
+      "prebuild": {
+        "id": "sprout",
+        "time": 12.5,
+        "anim": "pop"
+      }
+    },
+    "quantity": 15,
+    "produce": [
+      {
+        "time": 0.5,
+        "gainRessource": {
+          "mushroom": 1
+        },
+        "sound": "soundVegetable",
+        "anim": "shake",
+        "bonusSkill": "picking",
+        "costPrimaryCharacteristic": {
+          "stamina": 1
+        },
+        "xpSecondaryCharacteristic": {
+          "rapidity": 1
+        },
+        "xpSkill": {
+          "picking": 1
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 24,
+    "height": 24
+  },
+  "tree": {
+    "type": "landRessource",
+    "age": "woodenAge",
+    "no": 3,
+    "picture": {
+      "file": "tree.png",
+      "file100": "tree100.atf"
+    },
+    "name": {
+      "EN": "tree",
+      "FR": "arbre",
+      "DE": "Baum",
+      "JP": "樹木"
+    },
+    "description": {
+      "EN": "Trees provide wood to construct buildings.",
+      "FR": "Les arbres fournissent du bois pour construire des bâtiments.",
+      "DE": "Der Baum stellt Holz zur verfügung welches zum Bauen verwendet werden kann.",
+      "JP": "建築などに用いる木材を入手することができます。"
+    },
+    "rate": 75,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 50
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "forestry",
+      "xpSkill": {
+        "forestry": 50
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 50
+      },
+      "prebuild": {
+        "id": "sproutL",
+        "time": 25,
+        "anim": "pop"
+      }
+    },
+    "quantity": 50,
+    "produce": [
+      {
+        "time": 0.5,
+        "gainRessource": {
+          "wood": 1
+        },
+        "sound": "soundTree",
+        "anim": "shake",
+        "bonusSkill": "woodcutting",
+        "costPrimaryCharacteristic": {
+          "stamina": 1
+        },
+        "xpSecondaryCharacteristic": {
+          "strength": 1
+        },
+        "xpSkill": {
+          "woodcutting": 1
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 64,
+    "height": 64
+  },
+  "deer": {
+    "type": "animal",
+    "age": "woodenAge",
+    "no": 4,
+    "picture": {
+      "file": "deer.png",
+      "file100": "deer100.atf"
+    },
+    "name": {
+      "EN": "deer",
+      "FR": "cerf",
+      "DE": "Hirsch",
+      "JP": "鹿"
+    },
+    "pluralName": {
+      "EN": "deer",
+      "FR": "cerfs",
+      "DE": "Hirsche",
+      "JP": "鹿"
+    },
+    "description": {
+      "EN": "Deer provide raw meat and skin.",
+      "FR": "Le cerf fournit de la viande crue et de la peau.",
+      "DE": "Der Hirsch, einst getötet bietet sein kadaver Rohes Fleisch und Tierhaut.",
+      "JP": "死体から生皮と生肉を入手することができます。"
+    },
+    "rate": 10,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 15
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "zoology",
+      "xpSkill": {
+        "zoology": 15
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 15
+      },
+      "prebuild": {
+        "id": "cage",
+        "time": 7.5,
+        "anim": "pop"
+      }
+    },
+    "width": 40,
+    "height": 48,
+    "health": 50,
+    "defense": 100,
+    "speed": 7,
+    "death": {
+      "build": {
+        "name": "deerCarcass",
+        "quantity": 1
+      }
+    }
+  },
+  "deerCarcass": {
+    "type": "landRessource",
+    "picture": {
+      "file": "deerCarcass.png",
+      "file100": "deerCarcass100.atf"
+    },
+    "name": {
+      "EN": "deer carcass",
+      "FR": "carcasse de cerf",
+      "DE": "Hirschkadaver",
+      "JP": "鹿の死体"
+    },
+    "description": {
+      "EN": "Deer carcasses provide raw meat and skin.",
+      "FR": "La caracasse de cerf fournit de la viande crue et de la peau.",
+      "DE": "Hirschkadaver sorgen für rohes Fleisch und Haut.",
+      "JP": "生皮と生肉を入手することができます。"
+    },
+    "quantity": 10,
+    "produce": [
+      {
+        "time": 1,
+        "gainRessource": {
+          "rawMeat": 1,
+          "animalSkins": 1
+        },
+        "sound": "soundVegetable",
+        "anim": "shake",
+        "bonusSkill": "hunting",
+        "costPrimaryCharacteristic": {
+          "stamina": 1
+        },
+        "xpSecondaryCharacteristic": {
+          "address": 2
+        },
+        "xpSkill": {
+          "hunting": 2
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 48,
+    "height": 30
+  },
+  "rock": {
+    "type": "landRessource",
+    "age": "stoneAge",
+    "no": 5,
+    "picture": {
+      "file": "rock.png",
+      "file100": "rock100.atf"
+    },
+    "icon": "rock",
+    "name": {
+      "EN": "rock",
+      "FR": "rocher",
+      "DE": "Felsen",
+      "JP": "岩"
+    },
+    "description": {
+      "EN": "Rocks provide stone to construct buildings.",
+      "FR": "Les rochers fournissent de la pierre pour construire des bâtiments.",
+      "DE": "Der Felsen bietet steine zur verarbeitung oder der Konstruktion von Gebäuden.",
+      "JP": "建築用の切石などに用いる石材を入手することができます。"
+    },
+    "rate": 15,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 30
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "lithology",
+      "xpSkill": {
+        "lithology": 30
+      },
+      "xpSecondaryCharacteristic": {
+        "intelligence": 30
+      },
+      "prebuild": {
+        "id": "pebble",
+        "time": 45,
+        "anim": "pop"
+      }
+    },
+    "quantity": 30,
+    "produce": [
+      {
+        "time": 1,
+        "gainRessource": {
+          "stone": 1
+        },
+        "sound": "soundRock",
+        "anim": "shake",
+        "bonusSkill": "stonecutting",
+        "costPrimaryCharacteristic": {
+          "stamina": 2
+        },
+        "xpSecondaryCharacteristic": {
+          "strength": 2
+        },
+        "xpSkill": {
+          "stonecutting": 2
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 32,
+    "height": 32
+  },
+  "grainField": {
+    "type": "landRessource",
+    "age": "stoneAge",
+    "no": 6,
+    "picture": {
+      "file": "grainField.png",
+      "file100": "grainField100.atf"
+    },
+    "name": {
+      "EN": "grain field",
+      "FR": "champ de céréales",
+      "DE": "Getreidefeld",
+      "JP": "穀物畑"
+    },
+    "description": {
+      "EN": "Grain fields provide grain to bake bread.",
+      "FR": "Le champ de céréales fournit des céréales pour faire du pain.",
+      "DE": "Kornfelder liefern Getreide zum Brotbacken.",
+      "JP": "調理用の小麦粉などに用いる小麦を入手することができます。"
+    },
+    "rate": 0,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 5
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "farming",
+      "xpSkill": {
+        "farming": 5
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 5
+      },
+      "prebuild": {
+        "id": "sproutS",
+        "time": 30,
+        "anim": "pop"
+      }
+    },
+    "quantity": 5,
+    "produce": [
+      {
+        "time": 1,
+        "gainRessource": {
+          "grain": 1
+        },
+        "sound": "soundVegetable",
+        "anim": "shake",
+        "bonusSkill": "harvesting",
+        "costPrimaryCharacteristic": {
+          "stamina": 2
+        },
+        "xpSecondaryCharacteristic": {
+          "rapidity": 2
+        },
+        "xpSkill": {
+          "harvesting": 2
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 24,
+    "height": 48
+  },
+  "pig": {
+    "type": "animal",
+    "age": "stoneAge",
+    "no": 7,
+    "picture": {
+      "file": "pig.png",
+      "file100": "pig100.atf"
+    },
+    "name": {
+      "EN": "pig",
+      "FR": "cochon",
+      "DE": "Schwein",
+      "JP": "豚"
+    },
+    "pluralName": {
+      "EN": "pigs",
+      "FR": "cochons",
+      "DE": "Schweine",
+      "JP": "豚"
+    },
+    "description": {
+      "EN": "Pigs provide raw meat.",
+      "FR": "Le cochon fournit de la viande crue.",
+      "DE": "Das Schwein, einst getötet bietet sein kadaver viel Rohes Fleisch.",
+      "JP": "死体から生肉を入手することができます。"
+    },
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 10
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "breeding",
+      "xpSkill": {
+        "breeding": 10
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 10
+      },
+      "prebuild": {
+        "id": "cage",
+        "time": 15,
+        "anim": "pop"
+      }
+    },
+    "width": 32,
+    "height": 32,
+    "health": 10,
+    "defense": 50,
+    "speed": 2,
+    "death": {
+      "build": {
+        "name": "pigCarcass",
+        "quantity": 1
+      }
+    }
+  },
+  "pigCarcass": {
+    "type": "landRessource",
+    "picture": {
+      "file": "pigCarcass.png",
+      "file100": "pigCarcass100.atf"
+    },
+    "name": {
+      "EN": "pig carcass",
+      "FR": "carcasse de cochon",
+      "DE": "Schweinkadaver",
+      "JP": "豚の死体"
+    },
+    "description": {
+      "EN": "Pig carcasses provide raw meat.",
+      "FR": "La caracasse de cochon fournit de la viande crue.",
+      "DE": "Schweineschlachtkörper liefern rohes Fleisch.",
+      "JP": "生肉を入手することができます。"
+    },
+    "quantity": 30,
+    "produce": [
+      {
+        "time": 1,
+        "gainRessource": {
+          "rawMeat": 1
+        },
+        "sound": "soundVegetable",
+        "anim": "shake",
+        "bonusSkill": "hunting",
+        "costPrimaryCharacteristic": {
+          "stamina": 1
+        },
+        "xpSecondaryCharacteristic": {
+          "address": 1
+        },
+        "xpSkill": {
+          "hunting": 1
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 32,
+    "height": 32
+  },
+  "sheep": {
+    "type": "animal",
+    "age": "stoneAge",
+    "no": 8,
+    "picture": {
+      "file": "sheep.png",
+      "file100": "sheep100.atf"
+    },
+    "name": {
+      "EN": "sheep",
+      "FR": "mouton",
+      "DE": "Schaf",
+      "JP": "羊"
+    },
+    "pluralName": {
+      "EN": "sheep",
+      "FR": "moutons",
+      "DE": "Schafe",
+      "JP": "羊"
+    },
+    "description": {
+      "EN": "Sheep provide wool.",
+      "FR": "Le mouton fournit de la laine.",
+      "DE": "Das Schaf bietet freiwillig seine wertvolle wolle an.",
+      "JP": "羊毛を入手することができます。"
+    },
+    "rate": 0,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 35
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "breeding",
+      "xpSkill": {
+        "breeding": 35
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 35
+      },
+      "prebuild": {
+        "id": "cage",
+        "time": 17.5,
+        "anim": "pop"
+      }
+    },
+    "quantity": 18,
+    "produce": [
+      {
+        "time": 1,
+        "gainRessource": {
+          "wool": 1
+        },
+        "sound": "soundVegetable",
+        "bonusSkill": "sheepShearing",
+        "costPrimaryCharacteristic": {
+          "stamina": 2
+        },
+        "xpSecondaryCharacteristic": {
+          "rapidity": 2
+        },
+        "xpSkill": {
+          "sheepShearing": 2
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 40,
+    "height": 40,
+    "shadow": false,
+    "health": 25,
+    "defense": 100,
+    "speed": 3
+  },
+  "cage": {
+    "type": "prebuild",
+    "picture": {
+      "file": "cage.png",
+      "file100": "cage100.atf"
+    },
+    "name": {
+      "EN": "animal cage",
+      "FR": "cage d'animal",
+      "DE": "Tierkäfig",
+      "JP": "飼育檻"
+    },
+    "description": {
+      "EN": "The animal cage will soon unleash a fully-grown animal.",
+      "FR": "Cette cage d'animal va bientôt libérer un animal adulte.",
+      "DE": "Der Tierkäfig wird nach einigen sekunden zu einem ausgewachsenen Tier.",
+      "JP": "しばらくすると十分に成長した動物が解き放たれます。"
+    },
+    "width": 32,
+    "height": 32
+  },
+  "ironOre": {
+    "type": "landRessource",
+    "age": "ironAge",
+    "no": 9,
+    "picture": {
+      "file": "ironOre.png",
+      "file100": "ironOre100.atf"
+    },
+    "icon": "rock",
+    "name": {
+      "EN": "iron ore",
+      "FR": "minerai de fer",
+      "DE": "Eisenerz",
+      "JP": "鉄鉱石"
+    },
+    "description": {
+      "EN": "Iron ores provide iron to manufacture tools, weapons and armours.",
+      "FR": "Le minerai de fer fournit du fer pour fabriquer des outils, des armes et des armures.",
+      "DE": "Das Eisenerz bietet Eisen zur verarbeitung zu Eisenbarren welche für Werkzeuge, Waffen und Rüstungen benötigt werden.",
+      "JP": "道具や武器、鎧などで用いる鋳鉄や鋼鉄の元になる原鉄を入手することができます。"
+    },
+    "rate": 3,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 40
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "prospecting",
+      "xpSkill": {
+        "prospecting": 40
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 40
+      },
+      "prebuild": {
+        "id": "pebble",
+        "time": 60,
+        "anim": "pop"
+      }
+    },
+    "quantity": 20,
+    "produce": [
+      {
+        "time": 1.5,
+        "gainRessource": {
+          "iron": 1
+        },
+        "sound": "soundMineral",
+        "anim": "shake",
+        "bonusSkill": "mining",
+        "costPrimaryCharacteristic": {
+          "stamina": 3
+        },
+        "xpSecondaryCharacteristic": {
+          "endurance": 3
+        },
+        "xpSkill": {
+          "mining": 3
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 32,
+    "height": 32
+  },
+  "crystalsOre": {
+    "type": "landRessource",
+    "age": "etherAge",
+    "no": 10,
+    "picture": {
+      "file": "crystalsOre.png",
+      "file100": "crystalsOre100.atf"
+    },
+    "icon": "rock",
+    "name": {
+      "EN": "crystal ore",
+      "FR": "minerai de cristal",
+      "DE": "Kristallerz",
+      "JP": "水晶鉱石"
+    },
+    "description": {
+      "EN": "Crystal ores provide crystal to manufacture magical items.",
+      "FR": "Le minerai de cristal fournit des cristaux pour fabriquer de l'équipement magique.",
+      "DE": "Kristallerz bietet Kristalle welche zur Herstellung von Magischen Gegenständen benötigt werden.",
+      "JP": "魔法のアイテムなどに用いる水晶を入手することができます。"
+    },
+    "rate": 1,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 55
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "gemmology",
+      "xpSkill": {
+        "gemmology": 55
+      },
+      "xpSecondaryCharacteristic": {
+        "intelligence": 55
+      },
+      "prebuild": {
+        "id": "crystalPebble",
+        "time": 82,
+        "anim": "pop"
+      }
+    },
+    "quantity": 20,
+    "produce": [
+      {
+        "time": 2,
+        "gainRessource": {
+          "crystals": 1
+        },
+        "sound": "soundCristal",
+        "anim": "shake",
+        "bonusSkill": "mining",
+        "costPrimaryCharacteristic": {
+          "stamina": 4
+        },
+        "xpSecondaryCharacteristic": {
+          "endurance": 4
+        },
+        "xpSkill": {
+          "mining": 4
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 32,
+    "height": 32
+  },
+  "sulfurOre": {
+    "type": "landRessource",
+    "age": "goldenAge",
+    "no": 11,
+    "picture": {
+      "file": "sulfurOre.png",
+      "file100": "sulfurOre100.atf"
+    },
+    "icon": "rock",
+    "name": {
+      "EN": "sulphur ore",
+      "FR": "minerai de soufre",
+      "DE": "Schwefelerz",
+      "JP": "硫黄鉱石"
+    },
+    "description": {
+      "EN": "Sulphur ores provide sulphur to manufacture firearm ammo.",
+      "FR": "Le minerai de soufre fournit du soufre pour fabriquer des munitions d'armes à feu.",
+      "DE": "Schwefelerz bietet Schwefel zur Herstellung von Schusswaffen Munition",
+      "JP": "銃器の弾薬などに用いる硫黄を入手することができます。"
+    },
+    "rate": 1,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 60
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "prospecting",
+      "xpSkill": {
+        "prospecting": 60
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 60
+      },
+      "prebuild": {
+        "id": "pebble",
+        "time": 90,
+        "anim": "pop"
+      }
+    },
+    "quantity": 18,
+    "produce": [
+      {
+        "time": 2.5,
+        "gainRessource": {
+          "sulfur": 1
+        },
+        "sound": "soundMineral",
+        "anim": "shake",
+        "bonusSkill": "mining",
+        "costPrimaryCharacteristic": {
+          "stamina": 5
+        },
+        "xpSecondaryCharacteristic": {
+          "endurance": 5
+        },
+        "xpSkill": {
+          "mining": 5
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 32,
+    "height": 32
+  },
+  "goldenOre": {
+    "type": "landRessource",
+    "age": "goldenAge",
+    "no": 12,
+    "picture": {
+      "file": "goldenOre.png",
+      "file100": "goldenOre100.atf"
+    },
+    "icon": "rock",
+    "name": {
+      "EN": "gold ore",
+      "FR": "minerai d'or",
+      "DE": "Golderz",
+      "JP": "金鉱石"
+    },
+    "description": {
+      "EN": "Gold ores provide gold to manufacture jewellery.",
+      "FR": "Le minerai d'or fournit de l'or pour fabriquer des bijoux.",
+      "DE": "Golderze liefern Gold, um Schmuck herzustellen.",
+      "JP": "宝石細工などで用いる棒金の元になる金原料を入手することができます。"
+    },
+    "rate": 1,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 65
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "prospecting",
+      "xpSkill": {
+        "prospecting": 65
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 65
+      },
+      "prebuild": {
+        "id": "pebble",
+        "time": 98,
+        "anim": "pop"
+      }
+    },
+    "quantity": 20,
+    "produce": [
+      {
+        "time": 2.5,
+        "gainRessource": {
+          "gold": 1
+        },
+        "sound": "soundMineral",
+        "anim": "shake",
+        "bonusSkill": "mining",
+        "costPrimaryCharacteristic": {
+          "stamina": 5
+        },
+        "xpSecondaryCharacteristic": {
+          "endurance": 5
+        },
+        "xpSkill": {
+          "mining": 5
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 32,
+    "height": 32
+  },
+  "sprout": {
+    "type": "prebuild",
+    "picture": {
+      "file": "sprout.png",
+      "file100": "sprout100.atf"
+    },
+    "name": {
+      "EN": "sprout",
+      "FR": "pousse",
+      "DE": "Sprössling",
+      "JP": "新芽"
+    },
+    "description": {
+      "EN": "The sprout will soon become a plant.",
+      "FR": "La pousse va bientôt devenir une plante.",
+      "DE": "Der Sprössling wird in kurzer zeit zu einer Pflanze.",
+      "JP": "しばらくすると植物に成長します。"
+    },
+    "width": 32,
+    "height": 32
+  },
+  "sproutS": {
+    "type": "prebuild",
+    "picture": {
+      "file": "sproutS.png",
+      "file100": "sproutS100.atf"
+    },
+    "name": {
+      "EN": "sprout",
+      "FR": "pousse",
+      "DE": "Sprössling",
+      "JP": "新芽"
+    },
+    "description": {
+      "EN": "The sprout will soon become a plant.",
+      "FR": "La pousse va bientôt devenir une plante.",
+      "DE": "Der Sprössling wird in kurzer zeit zu einer Pflanze.",
+      "JP": "しばらくすると植物に成長します。"
+    },
+    "width": 16,
+    "height": 16
+  },
+  "sproutL": {
+    "type": "prebuild",
+    "picture": {
+      "file": "sproutL.png",
+      "file100": "sproutL100.atf"
+    },
+    "name": {
+      "EN": "sprout",
+      "FR": "pousse",
+      "DE": "Sprössling",
+      "JP": "新芽"
+    },
+    "description": {
+      "EN": "The sprout will soon become a plant.",
+      "FR": "La pousse va bientôt devenir une plante.",
+      "DE": "Der Sprössling wird in kurzer zeit zu einer Pflanze.",
+      "JP": "しばらくすると植物に成長します。"
+    },
+    "width": 64,
+    "height": 64
+  },
+  "pebble": {
+    "type": "prebuild",
+    "picture": {
+      "file": "pebble.png",
+      "file100": "pebble100.atf"
+    },
+    "name": {
+      "EN": "deposit",
+      "FR": "gisement",
+      "DE": "Kieselstein",
+      "JP": "鉱床"
+    },
+    "description": {
+      "EN": "The deposit will soon become a mineral ore.",
+      "FR": "Ce gisement va bientôt devenir un minerai.",
+      "DE": "Der Kleine Kieselstein wird schon bald zu einem vollwärtigen Erz Heranwachsen",
+      "JP": "しばらくすると鉱石になります。"
+    },
+    "width": 32,
+    "height": 32
+  },
+  "crystalPebble": {
+    "type": "prebuild",
+    "picture": {
+      "file": "crystalPebble.png",
+      "file100": "crystalPebble100.atf"
+    },
+    "name": {
+      "EN": "crystal deposit",
+      "FR": "gisement de cristal",
+      "DE": "Kristallsplitter",
+      "JP": "水晶鉱床"
+    },
+    "description": {
+      "EN": "The crystal deposit will soon become a crystal ore.",
+      "FR": "Ce gisement de cristal va bientôt devenir un minerai de cristal.",
+      "DE": "Der Kleine Kristallsplitter wird schon bald zu einem Großen Kristall Heranwachsen.",
+      "JP": "しばらくすると水晶鉱石になります。"
+    },
+    "width": 32,
+    "height": 32
+  },
+  "boar": {
+    "type": "animal",
+    "age": "stoneAge",
+    "no": 8.5,
+    "picture": {
+      "file": "boar.png",
+      "file100": "boar100.atf"
+    },
+    "name": {
+      "EN": "boar",
+      "FR": "sanglier",
+      "DE": "Eber",
+      "JP": "猪"
+    },
+    "pluralName": {
+      "EN": "boars",
+      "FR": "sangliers",
+      "DE": "Ebern",
+      "JP": "猪"
+    },
+    "description": {
+      "EN": "Boars provide raw meat and skin.",
+      "FR": "Le sanglier fournit de la viande crue et de la peau.",
+      "DE": "Der Eber, einst getötet bietet sein kadaver Rohes Fleisch und Tierhaut.",
+      "JP": "死体から生皮と生肉を入手することができます。"
+    },
+    "rate": 10,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 45
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "zoology",
+      "xpSkill": {
+        "zoology": 45
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 45
+      },
+      "prebuild": {
+        "id": "cage",
+        "time": 22.5,
+        "anim": "pop"
+      }
+    },
+    "width": 48,
+    "height": 48,
+    "health": 150,
+    "defense": 100,
+    "speed": 6,
+    "death": {
+      "build": {
+        "name": "boarCarcass",
+        "quantity": 1
+      }
+    }
+  },
+  "boarCarcass": {
+    "type": "landRessource",
+    "picture": {
+      "file": "boarCarcass.png",
+      "file100": "boarCarcass100.atf"
+    },
+    "name": {
+      "EN": "boar carcass",
+      "FR": "carcasse de sanglier",
+      "DE": "Eberkadaver",
+      "JP": "猪の死体"
+    },
+    "description": {
+      "EN": "Boar carcasses provide raw meat and skin.",
+      "FR": "La caracasse de sanglier fournit de la viande crue et de la peau.",
+      "DE": "Eberkadaver sorgen für rohes Fleisch und Haut.",
+      "JP": "生皮と生肉を入手することができます。"
+    },
+    "quantity": 30,
+    "produce": [
+      {
+        "time": 1,
+        "gainRessource": {
+          "rawMeat": 1,
+          "animalSkins": 1
+        },
+        "sound": "soundVegetable",
+        "anim": "shake",
+        "bonusSkill": "hunting",
+        "costPrimaryCharacteristic": {
+          "stamina": 2
+        },
+        "xpSecondaryCharacteristic": {
+          "address": 2
+        },
+        "xpSkill": {
+          "hunting": 2
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 32,
+    "height": 32
+  },
+  "coalOre": {
+    "type": "landRessource",
+    "age": "steamAge",
+    "no": 13,
+    "picture": {
+      "file": "coalOre.png",
+      "file100": "coalOre100.atf"
+    },
+    "icon": "rock",
+    "name": {
+      "EN": "coal ore",
+      "FR": "minerai de charbon",
+      "JP": "石炭鉱石"
+    },
+    "description": {
+      "EN": "Coal ores provide coal to manufacture steel.",
+      "FR": "Le minerai de charbon fournit du charbon pour fabriquer de l'acier.",
+      "JP": "鋼鉄などに用いる石炭を入手することができます。"
+    },
+    "rate": 1,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 45
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "prospecting",
+      "xpSkill": {
+        "prospecting": 45
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 45
+      },
+      "prebuild": {
+        "id": "coalPebble",
+        "time": 68,
+        "anim": "pop"
+      }
+    },
+    "quantity": 14,
+    "produce": [
+      {
+        "time": 2.5,
+        "gainRessource": {
+          "coal": 1
+        },
+        "sound": "soundMineral",
+        "anim": "shake",
+        "bonusSkill": "mining",
+        "costPrimaryCharacteristic": {
+          "stamina": 5
+        },
+        "xpSecondaryCharacteristic": {
+          "endurance": 5
+        },
+        "xpSkill": {
+          "mining": 5
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 32,
+    "height": 32
+  },
+  "coalPebble": {
+    "type": "prebuild",
+    "picture": {
+      "file": "coalPebble.png",
+      "file100": "coalPebble100.atf"
+    },
+    "name": {
+      "EN": "coal deposit",
+      "FR": "gisement de charbon",
+      "JP": "石炭鉱床"
+    },
+    "description": {
+      "EN": "The coal deposit will soon become a coal ore.",
+      "FR": "Ce gisement de charbon va bientôt devenir un minerai de charbon.",
+      "JP": "しばらくすると石炭鉱石になります。"
+    },
+    "width": 32,
+    "height": 32
+  },
+  "cow": {
+    "type": "animal",
+    "age": "stoneAge",
+    "no": 8.5,
+    "picture": {
+      "file": "cow.png",
+      "file100": "cow100.atf"
+    },
+    "name": {
+      "EN": "cow",
+      "FR": "vache",
+      "DE": "Kuh",
+      "JP": "乳牛"
+    },
+    "pluralName": {
+      "EN": "cows",
+      "FR": "vaches",
+      "DE": "Kühe",
+      "JP": "乳牛"
+    },
+    "description": {
+      "EN": "Cows provide milk.",
+      "FR": "La vache fournit du lait.",
+      "DE": "Die Kuh liefert Milch.",
+      "JP": "牛乳を入手することができます。"
+    },
+    "rate": 0,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 70
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "breeding",
+      "xpSkill": {
+        "breeding": 70
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 70
+      },
+      "prebuild": {
+        "id": "cage",
+        "time": 3,
+        "anim": "pop"
+      }
+    },
+    "quantity": 36,
+    "produce": [
+      {
+        "time": 1,
+        "gainRessource": {
+          "milk": 1
+        },
+        "sound": "soundBottle",
+        "bonusSkill": "breeding",
+        "costPrimaryCharacteristic": {
+          "stamina": 2
+        },
+        "xpSecondaryCharacteristic": {
+          "rapidity": 2
+        },
+        "xpSkill": {
+          "breeding": 2
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 53,
+    "height": 40,
+    "health": 75,
+    "defense": 100,
+    "speed": 2
+  },
+  "fox": {
+    "type": "animal",
+    "age": "etherAge",
+    "no": 9.5,
+    "picture": {
+      "file": "fox.png",
+      "file100": "fox100.atf"
+    },
+    "name": {
+      "EN": "fox",
+      "FR": "renard",
+      "DE": "fuchs",
+      "JP": "キツネ"
+    },
+    "pluralName": {
+      "EN": "foxes",
+      "FR": "renards",
+      "DE": "füchse",
+      "JP": "キツネ"
+    },
+    "description": {
+      "EN": "Foxes provide animal skin.",
+      "FR": "Le renard fournit des peaux animales.",
+      "DE": "Füchse sorgen für Tierhaut.",
+      "JP": "キツネは動物の皮を提供します。"
+    },
+    "rate": 2,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 15
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "breeding",
+      "xpSkill": {
+        "breeding": 15
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 15
+      },
+      "prebuild": {
+        "id": "cage",
+        "time": 15,
+        "anim": "pop"
+      }
+    },
+    "width": 40,
+    "height": 30,
+    "health": 20,
+    "defense": 100,
+    "speed": 6,
+    "death": {
+      "build": {
+        "name": "foxCarcass",
+        "quantity": 1
+      }
+    }
+  },
+  "foxCarcass": {
+    "type": "landRessource",
+    "picture": {
+      "file": "foxCarcass.png",
+      "file100": "foxCarcass100.atf"
+    },
+    "name": {
+      "EN": "fox",
+      "FR": "renard",
+      "DE": "fuchs",
+      "JP": "キツネ"
+    },
+    "description": {
+      "EN": "Foxes provide animal skin.",
+      "FR": "Le renard fournit des peaux animales.",
+      "DE": "Füchse sorgen für Tierhaut.",
+      "JP": "キツネは動物の皮を提供します。"
+    },
+    "quantity": 15,
+    "produce": [
+      {
+        "time": 0.5,
+        "gainRessource": {
+          "animalSkins": 1
+        },
+        "sound": "soundVegetable",
+        "anim": "shake",
+        "bonusSkill": "hunting",
+        "costPrimaryCharacteristic": {
+          "stamina": 1
+        },
+        "xpSecondaryCharacteristic": {
+          "address": 1
+        },
+        "xpSkill": {
+          "hunting": 1
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 32,
+    "height": 16
+  },
+  "predatorPowerArmor": {
+    "type": "landRessource",
+    "picture": {
+      "file": "predatorPowerArmor.png",
+      "file100": "predatorPowerArmor100.atf"
+    },
+    "name": {
+      "EN": "predator armor",
+      "FR": "armure assistée de prédateur",
+      "JP": "プレデターパワーアーマー"
+    },
+    "description": {
+      "EN": "The predator power armor is a close combat armor.",
+      "FR": "L'armure assistée de prédateur est une armure de combat rapproché.",
+      "JP": "近接戦闘用の、着用可能なパワーアーマーです。パワーアーマー工房で鋼鉄から建造できます。"
+    },
+    "mount": true,
+    "quantity": 1,
+    "produce": [
+      {
+        "time": 10,
+        "gainItem": {
+          "mountPredatorPowerArmor": 1
+        },
+        "bonusTimeSkill": "powerArmorsForging",
+        "costPrimaryCharacteristic": {
+          "stamina": 10
+        },
+        "xpSecondaryCharacteristic": {
+          "endurance": 10
+        },
+        "xpSkill": {
+          "powerArmorsForging": 10
+        },
+        "quantity": -1
+      }
+    ],
+    "width": 70,
+    "height": 64
+  },
+  "palfrey": {
+    "type": "animal",
+    "age": "goldenAge",
+    "picture": {
+      "file": "palfrey.png",
+      "file100": "palfrey100.atf"
+    },
+    "name": {
+      "EN": "palfrey",
+      "FR": "palefroi",
+      "JP": "乗用馬"
+    },
+    "pluralName": {
+      "EN": "palfreys",
+      "FR": "palefrois",
+      "JP": "乗用馬"
+    },
+    "description": {
+      "EN": "The palfrey is a valuable and prestigious mount.",
+      "FR": "Le palefroi est une monture de prestige de grande valeur.",
+      "JP": "騎乗動物として利用可能な、高級で由緒ある乗用馬です。厩舎で小麦と棒金から育成できます。"
+    },
+    "mount": true,
+    "quantity": 1,
+    "produce": [
+      {
+        "time": 10,
+        "gainItem": {
+          "mountPalfrey": 1
+        },
+        "bonusTimeSkill": "training",
+        "costPrimaryCharacteristic": {
+          "stamina": 20
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 20
+        },
+        "xpSkill": {
+          "training": 20
+        }
+      }
+    ],
+    "width": 56,
+    "height": 48,
+    "health": 200,
+    "defense": 100,
+    "speed": 10
+  },
+  "rabbit": {
+    "type": "animal",
+    "age": "woodenAge",
+    "no": 3.5,
+    "picture": {
+      "file": "rabbit.png",
+      "file100": "rabbit100.atf"
+    },
+    "name": {
+      "EN": "rabbit",
+      "FR": "lapin",
+      "JP": "兎"
+    },
+    "pluralName": {
+      "EN": "rabbits",
+      "FR": "lapins",
+      "JP": "兎"
+    },
+    "description": {
+      "EN": "Rabbits provide a little bit of raw meat and skin.",
+      "FR": "Le lapin fournit un peu de viande crue et de peau.",
+      "JP": "死体からほんの僅かな生皮と生肉を入手することができます。"
+    },
+    "rate": 30,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 2
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "zoology",
+      "xpSkill": {
+        "zoology": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 2
+      },
+      "prebuild": {
+        "id": "cage",
+        "time": 1,
+        "anim": "pop"
+      }
+    },
+    "width": 24,
+    "height": 24,
+    "health": 5,
+    "defense": 50,
+    "speed": 6,
+    "death": {
+      "build": {
+        "name": "rabbitCarcass",
+        "quantity": 1
+      }
+    }
+  },
+  "rabbitCarcass": {
+    "type": "landRessource",
+    "picture": {
+      "file": "rabbitCarcass.png",
+      "file100": "rabbitCarcass100.atf"
+    },
+    "name": {
+      "EN": "rabbit carcass",
+      "FR": "carcasse de lapin",
+      "DE": "Kaninchen Kadaver",
+      "JP": "兎の死体"
+    },
+    "description": {
+      "EN": "Rabbit carcasses provide raw meat and skin.",
+      "FR": "La caracasse de lapin fournit de la viande crue et de la peau.",
+      "DE": "Kaninchen Schlachtkörper liefern rohes Fleisch und Haut.",
+      "JP": "生皮と生肉を入手することができます。"
+    },
+    "quantity": 1,
+    "produce": [
+      {
+        "time": 1,
+        "gainRessource": {
+          "rawMeat": 1,
+          "animalSkins": 1
+        },
+        "sound": "soundVegetable",
+        "anim": "shake",
+        "bonusSkill": "hunting",
+        "costPrimaryCharacteristic": {
+          "stamina": 1
+        },
+        "xpSecondaryCharacteristic": {
+          "address": 2
+        },
+        "xpSkill": {
+          "hunting": 2
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 24,
+    "height": 24
+  },
+  "raceHorse": {
+    "type": "animal",
+    "age": "steamAge",
+    "picture": {
+      "file": "raceHorse.png",
+      "file100": "raceHorse100.atf"
+    },
+    "name": {
+      "EN": "race horse",
+      "FR": "cheval de course",
+      "JP": "競走馬"
+    },
+    "pluralName": {
+      "EN": "race horses",
+      "FR": "chevaux de course",
+      "JP": "競走馬"
+    },
+    "description": {
+      "EN": "The race horse is used as a mount.",
+      "FR": "Le cheval de course sert de monture.",
+      "JP": "騎乗生物として利用可能な競走馬です。厩舎で小麦と織物から育成できます。"
+    },
+    "mount": true,
+    "quantity": 1,
+    "produce": [
+      {
+        "time": 10,
+        "gainItem": {
+          "mountRaceHorse": 1
+        },
+        "bonusTimeSkill": "training",
+        "costPrimaryCharacteristic": {
+          "stamina": 20
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 20
+        },
+        "xpSkill": {
+          "training": 20
+        }
+      }
+    ],
+    "width": 56,
+    "height": 48,
+    "health": 200,
+    "defense": 100,
+    "speed": 12.5
+  },
+  "saddleHorse": {
+    "type": "animal",
+    "age": "stoneAge",
+    "picture": {
+      "file": "saddleHorse.png",
+      "file100": "saddleHorse100.atf"
+    },
+    "name": {
+      "EN": "saddle horse",
+      "FR": "cheval de selle",
+      "JP": "軽量馬"
+    },
+    "pluralName": {
+      "EN": "saddle horses",
+      "FR": "chevaux de selle",
+      "JP": "軽量馬"
+    },
+    "description": {
+      "EN": "The saddle horse is used as a mount.",
+      "FR": "Le cheval de selle sert de monture.",
+      "JP": "騎乗生物として利用可能な軽量馬です。厩舎で小麦となめし革から育成できます。"
+    },
+    "rate": 4,
+    "mount": true,
+    "quantity": 1,
+    "produce": [
+      {
+        "time": 10,
+        "gainItem": {
+          "mountSaddleHorse": 1
+        },
+        "bonusTimeSkill": "training",
+        "costPrimaryCharacteristic": {
+          "stamina": 20
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 20
+        },
+        "xpSkill": {
+          "training": 20
+        }
+      }
+    ],
+    "width": 56,
+    "height": 48,
+    "health": 200,
+    "defense": 100,
+    "speed": 10
+  },
+  "squirrel": {
+    "type": "animal",
+    "age": "woodenAge",
+    "no": 3.75,
+    "picture": {
+      "file": "squirrel.png",
+      "file100": "squirrel100.atf"
+    },
+    "name": {
+      "EN": "squirrel",
+      "FR": "écureuil",
+      "JP": "栗鼠"
+    },
+    "pluralName": {
+      "EN": "squirrels",
+      "FR": "écureuils",
+      "JP": "リス"
+    },
+    "description": {
+      "EN": "Squirrels provide a little bit of fur.",
+      "FR": "L'écureuil fournit un peu de fourrure.",
+      "JP": "リスは少し毛皮を提供します。"
+    },
+    "rate": 10,
+    "build": {
+      "buildable": "all",
+      "costPrimaryCharacteristic": {
+        "mana": 2
+      },
+      "sound": "soundPlant",
+      "bonusSkill": "zoology",
+      "xpSkill": {
+        "zoology": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "willpower": 2
+      },
+      "prebuild": {
+        "id": "cage",
+        "time": 1,
+        "anim": "pop"
+      }
+    },
+    "width": 36,
+    "height": 24,
+    "health": 5,
+    "defense": 50,
+    "speed": 7,
+    "death": {
+      "build": {
+        "name": "squirrelCarcass",
+        "quantity": 1
+      }
+    }
+  },
+  "squirrelCarcass": {
+    "type": "landRessource",
+    "picture": {
+      "file": "squirrelCarcass.png",
+      "file100": "squirrelCarcass100.atf"
+    },
+    "name": {
+      "EN": "squirrel carcass",
+      "FR": "carcasse d'écureuil",
+      "JP": "リスの死体"
+    },
+    "description": {
+      "EN": "Squirrel carcasses provide fur.",
+      "FR": "La caracasse d'écureuil fournit de la fourrure.",
+      "JP": "リスの死体は毛皮を提供します。"
+    },
+    "quantity": 1,
+    "produce": [
+      {
+        "time": 1,
+        "gainRessource": {
+          "animalSkins": 2
+        },
+        "sound": "soundVegetable",
+        "anim": "shake",
+        "bonusSkill": "hunting",
+        "costPrimaryCharacteristic": {
+          "stamina": 1
+        },
+        "xpSecondaryCharacteristic": {
+          "address": 2
+        },
+        "xpSkill": {
+          "hunting": 2
+        },
+        "repeat": true,
+        "quantity": -1
+      }
+    ],
+    "width": 24,
+    "height": 24
+  },
+  "unicorn": {
+    "type": "animal",
+    "age": "etherAge",
+    "picture": {
+      "file": "unicorn.png",
+      "file100": "unicorn100.atf"
+    },
+    "name": {
+      "EN": "unicorn",
+      "FR": "licorne",
+      "JP": "一角獣"
+    },
+    "pluralName": {
+      "EN": "unicorns",
+      "FR": "licornes",
+      "JP": "一角獣"
+    },
+    "description": {
+      "EN": "The unicorn is used as a mount.",
+      "FR": "La licorne sert de monture.",
+      "JP": "騎乗生物として利用可能な一角獣です。厩舎で小麦と水晶から育成できます。"
+    },
+    "mount": true,
+    "quantity": 1,
+    "produce": [
+      {
+        "time": 10,
+        "gainItem": {
+          "mountUnicorn": 1
+        },
+        "bonusTimeSkill": "training",
+        "costPrimaryCharacteristic": {
+          "stamina": 20
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 20
+        },
+        "xpSkill": {
+          "training": 20
+        }
+      }
+    ],
+    "width": 56,
+    "height": 48,
+    "health": 200,
+    "defense": 100,
+    "resistance": {
+      "magic": 2
+    },
+    "speed": 10
+  },
+  "warHorse": {
+    "type": "animal",
+    "age": "ironAge",
+    "picture": {
+      "file": "warHorse.png",
+      "file100": "warHorse100.atf"
+    },
+    "name": {
+      "EN": "war horse",
+      "FR": "cheval de guerre",
+      "JP": "軍馬"
+    },
+    "pluralName": {
+      "EN": "war horses",
+      "FR": "chevaux de guerre",
+      "JP": "軍馬"
+    },
+    "description": {
+      "EN": "The war horse is used as a mount.",
+      "FR": "Le cheval de guerre sert de monture.",
+      "JP": "騎乗生物として利用可能な軍馬です。厩舎で小麦と鋳鉄から育成できます。"
+    },
+    "mount": true,
+    "quantity": 1,
+    "produce": [
+      {
+        "time": 10,
+        "gainItem": {
+          "mountWarHorse": 1
+        },
+        "bonusTimeSkill": "training",
+        "costPrimaryCharacteristic": {
+          "stamina": 20
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 20
+        },
+        "xpSkill": {
+          "training": 20
+        }
+      }
+    ],
+    "width": 56,
+    "height": 48,
+    "health": 300,
+    "defense": 100,
+    "speed": 10
+  },
+  "workerPowerArmor": {
+    "type": "landRessource",
+    "picture": {
+      "file": "workerPowerArmor.png",
+      "file100": "workerPowerArmor100.atf"
+    },
+    "name": {
+      "EN": "worker power armor",
+      "FR": "armure assistée de travail",
+      "JP": "ワーカーパワーアーマー"
+    },
+    "description": {
+      "EN": "The worker power armor give a powerful protection.",
+      "FR": "L'armure assistée d'ouvrier offre une excellente protection.",
+      "JP": "強力な防護を着用者に与える、着用可能なパワーアーマーです。パワーアーマー工房で鋼鉄から建造できます。"
+    },
+    "mount": true,
+    "quantity": 1,
+    "produce": [
+      {
+        "time": 10,
+        "gainItem": {
+          "mountWorkerPowerArmor": 1
+        },
+        "bonusTimeSkill": "powerArmorsForging",
+        "costPrimaryCharacteristic": {
+          "stamina": 10
+        },
+        "xpSecondaryCharacteristic": {
+          "endurance": 10
+        },
+        "xpSkill": {
+          "powerArmorsForging": 10
+        },
+        "quantity": -1
+      }
+    ],
+    "width": 70,
+    "height": 64
+  }
+}

@@ -1,0 +1,1062 @@
+{
+  "_comment": "Town center buildings, one per age. Allow advancing to next age, recruit servants, act as warehouses. All ages 0-4 (base) + age 5 (expansion) included.",
+  "_source": "base=townCenters1.js + expansion=townCenters2.js",
+  "townCenterWoodenAge": {
+    "type": "townCenter",
+    "age": "woodenAge",
+    "endingAge": "stoneAge",
+    "no": 0,
+    "picture": {
+      "file": "townCenterWoodenAge.png",
+      "file100": "townCenterWoodenAge100.atf"
+    },
+    "name": {
+      "EN": "town centre",
+      "FR": "hôtel de ville",
+      "JP": "タウンセンター"
+    },
+    "pluralName": {
+      "EN": "town centres",
+      "FR": "hôtels de ville",
+      "JP": "タウンセンター"
+    },
+    "description": {
+      "EN": "The town centre allows you to move to the next age.",
+      "FR": "L'hôtel de ville vous permet de passer à l'époque suivante.",
+      "JP": "木の時代のタウンセンター。周囲の敵への攻撃能力を持つ他、次の年代に進むために必要です。資源倉庫にもなります。木材を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "wood": 200
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 1
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 1
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 1
+      },
+      "prebuild": {
+        "id": "townCenterWoodenAgeYard",
+        "time": 1
+      }
+    },
+    "repair": {
+      "health": 15,
+      "time": 1.5,
+      "costRessource": {
+        "wood": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 1
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 1
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 1
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 192,
+    "height": 240,
+    "visualHeight": 256,
+    "health": 3000,
+    "attack": 200,
+    "attackTime": 3,
+    "range": 500,
+    "missile": "dart",
+    "attackDY": -165,
+    "sound": "shoot",
+    "damage": [
+      "missile",
+      "piercing"
+    ],
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "warehouse": true
+  },
+  "townCenterWoodenAgeYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "townCenterWoodenAgeYard.png",
+      "file100": "townCenterWoodenAgeYard100.atf"
+    },
+    "name": {
+      "EN": "town centre",
+      "FR": "hôtel de ville",
+      "JP": "タウンセンター"
+    },
+    "description": {
+      "EN": "The town centre allows you to move to the next age.",
+      "FR": "L'hôtel de ville vous permet de passer à l'époque suivante.",
+      "JP": "木の時代のタウンセンター。周囲の敵への攻撃能力を持つ他、次の年代に進むために必要です。資源倉庫にもなります。木材を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 192,
+    "height": 240,
+    "visualHeight": 256,
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 3
+  },
+  "townCenterStoneAge": {
+    "type": "townCenter",
+    "age": "stoneAge",
+    "endingAge": "ironAge",
+    "no": 1,
+    "picture": {
+      "file": "townCenterStoneAge.png",
+      "file100": "townCenterStoneAge100.atf"
+    },
+    "name": {
+      "EN": "town centre",
+      "FR": "hôtel de ville",
+      "JP": "タウンセンター"
+    },
+    "pluralName": {
+      "EN": "town centres",
+      "FR": "hôtels de ville",
+      "JP": "タウンセンター"
+    },
+    "description": {
+      "EN": "The town centre allows you to move to the next age.",
+      "FR": "L'hôtel de ville vous permet de passer à l'époque suivante.",
+      "JP": "石の時代のタウンセンター。周囲の敵への攻撃能力を持つ他、次の年代に進むために必要です。収穫者の雇用元や資源倉庫にもなります。厚板と切石を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "plank": 150,
+        "freeStone": 150
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 2
+      },
+      "prebuild": {
+        "id": "townCenterStoneAgeYard",
+        "time": 1
+      }
+    },
+    "title": {
+      "EN": "Recruit servants",
+      "FR": "Recruter des serviteurs",
+      "JP": "収獲者の雇用"
+    },
+    "produce": [
+      {
+        "time": 0.5,
+        "gainItem": {
+          "crown": 1
+        },
+        "costRessource": {
+          "silverCoin": 200
+        }
+      },
+      {
+        "time": 25,
+        "createCharacter": {
+          "servantM": 1
+        },
+        "bonusTimeSkill": "conscription",
+        "costRessource": {
+          "silverCoin": 50
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 50
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 50
+        },
+        "xpSkill": {
+          "conscription": 50
+        },
+        "repeat": true
+      },
+      {
+        "time": 25,
+        "createCharacter": {
+          "servantF": 1
+        },
+        "bonusTimeSkill": "conscription",
+        "costRessource": {
+          "silverCoin": 50
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 50
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 50
+        },
+        "xpSkill": {
+          "conscription": 50
+        },
+        "repeat": true
+      }
+    ],
+    "repair": {
+      "health": 28,
+      "time": 1.5,
+      "costRessource": {
+        "plank": 1,
+        "freeStone": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 3
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 192,
+    "height": 240,
+    "visualHeight": 256,
+    "health": 4200,
+    "attack": 300,
+    "attackTime": 3,
+    "range": 500,
+    "missile": "stoneJavelinMissile",
+    "attackDY": -145,
+    "sound": "soundThrow",
+    "damage": [
+      "missile",
+      "piercing"
+    ],
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "warehouse": true
+  },
+  "townCenterStoneAgeYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "townCenterStoneAgeYard.png",
+      "file100": "townCenterStoneAgeYard100.atf"
+    },
+    "name": {
+      "EN": "town centre",
+      "FR": "hôtel de ville",
+      "JP": "タウンセンター"
+    },
+    "description": {
+      "EN": "The town centre allows you to move to the next age.",
+      "FR": "L'hôtel de ville vous permet de passer à l'époque suivante.",
+      "JP": "石の時代のタウンセンター。周囲の敵への攻撃能力を持つ他、次の年代に進むために必要です。収穫者の雇用元や資源倉庫にもなります。厚板と切石を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 192,
+    "height": 240,
+    "visualHeight": 256,
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 3
+  },
+  "townCenterIronAge": {
+    "type": "townCenter",
+    "age": "ironAge",
+    "endingAge": "etherAge",
+    "no": 2,
+    "picture": {
+      "file": "townCenterIronAge.png",
+      "file100": "townCenterIronAge100.atf"
+    },
+    "name": {
+      "EN": "town centre",
+      "FR": "hôtel de ville",
+      "JP": "タウンセンター"
+    },
+    "pluralName": {
+      "EN": "town centres",
+      "FR": "hôtels de ville",
+      "JP": "タウンセンター"
+    },
+    "description": {
+      "EN": "The town centre allows you to move to the next age.",
+      "FR": "L'hôtel de ville vous permet de passer à l'époque suivante.",
+      "JP": "鉄の時代のタウンセンター。周囲の敵への攻撃能力を持つ他、次の年代に進むために必要です。収穫者の雇用元や資源倉庫にもなります。厚板と鋳鉄を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "plank": 200,
+        "castIron": 100
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 2
+      },
+      "prebuild": {
+        "id": "townCenterIronAgeYard",
+        "time": 1
+      }
+    },
+    "title": {
+      "EN": "Recruit servants",
+      "FR": "Recruter des serviteurs",
+      "JP": "収獲者の雇用"
+    },
+    "produce": [
+      {
+        "time": 0.5,
+        "gainItem": {
+          "crown": 1
+        },
+        "costRessource": {
+          "silverCoin": 300
+        }
+      },
+      {
+        "time": 25,
+        "createCharacter": {
+          "servantM": 1
+        },
+        "bonusTimeSkill": "conscription",
+        "costRessource": {
+          "silverCoin": 50
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 50
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 50
+        },
+        "xpSkill": {
+          "conscription": 50
+        },
+        "repeat": true
+      },
+      {
+        "time": 25,
+        "createCharacter": {
+          "servantF": 1
+        },
+        "bonusTimeSkill": "conscription",
+        "costRessource": {
+          "silverCoin": 50
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 50
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 50
+        },
+        "xpSkill": {
+          "conscription": 50
+        },
+        "repeat": true
+      }
+    ],
+    "repair": {
+      "health": 51,
+      "time": 2.5,
+      "costRessource": {
+        "plank": 2,
+        "castIron": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 5
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 5
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 5
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 192,
+    "height": 240,
+    "visualHeight": 256,
+    "health": 5100,
+    "attack": 400,
+    "attackTime": 3,
+    "range": 500,
+    "missile": "bolt",
+    "attackDY": -93,
+    "sound": "soundCrossbow",
+    "damage": [
+      "missile",
+      "piercing"
+    ],
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "warehouse": true
+  },
+  "townCenterIronAgeYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "townCenterIronAgeYard.png",
+      "file100": "townCenterIronAgeYard100.atf"
+    },
+    "name": {
+      "EN": "town centre",
+      "FR": "hôtel de ville",
+      "JP": "タウンセンター"
+    },
+    "description": {
+      "EN": "The town centre allows you to move to the next age.",
+      "FR": "L'hôtel de ville vous permet de passer à l'époque suivante.",
+      "JP": "鉄の時代のタウンセンター。周囲の敵への攻撃能力を持つ他、次の年代に進むために必要です。収穫者の雇用元や資源倉庫にもなります。厚板と鋳鉄を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 192,
+    "height": 240,
+    "visualHeight": 256,
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 3
+  },
+  "townCenterEtherAge": {
+    "type": "townCenter",
+    "age": "etherAge",
+    "endingAge": "goldenAge",
+    "no": 3,
+    "picture": {
+      "file": "townCenterEtherAge.png",
+      "file100": "townCenterEtherAge100.atf"
+    },
+    "name": {
+      "EN": "town centre",
+      "FR": "hôtel de ville",
+      "JP": "タウンセンター"
+    },
+    "pluralName": {
+      "EN": "town centres",
+      "FR": "hôtels de ville",
+      "JP": "タウンセンター"
+    },
+    "description": {
+      "EN": "The town centre allows you to move to the next age.",
+      "FR": "L'hôtel de ville vous permet de passer à l'époque suivante.",
+      "JP": "エーテルの時代のタウンセンター。周囲の敵への攻撃能力を持つ他、次の年代に進むために必要です。収穫者の雇用元や資源倉庫にもなります。切石と水晶を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "freeStone": 200,
+        "crystals": 100
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 3
+      },
+      "prebuild": {
+        "id": "townCenterEtherAgeYard",
+        "time": 1.5
+      }
+    },
+    "title": {
+      "EN": "Recruit servants",
+      "FR": "Recruter des serviteurs",
+      "JP": "収獲者の雇用"
+    },
+    "produce": [
+      {
+        "time": 0.5,
+        "gainItem": {
+          "crown": 1
+        },
+        "costRessource": {
+          "silverCoin": 400
+        }
+      },
+      {
+        "time": 25,
+        "createCharacter": {
+          "servantM": 1
+        },
+        "bonusTimeSkill": "conscription",
+        "costRessource": {
+          "silverCoin": 50
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 50
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 50
+        },
+        "xpSkill": {
+          "conscription": 50
+        },
+        "repeat": true
+      },
+      {
+        "time": 25,
+        "createCharacter": {
+          "servantF": 1
+        },
+        "bonusTimeSkill": "conscription",
+        "costRessource": {
+          "silverCoin": 50
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 50
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 50
+        },
+        "xpSkill": {
+          "conscription": 50
+        },
+        "repeat": true
+      }
+    ],
+    "repair": {
+      "health": 60,
+      "time": 3,
+      "costRessource": {
+        "freeStone": 2,
+        "crystals": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 6
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 6
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 6
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 192,
+    "height": 240,
+    "visualHeight": 256,
+    "health": 6000,
+    "attack": 500,
+    "attackTime": 3,
+    "range": 600,
+    "missile": "iceBolt",
+    "attackDY": -250,
+    "special": {
+      "selfGuided": 0.05,
+      "penality": {
+        "id": "slowdown",
+        "time": 5
+      }
+    },
+    "damage": [
+      "magic",
+      "ice"
+    ],
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "warehouse": true
+  },
+  "townCenterEtherAgeYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "townCenterEtherAgeYard.png",
+      "file100": "townCenterEtherAgeYard100.atf"
+    },
+    "name": {
+      "EN": "town centre",
+      "FR": "hôtel de ville",
+      "JP": "タウンセンター"
+    },
+    "description": {
+      "EN": "The town centre allows you to move to the next age.",
+      "FR": "L'hôtel de ville vous permet de passer à l'époque suivante.",
+      "JP": "エーテルの時代のタウンセンター。周囲の敵への攻撃能力を持つ他、次の年代に進むために必要です。収穫者の雇用元や資源倉庫にもなります。切石と水晶を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 192,
+    "height": 240,
+    "visualHeight": 256,
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 3
+  },
+  "townCenterGoldenAge": {
+    "type": "townCenter",
+    "age": "goldenAge",
+    "endingAge": "steamAge",
+    "no": 4,
+    "picture": {
+      "file": "townCenterGoldenAge.png",
+      "file100": "townCenterGoldenAge100.atf"
+    },
+    "name": {
+      "EN": "town centre",
+      "FR": "hôtel de ville",
+      "JP": "タウンセンター"
+    },
+    "pluralName": {
+      "EN": "town centres",
+      "FR": "hôtels de ville",
+      "JP": "タウンセンター"
+    },
+    "description": {
+      "EN": "The town centre allows you to move to the next age.",
+      "FR": "L'hôtel de ville vous permet de passer à l'époque suivante.",
+      "JP": "黄金の時代のタウンセンター。周囲の敵への攻撃能力を持つ他、次の年代に進むために必要です。収穫者の雇用元や資源倉庫にもなります。切石と棒金を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "freeStone": 200,
+        "goldBar": 100
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 3
+      },
+      "prebuild": {
+        "id": "townCenterGoldenAgeYard",
+        "time": 1.5
+      }
+    },
+    "title": {
+      "EN": "Recruit servants",
+      "FR": "Recruter des serviteurs",
+      "JP": "収獲者の雇用"
+    },
+    "produce": [
+      {
+        "time": 0.5,
+        "gainItem": {
+          "crown": 1
+        },
+        "costRessource": {
+          "silverCoin": 500
+        }
+      },
+      {
+        "time": 25,
+        "createCharacter": {
+          "servantM": 1
+        },
+        "bonusTimeSkill": "conscription",
+        "costRessource": {
+          "silverCoin": 50
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 50
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 50
+        },
+        "xpSkill": {
+          "conscription": 50
+        },
+        "repeat": true
+      },
+      {
+        "time": 25,
+        "createCharacter": {
+          "servantF": 1
+        },
+        "bonusTimeSkill": "conscription",
+        "costRessource": {
+          "silverCoin": 50
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 50
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 50
+        },
+        "xpSkill": {
+          "conscription": 50
+        },
+        "repeat": true
+      }
+    ],
+    "repair": {
+      "health": 69,
+      "time": 4.5,
+      "costRessource": {
+        "freeStone": 2,
+        "goldBar": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 9
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 9
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 9
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 192,
+    "height": 240,
+    "visualHeight": 256,
+    "health": 6900,
+    "attack": 600,
+    "attackTime": 3,
+    "range": 600,
+    "missile": "cartridge",
+    "attackDY": -100,
+    "sound": "soundGun",
+    "damage": [
+      "missile",
+      "piercing"
+    ],
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "warehouse": true
+  },
+  "townCenterGoldenAgeYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "townCenterGoldenAgeYard.png",
+      "file100": "townCenterGoldenAgeYard100.atf"
+    },
+    "name": {
+      "EN": "town centre",
+      "FR": "hôtel de ville",
+      "JP": "タウンセンター"
+    },
+    "description": {
+      "EN": "The town centre allows you to move to the next age.",
+      "FR": "L'hôtel de ville vous permet de passer à l'époque suivante.",
+      "JP": "黄金の時代のタウンセンター。周囲の敵への攻撃能力を持つ他、次の年代に進むために必要です。収穫者の雇用元や資源倉庫にもなります。切石と棒金を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 192,
+    "height": 240,
+    "visualHeight": 256,
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 3
+  },
+  "townCenterSteamAge": {
+    "type": "townCenter",
+    "age": "steamAge",
+    "no": 5,
+    "picture": {
+      "file": "townCenterSteamAge.png",
+      "file100": "townCenterSteamAge100.atf"
+    },
+    "name": {
+      "EN": "town centre",
+      "FR": "hôtel de ville",
+      "JP": "タウンセンター"
+    },
+    "pluralName": {
+      "EN": "town centres",
+      "FR": "hôtels de ville",
+      "JP": "タウンセンター"
+    },
+    "description": {
+      "EN": "The town centre allows you to move to the next age.",
+      "FR": "L'hôtel de ville vous permet de passer à l'époque suivante.",
+      "JP": "蒸気の時代のタウンセンター。周囲の敵への攻撃能力を持つ他、次の年代に進むために必要です。収穫者の雇用元や資源倉庫にもなります。鋼鉄を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "steel": 300
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 3
+      },
+      "prebuild": {
+        "id": "townCenterSteamAgeYard",
+        "time": 1.5
+      }
+    },
+    "title": {
+      "EN": "Recruit servants",
+      "FR": "Recruter des serviteurs",
+      "JP": "収獲者の雇用"
+    },
+    "produce": [
+      {
+        "time": 0.5,
+        "gainItem": {
+          "crown": 1
+        },
+        "costRessource": {
+          "silverCoin": 600
+        }
+      },
+      {
+        "time": 25,
+        "createCharacter": {
+          "servantM": 1
+        },
+        "bonusTimeSkill": "conscription",
+        "costRessource": {
+          "silverCoin": 50
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 50
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 50
+        },
+        "xpSkill": {
+          "conscription": 50
+        },
+        "repeat": true
+      },
+      {
+        "time": 25,
+        "createCharacter": {
+          "servantF": 1
+        },
+        "bonusTimeSkill": "conscription",
+        "costRessource": {
+          "silverCoin": 50
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 50
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 50
+        },
+        "xpSkill": {
+          "conscription": 50
+        },
+        "repeat": true
+      }
+    ],
+    "repair": {
+      "health": 30,
+      "time": 1.5,
+      "costRessource": {
+        "steel": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 3
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 192,
+    "height": 240,
+    "visualHeight": 256,
+    "health": 9000,
+    "attack": 700,
+    "attackTime": 3,
+    "range": 600,
+    "missile": "microMissile",
+    "attackDY": -215,
+    "sound": "soundRocket",
+    "special": {
+      "selfGuided": 0.125
+    },
+    "damage": [
+      "missile",
+      "demolition"
+    ],
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "warehouse": true
+  },
+  "townCenterSteamAgeYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "townCenterSteamAgeYard.png",
+      "file100": "townCenterSteamAgeYard100.atf"
+    },
+    "name": {
+      "EN": "town centre",
+      "FR": "hôtel de ville",
+      "JP": "タウンセンター"
+    },
+    "description": {
+      "EN": "The town centre allows you to move to the next age.",
+      "FR": "L'hôtel de ville vous permet de passer à l'époque suivante.",
+      "JP": "蒸気の時代のタウンセンター。周囲の敵への攻撃能力を持つ他、次の年代に進むために必要です。収穫者の雇用元や資源倉庫にもなります。鋼鉄を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 192,
+    "height": 240,
+    "visualHeight": 256,
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 3
+  }
+}

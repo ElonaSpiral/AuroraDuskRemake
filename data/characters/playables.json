@@ -1,0 +1,5649 @@
+{
+  "_comment": "Player-character race definitions. Base game (nos 0-11), expansion adds darkElf M/F (12-13), highElf M/F (14-15), astalanM (16). Each entry defines base stats, skill modifiers, appearance layers, and dialogue lines. picture path: assets/characters/playables/<race>/",
+  "_source": "base=playables.js + expansion=playables2.js + astalan2.js",
+  "humanM": {
+    "type": "playable",
+    "no": 0,
+    "pictures": [
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps"
+          },
+          "folder": "bodiesM/",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages"
+          },
+          "folder": "facesM/"
+        }
+      },
+      {
+        "shoes": {
+          "name": {
+            "EN": "shoes",
+            "FR": "chaussures"
+          },
+          "folder": "shoesM/",
+          "colors": [
+            16777215,
+            6262964,
+            3624028,
+            12632256,
+            14737632,
+            8421504,
+            13155208,
+            7232851,
+            3552822,
+            13395456,
+            10240062,
+            13411742,
+            3626049,
+            7957675
+          ]
+        }
+      },
+      {
+        "clothes": {
+          "name": {
+            "EN": "clothes",
+            "FR": "vêtements"
+          },
+          "folder": "clothesM/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641,
+            255,
+            16711680,
+            65280,
+            16776960,
+            0,
+            16777215,
+            16711935,
+            65535
+          ]
+        }
+      },
+      {
+        "belts": {
+          "name": {
+            "EN": "belts",
+            "FR": "ceintures"
+          },
+          "folder": "beltsM/"
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hairs": {
+          "name": {
+            "EN": "hair",
+            "FR": "cheveux"
+          },
+          "folder": "hairsM/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "human",
+      "FR": "humain",
+      "DE": "Mensch",
+      "JP": "人間"
+    },
+    "pluralName": {
+      "EN": "humans",
+      "FR": "humains",
+      "DE": "Menschen",
+      "JP": "人間"
+    },
+    "description": {
+      "EN": "Humans represent the dominant people.\nTheir advanced technique in civil engineering allows them to build impressive fortified cities. For centuries, due to their ability to kill each other, humans have revolutionised military tactics and exceeded those of all the other races combined.\n\nThey have average characteristics. This is the most versatile breed, but they lack specialisation. As a result, they will never be the best in any field.\n\nPlaying with a human is the best choice for new players who discover the game.",
+      "FR": "Les humains sont les représentants du peuple dominant.\nLeur avancée en génie civil leur permet de bâtir d'imposantes villes fortifiées. Depuis des siècles, grâce à leur capacité à s'entre-tuer, les humains ont révolutionné les techniques militaires et dépassent celles de toutes les autres races réunies.\n\nLes caractéristiques des humains sont toutes dans la moyenne. C'est la race la plus polyvalente, mais l'absence de spécialisation fait qu'ils ne seront jamais les meilleurs dans aucun domaine.\n\nJouer avec un humain est un choix idéal pour les nouveaux joueurs qui découvrent le jeu.",
+      "JP": "人間は主な種族の代表格です。\n土木工学においての優れた技術は、印象的な要塞化都市の建築を可能とします。何世紀にも渡り人間同士での戦争に明け暮れていたため、革命的な軍事戦術を所有しており、他の種族すべてを合わせたよりも強力です。\n\n平均的な能力値を持ち、最も汎用性の高い種族ですが、専門技能に欠けています。従って最高の結果を出すことはどの分野でも難しいでしょう。\n\nゲームを始めたばかりの新規プレイヤーに向いた種族です。"
+    },
+    "sex": "M",
+    "otherSex": "humanF",
+    "width": 32,
+    "height": 48,
+    "health": 100,
+    "stamina": 100,
+    "mana": 100,
+    "attack": 100,
+    "attackEffect": "default",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 100,
+    "strength": 100,
+    "endurance": 100,
+    "address": 100,
+    "rapidity": 100,
+    "intelligence": 100,
+    "willpower": 100,
+    "charisma": 100,
+    "speed": 5,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けてくれ！",
+          "俺を助けてくれ！",
+          "お願いだから助けてくれ！",
+          "援護が必要だ！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かる。",
+          "本当にありがとう！",
+          "恩に着る！",
+          "素晴らしいな！",
+          "これはいいな。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くぞ！",
+          "さあ行こう！",
+          "来てくれ！",
+          "付いてこい！",
+          "進め！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃！",
+          "蹴散らせ！",
+          "突撃！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを破壊しろ！",
+          "あれを打ち壊してやれ！"
+        ]
+      }
+    }
+  },
+  "humanF": {
+    "type": "playable",
+    "no": 1,
+    "pictures": [
+      {
+        "back": {
+          "folder": "backF/",
+          "visible": false,
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps"
+          },
+          "folder": "bodiesF/",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages"
+          },
+          "folder": "facesF/"
+        }
+      },
+      {
+        "shoes": {
+          "name": {
+            "EN": "shoes",
+            "FR": "chaussures"
+          },
+          "folder": "shoesF/",
+          "colors": [
+            16777215,
+            6262964,
+            3624028,
+            12632256,
+            14737632,
+            8421504,
+            13155208,
+            7232851,
+            3552822,
+            13395456,
+            10240062,
+            13411742,
+            3626049,
+            7957675
+          ]
+        }
+      },
+      {
+        "clothes": {
+          "name": {
+            "EN": "clothes",
+            "FR": "vêtements"
+          },
+          "folder": "clothesF/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641,
+            255,
+            16711680,
+            65280,
+            16776960,
+            0,
+            16777215,
+            16711935,
+            65535
+          ]
+        }
+      },
+      {
+        "belts": {
+          "name": {
+            "EN": "belts",
+            "FR": "ceintures"
+          },
+          "folder": "beltsF/"
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hairs": {
+          "name": {
+            "EN": "hair",
+            "FR": "cheveux"
+          },
+          "folder": "hairsF/",
+          "linkShape": "back",
+          "linkColor": "back",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "human",
+      "FR": "humaine",
+      "DE": "Mensch",
+      "JP": "人間"
+    },
+    "pluralName": {
+      "EN": "humans",
+      "FR": "humaines",
+      "DE": "Menschen",
+      "JP": "人間"
+    },
+    "changeBestiary": "humanM",
+    "description": {
+      "EN": "Humans represent the dominant people.\nTheir advanced technique in civil engineering allows them to build impressive fortified cities. For centuries, due to their ability to kill each other, humans have revolutionised military tactics and exceeded those of all the other races combined.\n\nThey have average characteristics. This is the most versatile breed, but they lack specialisation. As a result, they will never be the best in any field.\n\nPlaying with a human is the best choice for new players who discover the game.",
+      "FR": "Les humaines sont les représentantes du peuple dominant.\nLeur avancée en génie civil leur permet de bâtir d'imposantes villes fortifiées. Depuis des siècles, grâce à leur capacité à s'entre-tuer, les humains ont révolutionné les techniques militaires et dépassent celles de toutes les autres races réunies.\n\nLes caractéristiques des humains sont toutes dans la moyenne. C'est la race la plus polyvalente, mais l'absence de spécialisation fait qu'ils ne seront jamais les meilleurs dans aucun domaine.\n\nJouer avec une humaine est un choix idéal pour les nouveaux joueurs qui découvrent le jeu.",
+      "JP": "人間は主な種族の代表格です。\n土木工学においての優れた技術は、印象的な要塞化都市の建築を可能とします。何世紀にも渡り人間同士での戦争に明け暮れていたため、革命的な軍事戦術を所有しており、他の種族すべてを合わせたよりも強力です。\n\n平均的な能力値を持ち、最も汎用性の高い種族ですが、専門技能に欠けています。従って最高の結果を出すことはどの分野でも難しいでしょう。\n\nゲームを始めたばかりの新規プレイヤーに向いた種族です。"
+    },
+    "sex": "F",
+    "otherSex": "humanH",
+    "width": 32,
+    "height": 48,
+    "health": 100,
+    "stamina": 100,
+    "mana": 100,
+    "attack": 100,
+    "attackEffect": "default",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 100,
+    "strength": 100,
+    "endurance": 100,
+    "address": 100,
+    "rapidity": 100,
+    "intelligence": 100,
+    "willpower": 100,
+    "charisma": 100,
+    "speed": 5,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けて！",
+          "私を助けて！",
+          "お願い……助けて！",
+          "助けて欲しいの！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かります。",
+          "ありがとうございます！",
+          "感謝します！",
+          "素敵です！",
+          "これはいいものですね。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くわよ！",
+          "さあ、やるわよ！",
+          "来て下さい！",
+          "付いてきて！",
+          "進軍して！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃！",
+          "蹴散らせ！",
+          "突撃！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを壊して！",
+          "あれを潰すのよ！"
+        ]
+      }
+    }
+  },
+  "elfeM": {
+    "type": "playable",
+    "no": 2,
+    "pictures": [
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps"
+          },
+          "folder": "bodiesM/",
+          "linkColor": "ears",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages"
+          },
+          "folder": "facesM/"
+        }
+      },
+      {
+        "shoes": {
+          "name": {
+            "EN": "shoes",
+            "FR": "chaussures"
+          },
+          "folder": "shoesM/",
+          "colors": [
+            16777215,
+            6262964,
+            3624028,
+            12632256,
+            14737632,
+            8421504,
+            13155208,
+            7232851,
+            3552822,
+            13395456,
+            10240062,
+            13411742,
+            3626049,
+            7957675
+          ]
+        }
+      },
+      {
+        "clothes": {
+          "name": {
+            "EN": "clothes",
+            "FR": "vêtements"
+          },
+          "folder": "clothesM/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641,
+            255,
+            16711680,
+            65280,
+            16776960,
+            0,
+            16777215,
+            16711935,
+            65535
+          ]
+        }
+      },
+      {
+        "belts": {
+          "name": {
+            "EN": "belts",
+            "FR": "ceintures"
+          },
+          "folder": "beltsM/"
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hairs": {
+          "name": {
+            "EN": "hair",
+            "FR": "cheveux"
+          },
+          "folder": "hairsM/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "ears": {
+          "name": {
+            "EN": "ears",
+            "FR": "oreilles"
+          },
+          "folder": "ears/elvesM/",
+          "linkColor": "bodies",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "elf",
+      "FR": "elfe",
+      "DE": "Elf",
+      "JP": "エルフ"
+    },
+    "pluralName": {
+      "EN": "elfs",
+      "FR": "elfes",
+      "DE": "Elfen",
+      "JP": "エルフ"
+    },
+    "description": {
+      "EN": "Elves are forest dwellers.\nThey look like humans, but are more slender, with faces with fine features and long spiked ears. Due to the expansion of human cities, many elves were forced to leave their native forests and live among men. Over generations, they eventually lost their magical gifts.\n\nElves are gifted in magic and archery. They are weak in melee combat and better with a bow or magic spells.\n\nPlayers who choose an elf make good second-line defenders. The elves are a fragile breed, so you should play cautiously during battles.",
+      "FR": "Les elfes sont des habitants des forêts.\nIls ressemblent aux humains, mais sont plus sveltes, avec des visages aux traits fins et de longues oreilles pointes. À cause de l'expansion des villes humaines, beaucoup d'elfes ont été contraints de quitter leurs forêts natales et de vivre parmi les hommes. Au fil des générations, ils finirent par perdre leurs dons magiques.\n\nLes elfes sont doués en magie et en archerie. Ils sont faibles au combat au corps-à-corps, mais bien meilleurs avec un arc ou des sorts magiques.\n\nLes joueurs qui choisissent un elfe feront de bons défenseurs de deuxième ligne. Les elfes étant une race fragile, il faudra jouer prudemment pendant les batailles.",
+      "JP": "エルフは森の住人です。\n人間のような姿をしていますがより華奢な体躯で、美貌と、長い尖った耳を持っています。人間の都市の拡大に伴って多くのエルフは元々の住処である森を追われ、人間とともに暮らすようになりました。世代を重ねるうちにかつての魔法的な恩恵を失っています。\n\n近接戦闘に劣る代わりに魔法と弓の利用でより良い結果を得ることができます。\n\n後衛に適したキャラクターを作ることができますが、傷に脆いため戦闘中は慎重な操作が必要です。"
+    },
+    "sex": "M",
+    "otherSex": "elfeF",
+    "width": 32,
+    "height": 48,
+    "health": 80,
+    "stamina": 100,
+    "mana": 120,
+    "attack": 100,
+    "attackEffect": "default",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 100,
+    "strength": 80,
+    "endurance": 80,
+    "address": 120,
+    "rapidity": 100,
+    "intelligence": 100,
+    "willpower": 120,
+    "charisma": 100,
+    "zoology": 20,
+    "forestry": 20,
+    "lithology": -20,
+    "prospecting": -20,
+    "bows": 20,
+    "firearms": -20,
+    "speed": 5,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けてくれ！",
+          "俺を助けてくれ！",
+          "お願いだから助けてくれ！",
+          "援護が必要だ！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かる。",
+          "本当にありがとう！",
+          "恩に着る！",
+          "素晴らしいな！",
+          "これはいいな。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くぞ！",
+          "さあ行こう！",
+          "来てくれ！",
+          "付いてこい！",
+          "進め！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃！",
+          "蹴散らせ！",
+          "突撃！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを破壊しろ！",
+          "あれを打ち壊してやれ！"
+        ]
+      }
+    }
+  },
+  "elfeF": {
+    "type": "playable",
+    "no": 3,
+    "pictures": [
+      {
+        "back": {
+          "name": {
+            "EN": "back",
+            "FR": "dos"
+          },
+          "folder": "backF/",
+          "visible": false,
+          "forbidden": [
+            "mary.png"
+          ],
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps"
+          },
+          "folder": "bodiesF/",
+          "linkColor": "ears",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages"
+          },
+          "folder": "facesF/"
+        }
+      },
+      {
+        "shoes": {
+          "name": {
+            "EN": "shoes",
+            "FR": "chaussures"
+          },
+          "folder": "shoesF/",
+          "colors": [
+            16777215,
+            6262964,
+            3624028,
+            12632256,
+            14737632,
+            8421504,
+            13155208,
+            7232851,
+            3552822,
+            13395456,
+            10240062,
+            13411742,
+            3626049,
+            7957675
+          ]
+        }
+      },
+      {
+        "clothes": {
+          "name": {
+            "EN": "clothes",
+            "FR": "vêtements"
+          },
+          "folder": "clothesF/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641,
+            255,
+            16711680,
+            65280,
+            16776960,
+            0,
+            16777215,
+            16711935,
+            65535
+          ]
+        }
+      },
+      {
+        "belts": {
+          "name": {
+            "EN": "belts",
+            "FR": "ceintures"
+          },
+          "folder": "beltsF/"
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hairs": {
+          "name": {
+            "EN": "hair",
+            "FR": "cheveux"
+          },
+          "folder": "hairsF/",
+          "linkShape": "back",
+          "linkColor": "back",
+          "forbidden": [
+            "mary.png"
+          ],
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "ears": {
+          "name": {
+            "EN": "ears",
+            "FR": "oreilles"
+          },
+          "folder": "ears/elvesF/",
+          "linkColor": "bodies",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "elf",
+      "FR": "elfe",
+      "DE": "Elfe",
+      "JP": "エルフ"
+    },
+    "pluralName": {
+      "EN": "elfs",
+      "FR": "elfes",
+      "DE": "Elfen",
+      "JP": "エルフ"
+    },
+    "changeBestiary": "elfeM",
+    "description": {
+      "EN": "Elves are forest dwellers.\nThey look like humans, but are more slender, with faces with fine features and long spiked ears. Due to the expansion of human cities, many elves were forced to leave their native forests and live among men. Over generations, they eventually lost their magical gifts.\n\nElves are gifted in magic and archery. They are weak in melee combat and better with a bow or magic spells.\n\nPlayers who choose an elf make good second-line defenders. The elves are a fragile breed, so you should play cautiously during battles.",
+      "FR": "Les elfes sont des habitants des forêts.\nIls ressemblent aux humains, mais sont plus sveltes, avec des visages aux traits fins et de longues oreilles pointes. À cause de l'expansion des villes humaines, beaucoup d'elfes ont été contraints de quitter leurs forêts natales et de vivre parmi les hommes. Au fil des générations, ils finirent par perdre leurs dons magiques.\n\nLes elfes sont doués en magie et en archerie. Ils sont faibles au combat au corps-à-corps, mais bien meilleurs avec un arc ou des sorts magiques.\n\nLes joueurs qui choisissent un elfe feront de bons défenseurs de deuxième ligne. Les elfes étant une race fragile, il faudra jouer prudemment pendant les batailles.",
+      "JP": "エルフは森の住人です。\n人間のような姿をしていますがより華奢な体躯で、美貌と、長い尖った耳を持っています。人間の都市の拡大に伴って多くのエルフは元々の住処である森を追われ、人間とともに暮らすようになりました。世代を重ねるうちにかつての魔法的な恩恵を失っています。\n\n近接戦闘に劣る代わりに魔法と弓の利用でより良い結果を得ることができます。\n\n後衛に適したキャラクターを作ることができますが、傷に脆いため戦闘中は慎重な操作が必要です。"
+    },
+    "sex": "F",
+    "otherSex": "elfeM",
+    "width": 32,
+    "height": 48,
+    "health": 80,
+    "stamina": 100,
+    "mana": 120,
+    "attack": 100,
+    "attackEffect": "default",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 100,
+    "strength": 80,
+    "endurance": 80,
+    "address": 120,
+    "rapidity": 100,
+    "intelligence": 100,
+    "willpower": 120,
+    "charisma": 100,
+    "zoology": 20,
+    "forestry": 20,
+    "lithology": -20,
+    "prospecting": -20,
+    "bows": 20,
+    "firearms": -20,
+    "speed": 5,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けて！",
+          "私を助けて！",
+          "お願い……助けて！",
+          "助けて欲しいの！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かります。",
+          "ありがとうございます！",
+          "感謝します！",
+          "素敵です！",
+          "これはいいものですね。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くわよ！",
+          "さあ、やるわよ！",
+          "来て下さい！",
+          "付いてきて！",
+          "進軍して！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃！",
+          "蹴散らせ！",
+          "突撃！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを壊して！",
+          "あれを潰すのよ！"
+        ]
+      }
+    }
+  },
+  "halfElfM": {
+    "type": "playable",
+    "no": 4,
+    "pictures": [
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps"
+          },
+          "folder": "bodiesM/",
+          "linkColor": "ears",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages"
+          },
+          "folder": "facesM/"
+        }
+      },
+      {
+        "shoes": {
+          "name": {
+            "EN": "shoes",
+            "FR": "chaussures"
+          },
+          "folder": "shoesM/",
+          "colors": [
+            16777215,
+            6262964,
+            3624028,
+            12632256,
+            14737632,
+            8421504,
+            13155208,
+            7232851,
+            3552822,
+            13395456,
+            10240062,
+            13411742,
+            3626049,
+            7957675
+          ]
+        }
+      },
+      {
+        "clothes": {
+          "name": {
+            "EN": "clothes",
+            "FR": "vêtements"
+          },
+          "folder": "clothesM/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641,
+            255,
+            16711680,
+            65280,
+            16776960,
+            0,
+            16777215,
+            16711935,
+            65535
+          ]
+        }
+      },
+      {
+        "belts": {
+          "name": {
+            "EN": "belts",
+            "FR": "ceintures"
+          },
+          "folder": "beltsM/"
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hairs": {
+          "name": {
+            "EN": "hair",
+            "FR": "cheveux"
+          },
+          "folder": "hairsM/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "ears": {
+          "name": {
+            "EN": "ears",
+            "FR": "oreilles"
+          },
+          "folder": "ears/elvesM/",
+          "linkColor": "bodies",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "half elf",
+      "FR": "demi elfe",
+      "DE": "Halb Elf",
+      "JP": "ハーフエルフ"
+    },
+    "pluralName": {
+      "EN": "halves elfs",
+      "FR": "demis elfes",
+      "DE": "Halbe Elfen",
+      "JP": "ハーフエルフ"
+    },
+    "description": {
+      "EN": "The halves elves are both elven and human.\nThey have a human body structure and long ears.\n\nHalf-elves are hardened city dwellers. They live among humans as though they were their peers. They share their lifestyle and customs.\n\nIf you hesitate between an elf or a human, half-elves are a good choice. They remain relatively polyvalent. Even if a half elf is better with range weapons or with magical powers, they are decent melee fighters.",
+      "FR": "Les demi-elfes sont à la fois elfes et humains.\nIls ont une carrure humaine, mais se différencient de par leur longues oreilles.\n\nLes demi-elfes sont des citadins endurcis. Ils vivent parmi les humains comme s'ils étaient leur semblables. Ils partagent leur style de vie et leurs coutumes.\n\nSi vous hésitez entre un elfe ou un humain, les demi-elfe sont un bon compromis. Ils restent une race relativement polyvalente. Même si un demi-elfe est meilleur à distance ou avec des pouvoirs magiques, il se débrouille correctement au corps-à-corps.",
+      "JP": "ハーフエルフは、エルフと人間両方である種族です。\n人間と同じ体躯に長い耳を持っています。\n\n常習的に都市に居住しており、元々そうであるようにライフスタイルや習慣を共にしながら人間に溶け込んでいます。\n\nエルフか人間かで悩んでいるプレイヤーにはハーフエルフは良い選択になります。比較的多価を保っており、優れた遠距離戦闘能力を持ちながら近接戦闘を十分にこなすこともできます。"
+    },
+    "sex": "M",
+    "otherSex": "halfElfF",
+    "width": 32,
+    "height": 48,
+    "health": 90,
+    "stamina": 100,
+    "mana": 110,
+    "attack": 100,
+    "attackEffect": "default",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 100,
+    "strength": 90,
+    "endurance": 90,
+    "address": 110,
+    "rapidity": 100,
+    "intelligence": 100,
+    "willpower": 110,
+    "charisma": 100,
+    "speed": 5,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けてくれ！",
+          "俺を助けてくれ！",
+          "お願いだから助けてくれ！",
+          "援護が必要だ！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かる。",
+          "本当にありがとう！",
+          "恩に着る！",
+          "素晴らしいな！",
+          "これはいいな。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くぞ！",
+          "さあ行こう！",
+          "来てくれ！",
+          "付いてこい！",
+          "進め！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃！",
+          "蹴散らせ！",
+          "突撃！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを破壊しろ！",
+          "あれを打ち壊してやれ！"
+        ]
+      }
+    }
+  },
+  "halfElfF": {
+    "type": "playable",
+    "no": 5,
+    "pictures": [
+      {
+        "back": {
+          "name": {
+            "EN": "back",
+            "FR": "dos"
+          },
+          "folder": "backF/",
+          "visible": false,
+          "forbidden": [
+            "mary.png"
+          ],
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps"
+          },
+          "folder": "bodiesF/",
+          "linkColor": "ears",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages"
+          },
+          "folder": "facesF/"
+        }
+      },
+      {
+        "shoes": {
+          "name": {
+            "EN": "shoes",
+            "FR": "chaussures"
+          },
+          "folder": "shoesF/",
+          "colors": [
+            16777215,
+            6262964,
+            3624028,
+            12632256,
+            14737632,
+            8421504,
+            13155208,
+            7232851,
+            3552822,
+            13395456,
+            10240062,
+            13411742,
+            3626049,
+            7957675
+          ]
+        }
+      },
+      {
+        "clothes": {
+          "name": {
+            "EN": "clothes",
+            "FR": "vêtements"
+          },
+          "folder": "clothesF/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641,
+            255,
+            16711680,
+            65280,
+            16776960,
+            0,
+            16777215,
+            16711935,
+            65535
+          ]
+        }
+      },
+      {
+        "belts": {
+          "name": {
+            "EN": "belts",
+            "FR": "ceintures"
+          },
+          "folder": "beltsF/"
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hairs": {
+          "name": {
+            "EN": "hair",
+            "FR": "cheveux"
+          },
+          "folder": "hairsF/",
+          "linkShape": "back",
+          "linkColor": "back",
+          "forbidden": [
+            "mary.png"
+          ],
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "ears": {
+          "name": {
+            "EN": "ears",
+            "FR": "oreilles"
+          },
+          "folder": "ears/elvesF/",
+          "linkColor": "bodies",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "half elf",
+      "FR": "demi elfe",
+      "DE": "Halb Elfe",
+      "JP": "ハーフエルフ"
+    },
+    "pluralName": {
+      "EN": "half elfs",
+      "FR": "demi elfes",
+      "DE": "Halbe Elfen",
+      "JP": "ハーフエルフ"
+    },
+    "changeBestiary": "halfElfM",
+    "description": {
+      "EN": "The halves elves are both elven and human.\nThey have a human body structure and long ears.\n\nHalf-elves are hardened city dwellers. They live among humans as though they were their peers. They share their lifestyle and customs.\n\nIf you hesitate between an elf or a human, half-elves are a good choice. They remain relatively polyvalent. Even if a half elf is better with range weapons or with magical powers, they are decent melee fighters.",
+      "FR": "Les demi-elfes sont à la fois elfes et humains.\nIls ont une carrure humaine, mais se différencient de par leur longues oreilles.\n\nLes demi-elfes sont des citadins endurcis. Ils vivent parmi les humains comme s'ils étaient leur semblables. Ils partagent leur style de vie et leurs coutumes.\n\nSi vous hésitez entre un elfe ou un humain, les demi-elfe sont un bon compromis. Ils restent une race relativement polyvalente. Même si un demi-elfe est meilleur à distance ou avec des pouvoirs magiques, il se débrouille correctement au corps-à-corps.",
+      "JP": "ハーフエルフは、エルフと人間両方である種族です。\n人間と同じ体躯に長い耳を持っています。\n\n常習的に都市に居住しており、元々そうであるようにライフスタイルや習慣を共にしながら人間に溶け込んでいます。\n\nエルフか人間かで悩んでいるプレイヤーにはハーフエルフは良い選択になります。比較的多価を保っており、優れた遠距離戦闘能力を持ちながら近接戦闘を十分にこなすこともできます。"
+    },
+    "sex": "F",
+    "otherSex": "halfElfM",
+    "width": 32,
+    "height": 48,
+    "health": 90,
+    "stamina": 100,
+    "mana": 110,
+    "attack": 100,
+    "attackEffect": "default",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 100,
+    "strength": 90,
+    "endurance": 90,
+    "address": 110,
+    "rapidity": 100,
+    "intelligence": 100,
+    "willpower": 110,
+    "charisma": 100,
+    "speed": 5,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けて！",
+          "私を助けて！",
+          "お願い……助けて！",
+          "助けて欲しいの！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かります。",
+          "ありがとうございます！",
+          "感謝します！",
+          "素敵です！",
+          "これはいいものですね。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くわよ！",
+          "さあ、やるわよ！",
+          "来て下さい！",
+          "付いてきて！",
+          "進軍して！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃！",
+          "蹴散らせ！",
+          "突撃！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを壊して！",
+          "あれを潰すのよ！"
+        ]
+      }
+    }
+  },
+  "dwarfM": {
+    "type": "playable",
+    "no": 6,
+    "pictures": [
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps"
+          },
+          "folder": "bodiesM/",
+          "linkColor": "ears",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages"
+          },
+          "folder": "facesM/"
+        }
+      },
+      {
+        "shoes": {
+          "name": {
+            "EN": "shoes",
+            "FR": "chaussures"
+          },
+          "folder": "shoesM/",
+          "colors": [
+            16777215,
+            6262964,
+            3624028,
+            12632256,
+            14737632,
+            8421504,
+            13155208,
+            7232851,
+            3552822,
+            13395456,
+            10240062,
+            13411742,
+            3626049,
+            7957675
+          ]
+        }
+      },
+      {
+        "clothes": {
+          "name": {
+            "EN": "clothes",
+            "FR": "vêtements"
+          },
+          "folder": "clothesM/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641,
+            255,
+            16711680,
+            65280,
+            16776960,
+            0,
+            16777215,
+            16711935,
+            65535
+          ]
+        }
+      },
+      {
+        "belts": {
+          "name": {
+            "EN": "belts",
+            "FR": "ceintures"
+          },
+          "folder": "beltsM/"
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hairs": {
+          "name": {
+            "EN": "hair",
+            "FR": "cheveux"
+          },
+          "folder": "hairsM/",
+          "linkColor": "beard",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "beard": {
+          "name": {
+            "EN": "beards",
+            "FR": "barbes"
+          },
+          "folder": "beards/",
+          "linkColor": "hairs",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "dwarf",
+      "FR": "nain",
+      "DE": "Zwerg",
+      "JP": "ドワーフ"
+    },
+    "pluralName": {
+      "EN": "dwarfs",
+      "FR": "nains",
+      "DE": "Zwerge",
+      "JP": "ドワーフ"
+    },
+    "description": {
+      "EN": "Dwarves are half-men.\nThey often live in mines where they extract valuable minerals for blacksmiths and jewellers. In cities, they easily find work as a blacksmiths or warriors.\n\nDwarves are slow but powerful melee fighters specialised in axes and hammers. They don't have any talent with precision weapons, except for firearms. They are also limited in magic.\n\nThis choice of character is perfect to fight on the front line. Dwarves are tough, but they are slow  and they can hardly run away from a battle.",
+      "FR": "Les nains sont des hommes de petite taille.\nIls vivent souvent dans des mines, où ils extraient des minerais rares pour les fonderies et les joailleries. Dans les villes, ils trouvent facilement du travail en tant que forgerons ou que guerriers.\n\nLes nains sont lentes, mais sont de puissants combattants au corps-à-corps, spécialisée dans les haches et les marteaux. Ils sont peu doués avec les armes de précision, sauf les armes à feu. Ils sont aussi limités en magie.\n\nCe choix de personnage est idéal pour aller combattre en première ligne. Les nains sont résistants, mais leur lenteur de déplacement fait qu'ils ont peu de chance fuir une bataille.",
+      "JP": "ドワーフは半人間の種族です。\n鍛冶や宝石細工のための貴重な鉱石を入手するため、しばしば鉱山に住んでいます。都市部においては鍛冶屋や戦士として働く姿を簡単に見つけることができるでしょう。\n\n斧やハンマーでの近接戦闘を得意とする強力な戦士ですが、銃器を除いて遠隔武器に才能がありません。同様に魔法の才能も限られています。\n\n前線で戦う戦士に最適な種族です。タフですが鈍重で、戦闘から逃げるのは難しいでしょう。"
+    },
+    "sex": "M",
+    "otherSex": "dwarfF",
+    "width": 32,
+    "height": 48,
+    "scaleY": 0.8,
+    "health": 120,
+    "stamina": 120,
+    "mana": 80,
+    "attack": 100,
+    "attackEffect": "default",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 100,
+    "strength": 120,
+    "endurance": 120,
+    "address": 80,
+    "rapidity": 80,
+    "intelligence": 100,
+    "willpower": 100,
+    "charisma": 100,
+    "alcohols": 20,
+    "prospecting": 20,
+    "mining": 20,
+    "metalSmelting": 20,
+    "weaponsForging": 20,
+    "armorsForging": 20,
+    "firearmsForging": 20,
+    "gemmology": 20,
+    "goldsmithery": 20,
+    "bluntWeapons": 20,
+    "axes": 20,
+    "firearms": 20,
+    "picking": -20,
+    "tanning": -20,
+    "forestry": -20,
+    "zoology": -20,
+    "hunting": -20,
+    "farming": -20,
+    "harvesting": -20,
+    "bakery": -20,
+    "breeding": -20,
+    "bows": -20,
+    "pyrotechnicMagic": -20,
+    "redemptiveMagic": -20,
+    "speed": 4.5,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けてくれ！",
+          "俺を助けてくれ！",
+          "お願いだから助けてくれ！",
+          "援護が必要だ！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かる。",
+          "本当にありがとう！",
+          "恩に着る！",
+          "素晴らしいな！",
+          "これはいいな。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くぞ！",
+          "さあ行こう！",
+          "来てくれ！",
+          "付いてこい！",
+          "進め！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃！",
+          "蹴散らせ！",
+          "突撃！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを破壊しろ！",
+          "あれを打ち壊してやれ！"
+        ]
+      }
+    }
+  },
+  "dwarfF": {
+    "type": "playable",
+    "no": 7,
+    "pictures": [
+      {
+        "back": {
+          "name": {
+            "EN": "back",
+            "FR": "dos"
+          },
+          "folder": "backF/",
+          "visible": false,
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps"
+          },
+          "folder": "bodiesF/",
+          "linkColor": "ears",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages"
+          },
+          "folder": "facesF/"
+        }
+      },
+      {
+        "shoes": {
+          "name": {
+            "EN": "shoes",
+            "FR": "chaussures"
+          },
+          "folder": "shoesF/",
+          "colors": [
+            16777215,
+            6262964,
+            3624028,
+            12632256,
+            14737632,
+            8421504,
+            13155208,
+            7232851,
+            3552822,
+            13395456,
+            10240062,
+            13411742,
+            3626049,
+            7957675
+          ]
+        }
+      },
+      {
+        "clothes": {
+          "name": {
+            "EN": "clothes",
+            "FR": "vêtements"
+          },
+          "folder": "clothesF/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641,
+            255,
+            16711680,
+            65280,
+            16776960,
+            0,
+            16777215,
+            16711935,
+            65535
+          ]
+        }
+      },
+      {
+        "belts": {
+          "name": {
+            "EN": "belts",
+            "FR": "ceintures"
+          },
+          "folder": "beltsF/"
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hairs": {
+          "name": {
+            "EN": "hair",
+            "FR": "cheveux"
+          },
+          "folder": "hairsF/",
+          "linkShape": "back",
+          "linkColor": "back",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "dwarf",
+      "FR": "naine",
+      "DE": "Zwerg",
+      "JP": "ドワーフ"
+    },
+    "pluralName": {
+      "EN": "dwarfs",
+      "FR": "naines",
+      "DE": "Zwerge",
+      "JP": "ドワーフ"
+    },
+    "changeBestiary": "dwarfM",
+    "description": {
+      "EN": "Dwarves are half-women.\nThey often live in mines where they extract valuable minerals for blacksmiths and jewellers. In cities, they easily find work as a blacksmiths or warriors.\n\nDwarves are slow but powerful melee fighters specialised in axes and hammers. They don't have any talent with precision weapons, except for firearms. They are also limited in magic.\n\nThis choice of character is perfect to fight on the front line. Dwarves are tough, but they are slow  and they can hardly run away from a battle.",
+      "FR": "Les naines sont des femmes de petite taille.\nElles vivent souvent dans des mines, où elles extraient des minerais rares pour les fonderies et les joailleries. Dans les villes, elles trouvent facilement du travail en tant que forgeronnes ou que guerrières.\n\nLes naines sont lentes, mais sont de puissantes combattantes au corps-à-corps, spécialisées dans les haches et les marteaux. Elles sont peu douées avec les armes de précision, sauf les armes à feu. Elles sont aussi limitées en magie.\n\nCe choix de personnage est idéal pour aller combattre en première ligne. Les naines sont résistantes, mais leur lenteur de déplacement fait qu'elles ont peu de chance fuir une bataille.",
+      "JP": "ドワーフは半人間の種族です。\n鍛冶や宝石細工のための貴重な鉱石を入手するため、しばしば鉱山に住んでいます。都市部においては鍛冶屋や戦士として働く姿を簡単に見つけることができるでしょう。\n\n斧やハンマーでの近接戦闘を得意とする強力な戦士ですが、銃器を除いて遠隔武器に才能がありません。同様に魔法の才能も限られています。\n\n前線で戦う戦士に最適な種族です。タフですが鈍重で、戦闘から逃げるのは難しいでしょう。"
+    },
+    "sex": "F",
+    "otherSex": "dwarfM",
+    "width": 32,
+    "height": 48,
+    "scaleY": 0.8,
+    "health": 120,
+    "stamina": 120,
+    "mana": 80,
+    "attack": 100,
+    "attackEffect": "default",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 100,
+    "strength": 120,
+    "endurance": 120,
+    "address": 80,
+    "rapidity": 80,
+    "intelligence": 100,
+    "willpower": 100,
+    "charisma": 100,
+    "alcohols": 20,
+    "prospecting": 20,
+    "mining": 20,
+    "metalSmelting": 20,
+    "weaponsForging": 20,
+    "armorsForging": 20,
+    "firearmsForging": 20,
+    "gemmology": 20,
+    "goldsmithery": 20,
+    "bluntWeapons": 20,
+    "axes": 20,
+    "firearms": 20,
+    "picking": -20,
+    "tanning": -20,
+    "forestry": -20,
+    "zoology": -20,
+    "hunting": -20,
+    "farming": -20,
+    "harvesting": -20,
+    "bakery": -20,
+    "breeding": -20,
+    "bows": -20,
+    "pyrotechnicMagic": -20,
+    "redemptiveMagic": -20,
+    "speed": 4.5,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けて！",
+          "私を助けて！",
+          "お願い……助けて！",
+          "助けて欲しいの！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かります。",
+          "ありがとうございます！",
+          "感謝します！",
+          "素敵です！",
+          "これはいいものですね。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くわよ！",
+          "さあ、やるわよ！",
+          "来て下さい！",
+          "付いてきて！",
+          "進軍して！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃！",
+          "蹴散らせ！",
+          "突撃！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを壊して！",
+          "あれを潰すのよ！"
+        ]
+      }
+    }
+  },
+  "felineM": {
+    "type": "playable",
+    "no": 8,
+    "pictures": [
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps"
+          },
+          "folder": "bodiesM/",
+          "linkColor": "ears",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages"
+          },
+          "folder": "facesM/"
+        }
+      },
+      {
+        "clothes": {
+          "name": {
+            "EN": "clothes",
+            "FR": "vêtements"
+          },
+          "folder": "clothesM/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641,
+            255,
+            16711680,
+            65280,
+            16776960,
+            0,
+            16777215,
+            16711935,
+            65535
+          ]
+        }
+      },
+      {
+        "belts": {
+          "name": {
+            "EN": "belts",
+            "FR": "ceintures"
+          },
+          "folder": "beltsM/"
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hairs": {
+          "name": {
+            "EN": "hair",
+            "FR": "cheveux"
+          },
+          "folder": "hairsM/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "ears": {
+          "name": {
+            "EN": "ears",
+            "FR": "oreilles"
+          },
+          "folder": "ears/felinesM/",
+          "linkColor": "bodies",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "feline",
+      "FR": "félin",
+      "JP": "フェリーン"
+    },
+    "pluralName": {
+      "EN": "felines",
+      "FR": "félin",
+      "JP": "フェリーン"
+    },
+    "description": {
+      "EN": "Felines are half-men, half-cat creatures.\nThey are peaceful, they enjoy cooking, partying and eating all kinds of foods. In society, they often play the role of servants, but they know how to fight with their claws out.\n\nFelines are very fast. They are specialised in light weapons and range weapons. They have no interest in wearing heavy armours, so they focus on light ones.\n\nA feline is a third-line character who uses his advantages in crafting to supply other fighting forces. If a feline is in danger, he can easily stay away, due to his huge movement speed.",
+      "FR": "Les félins sont des créatures mi-homme, mi-félin.\nCe sont des êtres pacifiques qui aiment cuisiner, faire la fête et manger toutes sortes de nourriture. En société, ils jouent souvent le rôle de domestiques, mais savent néanmoins se battre quand il s'agit de sortir les griffes.\n\nLes félins sont très rapides et spécialisés dans les armes légères ou à distance. Ils n'ont aucun intérêt à porter des armures lourdes, alors mieux vaut privilégier les armures légères.\n\nUn félin est un personnage de troisième ligne qui utilise ses capacités en artisanat pour soutenir les autres forces combattantes. Si un félin est en danger, il pourra facilement rester à distance grâce à sa grande vitesse de déplacement.",
+      "JP": "フェリーンは半獣人の種族です。\n平和的で、調理やパーティー、あらゆる食事を楽しむことを好んでいます。社会ではしばしば使用人となっていますが、その身に備えた爪で戦う方法も知っています。\n\n非常にすばやく、小型武器や遠隔武器を得意としています。重装甲を身にまとうことには興味がなく、軽量なものに集中しています。\n\nその特性を生かして軍のための補給物資の製造などを行う再後衛のキャラクターに向いています。危機が迫っているならば移動速度を活かして、すぐに場を離脱することが可能です。"
+    },
+    "sex": "M",
+    "otherSex": "felineF",
+    "width": 32,
+    "height": 48,
+    "scale": 0.9,
+    "health": 80,
+    "stamina": 120,
+    "mana": 100,
+    "attack": 80,
+    "attackEffect": "scratch",
+    "damage": [
+      "closeCombat",
+      "slashing"
+    ],
+    "defense": 100,
+    "strength": 80,
+    "endurance": 80,
+    "address": 120,
+    "rapidity": 120,
+    "intelligence": 100,
+    "willpower": 100,
+    "charisma": 100,
+    "hunting": 20,
+    "bakery": 20,
+    "breeding": 20,
+    "alcohols": 20,
+    "shoemaking": -20,
+    "lithology": -20,
+    "stonecutting": -20,
+    "prospecting": -20,
+    "speed": 6,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けてくれ！",
+          "俺を助けてくれ！",
+          "お願いだから助けてくれ！",
+          "援護が必要だ！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かる。",
+          "本当にありがとう！",
+          "恩に着る！",
+          "素晴らしいな！",
+          "これはいいな。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くぞ！",
+          "さあ行こう！",
+          "来てくれ！",
+          "付いてこい！",
+          "進め！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃！",
+          "蹴散らせ！",
+          "突撃！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを破壊しろ！",
+          "あれを打ち壊してやれ！"
+        ]
+      }
+    }
+  },
+  "felineF": {
+    "type": "playable",
+    "no": 9,
+    "pictures": [
+      {
+        "back": {
+          "name": {
+            "EN": "back",
+            "FR": "dos"
+          },
+          "folder": "backF/",
+          "visible": false,
+          "forbidden": [
+            "mary.png"
+          ],
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps"
+          },
+          "folder": "bodiesF/",
+          "linkColor": "ears",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages"
+          },
+          "folder": "facesF/"
+        }
+      },
+      {
+        "clothes": {
+          "name": {
+            "EN": "clothes",
+            "FR": "vêtements"
+          },
+          "folder": "clothesF/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641,
+            255,
+            16711680,
+            65280,
+            16776960,
+            0,
+            16777215,
+            16711935,
+            65535
+          ]
+        }
+      },
+      {
+        "belts": {
+          "name": {
+            "EN": "belts",
+            "FR": "ceintures"
+          },
+          "folder": "beltsF/"
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hairs": {
+          "name": {
+            "EN": "hair",
+            "FR": "cheveux"
+          },
+          "folder": "hairsF/",
+          "linkShape": "back",
+          "linkColor": "back",
+          "forbidden": [
+            "mary.png"
+          ],
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "ears": {
+          "name": {
+            "EN": "ears",
+            "FR": "oreilles"
+          },
+          "folder": "ears/felinesF/",
+          "linkColor": "bodies",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "feline",
+      "FR": "féline",
+      "JP": "フェリーン"
+    },
+    "pluralName": {
+      "EN": "felines",
+      "FR": "féline",
+      "JP": "フェリーン"
+    },
+    "changeBestiary": "felineM",
+    "description": {
+      "EN": "Felines are half-women, half-cat creatures.\nThey are peaceful, they enjoy cooking, partying and eating all kinds of foods. In society, they often play the role of servants, but they know how to fight with their claws out.\n\nFelines are very fast. They are specialised in light weapons and range weapons. They have no interest in wearing heavy armours, so they focus on light ones.\n\nA feline is a third-line character who uses her advantages in crafting to supply other fighting forces. If a feline is in danger, she can easily stay away, due to her huge movement speed.",
+      "FR": "Les félines sont des créatures mi-femme, mi-félin.\nCe sont des êtres pacifiques qui aiment cuisiner, faire la fête et manger toutes sortes de nourriture. En société, elles jouent souvent le rôle de domestiques, mais savent néanmoins se battre quand il s'agit de sortir les griffes.\n\nLes félines sont très rapides et spécialisées dans les armes légères ou à distance. Elles n'ont aucun intérêt à porter des armures lourdes, alors mieux vaut privilégier les armures légères.\n\nUne féline est un personnage de troisième ligne qui utilise ses capacités en artisanat pour soutenir les autres forces combattantes. Si une féline est en danger, elle pourra facilement rester à distance grâce à sa grande vitesse de déplacement.",
+      "JP": "フェリーンは半獣人の種族です。\n平和的で、調理やパーティー、あらゆる食事を楽しむことを好んでいます。社会ではしばしば使用人となっていますが、その身に備えた爪で戦う方法も知っています。\n\n非常にすばやく、小型武器や遠隔武器を得意としています。重装甲を身にまとうことには興味がなく、軽量なものに集中しています。\n\nその特性を生かして軍のための補給物資の製造などを行う再後衛のキャラクターに向いています。危機が迫っているならば移動速度を活かして、すぐに場を離脱することが可能です。"
+    },
+    "sex": "F",
+    "otherSex": "felineM",
+    "width": 32,
+    "height": 48,
+    "scale": 0.9,
+    "health": 80,
+    "stamina": 120,
+    "mana": 100,
+    "attack": 80,
+    "attackEffect": "scratch",
+    "damage": [
+      "closeCombat",
+      "slashing"
+    ],
+    "defense": 100,
+    "strength": 80,
+    "endurance": 80,
+    "address": 120,
+    "rapidity": 120,
+    "intelligence": 100,
+    "willpower": 100,
+    "charisma": 100,
+    "bakery": 20,
+    "breeding": 20,
+    "alcohols": 20,
+    "shoemaking": -20,
+    "lithology": -20,
+    "stonecutting": -20,
+    "prospecting": -20,
+    "speed": 6,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けて欲しいにゃ！",
+          "みゃーを助けて！",
+          "頼むのにゃ……助けて！",
+          "手伝いが必要にゃ！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かるにゃ。",
+          "ありがたいにゃ！",
+          "感謝するにゃ！",
+          "素敵だにゃ！",
+          "これはいいものだにゃ。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くにゃ！",
+          "さあ、やるにゃ！",
+          "来るんだにゃ！",
+          "付いてくるにゃ！",
+          "進軍にゃ！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃にゃ！",
+          "進むのにゃ！",
+          "蹴散らすのにゃ！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを壊すんだにゃ！",
+          "あれをタタキにしてやるのにゃ！"
+        ]
+      }
+    }
+  },
+  "colossusM": {
+    "type": "playable",
+    "no": 10,
+    "pictures": [
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps"
+          },
+          "folder": "bodiesM/",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages"
+          },
+          "folder": "facesM/"
+        }
+      },
+      {
+        "shoes": {
+          "name": {
+            "EN": "shoes",
+            "FR": "chaussures"
+          },
+          "folder": "shoesM/",
+          "colors": [
+            16777215,
+            6262964,
+            3624028,
+            12632256,
+            14737632,
+            8421504,
+            13155208,
+            7232851,
+            3552822,
+            13395456,
+            10240062,
+            13411742,
+            3626049,
+            7957675
+          ]
+        }
+      },
+      {
+        "clothes": {
+          "name": {
+            "EN": "clothes",
+            "FR": "vêtements"
+          },
+          "folder": "clothesM/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641,
+            255,
+            16711680,
+            65280,
+            16776960,
+            0,
+            16777215,
+            16711935,
+            65535
+          ]
+        }
+      },
+      {
+        "belts": {
+          "name": {
+            "EN": "belts",
+            "FR": "ceintures"
+          },
+          "folder": "beltsM/"
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hairs": {
+          "name": {
+            "EN": "hair",
+            "FR": "cheveux"
+          },
+          "folder": "hairsM/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "colossus",
+      "FR": "colosse",
+      "DE": "Koloss",
+      "JP": "コロッサス"
+    },
+    "pluralName": {
+      "EN": "colossus",
+      "FR": "colosses",
+      "DE": "Kolosse",
+      "JP": "コロッサス"
+    },
+    "description": {
+      "EN": "Colossus are men of great size.\nThey are aggressive creatures who live in remote mountains. When colossus need to express their violence, they go to town where big guys always find their place.\n\nColossus are very strong and very resistant, but their magical abilities are very limited. They are ideal warriors. As for crafting, they are good at smashing stones.\n\nA colossus is a character specifically designed for physical combat and to rush into the brawl. They are penalised in activities that require dexterity or a brain.",
+      "FR": "Les colosses sont des hommes de très grande taille.\nCe sont des êtres agressifs qui vivent dans des montagnes isolées. Quand les colosses ont besoin d'extérioriser leur violence, ils se rendent en ville ou les gros bras trouvent toujours leur place.\n\nLes colosses sont très forts et très résistants. Leurs capacités magiques sont par contre très limitées. Ce sont des guerriers idéaux. En artisanat, ils sont doués pour fracasser des pierres.\n\nUn colosse est un personnage spécialement conçu pour le combat physique et pour foncer dans le tas. Ils sont par contre pénalisés dans les activités qui exigent de la dextérité ou des cellules grises.",
+      "JP": "コロッサスは巨人種族です。\n遠い山々に住んでいる攻撃的な種族で、力を見せつける必要があるときは街にその居場所を見つけます。\n\n非常に力強く頑健ですが、魔法の能力は大きく限られています。理想的な戦士であるほか、岩を砕くことにも向いています。\n\n物理的な乱戦に特に向いている種族で、器用さや頭を使う活動にはペナルティがあります。"
+    },
+    "sex": "M",
+    "otherSex": "colossusF",
+    "width": 32,
+    "height": 48,
+    "scale": 1.2,
+    "health": 140,
+    "stamina": 80,
+    "mana": 60,
+    "attack": 120,
+    "attackEffect": "shock",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 100,
+    "strength": 140,
+    "endurance": 140,
+    "address": 80,
+    "rapidity": 80,
+    "intelligence": 80,
+    "willpower": 80,
+    "charisma": 100,
+    "building": 20,
+    "lithology": 20,
+    "stonecutting": 20,
+    "repairing": -20,
+    "forestry": -20,
+    "picking": -20,
+    "bluntWeapons": 20,
+    "lightWeapons": -20,
+    "golemology": 20,
+    "conscription": -20,
+    "speed": 5,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けてくれ！",
+          "俺を助けてくれ！",
+          "お願いだから助けてくれ！",
+          "援護が必要だ！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かる。",
+          "本当にありがとう！",
+          "恩に着る！",
+          "素晴らしいな！",
+          "これはいいな。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くぞ！",
+          "さあ行こう！",
+          "来てくれ！",
+          "付いてこい！",
+          "進め！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃！",
+          "蹴散らせ！",
+          "突撃！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを破壊しろ！",
+          "あれを打ち壊してやれ！"
+        ]
+      }
+    }
+  },
+  "colossusF": {
+    "type": "playable",
+    "no": 11,
+    "pictures": [
+      {
+        "back": {
+          "name": {
+            "EN": "back",
+            "FR": "dos"
+          },
+          "folder": "backF/",
+          "visible": false,
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps"
+          },
+          "folder": "bodiesF/",
+          "colors": [
+            16636065,
+            13147004,
+            12356961,
+            16573107,
+            14988178,
+            7226145
+          ]
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages"
+          },
+          "folder": "facesF/"
+        }
+      },
+      {
+        "shoes": {
+          "name": {
+            "EN": "shoes",
+            "FR": "chaussures"
+          },
+          "folder": "shoesF/",
+          "colors": [
+            16777215,
+            6262964,
+            3624028,
+            12632256,
+            14737632,
+            8421504,
+            13155208,
+            7232851,
+            3552822,
+            13395456,
+            10240062,
+            13411742,
+            3626049,
+            7957675
+          ]
+        }
+      },
+      {
+        "clothes": {
+          "name": {
+            "EN": "clothes",
+            "FR": "vêtements"
+          },
+          "folder": "clothesF/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641,
+            255,
+            16711680,
+            65280,
+            16776960,
+            0,
+            16777215,
+            16711935,
+            65535
+          ]
+        }
+      },
+      {
+        "belts": {
+          "name": {
+            "EN": "belts",
+            "FR": "ceintures"
+          },
+          "folder": "beltsF/"
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hairs": {
+          "name": {
+            "EN": "hair",
+            "FR": "cheveux"
+          },
+          "folder": "hairsF/",
+          "linkShape": "back",
+          "linkColor": "back",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "colossus",
+      "FR": "colosse",
+      "DE": "Koloss",
+      "JP": "コロッサス"
+    },
+    "pluralName": {
+      "EN": "colossus",
+      "FR": "colosses",
+      "DE": "Kolosse",
+      "JP": "コロッサス"
+    },
+    "changeBestiary": "colossusM",
+    "description": {
+      "EN": "Colossus are men of great size.\nThey are aggressive creatures who live in remote mountains. When colossus need to express their violence, they go to town where big guys always find their place.\n\nColossus are very strong and very resistant, but their magical abilities are very limited. They are ideal warriors. As for crafting, they are good at smashing stones.\n\nA colossus is a character specifically designed for physical combat and to rush into the brawl. They are penalised in activities that require dexterity or a brain.",
+      "FR": "Les colosses sont des hommes de très grande taille.\nCe sont des êtres agressifs qui vivent dans des montagnes isolées. Quand les colosses ont besoin d'extérioriser leur violence, ils se rendent en ville ou les gros bras trouvent toujours leur place.\n\nLes colosses sont très forts et très résistants. Leurs capacités magiques sont par contre très limitées. Ce sont des guerriers idéaux. En artisanat, ils sont doués pour fracasser des pierres.\n\nUn colosse est un personnage spécialement conçu pour le combat physique et pour foncer dans le tas. Ils sont par contre pénalisés dans les activités qui exigent de la dextérité ou des cellules grises.",
+      "JP": "コロッサスは巨人種族です。\n遠い山々に住んでいる攻撃的な種族で、力を見せつける必要があるときは街にその居場所を見つけます。\n\n非常に力強く頑健ですが、魔法の能力は大きく限られています。理想的な戦士であるほか、岩を砕くことにも向いています。\n\n物理的な乱戦に特に向いている種族で、器用さや頭を使う活動にはペナルティがあります。"
+    },
+    "sex": "F",
+    "otherSex": "colossusM",
+    "width": 32,
+    "height": 48,
+    "scale": 1.2,
+    "health": 140,
+    "stamina": 80,
+    "mana": 60,
+    "attack": 120,
+    "attackEffect": "shock",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 100,
+    "strength": 140,
+    "endurance": 140,
+    "address": 80,
+    "rapidity": 80,
+    "intelligence": 80,
+    "willpower": 80,
+    "charisma": 100,
+    "building": 20,
+    "lithology": 20,
+    "stonecutting": 20,
+    "repairing": -20,
+    "forestry": -20,
+    "picking": -20,
+    "bluntWeapons": 20,
+    "lightWeapons": -20,
+    "golemology": 20,
+    "conscription": -20,
+    "speed": 5,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けて！",
+          "私を助けて！",
+          "お願い……助けて！",
+          "助けて欲しいの！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かります。",
+          "ありがとうございます！",
+          "感謝します！",
+          "素敵です！",
+          "これはいいものですね。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くわよ！",
+          "さあ、やるわよ！",
+          "来て下さい！",
+          "付いてきて！",
+          "進軍して！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃！",
+          "蹴散らせ！",
+          "突撃！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを壊して！",
+          "あれを潰すのよ！"
+        ]
+      }
+    }
+  },
+  "darkElfM": {
+    "type": "playable",
+    "no": 12,
+    "pictures": [
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps"
+          },
+          "folder": "../../../data/characters/playables/bodiesM/",
+          "linkColor": "ears",
+          "colors": [
+            3293508,
+            11700565,
+            7629943
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages"
+          },
+          "folder": "../../../data/characters/playables/facesM/"
+        }
+      },
+      {
+        "shoes": {
+          "name": {
+            "EN": "shoes",
+            "FR": "chaussures"
+          },
+          "folder": "../../../data/characters/playables/shoesM/",
+          "colors": [
+            16777215,
+            6262964,
+            3624028,
+            12632256,
+            14737632,
+            8421504,
+            13155208,
+            7232851,
+            3552822,
+            13395456,
+            10240062,
+            13411742,
+            3626049,
+            7957675
+          ]
+        }
+      },
+      {
+        "clothes": {
+          "name": {
+            "EN": "clothes",
+            "FR": "vêtements"
+          },
+          "folder": "../../../data/characters/playables/clothesM/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641,
+            255,
+            16711680,
+            65280,
+            16776960,
+            0,
+            16777215,
+            16711935,
+            65535
+          ]
+        }
+      },
+      {
+        "belts": {
+          "name": {
+            "EN": "belts",
+            "FR": "ceintures"
+          },
+          "folder": "../../../data/characters/playables/beltsM/"
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hairs": {
+          "name": {
+            "EN": "hair",
+            "FR": "cheveux"
+          },
+          "folder": "../../../data/characters/playables/hairsM/",
+          "colors": [
+            16777215,
+            12632256,
+            14737632,
+            8421504
+          ]
+        }
+      },
+      {
+        "ears": {
+          "name": {
+            "EN": "ears",
+            "FR": "oreilles"
+          },
+          "folder": "../../../data/characters/playables/ears/elvesM/",
+          "linkColor": "bodies",
+          "colors": [
+            3293508,
+            11700565,
+            7629943
+          ]
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "dark elf",
+      "FR": "elfe noir",
+      "JP": "ダークエルフ"
+    },
+    "pluralName": {
+      "EN": "dark elfs",
+      "FR": "elfes noirs",
+      "JP": "ダークエルフ"
+    },
+    "description": {
+      "EN": "Dark elves live in the depths of the Earth. They have the same shape as the other elves, but they have a dark skin and light hair.\nGenerally, dark elves are evil and want to destroy the people of the surface. But there are renegades  who rejected these doctrines of the underworld and joined humans. Because of their origins, they are often rejected and have issues integrating.\nDark elves are gifted in black and destructive magic. They have more difficulty in learning other magic.\nPlayers who choose a dark elf will have a good offensive character and can focus on fighting alone.",
+      "FR": "Les elfes noirs vivent dans les profondeurs de la Terre. Ils ont la même silhouette que les autres elfes, mais ont la peau sombre et les cheveux clairs.\nGénéralement, les elfes noirs sont maléfiques et ne songent qu'à anéantir les peuples de la surface. Mais il existe des renégats qui ont rejeté les doctrines du monde souterrain et rejoint le peuple humain. A cause de leurs origines, ils sont souvent rejetés et ont du mal à s'intégrer.\nLes elfes noirs sont doués en magie noire et en magie destructrice. Ils ont plus de mal à assimiler les autres types de magie.\nLes joueurs qui choisissent un elfe noir auront  un bon personnage offensif et porté sur le combat en solitaire.",
+      "JP": "ダークエルフは地下深くに住まう種族で、他のエルフ種と同じ形をしていますが、黒い肌と明るい髪が特徴です。\n一般的にダークエルフは邪悪で地上のものの破壊を望んでいます。その方針に反旗を翻し、人間たちへと合流しようとするものもいますが、度々その出自から拒否され問題となることもあります。\n死霊術と破壊魔術に優れていますが、その他の魔術の習熟はより難しいです。\n攻撃的かつ単身で戦うことが可能なキャラクター向けの種族です。"
+    },
+    "playable": "completeMissions-",
+    "sex": "M",
+    "otherSex": "darkElfF",
+    "width": 32,
+    "height": 48,
+    "scale": 0.9,
+    "health": 100,
+    "stamina": 80,
+    "mana": 120,
+    "attack": 100,
+    "attackEffect": "default",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 100,
+    "resistance": {
+      "light": 1.2,
+      "death": 0.8
+    },
+    "strength": 100,
+    "endurance": 100,
+    "address": 110,
+    "rapidity": 100,
+    "intelligence": 120,
+    "willpower": 80,
+    "charisma": 80,
+    "chaoticMagic": 20,
+    "conjuration": 20,
+    "druidicMagic": -20,
+    "necromanticMagic": 20,
+    "pyrotechnicMagic": 20,
+    "redemptiveMagic": -20,
+    "repressiveMagic": -20,
+    "shamanicMagic": -20,
+    "shootingWeapons": 20,
+    "speed": 5,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けてくれ！",
+          "俺を助けてくれ！",
+          "お願いだから助けてくれ！",
+          "援護が必要だ！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かる。",
+          "本当にありがとう！",
+          "恩に着る！",
+          "素晴らしいな！",
+          "これはいいな。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くぞ！",
+          "さあ行こう！",
+          "来てくれ！",
+          "付いてこい！",
+          "進め！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃！",
+          "蹴散らせ！",
+          "突撃！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを破壊しろ！",
+          "あれを打ち壊してやれ！"
+        ]
+      }
+    }
+  },
+  "darkElfF": {
+    "type": "playable",
+    "no": 13,
+    "pictures": [
+      {
+        "back": {
+          "name": {
+            "EN": "back",
+            "FR": "dos"
+          },
+          "folder": "../../../data/characters/playables/backF/",
+          "visible": false,
+          "forbidden": [
+            "mary.png"
+          ],
+          "colors": [
+            16777215,
+            12632256,
+            14737632,
+            8421504
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps"
+          },
+          "folder": "../../../data/characters/playables/bodiesF/",
+          "linkColor": "ears",
+          "colors": [
+            3293508,
+            11700565,
+            7629943
+          ]
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages"
+          },
+          "folder": "../../../data/characters/playables/facesF/"
+        }
+      },
+      {
+        "shoes": {
+          "name": {
+            "EN": "shoes",
+            "FR": "chaussures"
+          },
+          "folder": "../../../data/characters/playables/shoesF/",
+          "colors": [
+            16777215,
+            6262964,
+            3624028,
+            12632256,
+            14737632,
+            8421504,
+            13155208,
+            7232851,
+            3552822,
+            13395456,
+            10240062,
+            13411742,
+            3626049,
+            7957675
+          ]
+        }
+      },
+      {
+        "clothes": {
+          "name": {
+            "EN": "clothes",
+            "FR": "vêtements"
+          },
+          "folder": "../../../data/characters/playables/clothesF/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641,
+            255,
+            16711680,
+            65280,
+            16776960,
+            0,
+            16777215,
+            16711935,
+            65535
+          ]
+        }
+      },
+      {
+        "belts": {
+          "name": {
+            "EN": "belts",
+            "FR": "ceintures"
+          },
+          "folder": "../../../data/characters/playables/beltsF/"
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hairs": {
+          "name": {
+            "EN": "hair",
+            "FR": "cheveux"
+          },
+          "folder": "../../../data/characters/playables/hairsF/",
+          "linkShape": "back",
+          "linkColor": "back",
+          "forbidden": [
+            "mary.png"
+          ],
+          "colors": [
+            16777215,
+            12632256,
+            14737632,
+            8421504
+          ]
+        }
+      },
+      {
+        "ears": {
+          "name": {
+            "EN": "ears",
+            "FR": "oreilles"
+          },
+          "folder": "../../../data/characters/playables/ears/elvesF/",
+          "linkColor": "bodies",
+          "colors": [
+            3293508,
+            11700565,
+            7629943
+          ]
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "dark elf",
+      "FR": "elfe noire",
+      "JP": "ダークエルフ"
+    },
+    "pluralName": {
+      "EN": "dark elfs",
+      "FR": "elfes noires",
+      "JP": "ダークエルフ"
+    },
+    "changeBestiary": "darkElfM",
+    "description": {
+      "EN": "Dark elves live in the depths of the Earth. They have the same shape as the other elves, but they have a dark skin and light hair.\nGenerally, dark elves are evil and want to destroy the people of the surface. But there are renegades  who rejected these doctrines of the underworld and joined humans. Because of their origins, they are often rejected and have issues integrating.\nDark elves are gifted in black and destructive magic. They have more difficulty in learning other magic.\nPlayers who choose a dark elf will have a good offensive character and can focus on fighting alone.",
+      "FR": "Les elfes noirs vivent dans les profondeurs de la Terre. Ils ont la même silhouette que les autres elfes, mais ont la peau sombre et les cheveux clairs.\nGénéralement, les elfes noirs sont maléfiques et ne songent qu'à anéantir les peuples de la surface. Mais il existe des renégats qui ont rejeté les doctrines du monde souterrain et rejoint le peuple humain. A cause de leurs origines, ils sont souvent rejetés et ont du mal à s'intégrer.\nLes elfes noirs sont doués en magie noire et en magie destructrice. Ils ont plus de mal à assimiler les autres types de magie.\nLes joueurs qui choisissent un elfe noir auront  un bon personnage offensif et porté sur le combat en solitaire.",
+      "JP": "ダークエルフは地下深くに住まう種族で、他のエルフ種と同じ形をしていますが、黒い肌と明るい髪が特徴です。\n一般的にダークエルフは邪悪で地上のものの破壊を望んでいます。その方針に反旗を翻し、人間たちへと合流しようとするものもいますが、度々その出自から拒否され問題となることもあります。\n死霊術と破壊魔術に優れていますが、その他の魔術の習熟はより難しいです。\n攻撃的かつ単身で戦うことが可能なキャラクター向けの種族です。"
+    },
+    "playable": "completeMissions-",
+    "sex": "F",
+    "otherSex": "darkElfM",
+    "width": 32,
+    "height": 48,
+    "scale": 0.9,
+    "health": 100,
+    "stamina": 80,
+    "mana": 120,
+    "attack": 100,
+    "attackEffect": "default",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 100,
+    "resistance": {
+      "light": 1.2,
+      "death": 0.8
+    },
+    "strength": 100,
+    "endurance": 100,
+    "address": 110,
+    "rapidity": 100,
+    "intelligence": 120,
+    "willpower": 80,
+    "charisma": 80,
+    "bows": 80,
+    "chaoticMagic": 20,
+    "conjuration": 20,
+    "druidicMagic": -20,
+    "necromanticMagic": 20,
+    "pyrotechnicMagic": 20,
+    "redemptiveMagic": -20,
+    "repressiveMagic": -20,
+    "shamanicMagic": -20,
+    "shootingWeapons": 20,
+    "speed": 5,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けて！",
+          "私を助けて！",
+          "お願い……助けて！",
+          "助けて欲しいの！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かります。",
+          "ありがとうございます！",
+          "感謝します！",
+          "素敵です！",
+          "これはいいものですね。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くわよ！",
+          "さあ、やるわよ！",
+          "来て下さい！",
+          "付いてきて！",
+          "進軍して！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃！",
+          "蹴散らせ！",
+          "突撃！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを壊して！",
+          "あれを潰すのよ！"
+        ]
+      }
+    }
+  },
+  "highElfM": {
+    "type": "playable",
+    "no": 14,
+    "pictures": [
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps"
+          },
+          "folder": "../../../data/characters/playables/bodiesM/",
+          "linkColor": "ears",
+          "colors": [
+            16639702,
+            16636065,
+            16573107,
+            16105113,
+            14083573
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages"
+          },
+          "folder": "../../../data/characters/playables/facesM/"
+        }
+      },
+      {
+        "shoes": {
+          "name": {
+            "EN": "shoes",
+            "FR": "chaussures"
+          },
+          "folder": "../../../data/characters/playables/shoesM/",
+          "colors": [
+            16777215,
+            6262964,
+            3624028,
+            12632256,
+            14737632,
+            8421504,
+            13155208,
+            7232851,
+            3552822,
+            13395456,
+            10240062,
+            13411742,
+            3626049,
+            7957675
+          ]
+        }
+      },
+      {
+        "clothes": {
+          "name": {
+            "EN": "clothes",
+            "FR": "vêtements"
+          },
+          "folder": "../../../data/characters/playables/clothesM/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641,
+            255,
+            16711680,
+            65280,
+            16776960,
+            0,
+            16777215,
+            16711935,
+            65535
+          ]
+        }
+      },
+      {
+        "belts": {
+          "name": {
+            "EN": "belts",
+            "FR": "ceintures"
+          },
+          "folder": "../../../data/characters/playables/beltsM/"
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hairs": {
+          "name": {
+            "EN": "hair",
+            "FR": "cheveux"
+          },
+          "folder": "../../../data/characters/playables/hairsM/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "ears": {
+          "name": {
+            "EN": "ears",
+            "FR": "oreilles"
+          },
+          "folder": "../../../data/characters/playables/ears/elvesM/",
+          "linkColor": "bodies",
+          "colors": [
+            16639702,
+            16636065,
+            16573107,
+            16105113,
+            14083573
+          ]
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "high elf",
+      "FR": "haut elfe",
+      "JP": "ダークエルフ"
+    },
+    "pluralName": {
+      "EN": "high elves",
+      "FR": "hauts elfes",
+      "JP": "ハイエルフ"
+    },
+    "description": {
+      "EN": "The high elves come from the legendary island of Ellesium. They are taller and slender than the other elves and their skin is paler.\nThe high elves worship the goddess of Ellesia and consider themselves as her direct offspring. Thus, they claim to be demi-gods and consider themselves superior to other races.\nThey are smarter and more skilled in magic but are less skilled in manual work. They think that their inability to do ungrateful tasks is also a proof of their superiority.\nA high elf is a good choice if you want to play a pure magician, but it will be harder for him to manufacture the rest of his equipment.",
+      "FR": "Les hauts elfes sont originaires de l'île légendaire d'Ellesium. Il sont plus grands et élancés que les autres elfes. Leur teint de peau est plus pâle.\nLes haut elfes vénèrent la déesse d'Ellesia et se considèrent comme ses descendants directs. De ce fait, ils prétendent être des demi-dieux et se considèrent comme supérieurs aux autres races.\nIls sont plus intelligents et doués en magie, mais sont moins adroits pour les travaux manuels. Ils considèrent que leur inaptitude aux tâches ingrates est également la preuve de leur supériorité.\nUn haut elfe constitue un bon choix pour créer un magicien pur. Par contre, il sera moins apte à se fabriquer le reste de son équipement.",
+      "JP": "ハイエルフは伝説の島、エレシウムから来ています。 彼らは他のエルフよりも背が高くて細いです、そして、彼らの皮膚はより薄いです。\nハイエルフはエルシアの女神を崇拝し、自分を直接の子孫と見なします。 したがって、彼らは半神であると主張し、他の種族よりも優れていると考えています。\n彼らはより賢く、魔法に精通しているが、手作業にはあまり精通していない。 彼らは恩知らずな仕事をすることができないことも彼らの優位性の証拠だと考えています。\nハイエルフは、純粋な魔術師をプレイしたい場合には良い選択ですが、彼が他の装備を製造するのはより困難です。"
+    },
+    "sex": "M",
+    "otherSex": "highElF",
+    "width": 32,
+    "height": 48,
+    "scaleY": 1.1,
+    "health": 80,
+    "stamina": 80,
+    "mana": 140,
+    "attack": 100,
+    "attackEffect": "default",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 100,
+    "strength": 90,
+    "endurance": 90,
+    "address": 90,
+    "rapidity": 90,
+    "intelligence": 120,
+    "willpower": 120,
+    "charisma": 100,
+    "building": -20,
+    "repairing": -20,
+    "fortification": -20,
+    "picking": -20,
+    "woodcutting": -20,
+    "hunting": -20,
+    "tanning": -20,
+    "sawing": -20,
+    "stonecutting": -20,
+    "sculpting": -20,
+    "harvesting": -20,
+    "bakery": -20,
+    "bowsCrafting": -20,
+    "alcohols": -20,
+    "sheepShearing": -20,
+    "weaving": -20,
+    "sewing": -20,
+    "shoemaking": -20,
+    "mining": -20,
+    "metalSmelting": -20,
+    "weaponsForging": -20,
+    "crossbowsForging": -20,
+    "armorsForging": -20,
+    "firearmsForging": -20,
+    "butchery": -20,
+    "leatherwork": -20,
+    "militaryEngineering": -20,
+    "toolsForging": -20,
+    "powerArmorsForging": -20,
+    "papermaking": -20,
+    "gemmology": 20,
+    "apothecary": 20,
+    "enchantment": 20,
+    "goldsmithery": 20,
+    "magicClothes": 20,
+    "jewellery": 20,
+    "clothes": 20,
+    "shoes": 20,
+    "gloves": 20,
+    "tools": -20,
+    "throwingWeapons": -20,
+    "powerArmors": -20,
+    "firearms": -20,
+    "bows": -20,
+    "polearms": -20,
+    "lightWeapons": -20,
+    "edgedWeapons": -20,
+    "bluntWeapons": -20,
+    "axes": -20,
+    "shootingWeapons": -20,
+    "shields": -20,
+    "lightArmors": -20,
+    "mediumArmors": -20,
+    "heavyArmors": -20,
+    "chaoticMagic": 20,
+    "conjuration": 20,
+    "druidicMagic": 20,
+    "necromanticMagic": 20,
+    "pyrotechnicMagic": 20,
+    "redemptiveMagic": 20,
+    "repressiveMagic": 20,
+    "shamanicMagic": 20,
+    "speed": 5,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けてくれ！",
+          "俺を助けてくれ！",
+          "お願いだから助けてくれ！",
+          "援護が必要だ！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かる。",
+          "本当にありがとう！",
+          "恩に着る！",
+          "素晴らしいな！",
+          "これはいいな。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くぞ！",
+          "さあ行こう！",
+          "来てくれ！",
+          "付いてこい！",
+          "進め！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃！",
+          "蹴散らせ！",
+          "突撃！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを破壊しろ！",
+          "あれを打ち壊してやれ！"
+        ]
+      }
+    }
+  },
+  "highElfF": {
+    "type": "playable",
+    "no": 15,
+    "pictures": [
+      {
+        "back": {
+          "name": {
+            "EN": "back",
+            "FR": "dos"
+          },
+          "folder": "../../../data/characters/playables/backF/",
+          "visible": false,
+          "forbidden": [
+            "mary.png"
+          ],
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps"
+          },
+          "folder": "../../../data/characters/playables/bodiesF/",
+          "linkColor": "ears",
+          "colors": [
+            16639702,
+            16636065,
+            16573107,
+            16105113,
+            14083573
+          ]
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages"
+          },
+          "folder": "../../../data/characters/playables/facesF/"
+        }
+      },
+      {
+        "shoes": {
+          "name": {
+            "EN": "shoes",
+            "FR": "chaussures"
+          },
+          "folder": "../../../data/characters/playables/shoesF/",
+          "colors": [
+            16777215,
+            6262964,
+            3624028,
+            12632256,
+            14737632,
+            8421504,
+            13155208,
+            7232851,
+            3552822,
+            13395456,
+            10240062,
+            13411742,
+            3626049,
+            7957675
+          ]
+        }
+      },
+      {
+        "clothes": {
+          "name": {
+            "EN": "clothes",
+            "FR": "vêtements"
+          },
+          "folder": "../../../data/characters/playables/clothesF/",
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641,
+            255,
+            16711680,
+            65280,
+            16776960,
+            0,
+            16777215,
+            16711935,
+            65535
+          ]
+        }
+      },
+      {
+        "belts": {
+          "name": {
+            "EN": "belts",
+            "FR": "ceintures"
+          },
+          "folder": "../../../data/characters/playables/beltsF/"
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hairs": {
+          "name": {
+            "EN": "hair",
+            "FR": "cheveux"
+          },
+          "folder": "../../../data/characters/playables/hairsF/",
+          "linkShape": "back",
+          "linkColor": "back",
+          "forbidden": [
+            "mary.png"
+          ],
+          "colors": [
+            16777215,
+            5548004,
+            2376796,
+            12632256,
+            14737632,
+            8421504,
+            16112758,
+            8017215,
+            3552822,
+            16225308,
+            10362395,
+            15768972,
+            29238,
+            7559641
+          ]
+        }
+      },
+      {
+        "ears": {
+          "name": {
+            "EN": "ears",
+            "FR": "oreilles"
+          },
+          "folder": "../../../data/characters/playables/ears/elvesF/",
+          "linkColor": "bodies",
+          "colors": [
+            16639702,
+            16636065,
+            16573107,
+            16105113,
+            14083573
+          ]
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "high elf",
+      "FR": "haut elfe",
+      "JP": "ダークエルフ"
+    },
+    "pluralName": {
+      "EN": "high elves",
+      "FR": "hauts elfes",
+      "JP": "ハイエルフ"
+    },
+    "description": {
+      "EN": "The high elves come from the legendary island of Ellesium. They are taller and slender than the other elves and their skin is paler.\nThe high elves worship the goddess of Ellesia and consider themselves as her direct offspring. Thus, they claim to be demi-gods and consider themselves superior to other races.\nThey are smarter and more skilled in magic but are less skilled in manual work. They think that their inability to do ungrateful tasks is also a proof of their superiority.\nA high elf is a good choice if you want to play a pure magician, but it will be harder for him to manufacture the rest of his equipment.",
+      "FR": "Les hauts elfes sont originaires de l'île légendaire d'Ellesium. Il sont plus grands et élancés que les autres elfes. Leur teint de peau est plus pâle.\nLes haut elfes vénèrent la déesse d'Ellesia et se considèrent comme ses descendants directs. De ce fait, ils prétendent être des demi-dieux et se considèrent comme supérieurs aux autres races.\nIls sont plus intelligents et doués en magie, mais sont moins adroits pour les travaux manuels. Ils considèrent que leur inaptitude aux tâches ingrates est également la preuve de leur supériorité.\nUn haut elfe constitue un bon choix pour créer un magicien pur. Par contre, il sera moins apte à se fabriquer le reste de son équipement.",
+      "JP": "ハイエルフは伝説の島、エレシウムから来ています。 彼らは他のエルフよりも背が高くて細いです、そして、彼らの皮膚はより薄いです。\nハイエルフはエルシアの女神を崇拝し、自分を直接の子孫と見なします。 したがって、彼らは半神であると主張し、他の種族よりも優れていると考えています。\n彼らはより賢く、魔法に精通しているが、手作業にはあまり精通していない。 彼らは恩知らずな仕事をすることができないことも彼らの優位性の証拠だと考えています。\nハイエルフは、純粋な魔術師をプレイしたい場合には良い選択ですが、彼が他の装備を製造するのはより困難です。"
+    },
+    "sex": "F",
+    "otherSex": "highElfM",
+    "width": 32,
+    "height": 48,
+    "scaleY": 1.1,
+    "health": 80,
+    "stamina": 80,
+    "mana": 140,
+    "attack": 100,
+    "attackEffect": "default",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 100,
+    "strength": 90,
+    "endurance": 90,
+    "address": 90,
+    "rapidity": 90,
+    "intelligence": 120,
+    "willpower": 120,
+    "charisma": 100,
+    "building": -20,
+    "repairing": -20,
+    "fortification": -20,
+    "picking": -20,
+    "woodcutting": -20,
+    "hunting": -20,
+    "tanning": -20,
+    "sawing": -20,
+    "stonecutting": -20,
+    "sculpting": -20,
+    "harvesting": -20,
+    "bakery": -20,
+    "bowsCrafting": -20,
+    "alcohols": -20,
+    "sheepShearing": -20,
+    "weaving": -20,
+    "sewing": -20,
+    "shoemaking": -20,
+    "mining": -20,
+    "metalSmelting": -20,
+    "weaponsForging": -20,
+    "crossbowsForging": -20,
+    "armorsForging": -20,
+    "firearmsForging": -20,
+    "butchery": -20,
+    "leatherwork": -20,
+    "militaryEngineering": -20,
+    "toolsForging": -20,
+    "powerArmorsForging": -20,
+    "papermaking": -20,
+    "gemmology": 20,
+    "apothecary": 20,
+    "enchantment": 20,
+    "goldsmithery": 20,
+    "magicClothes": 20,
+    "jewellery": 20,
+    "clothes": 20,
+    "shoes": 20,
+    "gloves": 20,
+    "tools": -20,
+    "throwingWeapons": -20,
+    "powerArmors": -20,
+    "firearms": -20,
+    "bows": -20,
+    "polearms": -20,
+    "lightWeapons": -20,
+    "edgedWeapons": -20,
+    "bluntWeapons": -20,
+    "axes": -20,
+    "shootingWeapons": -20,
+    "shields": -20,
+    "lightArmors": -20,
+    "mediumArmors": -20,
+    "heavyArmors": -20,
+    "chaoticMagic": 20,
+    "conjuration": 20,
+    "druidicMagic": 20,
+    "necromanticMagic": 20,
+    "pyrotechnicMagic": 20,
+    "redemptiveMagic": 20,
+    "repressiveMagic": 20,
+    "shamanicMagic": 20,
+    "speed": 5,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けて！",
+          "私を助けて！",
+          "お願い……助けて！",
+          "助けて欲しいの！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かります。",
+          "ありがとうございます！",
+          "感謝します！",
+          "素敵です！",
+          "これはいいものですね。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くわよ！",
+          "さあ、やるわよ！",
+          "来て下さい！",
+          "付いてきて！",
+          "進軍して！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃！",
+          "蹴散らせ！",
+          "突撃！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを壊して！",
+          "あれを潰すのよ！"
+        ]
+      }
+    }
+  },
+  "astalanM": {
+    "type": "playable",
+    "no": 16,
+    "pictures": [
+      {
+        "bodies": {
+          "name": {
+            "EN": "bodies",
+            "FR": "corps",
+            "JP": "体"
+          },
+          "folder": "bodiesM/",
+          "colors": [
+            14736347,
+            10523532,
+            9338992,
+            7033419,
+            5063748,
+            13421772,
+            10066329,
+            6710886,
+            16777215,
+            11913169,
+            6195902,
+            16377229,
+            14066502,
+            10119711
+          ]
+        }
+      },
+      {
+        "cloakB": {
+          "visible": false
+        }
+      },
+      {
+        "faces": {
+          "name": {
+            "EN": "faces",
+            "FR": "visages",
+            "JP": "顔"
+          },
+          "folder": "facesM/"
+        }
+      },
+      {
+        "clothes": {
+          "visible": false
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "cloakF": {
+          "visible": false
+        }
+      },
+      {
+        "hat": {
+          "visible": false
+        }
+      }
+    ],
+    "name": {
+      "EN": "astalan",
+      "FR": "astalan",
+      "DE": "astalan",
+      "JP": "アスタラン"
+    },
+    "pluralName": {
+      "EN": "astalans",
+      "FR": "astalans",
+      "DE": "astalans",
+      "JP": "アスタラン"
+    },
+    "description": {
+      "EN": "The Astalans are ancient humans who have transferred their souls into artificial golems, in order to become immortal. Their body are made of stone, iron, gold or even crystal. They are very resistant but also very slow.\nThe Astalans have lost everything that made them human beings. They are above all rational and have forgotten what feelings were.\nThey can not understand the behaviour of living beings and prefer to live among themselves, isolated from the world.\n\nAs mineral creatures, they are experts in all materials. They are extremely specialised in golem construction. They are less skilled in traditional crafting.\n\nThis race is recommended for players who want to specialise in this specific area.",
+      "FR": "Les Astalans sont d'anciens humains qui ont transféré leur âme dans un golem artificiel afin de devenir immortels. Leur corps peut être fait de pierre, de fer, d'or ou même de cristal. Ils sont naturellement très résistants, mais aussi très lents.\n\nes Astalans ont perdu tout ce qui faisait d'eux des êtres humains. Ils sont avant tout rationnels et ont oublié ce qu'étaient les sentiments. Ils n'arrivent pas à comprendre le comportement des êtres vivants et préfèrent vivre entre eux, isolés du monde.\n\nÉtant des créatures minérales, ils sont experts dans tous les matériaux. Ils sont extrêmement spécialisés dans la construction des golems. Ils sont moins habiles dans l'artisanat traditionnel.\n\nCette race est recommandée aux joueurs qui veulent se spécialiser dans ce domaine précis.",
+      "JP": "アスタランは、不死を得るためゴーレムの体にその精神を移し替えた太古の人類です。石や鉄、黄金や水晶でできたその体は強固である代わりに、動きは非常に緩慢です。\n既にかつての人間性は失われており、感情を忘れ非常に合理的となった彼らは、生物の行動を理解できず、今では世間から離れ生活を営んでいます。\n\n鉱物であるため、すべての素材の扱いに優れ、ゴーレム工学にも精通していますが、一般的な工芸は得意ではありません。\n\n特定の領域に精通した専門家向けの種族です。"
+    },
+    "playable": "completeMissions-",
+    "sex": "M",
+    "width": 32,
+    "height": 48,
+    "scale": 1.2,
+    "health": 120,
+    "stamina": 80,
+    "mana": 100,
+    "attack": 100,
+    "attackEffect": "shock",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 100,
+    "resistance": {
+      "poison": 0
+    },
+    "strength": 120,
+    "endurance": 120,
+    "address": 80,
+    "rapidity": 80,
+    "intelligence": 120,
+    "willpower": 100,
+    "charisma": 80,
+    "forestry": -20,
+    "lithology": 20,
+    "picking": -20,
+    "stonecutting": 20,
+    "woodcutting": -20,
+    "sculpting": 20,
+    "zoology": -20,
+    "prospecting": 20,
+    "hunting": -20,
+    "mining": 20,
+    "tanning": -20,
+    "metalSmelting": 20,
+    "sawing": -20,
+    "weaponsForging": 20,
+    "farming": -20,
+    "crossbowsForging": 20,
+    "harvesting": -20,
+    "armorsForging": 20,
+    "bakery": -20,
+    "gemmology": 20,
+    "bowsCrafting": -20,
+    "apothecary": 20,
+    "breeding": -20,
+    "enchantment": 20,
+    "sheepShearing": -20,
+    "goldsmithery": 20,
+    "lightWeapons": -20,
+    "bluntWeapons": 20,
+    "edgedWeapons": -20,
+    "axes": 20,
+    "throwingWeapons": -20,
+    "polearms": 20,
+    "bows": -20,
+    "shields": 20,
+    "shootingWeapons": -20,
+    "lightArmors": 20,
+    "firearms": -20,
+    "mediumArmors": 20,
+    "clothes": -20,
+    "heavyArmors": 20,
+    "shamanicMagic": -20,
+    "repressiveMagic": 20,
+    "druidicMagic": -20,
+    "redemptiveMagic": 20,
+    "pyrotechnicMagic": -20,
+    "conjuration": -20,
+    "golemology": 100,
+    "fortification": 20,
+    "butchery": -20,
+    "leatherwork": -20,
+    "chaoticMagic": -20,
+    "necromanticMagic": -20,
+    "tools": 20,
+    "toolsForging": 20,
+    "training": -20,
+    "speed": 5,
+    "talk": {
+      "flee": {
+        "EN": [
+          "Help!",
+          "Help me!",
+          "Please help!",
+          "I need help!"
+        ],
+        "FR": [
+          "Au secours !",
+          "Aidez-moi !",
+          "À l'aide !",
+          "J'ai besoin d'aide !"
+        ],
+        "DE": [
+          "Hilfe!",
+          "Helfen Sie mir!",
+          "Bitte helfen!",
+          "Brauche Hilfe!"
+        ],
+        "JP": [
+          "助けてくれ！",
+          "私を助けてくれ！",
+          "お願いだから助けてくれ！",
+          "援護が必要だ！"
+        ]
+      },
+      "thank": {
+        "EN": [
+          "Thanks.",
+          "Thank you very much!",
+          "Thanks a lot!",
+          "Great!",
+          "That's nice."
+        ],
+        "FR": [
+          "Merci.",
+          "Merci beaucoup.",
+          "Trop sympa !",
+          "Super ! Merci.",
+          "C'est gentil."
+        ],
+        "DE": [
+          "Danke.",
+          "Danke schön.",
+          "Vielen Dank!",
+          "Das ist schön."
+        ],
+        "JP": [
+          "助かる。",
+          "本当にありがとう！",
+          "恩に着る！",
+          "素晴らしいな！",
+          "これはいいな。"
+        ]
+      },
+      "move": {
+        "EN": [
+          "Go !",
+          "Let's go!",
+          "Come on!",
+          "Move!"
+        ],
+        "FR": [
+          "En avant !",
+          "Allez !",
+          "Allez-y !",
+          "Avancez !"
+        ],
+        "DE": [
+          "Vorwärts!",
+          "Vorangehen!",
+          "Gehen Sie vorwärts."
+        ],
+        "JP": [
+          "行くぞ！",
+          "さあ行こう！",
+          "来てくれ！",
+          "付いてこい！",
+          "進め！"
+        ]
+      },
+      "attack": {
+        "EN": [
+          "Attack!"
+        ],
+        "FR": [
+          "À l'attaque !"
+        ],
+        "DE": [
+          "Attacke!",
+          "Onslaught!"
+        ],
+        "JP": [
+          "攻撃！",
+          "蹴散らせ！",
+          "突撃！"
+        ]
+      },
+      "destroy": {
+        "EN": [
+          "Destroy this.",
+          "Raze this."
+        ],
+        "FR": [
+          "Détruisez ça.",
+          "Rasez ça."
+        ],
+        "DE": [
+          "Raze dies.",
+          "Zerstören Sie diese."
+        ],
+        "JP": [
+          "あれを破壊しろ！",
+          "あれを打ち壊してやれ！"
+        ]
+      }
+    }
+  }
+}

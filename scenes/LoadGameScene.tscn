@@ -1,0 +1,130 @@
+[gd_scene load_steps=3 format=3 uid="uid://aurora_loadgame"]
+
+[ext_resource type="Script" path="res://scripts/LoadGameScene.gd" id="1_script"]
+[ext_resource type="Theme"  path="res://theme/ElinTheme.tres"     id="2_theme"]
+
+; ──────────────────────────────────────────────────────────────
+;  LoadGameScene — layout matches OptionsScene convention:
+;    • Dark bg + vignette
+;    • Anchor-based title label (centers at any resolution)
+;    • Parchment PanelContainer at 2/3 width for the save list
+;    • Standalone BackPanel bottom-left  ← consistent position
+; ──────────────────────────────────────────────────────────────
+
+[node name="LoadGameScene" type="Control"]
+layout_mode    = 3
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+theme          = ExtResource("2_theme")
+script         = ExtResource("1_script")
+
+; ── Backgrounds ───────────────────────────────────────────────
+[node name="BgBase" type="ColorRect" parent="."]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+color          = Color(0.110, 0.088, 0.062, 1.0)
+mouse_filter   = 2
+
+[node name="BgVignette" type="ColorRect" parent="."]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+color          = Color(0.0, 0.0, 0.0, 0.28)
+mouse_filter   = 2
+
+; ── Title — anchor-based so it fills the full viewport width ──
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode           = 1
+anchors_preset        = -1
+anchor_left           = 0.0
+anchor_top            = 0.0
+anchor_right          = 1.0
+anchor_bottom         = 0.0
+offset_top            = 36.0
+offset_bottom         = 116.0
+size_flags_horizontal = 3
+text                  = "LOAD GAME"
+horizontal_alignment  = 1
+theme_override_font_sizes/font_size = 72
+theme_override_colors/font_color    = Color(0.420, 0.243, 0.071, 1.0)
+
+; ── Save list panel — 2/3 width centred, matches OptionsScene ─
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode   = 1
+anchor_left   = 0.1667
+anchor_top    = 0.14
+anchor_right  = 0.8333
+anchor_bottom = 0.88
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left   = 36
+theme_override_constants/margin_top    = 28
+theme_override_constants/margin_right  = 36
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode                         = 2
+theme_override_constants/separation = 16
+
+[node name="SaveListLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text        = "Select a save file:"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color    = Color(0.420, 0.243, 0.071, 1.0)
+
+[node name="SaveList" type="ItemList" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode              = 2
+size_flags_vertical      = 3
+custom_minimum_size      = Vector2(0, 200)
+allow_reselect           = true
+
+[node name="PreviewLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode          = 2
+custom_minimum_size  = Vector2(0, 60)
+text                 = ""
+theme_override_font_sizes/font_size = 19
+theme_override_colors/font_color    = Color(0.490, 0.390, 0.240, 0.85)
+autowrap_mode        = 3
+
+; ── Action buttons — centred inside panel (Load + Delete only) ─
+[node name="ButtonRow" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode                         = 2
+theme_override_constants/separation = 14
+alignment                           = 1
+
+[node name="BtnLoad" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ButtonRow"]
+layout_mode         = 2
+custom_minimum_size = Vector2(160, 52)
+text                = "LOAD"
+disabled            = true
+
+[node name="BtnDelete" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ButtonRow"]
+layout_mode         = 2
+custom_minimum_size = Vector2(160, 52)
+text                = "DELETE"
+disabled            = true
+theme_override_colors/font_color = Color(0.545, 0.228, 0.071, 1.0)
+
+; ── Standalone Back button — bottom-left, same as OptionsScene ─
+[node name="BackPanel" type="PanelContainer" parent="."]
+layout_mode   = 1
+anchor_left   = 0.0
+anchor_top    = 1.0
+anchor_right  = 0.0
+anchor_bottom = 1.0
+offset_left   = 20.0
+offset_top    = -70.0
+offset_right  = 260.0
+offset_bottom = -12.0
+z_index       = 1
+
+[node name="BtnBack" type="Button" parent="BackPanel"]
+layout_mode         = 2
+custom_minimum_size = Vector2(220, 48)
+text                = "BACK"
+theme_override_font_sizes/font_size = 22

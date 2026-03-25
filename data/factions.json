@@ -1,0 +1,277 @@
+{
+  "_comment": "Faction definitions. player_faction=true means the player can choose this faction. enemy_faction=true means it appears as the opposing force in wave/skirmish modes. Source: data/factions/ folder (base game + expansion merged).",
+  "_note": "Aurora (0) is the default player faction. Crepusculum (1) and dungeon factions are wave enemies. Named factions (2-7) are available in multiplayer/skirmish as player-selectable teams.",
+  "aurora": {
+    "type": "faction",
+    "no": 0,
+    "name": {
+      "EN": "Aurora",
+      "FR": "Aurora",
+      "DE": "Aurora",
+      "JP": "オーロラ国"
+    },
+    "description": {
+      "EN": "Aurora is a nation made of intelligent and civilised races.",
+      "FR": "Aurora est une nation qui regroupe les races intelligentes et civilisées.",
+      "DE": "Aurora ist eine nation unter der sich sämtliches intelligentes und Civilisiertes Leben versammelt.",
+      "JP": "知性を持つ文化的な種族の国家です。"
+    },
+    "races": [
+      "humanM",
+      "humanF",
+      "elfeM",
+      "elfeF",
+      "halfElfM",
+      "halfElfF",
+      "dwarfM",
+      "dwarfF",
+      "felineM",
+      "felineF",
+      "colossusM",
+      "colossusF"
+    ],
+    "townCenters": [
+      "townCenterWoodenAge",
+      "townCenterStoneAge",
+      "townCenterIronAge",
+      "townCenterEtherAge",
+      "townCenterGoldenAge",
+      "townCenterSteamAge",
+      "townCenterRadiumAge"
+    ],
+    "aiKings": [
+      "AI_king"
+    ],
+    "player_faction": true
+  },
+  "crepusculum": {
+    "type": "faction",
+    "no": 1,
+    "name": {
+      "EN": "Crepusculum",
+      "FR": "Crepusculum",
+      "DE": "Crepusculum",
+      "JP": "黄昏の軍勢"
+    },
+    "description": {
+      "EN": "Crepusculum is the nation which has submitted countless monsters in order to destroy Aurora.",
+      "FR": "Crepusculum est la nation qui a soumis d'innombrables monstres dans le but de détruire Aurora.",
+      "DE": "Crepusculum, eine nation welche es sich zur aufgabe gemacht hat mit allen mitteln und Monstern Aurora zu Zerstören.",
+      "JP": "オーロラ国を破壊する目的を持った、数え切れないほどのモンスター達の勢力です。"
+    },
+    "dungeon": "crepusculumDungeon",
+    "enemy_faction": true
+  },
+  "darkElves": {
+    "type": "faction",
+    "no": 2,
+    "name": {
+      "EN": "dark elves",
+      "FR": "elfes noirs",
+      "DE": "Dunkelelfen",
+      "JP": "ダークエルフ族"
+    },
+    "description": {
+      "EN": "",
+      "FR": "",
+      "DE": "",
+      "JP": ""
+    },
+    "races": [
+      "darkElfM",
+      "darkElfF"
+    ],
+    "ais": [
+      "AI_darkElf",
+      "AI_darkKnight",
+      "AI_necromancer"
+    ],
+    "townCenters": [
+      "townCenterWoodenAge",
+      "townCenterStoneAge",
+      "townCenterIronAge",
+      "townCenterEtherAge",
+      "townCenterGoldenAge",
+      "townCenterSteamAge",
+      "townCenterRadiumAge"
+    ],
+    "aiKings": [
+      "AI_king"
+    ],
+    "player_faction": true
+  },
+  "astalans": {
+    "type": "faction",
+    "no": 3,
+    "name": {
+      "EN": "astalans",
+      "FR": "astalans",
+      "DE": "astalans",
+      "JP": "アスタラン族"
+    },
+    "description": {
+      "EN": "",
+      "FR": "",
+      "DE": "",
+      "JP": ""
+    },
+    "races": [
+      "astalanM"
+    ],
+    "ais": [
+      "AI_astalan",
+      "AI_artilleryman",
+      "AI_Golemologue",
+      "AI_miner",
+      "AI_iceMage",
+      "AI_pikeman",
+      "AI_tank"
+    ],
+    "townCenters": [
+      "townCenterWoodenAge",
+      "townCenterStoneAge",
+      "townCenterIronAge",
+      "townCenterEtherAge",
+      "townCenterGoldenAge",
+      "townCenterSteamAge",
+      "townCenterRadiumAge"
+    ],
+    "aiKings": [
+      "AI_king"
+    ],
+    "player_faction": true
+  },
+  "beastFaction": {
+    "type": "faction",
+    "no": 4,
+    "name": {
+      "EN": "beasts",
+      "FR": "bêtes",
+      "DE": "tiere",
+      "JP": "獣群"
+    },
+    "description": {
+      "EN": "The beasts are the nation of the animals and the beastmen.",
+      "FR": "Les bêtes représentent la nation des animaux et des hommes-bêtes.",
+      "DE": "Die Tiere repräsentieren die Nation von Tieren und Tiertieren.",
+      "JP": "動物たちと獣人の勢力です。"
+    },
+    "dungeon": "beastDungeon",
+    "races": [
+      "bat",
+      "rat",
+      "wolf",
+      "minotaur",
+      "blackBear",
+      "werewolf"
+    ],
+    "enemy_faction": true
+  },
+  "undeadFaction": {
+    "type": "faction",
+    "no": 5,
+    "name": {
+      "EN": "undead",
+      "FR": "morts-vivants",
+      "DE": "Undead",
+      "JP": "不死群"
+    },
+    "description": {
+      "EN": "The undead represent the nation of the skeletons, the zombies and the ghosts.",
+      "FR": "Les morts-vivants représentent la nation des squelettes, des zombies et des fantômes.",
+      "DE": "Die Untoten stellen die Nation der Skelette, Zombies und Geister dar.",
+      "JP": "スケルトンやゾンビ、幽霊などで構成された勢力です。"
+    },
+    "dungeon": "undeadDungeon",
+    "races": [
+      "bat",
+      "blackKnight",
+      "skeleton",
+      "zombie",
+      "reaper",
+      "mummy"
+    ],
+    "enemy_faction": true
+  },
+  "elves": {
+    "type": "faction",
+    "no": 6,
+    "name": {
+      "EN": "elves",
+      "FR": "elfes",
+      "DE": "elfen",
+      "JP": "エルフ"
+    },
+    "description": {
+      "EN": "",
+      "FR": "",
+      "DE": "",
+      "JP": ""
+    },
+    "races": [
+      "elfeM",
+      "elfeF"
+    ],
+    "ais": [
+      "AI_archer",
+      "AI_breeder",
+      "AI_druid",
+      "AI_forester",
+      "AI_iceMage",
+      "AI_ranger"
+    ],
+    "townCenters": [
+      "townCenterWoodenAge",
+      "townCenterStoneAge",
+      "townCenterIronAge",
+      "townCenterEtherAge",
+      "townCenterGoldenAge",
+      "townCenterSteamAge",
+      "townCenterRadiumAge"
+    ],
+    "aiKings": [
+      "AI_king"
+    ],
+    "player_faction": true
+  },
+  "dwarfs": {
+    "type": "faction",
+    "no": 7,
+    "name": {
+      "EN": "dwarves",
+      "FR": "nains",
+      "DE": "Zwerge",
+      "JP": "ドワーフ族"
+    },
+    "description": {
+      "EN": "",
+      "FR": "",
+      "DE": "",
+      "JP": ""
+    },
+    "races": [
+      "dwarfM",
+      "dwarfF"
+    ],
+    "ais": [
+      "AI_berserker",
+      "AI_engineer",
+      "AI_grenadier",
+      "AI_runicPriest",
+      "AI_warrior"
+    ],
+    "townCenters": [
+      "townCenterWoodenAge",
+      "townCenterStoneAge",
+      "townCenterIronAge",
+      "townCenterEtherAge",
+      "townCenterGoldenAge",
+      "townCenterSteamAge",
+      "townCenterRadiumAge"
+    ],
+    "aiKings": [
+      "AI_king"
+    ],
+    "player_faction": true
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "_comment": "Default keybindings from the original game. 'keycode' is the original Flash/JS keycode. 'godot_key' is the equivalent Godot KEY_* constant name. These are defaults — players can override via OptionsScene.",
+  "_note": "Use Godot KEY_* constants: KEY_A=65, KEY_B=66 etc. Special keys mapped below.",
+  "attack_resurrect": {
+    "keycode": 65,
+    "godot_key": "KEY_A"
+  },
+  "characterSheet": {
+    "keycode": 67,
+    "godot_key": "KEY_C"
+  },
+  "resources": {
+    "keycode": 82,
+    "godot_key": "KEY_R"
+  },
+  "bestiary": {
+    "keycode": 66,
+    "godot_key": "KEY_B"
+  },
+  "inventory": {
+    "keycode": 73,
+    "godot_key": "KEY_I"
+  },
+  "workshops": {
+    "keycode": 87,
+    "godot_key": "KEY_W"
+  },
+  "plantResources": {
+    "keycode": 76,
+    "godot_key": "KEY_L"
+  },
+  "houses": {
+    "keycode": 72,
+    "godot_key": "KEY_H"
+  },
+  "defenseTowers": {
+    "keycode": 84,
+    "godot_key": "KEY_T"
+  },
+  "cameraLock": {
+    "keycode": 89,
+    "godot_key": "KEY_Y"
+  },
+  "save": {
+    "keycode": 71,
+    "godot_key": "KEY_G"
+  },
+  "changeCharacter": {
+    "keycode": 9,
+    "godot_key": "Tab"
+  },
+  "scrollLeft": {
+    "keycode": 37,
+    "godot_key": "Left"
+  },
+  "scrollRight": {
+    "keycode": 39,
+    "godot_key": "Right"
+  },
+  "close": {
+    "keycode": 32,
+    "godot_key": "Space"
+  },
+  "validate": {
+    "keycode": 13,
+    "godot_key": "Enter"
+  },
+  "fullScreen": {
+    "keycode": 70,
+    "godot_key": "KEY_F"
+  },
+  "zoomIn": {
+    "keycode": 107,
+    "godot_key": "NumpadPlus"
+  },
+  "zoomOut": {
+    "keycode": 109,
+    "godot_key": "NumpadMinus"
+  },
+  "destroy": {
+    "keycode": 46,
+    "godot_key": "Delete"
+  },
+  "chooseLocation": {
+    "keycode": 17,
+    "godot_key": "Ctrl"
+  },
+  "options": {
+    "keycode": 27,
+    "godot_key": "Escape"
+  }
+}

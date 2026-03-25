@@ -1,0 +1,266 @@
+[gd_scene load_steps=3 format=3 uid="uid://aurora_characters"]
+
+[ext_resource type="Script" path="res://scripts/CharactersScene.gd" id="1_script"]
+[ext_resource type="Theme"  path="res://theme/ElinTheme.tres"       id="2_theme"]
+
+; ──────────────────────────────────────────────────────────────
+;  CharactersScene shell
+;
+;  Root
+;  ├── BgBase / BgVignette
+;  ├── TitleLabel  (anchor-based, centred)
+;  ├── HBox  (anchor-based, fills content area)
+;  │   ├── LeftPanel  (PanelContainer — character card list)
+;  │   │   └── Scroll → CardVBox
+;  │   └── RightPanel (PanelContainer — stats + skills)
+;  │       └── InfoScroll → InfoVBox  (built by script)
+;  ├── BottomBar  (HBoxContainer — Delete / Choose / Create)
+;  └── BackPanel  (bottom-left, consistent with all scenes)
+; ──────────────────────────────────────────────────────────────
+
+[node name="CharactersScene" type="Control"]
+layout_mode    = 3
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+theme          = ExtResource("2_theme")
+script         = ExtResource("1_script")
+
+; ── Backgrounds ───────────────────────────────────────────────
+[node name="BgBase" type="ColorRect" parent="."]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+color          = Color(0.110, 0.088, 0.062, 1.0)
+mouse_filter   = 2
+
+[node name="BgVignette" type="ColorRect" parent="."]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+color          = Color(0.0, 0.0, 0.0, 0.28)
+mouse_filter   = 2
+
+; ── Title ─────────────────────────────────────────────────────
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode           = 1
+anchors_preset        = -1
+anchor_left           = 0.0
+anchor_top            = 0.0
+anchor_right          = 1.0
+anchor_bottom         = 0.0
+offset_top            = 14.0
+offset_bottom         = 72.0
+size_flags_horizontal = 3
+text                  = "CHARACTERS"
+horizontal_alignment  = 1
+theme_override_font_sizes/font_size = 52
+theme_override_colors/font_color    = Color(0.420, 0.243, 0.071, 1.0)
+
+; ── Main split — left list + right info ───────────────────────
+; Sits between the title (top ~10%) and the bottom bar (~12% from bottom)
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode    = 1
+anchors_preset = -1
+anchor_left    = 0.02
+anchor_top     = 0.10
+anchor_right   = 0.98
+anchor_bottom  = 0.86
+theme_override_constants/separation = 14
+
+; ── LEFT: character card list ─────────────────────────────────
+[node name="LeftPanel" type="PanelContainer" parent="HBox"]
+layout_mode           = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.0
+
+[node name="LeftMargin" type="MarginContainer" parent="HBox/LeftPanel"]
+layout_mode = 2
+theme_override_constants/margin_left   = 12
+theme_override_constants/margin_top    = 12
+theme_override_constants/margin_right  = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Scroll" type="ScrollContainer" parent="HBox/LeftPanel/LeftMargin"]
+layout_mode               = 2
+size_flags_vertical       = 3
+horizontal_scroll_mode    = 0
+
+[node name="CardVBox" type="VBoxContainer" parent="HBox/LeftPanel/LeftMargin/Scroll"]
+layout_mode                         = 2
+size_flags_horizontal               = 3
+theme_override_constants/separation = 8
+
+; ── RIGHT: scrollable character info ──────────────────────────
+; RightMargin only pads left/top/bottom — NOT right.
+; The scrollbar must be flush to the panel's right edge.
+; Content right-padding is added by the InnerPad MarginContainer
+; that CharactersScene.gd creates inside InfoVBox.
+[node name="RightPanel" type="PanelContainer" parent="HBox"]
+layout_mode              = 2
+size_flags_horizontal    = 3
+size_flags_stretch_ratio = 1.2
+
+[node name="RightMargin" type="MarginContainer" parent="HBox/RightPanel"]
+layout_mode = 2
+theme_override_constants/margin_left   = 18
+theme_override_constants/margin_top    = 12
+theme_override_constants/margin_right  = 0
+theme_override_constants/margin_bottom = 12
+
+[node name="InfoScroll" type="ScrollContainer" parent="HBox/RightPanel/RightMargin"]
+layout_mode            = 2
+size_flags_vertical    = 3
+horizontal_scroll_mode = 0
+
+[node name="InfoVBox" type="VBoxContainer" parent="HBox/RightPanel/RightMargin/InfoScroll"]
+layout_mode                         = 2
+size_flags_horizontal               = 3
+theme_override_constants/separation = 3
+
+; ── Bottom action bar ─────────────────────────────────────────
+[node name="BottomBar" type="HBoxContainer" parent="."]
+layout_mode    = 1
+anchors_preset = -1
+anchor_left    = 0.02
+anchor_top     = 1.0
+anchor_right   = 0.98
+anchor_bottom  = 1.0
+offset_top     = -68.0
+offset_bottom  = -12.0
+theme_override_constants/separation = 14
+
+[node name="BarSpacer" type="Control" parent="BottomBar"]
+layout_mode           = 2
+size_flags_horizontal = 3
+
+[node name="RightBtns" type="HBoxContainer" parent="BottomBar"]
+layout_mode                         = 2
+theme_override_constants/separation = 12
+
+[node name="BtnDeleteChar" type="Button" parent="BottomBar/RightBtns"]
+layout_mode         = 2
+custom_minimum_size = Vector2(220, 48)
+text                = "DELETE CHARACTER"
+disabled            = true
+theme_override_font_sizes/font_size    = 20
+theme_override_colors/font_color       = Color(0.78, 0.12, 0.08, 1.0)
+theme_override_colors/font_hover_color = Color(1.00, 0.18, 0.10, 1.0)
+
+[node name="BtnChoose" type="Button" parent="BottomBar/RightBtns"]
+layout_mode         = 2
+custom_minimum_size = Vector2(220, 48)
+text                = "CHOOSE CHARACTER"
+disabled            = true
+theme_override_font_sizes/font_size = 20
+
+[node name="BtnCreate" type="Button" parent="BottomBar/RightBtns"]
+layout_mode         = 2
+custom_minimum_size = Vector2(200, 48)
+text                = "CREATE CHARACTER"
+theme_override_font_sizes/font_size = 20
+
+; ── Confirmation popup overlay ────────────────────────────────
+; Hidden by default. Shown when Delete Character is pressed.
+; Full-viewport dimmer blocks all input behind the dialog.
+[node name="ConfirmOverlay" type="Control" parent="."]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+visible        = false
+z_index        = 10
+
+; Semi-transparent dark dimmer — mouse_filter=STOP blocks clicks behind
+[node name="Dimmer" type="ColorRect" parent="ConfirmOverlay"]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+color          = Color(0.0, 0.0, 0.0, 0.60)
+mouse_filter   = 0
+
+; Centred dialog panel
+[node name="DialogPanel" type="PanelContainer" parent="ConfirmOverlay"]
+layout_mode    = 1
+anchors_preset = 8
+anchor_left    = 0.5
+anchor_top     = 0.5
+anchor_right   = 0.5
+anchor_bottom  = 0.5
+offset_left    = -260.0
+offset_top     = -140.0
+offset_right   = 260.0
+offset_bottom  = 140.0
+
+[node name="DialogMargin" type="MarginContainer" parent="ConfirmOverlay/DialogPanel"]
+layout_mode = 2
+theme_override_constants/margin_left   = 32
+theme_override_constants/margin_top    = 28
+theme_override_constants/margin_right  = 32
+theme_override_constants/margin_bottom = 24
+
+[node name="DialogVBox" type="VBoxContainer" parent="ConfirmOverlay/DialogPanel/DialogMargin"]
+layout_mode                         = 2
+theme_override_constants/separation = 18
+
+[node name="TitleLbl" type="Label" parent="ConfirmOverlay/DialogPanel/DialogMargin/DialogVBox"]
+layout_mode          = 2
+text                 = "Delete Character?"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 26
+theme_override_colors/font_color    = Color(0.420, 0.243, 0.071, 1.0)
+
+[node name="CharNameLbl" type="Label" parent="ConfirmOverlay/DialogPanel/DialogMargin/DialogVBox"]
+layout_mode          = 2
+text                 = ""
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color    = Color(0.228, 0.145, 0.063, 1.0)
+
+[node name="WarnLbl" type="Label" parent="ConfirmOverlay/DialogPanel/DialogMargin/DialogVBox"]
+layout_mode          = 2
+text                 = "This action cannot be undone."
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color    = Color(0.600, 0.150, 0.080, 1.0)
+
+[node name="BtnRow" type="HBoxContainer" parent="ConfirmOverlay/DialogPanel/DialogMargin/DialogVBox"]
+layout_mode                         = 2
+alignment                           = 1
+theme_override_constants/separation = 20
+
+[node name="BtnConfirmYes" type="Button" parent="ConfirmOverlay/DialogPanel/DialogMargin/DialogVBox/BtnRow"]
+layout_mode         = 2
+custom_minimum_size = Vector2(160, 48)
+text                = "YES, DELETE"
+theme_override_font_sizes/font_size    = 20
+theme_override_colors/font_color       = Color(0.78, 0.12, 0.08, 1.0)
+theme_override_colors/font_hover_color = Color(1.00, 0.18, 0.10, 1.0)
+
+[node name="BtnConfirmNo" type="Button" parent="ConfirmOverlay/DialogPanel/DialogMargin/DialogVBox/BtnRow"]
+layout_mode         = 2
+custom_minimum_size = Vector2(160, 48)
+text                = "NO, CANCEL"
+theme_override_font_sizes/font_size = 20
+
+; ── Standalone Back button — bottom-left ──────────────────────
+[node name="BackPanel" type="PanelContainer" parent="."]
+layout_mode   = 1
+anchor_left   = 0.0
+anchor_top    = 1.0
+anchor_right  = 0.0
+anchor_bottom = 1.0
+offset_left   = 20.0
+offset_top    = -70.0
+offset_right  = 260.0
+offset_bottom = -12.0
+z_index       = 2
+
+[node name="BtnBack" type="Button" parent="BackPanel"]
+layout_mode         = 2
+custom_minimum_size = Vector2(220, 48)
+text                = "BACK"
+theme_override_font_sizes/font_size = 22

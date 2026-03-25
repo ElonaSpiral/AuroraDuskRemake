@@ -1,0 +1,211 @@
+[gd_scene load_steps=2 format=3 uid="uid://aurora_gamemode"]
+
+[ext_resource type="Script" path="res://scripts/GameModeScene.gd" id="1_script"]
+[ext_resource type="Theme"  path="res://theme/ElinTheme.tres"     id="2_theme"]
+
+; ──────────────────────────────────────────────────────────────
+;  GameModeScene — Select Adventure / Survival / Skirmish
+;
+;  Root
+;  ├── BgBase (dark fallback)
+;  ├── BgImage (bg2.jpg)
+;  ├── BgVignette (slight darkening over bg)
+;  ├── TitleLabel  (top, 5–16%)
+;  ├── DescArea    (always-visible descriptions, 22–52%)
+;  │   └── DescCenter → DescVBox (3 mode description entries)
+;  ├── ButtonsArea (buttons only, 58–84%)
+;  │   └── BtnCenter → BtnVBox (3 mode buttons)
+;  └── BackPanel (bottom-left)
+; ──────────────────────────────────────────────────────────────
+
+[node name="GameModeScene" type="Control"]
+layout_mode    = 3
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+theme          = ExtResource("2_theme")
+script         = ExtResource("1_script")
+
+; ── Backgrounds ───────────────────────────────────────────────
+[node name="BgBase" type="ColorRect" parent="."]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+color          = Color(0.072, 0.055, 0.040, 1.0)
+mouse_filter   = 2
+
+; ImageLayerManager builds layers here from data/ui_images.json → "game_mode"
+[node name="BgLayers" type="Control" parent="."]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+mouse_filter   = 2
+
+; ── Title ─────────────────────────────────────────────────────
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode           = 1
+anchors_preset        = -1
+anchor_left           = 0.0
+anchor_top            = 0.0
+anchor_right          = 1.0
+anchor_bottom         = 0.0
+offset_top            = 50.0
+offset_bottom         = 120.0
+size_flags_horizontal = 3
+text                  = "SELECT MODE"
+horizontal_alignment  = 1
+theme_override_font_sizes/font_size = 64
+theme_override_colors/font_color    = Color(0.940, 0.800, 0.380, 1.0)
+theme_override_colors/font_shadow_color  = Color(0.0, 0.0, 0.0, 0.85)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+
+; ── Description area — always visible, between title and buttons ─
+; anchor_top 0.26 → 0.55 = roughly 40% down the screen (60% from bottom)
+[node name="DescArea" type="Control" parent="."]
+layout_mode    = 1
+anchors_preset = -1
+anchor_left    = 0.0
+anchor_top     = 0.26
+anchor_right   = 1.0
+anchor_bottom  = 0.55
+mouse_filter   = 2
+
+[node name="DescCenter" type="CenterContainer" parent="DescArea"]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+
+[node name="DescVBox" type="VBoxContainer" parent="DescArea/DescCenter"]
+layout_mode                         = 2
+theme_override_constants/separation = 14
+
+; Adventure description
+[node name="AdventureEntry" type="VBoxContainer" parent="DescArea/DescCenter/DescVBox"]
+layout_mode                         = 2
+theme_override_constants/separation = 2
+
+[node name="AdventureTitle" type="Label" parent="DescArea/DescCenter/DescVBox/AdventureEntry"]
+layout_mode          = 2
+custom_minimum_size  = Vector2(560, 0)
+text                 = "▶  Start Adventure"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color    = Color(0.940, 0.800, 0.380, 1.0)
+
+[node name="AdventureDesc" type="Label" parent="DescArea/DescCenter/DescVBox/AdventureEntry"]
+layout_mode          = 2
+custom_minimum_size  = Vector2(560, 0)
+text                 = "Follow the story through hand-crafted maps with objectives and narrative."
+horizontal_alignment = 1
+autowrap_mode        = 3
+theme_override_font_sizes/font_size = 17
+theme_override_colors/font_color    = Color(0.816, 0.753, 0.565, 0.90)
+
+; Survival description
+[node name="SurvivalEntry" type="VBoxContainer" parent="DescArea/DescCenter/DescVBox"]
+layout_mode                         = 2
+theme_override_constants/separation = 2
+
+[node name="SurvivalTitle" type="Label" parent="DescArea/DescCenter/DescVBox/SurvivalEntry"]
+layout_mode          = 2
+custom_minimum_size  = Vector2(560, 0)
+text                 = "⚔  Survival Mode"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color    = Color(0.940, 0.800, 0.380, 1.0)
+
+[node name="SurvivalDesc" type="Label" parent="DescArea/DescCenter/DescVBox/SurvivalEntry"]
+layout_mode          = 2
+custom_minimum_size  = Vector2(560, 0)
+text                 = "Hold out against endless waves of enemies for as long as possible."
+horizontal_alignment = 1
+autowrap_mode        = 3
+theme_override_font_sizes/font_size = 17
+theme_override_colors/font_color    = Color(0.816, 0.753, 0.565, 0.90)
+
+; Skirmish description
+[node name="SkirmishEntry" type="VBoxContainer" parent="DescArea/DescCenter/DescVBox"]
+layout_mode                         = 2
+theme_override_constants/separation = 2
+
+[node name="SkirmishTitle" type="Label" parent="DescArea/DescCenter/DescVBox/SkirmishEntry"]
+layout_mode          = 2
+custom_minimum_size  = Vector2(560, 0)
+text                 = "⚑  Skirmish Mode"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color    = Color(0.940, 0.800, 0.380, 1.0)
+
+[node name="SkirmishDesc" type="Label" parent="DescArea/DescCenter/DescVBox/SkirmishEntry"]
+layout_mode          = 2
+custom_minimum_size  = Vector2(560, 0)
+text                 = "Battle 2–10 factions on preset maps. Last faction standing wins."
+horizontal_alignment = 1
+autowrap_mode        = 3
+theme_override_font_sizes/font_size = 17
+theme_override_colors/font_color    = Color(0.816, 0.753, 0.565, 0.90)
+
+; ── Button area — anchored to lower portion of screen ─────────
+; anchor_top=0.68 keeps buttons well below the description block.
+[node name="ButtonsArea" type="Control" parent="."]
+layout_mode    = 1
+anchors_preset = -1
+anchor_left    = 0.0
+anchor_top     = 0.68
+anchor_right   = 1.0
+anchor_bottom  = 0.96
+mouse_filter   = 2
+
+[node name="BtnCenter" type="CenterContainer" parent="ButtonsArea"]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+
+[node name="BtnVBox" type="VBoxContainer" parent="ButtonsArea/BtnCenter"]
+layout_mode                         = 2
+theme_override_constants/separation = 12
+
+[node name="BtnAdventure" type="Button" parent="ButtonsArea/BtnCenter/BtnVBox"]
+layout_mode         = 2
+custom_minimum_size = Vector2(520, 58)
+text                = "  ▶  START ADVENTURE"
+pivot_offset        = Vector2(260, 29)
+theme_override_font_sizes/font_size = 22
+
+[node name="BtnSurvival" type="Button" parent="ButtonsArea/BtnCenter/BtnVBox"]
+layout_mode         = 2
+custom_minimum_size = Vector2(520, 58)
+text                = "  ⚔  SURVIVAL MODE"
+pivot_offset        = Vector2(260, 29)
+theme_override_font_sizes/font_size = 22
+
+[node name="BtnSkirmish" type="Button" parent="ButtonsArea/BtnCenter/BtnVBox"]
+layout_mode         = 2
+custom_minimum_size = Vector2(520, 58)
+text                = "  ⚑  SKIRMISH MODE"
+pivot_offset        = Vector2(260, 29)
+theme_override_font_sizes/font_size = 22
+
+; ── Back button — bottom-left ─────────────────────────────────
+[node name="BackPanel" type="PanelContainer" parent="."]
+layout_mode   = 1
+anchor_left   = 0.0
+anchor_top    = 1.0
+anchor_right  = 0.0
+anchor_bottom = 1.0
+offset_left   = 20.0
+offset_top    = -70.0
+offset_right  = 260.0
+offset_bottom = -12.0
+z_index       = 2
+
+[node name="BtnBack" type="Button" parent="BackPanel"]
+layout_mode         = 2
+custom_minimum_size = Vector2(220, 48)
+text                = "BACK"
+theme_override_font_sizes/font_size = 22

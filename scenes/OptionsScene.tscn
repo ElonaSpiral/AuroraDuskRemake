@@ -1,0 +1,151 @@
+[gd_scene load_steps=3 format=3 uid="uid://aurora_options"]
+
+[ext_resource type="Script" path="res://scripts/OptionsScene.gd" id="1_script"]
+[ext_resource type="Theme"  path="res://theme/ElinTheme.tres"    id="2_theme"]
+
+; ──────────────────────────────────────────────────────────────
+;  OptionsScene shell — all tab content built by OptionsScene.gd
+;
+;  Layout (anchor-based throughout):
+;    Root Control (full viewport)
+;    ├── BgBase / BgVignette
+;    ├── MainPanel (2/3 width, centred, leaves room at bottom)
+;    │   └── VBox
+;    │       ├── TitleBar  (PanelContainer header)
+;    │       │    └── TitleHBox → TitleIcon · TitleLabel · BtnClose
+;    │       ├── TabContainer  [built by script]
+;    │       └── BottomBar
+;    │            └── BottomMargin → InnerHBox
+;    │                 ├── Spacer
+;    │                 ├── BtnApply  (visible only on Graphics tab)
+;    │                 └── BtnReset
+;    └── BackPanel (standalone, bottom-left — matches GameScene)
+;         └── BtnBack
+; ──────────────────────────────────────────────────────────────
+
+[node name="OptionsScene" type="Control"]
+layout_mode    = 3
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+theme          = ExtResource("2_theme")
+script         = ExtResource("1_script")
+
+; ── Backgrounds ───────────────────────────────────────────────
+[node name="BgBase" type="ColorRect" parent="."]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+color          = Color(0.110, 0.088, 0.062, 1.0)
+mouse_filter   = 2
+
+[node name="BgVignette" type="ColorRect" parent="."]
+layout_mode    = 1
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+color          = Color(0.0, 0.0, 0.0, 0.28)
+mouse_filter   = 2
+
+; ── Main Panel — 2/3 width, centred, height leaves room below ─
+[node name="MainPanel" type="PanelContainer" parent="."]
+layout_mode    = 1
+anchor_left    = 0.1667
+anchor_top     = 0.04
+anchor_right   = 0.8333
+anchor_bottom  = 0.88
+
+; Inner stack fills panel
+[node name="VBox" type="VBoxContainer" parent="MainPanel"]
+layout_mode                         = 2
+theme_override_constants/separation = 0
+
+; ── Title Bar ─────────────────────────────────────────────────
+[node name="TitleBar" type="PanelContainer" parent="MainPanel/VBox"]
+layout_mode         = 2
+custom_minimum_size = Vector2(0, 46)
+
+[node name="TitleHBox" type="HBoxContainer" parent="MainPanel/VBox/TitleBar"]
+layout_mode                         = 2
+theme_override_constants/separation = 8
+
+[node name="TitleIcon" type="Label" parent="MainPanel/VBox/TitleBar/TitleHBox"]
+layout_mode        = 2
+text               = "⚙"
+vertical_alignment = 1
+theme_override_font_sizes/font_size  = 22
+theme_override_colors/font_color     = Color(0.420, 0.243, 0.071, 1.0)
+
+[node name="TitleLabel" type="Label" parent="MainPanel/VBox/TitleBar/TitleHBox"]
+layout_mode               = 2
+size_flags_horizontal     = 3
+text                      = "Options"
+vertical_alignment        = 1
+theme_override_font_sizes/font_size  = 22
+theme_override_colors/font_color     = Color(0.228, 0.145, 0.063, 1.0)
+
+[node name="BtnClose" type="Button" parent="MainPanel/VBox/TitleBar/TitleHBox"]
+layout_mode         = 2
+custom_minimum_size = Vector2(38, 34)
+text                = "✕"
+theme_override_font_sizes/font_size = 18
+
+; ── Tab Container (populated by OptionsScene.gd) ──────────────
+[node name="TabContainer" type="TabContainer" parent="MainPanel/VBox"]
+layout_mode         = 2
+size_flags_vertical = 3
+tab_alignment       = 0
+clip_contents       = false
+
+; ── Bottom Bar ────────────────────────────────────────────────
+[node name="BottomBar" type="HBoxContainer" parent="MainPanel/VBox"]
+layout_mode                         = 2
+custom_minimum_size                 = Vector2(0, 58)
+theme_override_constants/separation = 0
+
+[node name="BottomMargin" type="MarginContainer" parent="MainPanel/VBox/BottomBar"]
+layout_mode                        = 2
+size_flags_horizontal              = 3
+theme_override_constants/margin_left   = 16
+theme_override_constants/margin_top    = 8
+theme_override_constants/margin_right  = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="InnerHBox" type="HBoxContainer" parent="MainPanel/VBox/BottomBar/BottomMargin"]
+layout_mode                         = 2
+theme_override_constants/separation = 12
+
+[node name="Spacer" type="Control" parent="MainPanel/VBox/BottomBar/BottomMargin/InnerHBox"]
+layout_mode           = 2
+size_flags_horizontal = 3
+
+[node name="BtnApply" type="Button" parent="MainPanel/VBox/BottomBar/BottomMargin/InnerHBox"]
+layout_mode         = 2
+custom_minimum_size = Vector2(220, 40)
+text                = "✓  Apply Display"
+visible             = false
+
+[node name="BtnReset" type="Button" parent="MainPanel/VBox/BottomBar/BottomMargin/InnerHBox"]
+layout_mode         = 2
+custom_minimum_size = Vector2(260, 40)
+text                = "⟳  Reset General Config"
+
+; ── Standalone Back button — bottom-left, matches GameScene ───
+[node name="BackPanel" type="PanelContainer" parent="."]
+layout_mode    = 1
+anchor_left    = 0.0
+anchor_top     = 1.0
+anchor_right   = 0.0
+anchor_bottom  = 1.0
+offset_left    = 20.0
+offset_top     = -70.0
+offset_right   = 260.0
+offset_bottom  = -12.0
+z_index        = 1
+
+[node name="BtnBack" type="Button" parent="BackPanel"]
+layout_mode         = 2
+custom_minimum_size = Vector2(220, 48)
+text                = "BACK"
+theme_override_font_sizes/font_size = 22

@@ -1,0 +1,36 @@
+{
+  "_comment": "Enrichment data for map PNGs. MapManager discovers maps by scanning assets/maps/ subfolders — this file only provides display names, spawn points, and size overrides. Keyed by PNG filename.",
+  "_spawn_encoding": {
+    "green_dot": "rgb(0,~48,0) — used in maps/2, maps/10",
+    "red_dot":   "rgb(~28,0,0) — used in maps/6",
+    "detection": "brightness<60 AND (g>r+b OR r>g+b)"
+  },
+  "_folder_rules": {
+    "1":    "survival only         (factions=1)",
+    "2":    "skirmish+multiplayer  (factions=2)",
+    "3":    "skirmish+multiplayer  (factions=3)",
+    "4":    "skirmish+multiplayer  (factions=4)",
+    "6":    "skirmish+multiplayer  (factions=6)",
+    "8":    "skirmish+multiplayer  (factions=8)",
+    "10":   "skirmish+multiplayer  (factions=10)",
+    "test": "debug only            (factions=2)"
+  },
+  "_notes": [
+    "Adventure mode reads from missions/ folder — not handled here.",
+    "random.png at assets/maps/ root becomes the Random Map meta-entry (all modes except debug).",
+    "Folder-1 maps have no spawn dots — their spawn_points must be defined here if needed.",
+    "Multiplayer and skirmish share the same map pool (folders 2–10)."
+  ],
+  "byFile": {
+    "Aurora.png":          { "name": "Aurora" },
+    "AuroraFields.png":    { "name": "Aurora Fields" },
+    "aBridgeTooFar.png":   { "name": "A Bridge Too Far" },
+    "centralRoad.png":     { "name": "Central Road" },
+    "falconNest.png":      { "name": "Falcon Nest" },
+    "1000.png":            { "name": "Survival Arena" },
+    "middleBridge.png":    { "name": "Middle Bridge",   "spawn_points": [{"x":105,"y":64},{"x":24,"y":69}] },
+    "snowBattle.png":      { "name": "Snow Battle",     "spawn_points": [{"x":107,"y":56},{"x":26,"y":83}] },
+    "passRiver.png":       { "name": "Pass River",      "spawn_points": [{"x":26,"y":17},{"x":101,"y":18},{"x":23,"y":63},{"x":98,"y":65},{"x":24,"y":107},{"x":94,"y":108}] },
+    "sandBox.png":         { "name": "Sand Box",        "size": [208,208], "spawn_points": [{"x":98,"y":16},{"x":166,"y":20},{"x":22,"y":30},{"x":191,"y":87},{"x":14,"y":103},{"x":100,"y":108},{"x":187,"y":165},{"x":15,"y":167},{"x":130,"y":182},{"x":65,"y":195}] }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "health": {
+    "id": "health",
+    "name": "health",
+    "type": "primaryCharacteristic",
+    "default": 100,
+    "description": "Health determines how much damage you can take before dying.",
+    "order": 0
+  },
+  "stamina": {
+    "id": "stamina",
+    "name": "stamina",
+    "type": "primaryCharacteristic",
+    "default": 100,
+    "description": "Stamina determines how many physical actions you can make.",
+    "order": 1
+  },
+  "mana": {
+    "id": "mana",
+    "name": "mana",
+    "type": "primaryCharacteristic",
+    "default": 100,
+    "description": "Mana determines how many spells you can cast.",
+    "order": 2
+  },
+  "attack": {
+    "id": "attack",
+    "name": "attack",
+    "type": "secondaryCharacteristic",
+    "default": 100,
+    "description": "Attack determines the damages you cause when hitting an enemy.",
+    "order": 0
+  },
+  "defense": {
+    "id": "defense",
+    "name": "defence",
+    "type": "secondaryCharacteristic",
+    "default": 100,
+    "description": "Defence decreases the damages you take when hit by an enemy.",
+    "order": 1
+  },
+  "strength": {
+    "id": "strength",
+    "name": "strength",
+    "type": "secondaryCharacteristic",
+    "default": 100,
+    "description": "Strength determines your attack score when using a melee weapon.",
+    "order": 2
+  },
+  "endurance": {
+    "id": "endurance",
+    "name": "endurance",
+    "type": "secondaryCharacteristic",
+    "default": 100,
+    "description": "Endurance determines your defence score when using a shield or wearing a heavy armour.",
+    "order": 3
+  },
+  "address": {
+    "id": "address",
+    "name": "address",
+    "type": "secondaryCharacteristic",
+    "default": 100,
+    "description": "Address determines your attack score with a range weapon.",
+    "order": 4
+  },
+  "rapidity": {
+    "id": "rapidity",
+    "name": "rapidity",
+    "type": "secondaryCharacteristic",
+    "default": 100,
+    "description": "Rapidity determines your defence score when wearing a light armour.",
+    "order": 5
+  },
+  "intelligence": {
+    "id": "intelligence",
+    "name": "intelligence",
+    "type": "secondaryCharacteristic",
+    "default": 100,
+    "description": "Intelligence determines your attack score when using a magic power.",
+    "order": 6
+  },
+  "willpower": {
+    "id": "willpower",
+    "name": "willpower",
+    "type": "secondaryCharacteristic",
+    "default": 100,
+    "description": "Willpower determines your mana score when wearing magic robes.",
+    "order": 7
+  },
+  "charisma": {
+    "id": "charisma",
+    "name": "charisma",
+    "type": "secondaryCharacteristic",
+    "default": 100,
+    "description": "Charisma increases your skills in military recruitment and in trading and gives you bonuses in jewellery.",
+    "order": 8
+  },
+  "speed": {
+    "id": "speed",
+    "name": "speed",
+    "type": "secondaryCharacteristic",
+    "default": 100,
+    "description": "Speed allows you to move faster.",
+    "order": 5
+  }
+}

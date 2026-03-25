@@ -1,0 +1,133 @@
+[gd_scene load_steps=3 format=3 uid="uid://aurora_mapselect"]
+
+[ext_resource type="Script" path="res://scripts/MapSelectScene.gd" id="1_script"]
+[ext_resource type="Theme"  path="res://theme/ElinTheme.tres"       id="2_theme"]
+
+; ──────────────────────────────────────────────────────────────
+;  MapSelectScene
+;
+;  Control (root)
+;  ├── BgLayers         (Control — populated by ImageLayerManager)
+;  ├── TitleLabel       (Label   — "SELECT MAP — MODE")
+;  ├── ContentArea      (HBoxContainer — left cards / right detail)
+;  │   ├── MapGrid      (GridContainer — one Button card per map)
+;  │   └── DetailPanel  (PanelContainer — name / info / preview / start)
+;  │       └── DetailVBox
+;  │           ├── DetailName  (Label)
+;  │           ├── DetailInfo  (Label)
+;  │           ├── DetailMap   (TextureRect — minimap preview)
+;  │           └── BtnStart    (Button)
+;  └── BtnBack          (Button — bottom-left)
+; ──────────────────────────────────────────────────────────────
+
+[node name="MapSelectScene" type="Control"]
+layout_mode    = 3
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+script         = ExtResource("1_script")
+theme          = ExtResource("2_theme")
+
+; ── Background ────────────────────────────────────────────────
+[node name="BgLayers" type="Control" parent="."]
+layout_mode    = 3
+anchors_preset = 15
+anchor_right   = 1.0
+anchor_bottom  = 1.0
+mouse_filter   = 2
+
+; ── Title ─────────────────────────────────────────────────────
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode    = 1
+anchor_left    = 0.0
+anchor_top     = 0.0
+anchor_right   = 1.0
+anchor_bottom  = 0.0
+offset_top     = 28.0
+offset_bottom  = 76.0
+horizontal_alignment = 1
+text           = "SELECT MAP"
+theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color    = Color(0.420, 0.243, 0.071, 1.0)
+
+; ── Content area (cards left, detail right) ───────────────────
+[node name="ContentArea" type="HBoxContainer" parent="."]
+layout_mode    = 1
+anchor_left    = 0.05
+anchor_top     = 0.13
+anchor_right   = 0.95
+anchor_bottom  = 0.88
+theme_override_constants/separation = 24
+
+; ── Left: scrollable map card list ────────────────────────────
+[node name="CardScroll" type="ScrollContainer" parent="ContentArea"]
+layout_mode              = 2
+size_flags_horizontal    = 3
+size_flags_vertical      = 3
+size_flags_stretch_ratio = 0.42
+custom_minimum_size      = Vector2(200, 0)
+
+[node name="MapGrid" type="GridContainer" parent="ContentArea/CardScroll"]
+layout_mode           = 2
+size_flags_horizontal = 3
+columns               = 1
+theme_override_constants/v_separation = 8
+
+; ── Right: detail panel ───────────────────────────────────────
+[node name="DetailPanel" type="PanelContainer" parent="ContentArea"]
+layout_mode              = 2
+size_flags_horizontal    = 3
+size_flags_vertical      = 3
+size_flags_stretch_ratio = 0.58
+
+[node name="DetailVBox" type="VBoxContainer" parent="ContentArea/DetailPanel"]
+layout_mode    = 2
+theme_override_constants/separation = 16
+
+[node name="DetailMargin" type="MarginContainer" parent="ContentArea/DetailPanel/DetailVBox"]
+layout_mode = 2
+theme_override_constants/margin_left   = 20
+theme_override_constants/margin_top    = 16
+theme_override_constants/margin_right  = 20
+theme_override_constants/margin_bottom = 8
+
+[node name="DetailName" type="Label" parent="ContentArea/DetailPanel/DetailVBox/DetailMargin"]
+layout_mode  = 2
+text         = "Select a map"
+theme_override_font_sizes/font_size = 26
+theme_override_colors/font_color    = Color(0.420, 0.243, 0.071, 1.0)
+
+[node name="DetailInfo" type="Label" parent="ContentArea/DetailPanel/DetailVBox"]
+layout_mode  = 2
+text         = ""
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color    = Color(0.490, 0.390, 0.240, 1.0)
+
+[node name="DetailMap" type="TextureRect" parent="ContentArea/DetailPanel/DetailVBox"]
+layout_mode              = 2
+size_flags_horizontal    = 3
+size_flags_vertical      = 3
+custom_minimum_size      = Vector2(0, 280)
+stretch_mode             = 5
+expand_mode              = 1
+
+[node name="BtnStart" type="Button" parent="ContentArea/DetailPanel/DetailVBox"]
+layout_mode              = 2
+custom_minimum_size      = Vector2(0, 52)
+text                     = "▶  START GAME"
+theme_override_font_sizes/font_size = 20
+disabled                 = true
+
+; ── Back button ───────────────────────────────────────────────
+[node name="BtnBack" type="Button" parent="."]
+layout_mode    = 1
+anchor_left    = 0.0
+anchor_top     = 1.0
+anchor_right   = 0.0
+anchor_bottom  = 1.0
+offset_left    = 24.0
+offset_top     = -60.0
+offset_right   = 180.0
+offset_bottom  = -16.0
+text           = "◀  BACK"
+theme_override_font_sizes/font_size = 18

@@ -1,0 +1,4032 @@
+{
+  "_comment": "Defense tower entity definitions for all ages. Two JS source files merged: base game (woodenAge-goldenAge) + steamAge expansion. See _sprite_system for how to interpret the PNG sprite sheets.",
+  "_types": {
+    "defenseTower": "Static ranged tower — attacks automatically",
+    "barrack": "Production building — spawns soldiers",
+    "resurrectTower": "Resurrection building — revives dead units",
+    "wall": "Passive blocking structure",
+    "buildingMonster": "Mobile building-unit hybrid (golems)",
+    "prebuild": "Under-construction variant (the Yard) — uses construction spritesheet"
+  },
+  "_sprite_system": {
+    "completed_png": {
+      "description": "Horizontal strip of 2 frames (2 orientations). Frame width = building.width, frame height = max(visualHeight, sheet_height).",
+      "frame_0": "Orientation A — facing right (south-east)",
+      "frame_1": "Orientation B — facing left (south-west)",
+      "frame_x": "orientation * building.width"
+    },
+    "yard_png": {
+      "description": "Horizontal strip of (steps × 2) frames, plus a second shadow row below.",
+      "frame_formula": "frame_index = construction_step * 2 + orientation",
+      "frame_x": "frame_index * building.width",
+      "frame_y_sprite": 0,
+      "frame_y_shadow": "frame_height (second row)",
+      "steps_0": "steps=0 means instant build — no Yard sprite shown",
+      "note": "construction_step goes from 0 (just started) to steps-1 (nearly done)"
+    }
+  },
+  "woodenTower": {
+    "type": "defenseTower",
+    "age": "woodenAge",
+    "no": 0,
+    "picture": {
+      "file": "woodenTower.png",
+      "file100": "woodenTower100.atf"
+    },
+    "name": {
+      "EN": "wooden tower",
+      "FR": "tour en bois",
+      "JP": "木製監視塔"
+    },
+    "description": {
+      "EN": "The wooden tower is a light defence tower which can shoot assegais at enemies.",
+      "FR": "La tour en bois est une tourelle de défense légère qui tire des sagaies sur vos ennemis.",
+      "JP": "アセガイを敵に向かって投げつける軽度な防衛用の塔です。木材を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "wood": 250
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 1
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 1
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 1
+      },
+      "prebuild": {
+        "id": "woodenTowerYard",
+        "time": 0.5
+      }
+    },
+    "repair": {
+      "health": 4,
+      "time": 0.5,
+      "costRessource": {
+        "wood": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 1
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 1
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 1
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.25
+      }
+    },
+    "width": 64,
+    "height": 128,
+    "visualHeight": 160,
+    "health": 1000,
+    "attack": 200,
+    "attackTime": 3,
+    "range": 500,
+    "missile": "assegaiMissile",
+    "attackDY": -104,
+    "sound": "soundThrow",
+    "damage": [
+      "missile",
+      "piercing"
+    ],
+    "defense": 100,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "woodenTowerYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "woodenTowerYard.png",
+      "file100": "woodenTowerYard100.atf"
+    },
+    "name": {
+      "EN": "wooden tower",
+      "FR": "tour en bois",
+      "JP": "木製監視塔"
+    },
+    "description": {
+      "EN": "The wooden tower is a light defence tower which can shoot assegais at enemies.",
+      "FR": "La tour en bois est une tourelle légère qui tire des sagaies sur vos ennemis.",
+      "JP": "アセガイを敵に向かって投げつける軽度な防衛用の塔です。木材を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.25
+      }
+    },
+    "width": 64,
+    "height": 128,
+    "visualHeight": 160,
+    "defense": 100,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 0
+  },
+  "totem": {
+    "type": "resurrectTower",
+    "age": "woodenAge",
+    "no": 1,
+    "picture": {
+      "file": "totem.png",
+      "file100": "totem100.atf"
+    },
+    "name": {
+      "EN": "totem",
+      "FR": "totem",
+      "JP": "トーテム像"
+    },
+    "description": {
+      "EN": "The totem can resurrect one dead person.",
+      "FR": "Le totem permet de ressusciter une personne morte.",
+      "JP": "死者を1名甦らせることができます。木材を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "wood": 40
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 1
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "sculpting",
+      "xpSkill": {
+        "sculpting": 1
+      },
+      "xpSecondaryCharacteristic": {
+        "address": 1
+      },
+      "prebuild": {
+        "id": "totemYard",
+        "time": 0.5
+      }
+    },
+    "repair": {
+      "health": 3,
+      "time": 0.5,
+      "costRessource": {
+        "wood": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 1
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "sculpting",
+      "xpSkill": {
+        "sculpting": 1
+      },
+      "xpSecondaryCharacteristic": {
+        "address": 1
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction"
+      }
+    },
+    "width": 64,
+    "height": 56,
+    "visualHeight": 64,
+    "health": 120,
+    "resurrect": 1,
+    "resurrectTime": 2,
+    "healthResurrection": 0.1,
+    "effectResurrection": "resurrectionEffect",
+    "defense": 100,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "totemYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "totemYard.png",
+      "file100": "totemYard100.atf"
+    },
+    "name": {
+      "EN": "totem",
+      "FR": "totem",
+      "JP": "トーテム像"
+    },
+    "description": {
+      "EN": "The totem can resurrect one dead person.",
+      "FR": "Le totem permet de ressusciter une personne morte.",
+      "JP": "死者を1名甦らせることができます。木材を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction"
+      }
+    },
+    "width": 64,
+    "height": 56,
+    "visualHeight": 64,
+    "defense": 100,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 0
+  },
+  "palisade": {
+    "type": "wall",
+    "age": "stoneAge",
+    "no": 2,
+    "picture": {
+      "file": "palisade.png",
+      "file100": "palisade100.atf"
+    },
+    "name": {
+      "EN": "palisade",
+      "FR": "palissade",
+      "JP": "矢来"
+    },
+    "description": {
+      "EN": "Palisades can stop your enemies.",
+      "FR": "La palissade bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる木製の柵です。木材を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "locationStep": 32,
+      "buildable": "all",
+      "costRessource": {
+        "wood": 20
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 1
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "fortification",
+      "xpSkill": {
+        "fortification": 1
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 1
+      },
+      "prebuild": {
+        "id": "palisadeYard",
+        "time": 0.5
+      }
+    },
+    "repair": {
+      "health": 25,
+      "time": 0.5,
+      "costRessource": {
+        "wood": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 1
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 1
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 1
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 32,
+    "height": 30,
+    "visualHeight": 64,
+    "health": 500,
+    "defense": 100,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "palisadeYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "palisadeYard.png",
+      "file100": "palisadeYard100.atf"
+    },
+    "name": {
+      "EN": "palisade",
+      "FR": "palissade",
+      "JP": "矢来"
+    },
+    "description": {
+      "EN": "Palisades can stop your enemies.",
+      "FR": "La palissade bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる木製の柵です。木材を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 32,
+    "height": 30,
+    "visualHeight": 64,
+    "defense": 100,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 0
+  },
+  "palisadeNS": {
+    "type": "wall",
+    "age": "stoneAge",
+    "picture": {
+      "file": "palisadeNS.png",
+      "file100": "palisadeNS100.atf"
+    },
+    "name": {
+      "EN": "palisade",
+      "FR": "palissade",
+      "JP": "矢来"
+    },
+    "description": {
+      "EN": "Palisades can stop your enemies.",
+      "FR": "La palissade bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる木製の柵です。木材を用いて建築することができます。"
+    },
+    "build": {
+      "costRessource": {
+        "wood": 20
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 1
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "fortification",
+      "xpSkill": {
+        "fortification": 1
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 1
+      },
+      "prebuild": {
+        "id": "palisadeYard",
+        "time": 0.5
+      }
+    },
+    "repair": {
+      "health": 25,
+      "time": 0.5,
+      "costRessource": {
+        "wood": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 1
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 1
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 1
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 32,
+    "height": 30,
+    "visualHeight": 64,
+    "health": 500,
+    "defense": 100,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "palisadeWE": {
+    "type": "wall",
+    "age": "stoneAge",
+    "picture": {
+      "file": "palisadeWE.png",
+      "file100": "palisadeWE100.atf"
+    },
+    "name": {
+      "EN": "palisade",
+      "FR": "palissade",
+      "JP": "矢来"
+    },
+    "description": {
+      "EN": "Palisades can stop your enemies.",
+      "FR": "La palissade bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる木製の柵です。木材を用いて建築することができます。"
+    },
+    "build": {
+      "costRessource": {
+        "wood": 20
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 1
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "fortification",
+      "xpSkill": {
+        "fortification": 1
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 1
+      },
+      "prebuild": {
+        "id": "palisadeYard",
+        "time": 0.5
+      }
+    },
+    "repair": {
+      "health": 25,
+      "time": 0.5,
+      "costRessource": {
+        "wood": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 1
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 1
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 1
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 36,
+    "height": 30,
+    "visualHeight": 64,
+    "health": 500,
+    "defense": 100,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "advWoodenTower": {
+    "type": "defenseTower",
+    "age": "stoneAge",
+    "no": 3,
+    "picture": {
+      "file": "advWoodenTower.png",
+      "file100": "advWoodenTower100.atf"
+    },
+    "name": {
+      "EN": "adv wooden tower",
+      "FR": "tour en bois évoluée",
+      "JP": "新型木製監視塔"
+    },
+    "description": {
+      "EN": "The advanced wooden tower is a defence tower which can shoot arrows at enemies.",
+      "FR": "La tour en bois évoluée est une tourelle de défense qui tire des flèches sur vos ennemis.",
+      "JP": "矢を敵に向かって放つ防衛用の塔です。厚板を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "plank": 250
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 1
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 1
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 1
+      },
+      "prebuild": {
+        "id": "advWoodenTowerYard",
+        "time": 0.5
+      }
+    },
+    "repair": {
+      "health": 6,
+      "time": 0.5,
+      "costRessource": {
+        "plank": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 1
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 1
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 1
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.25
+      }
+    },
+    "width": 64,
+    "height": 128,
+    "visualHeight": 160,
+    "health": 1500,
+    "attack": 400,
+    "attackTime": 3,
+    "range": 500,
+    "missile": "arrow",
+    "attackDY": -104,
+    "sound": "soundBow",
+    "damage": [
+      "missile",
+      "piercing"
+    ],
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "advWoodenTowerYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "advWoodenTowerYard.png",
+      "file100": "advWoodenTowerYard100.atf"
+    },
+    "name": {
+      "EN": "advanced wooden tower",
+      "FR": "tour en bois évoluée",
+      "JP": "新型木製監視塔"
+    },
+    "description": {
+      "EN": "The advanced wooden tower is defence tower which can shoot arrows at enemies.",
+      "FR": "La tour en bois évoluée est une tourelle de défense qui tire des flèches sur vos ennemis.",
+      "JP": "矢を敵に向かって放つ防衛用の塔です。厚板を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.25
+      }
+    },
+    "width": 64,
+    "height": 128,
+    "visualHeight": 160,
+    "defense": 100,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 0
+  },
+  "soulsStatue": {
+    "type": "resurrectTower",
+    "age": "stoneAge",
+    "no": 4,
+    "picture": {
+      "file": "soulsStatue.png",
+      "file100": "soulsStatue100.atf"
+    },
+    "name": {
+      "EN": "statue of souls",
+      "FR": "statue des âmes",
+      "JP": "魂の彫刻"
+    },
+    "description": {
+      "EN": "The statue of souls can resurrect dead people.",
+      "FR": "La statue des âmes permet de ressusciter des personnages morts.",
+      "JP": "死者を計5名甦らせることができます。切石を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "freeStone": 50
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "sculpting",
+      "xpSkill": {
+        "sculpting": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "address": 2
+      },
+      "prebuild": {
+        "id": "soulsStatueYard",
+        "time": 1
+      }
+    },
+    "repair": {
+      "health": 6,
+      "time": 1,
+      "costRessource": {
+        "freeStone": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "sculpting",
+      "xpSkill": {
+        "sculpting": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "address": 2
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction"
+      }
+    },
+    "width": 64,
+    "height": 56,
+    "visualHeight": 64,
+    "health": 300,
+    "resurrect": 5,
+    "resurrectTime": 3,
+    "healthResurrection": 0.2,
+    "effectResurrection": "resurrectionEffect",
+    "defense": 150,
+    "resistance": {
+      "light": 0.5,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "soulsStatueYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "soulsStatueYard.png",
+      "file100": "soulsStatueYard100.atf"
+    },
+    "name": {
+      "EN": "statue of souls",
+      "FR": "statue des âmes",
+      "JP": "魂の彫刻"
+    },
+    "description": {
+      "EN": "The statue of souls can resurrect dead people.",
+      "FR": "La statue des âmes permet de ressusciter des personnages morts.",
+      "JP": "死者を計5名甦らせることができます。切石を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction"
+      }
+    },
+    "width": 64,
+    "height": 56,
+    "visualHeight": 64,
+    "defense": 150,
+    "steps": 0,
+    "resistance": {
+      "light": 0.5,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "barrack": {
+    "type": "barrack",
+    "age": "stoneAge",
+    "no": 5,
+    "picture": {
+      "file": "barrack.png",
+      "file100": "barrack100.atf"
+    },
+    "name": {
+      "EN": "barracks",
+      "FR": "caserne",
+      "JP": "兵舎"
+    },
+    "description": {
+      "EN": "Barracks allow to recruit soldiers.",
+      "FR": "La caserne vous permet de recruter des soldats.",
+      "JP": "銀貨を用いて兵士を雇うことが可能です。厚板と切石を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "freeStone": 100,
+        "plank": 100
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 2
+      },
+      "prebuild": {
+        "id": "barrackYard",
+        "time": 1
+      }
+    },
+    "title": {
+      "EN": "Recruit soldiers",
+      "FR": "Recruter des soldats",
+      "JP": "兵士の雇用"
+    },
+    "produce": [
+      {
+        "time": 5,
+        "createCharacter": {
+          "militiaman": 1
+        },
+        "bonusTimeSkill": "conscription",
+        "costRessource": {
+          "silverCoin": 10
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 10
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 10
+        },
+        "xpSkill": {
+          "conscription": 10
+        },
+        "repeat": true
+      },
+      {
+        "time": 10,
+        "createCharacter": {
+          "archer": 1
+        },
+        "bonusTimeSkill": "conscription",
+        "costRessource": {
+          "silverCoin": 20
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 20
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 20
+        },
+        "xpSkill": {
+          "conscription": 20
+        },
+        "repeat": true
+      },
+      {
+        "time": 6,
+        "createCharacter": {
+          "infantryman": 1
+        },
+        "bonusTimeSkill": "conscription",
+        "costRessource": {
+          "silverCoin": 12
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 12
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 12
+        },
+        "xpSkill": {
+          "conscription": 12
+        },
+        "repeat": true
+      },
+      {
+        "time": 22.5,
+        "createCharacter": {
+          "pyromage": 1
+        },
+        "bonusTimeSkill": "conscription",
+        "costRessource": {
+          "silverCoin": 45
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 45
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 45
+        },
+        "xpSkill": {
+          "conscription": 45
+        },
+        "repeat": true
+      },
+      {
+        "time": 25,
+        "createCharacter": {
+          "healer": 1
+        },
+        "bonusTimeSkill": "conscription",
+        "costRessource": {
+          "silverCoin": 50
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 50
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 50
+        },
+        "xpSkill": {
+          "conscription": 50
+        },
+        "repeat": true
+      },
+      {
+        "time": 12.5,
+        "createCharacter": {
+          "cuirassier": 1
+        },
+        "bonusTimeSkill": "conscription",
+        "costRessource": {
+          "silverCoin": 25
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 25
+        },
+        "xpSecondaryCharacteristic": {
+          "charisma": 25
+        },
+        "xpSkill": {
+          "conscription": 25
+        },
+        "repeat": true
+      }
+    ],
+    "repair": {
+      "health": 20,
+      "time": 1.5,
+      "costRessource": {
+        "freeStone": 1,
+        "plank": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 3
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 128,
+    "height": 160,
+    "visualHeight": 192,
+    "health": 2000,
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "barrackYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "barrackYard.png",
+      "file100": "barrackYard100.atf"
+    },
+    "name": {
+      "EN": "barracks",
+      "FR": "caserne",
+      "JP": "兵舎"
+    },
+    "description": {
+      "EN": "The barracks allows to recruit soldiers.",
+      "FR": "La caserne vous permet de recruter des soldats.",
+      "JP": "銀貨を用いて兵士を雇うことが可能です。厚板と切石を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 128,
+    "height": 160,
+    "visualHeight": 192,
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 3
+  },
+  "stoneGolem": {
+    "type": "buildingMonster",
+    "age": "stoneAge",
+    "no": 6,
+    "picture": {
+      "file": "stoneGolem.png",
+      "file100": "stoneGolem100.atf"
+    },
+    "name": {
+      "EN": "stone golem",
+      "FR": "golem de pierre",
+      "JP": "ストーンゴーレム"
+    },
+    "description": {
+      "EN": "The stone golem is a mobile golem which can punch enemies.",
+      "FR": "Le golem de pierre est un golem mobile qui cogne vos ennemis.",
+      "JP": "腕を敵に振るう石製の歩行ゴーレムです。石材を用いて建造することができます。"
+    },
+    "pluralName": {
+      "EN": "stone golems",
+      "FR": "golems de pierre",
+      "JP": "ストーンゴーレム"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "stone": 200
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "golemology",
+      "xpSkill": {
+        "golemology": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "intelligence": 2
+      },
+      "prebuild": {
+        "id": "stoneGolemYard",
+        "time": 1
+      }
+    },
+    "repair": {
+      "health": 20,
+      "time": 1,
+      "costRessource": {
+        "stone": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "golemology",
+      "xpSkill": {
+        "golemology": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "intelligence": 2
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction"
+      }
+    },
+    "width": 64,
+    "height": 56,
+    "visualHeight": 70,
+    "health": 2000,
+    "attack": 400,
+    "attackTime": 6,
+    "attackEffect": "default",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 200,
+    "resistance": {
+      "death": 0.5,
+      "demolition": 2,
+      "golemKiller": 4,
+      "poison": 0
+    },
+    "speed": 4
+  },
+  "stoneGolemYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "stoneGolemYard.png",
+      "file100": "stoneGolemYard100.atf"
+    },
+    "name": {
+      "EN": "stone golem",
+      "FR": "golem de pierre",
+      "JP": "ストーンゴーレム"
+    },
+    "description": {
+      "EN": "The stone golem is a mobile golem which punches enemies.",
+      "FR": "Le golem de pierre est un golem mobile qui cogne vos ennemis.",
+      "JP": "腕を敵に振るう石製の歩行ゴーレムです。石材を用いて建造することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction"
+      }
+    },
+    "width": 64,
+    "height": 56,
+    "visualHeight": 70,
+    "defense": 200,
+    "resistance": {
+      "fire": 1.5,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 5
+  },
+  "stoneWall": {
+    "type": "wall",
+    "age": "ironAge",
+    "no": 7,
+    "picture": {
+      "file": "stoneWall.png",
+      "file100": "stoneWall100.atf"
+    },
+    "name": {
+      "EN": "stone wall",
+      "FR": "mur de pierre",
+      "JP": "石壁"
+    },
+    "description": {
+      "EN": "Stone walls can stop your enemies.",
+      "FR": "Le mur de pierre bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる石製の壁です。切石を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "locationStep": 32,
+      "buildable": "all",
+      "costRessource": {
+        "freeStone": 20
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "fortification",
+      "xpSkill": {
+        "fortification": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 2
+      },
+      "prebuild": {
+        "id": "stoneWallYard",
+        "time": 1
+      }
+    },
+    "repair": {
+      "health": 50,
+      "time": 1,
+      "costRessource": {
+        "freeStone": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 2
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 32,
+    "height": 30,
+    "visualHeight": 64,
+    "health": 1000,
+    "defense": 300,
+    "resistance": {
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "stoneWallYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "stoneWallYard.png",
+      "file100": "stoneWallYard100.atf"
+    },
+    "name": {
+      "EN": "stone wall",
+      "FR": "mur de pierre",
+      "JP": "石壁"
+    },
+    "description": {
+      "EN": "Stone walls can stop your enemies.",
+      "FR": "Le mur de pierre bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる石製の壁です。切石を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 32,
+    "height": 30,
+    "visualHeight": 64,
+    "defense": 300,
+    "resistance": {
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 0
+  },
+  "stoneWallNS": {
+    "type": "wall",
+    "age": "ironAge",
+    "picture": {
+      "file": "stoneWallNS.png",
+      "file100": "stoneWallNS100.atf"
+    },
+    "name": {
+      "EN": "stone wall",
+      "FR": "mur de pierre",
+      "JP": "石壁"
+    },
+    "description": {
+      "EN": "Stone walls can stop your enemies.",
+      "FR": "Le mur de pierre bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる石製の壁です。切石を用いて建築することができます。"
+    },
+    "build": {
+      "costRessource": {
+        "freeStone": 20
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "fortification",
+      "xpSkill": {
+        "fortification": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 2
+      },
+      "prebuild": {
+        "id": "stoneWallYard",
+        "time": 1
+      }
+    },
+    "repair": {
+      "health": 50,
+      "time": 1,
+      "costRessource": {
+        "freeStone": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 2
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 32,
+    "height": 30,
+    "visualHeight": 64,
+    "health": 1000,
+    "defense": 300,
+    "resistance": {
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "stoneWallWE": {
+    "type": "wall",
+    "age": "ironAge",
+    "picture": {
+      "file": "stoneWallWE.png",
+      "file100": "stoneWallWE100.atf"
+    },
+    "name": {
+      "EN": "stone wall",
+      "FR": "mur de pierre",
+      "JP": "石壁"
+    },
+    "description": {
+      "EN": "Stone walls can stop your enemies.",
+      "FR": "Le mur de pierre bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる石製の壁です。切石を用いて建築することができます。"
+    },
+    "build": {
+      "costRessource": {
+        "freeStone": 20
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "fortification",
+      "xpSkill": {
+        "fortification": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 2
+      },
+      "prebuild": {
+        "id": "stoneWallYard",
+        "time": 1
+      }
+    },
+    "repair": {
+      "health": 50,
+      "time": 1,
+      "costRessource": {
+        "freeStone": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 2
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 36,
+    "height": 30,
+    "visualHeight": 64,
+    "health": 1000,
+    "defense": 300,
+    "resistance": {
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "stoneTower": {
+    "type": "defenseTower",
+    "age": "ironAge",
+    "no": 8,
+    "picture": {
+      "file": "stoneTower.png",
+      "file100": "stoneTower100.atf"
+    },
+    "name": {
+      "EN": "stone tower",
+      "FR": "tour en pierre",
+      "JP": "石製監視塔"
+    },
+    "description": {
+      "EN": "The stone tower is a tough defence tower which can shoot bolts at enemies.",
+      "FR": "La tour en pierre est une tourelle solide qui tire des carreaux sur vos ennemis.",
+      "JP": "クロスボウボルトを敵に向かって放つ強固な防衛用の塔です。切石を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "freeStone": 250
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 2
+      },
+      "prebuild": {
+        "id": "stoneTowerYard",
+        "time": 1
+      }
+    },
+    "repair": {
+      "health": 12,
+      "time": 1,
+      "costRessource": {
+        "freeStone": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 2
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.25
+      }
+    },
+    "width": 64,
+    "height": 128,
+    "visualHeight": 160,
+    "health": 3000,
+    "attack": 400,
+    "attackTime": 3,
+    "range": 500,
+    "missile": "bolt",
+    "attackDY": -84,
+    "sound": "soundCrossbow",
+    "damage": [
+      "missile",
+      "piercing"
+    ],
+    "defense": 300,
+    "resistance": {
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "stoneTowerYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "stoneTowerYard.png",
+      "file100": "stoneTowerYard100.atf"
+    },
+    "name": {
+      "EN": "stone tower",
+      "FR": "tour en pierre",
+      "JP": "石製監視塔"
+    },
+    "description": {
+      "EN": "The stone tower is a tough defence tower which can shoot bolts at enemies.",
+      "FR": "La tour en pierre est une tourelle résistante qui tire des carreaux sur vos ennemis.",
+      "JP": "クロスボウボルトを敵に向かって放つ強固な防衛用の塔です。切石を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.25
+      }
+    },
+    "width": 64,
+    "height": 128,
+    "visualHeight": 160,
+    "defense": 300,
+    "steps": 5,
+    "resistance": {
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "chapel": {
+    "type": "resurrectTower",
+    "age": "ironAge",
+    "no": 9,
+    "picture": {
+      "file": "chapel.png",
+      "file100": "chapel100.atf"
+    },
+    "name": {
+      "EN": "chapel",
+      "FR": "chapelle",
+      "JP": "教会"
+    },
+    "description": {
+      "EN": "The chapel can resurrect dead people.",
+      "FR": "La chapelle permet de ressusciter des personnages morts.",
+      "JP": "死者を計20名甦らせることができます。厚板を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "plank": 300
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 1
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 1
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 1
+      },
+      "prebuild": {
+        "id": "chapelYard",
+        "time": 0.5
+      }
+    },
+    "repair": {
+      "health": 4,
+      "time": 0.5,
+      "costRessource": {
+        "plank": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 1
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 1
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 1
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 128,
+    "height": 160,
+    "visualHeight": 192,
+    "health": 1200,
+    "resurrect": 20,
+    "resurrectTime": 6,
+    "healthResurrection": 0.3,
+    "effectResurrection": "resurrectionEffect",
+    "defense": 125,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "chapelYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "chapelYard.png",
+      "file100": "chapelYard100.atf"
+    },
+    "name": {
+      "EN": "chapel",
+      "FR": "chapelle",
+      "JP": "教会"
+    },
+    "description": {
+      "EN": "The chapel can resurrect dead people.",
+      "FR": "La chapelle permet de ressusciter des personnages morts.",
+      "JP": "死者を計20名甦らせることができます。厚板を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 128,
+    "height": 160,
+    "visualHeight": 192,
+    "defense": 125,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 3
+  },
+  "siegeWorkshop": {
+    "type": "barrack",
+    "age": "ironAge",
+    "no": 9.5,
+    "picture": {
+      "file": "siegeWorkshop.png",
+      "file100": "siegeWorkshop100.atf"
+    },
+    "name": {
+      "EN": "siege workshop",
+      "FR": "atelier de siège",
+      "JP": "制圧兵器工廠"
+    },
+    "description": {
+      "EN": "The siege workshop allows you to build siege weapons.",
+      "FR": "L'atelier de siège vous permet de fabriquer des armes de siège.",
+      "JP": "各種の制圧兵器の建造が可能です。厚板と切石を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "freeStone": 150,
+        "plank": 150
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 2
+      },
+      "prebuild": {
+        "id": "siegeWorkshopYard",
+        "time": 1
+      }
+    },
+    "title": {
+      "EN": "Build siege weapons",
+      "FR": "Fabriquer des armes de siège",
+      "JP": "制圧兵器の建造"
+    },
+    "produce": [
+      {
+        "time": 0.5,
+        "createCharacter": {
+          "siegeScorpion": 1
+        },
+        "bonusTimeSkill": "militaryEngineering",
+        "costRessource": {
+          "plank": 1
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 1
+        },
+        "xpSecondaryCharacteristic": {
+          "intelligence": 1
+        },
+        "xpSkill": {
+          "militaryEngineering": 1
+        },
+        "steps": 70
+      },
+      {
+        "time": 1.5,
+        "createCharacter": {
+          "catapult": 1
+        },
+        "bonusTimeSkill": "militaryEngineering",
+        "costRessource": {
+          "plank": 2,
+          "stone": 1
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 3
+        },
+        "xpSecondaryCharacteristic": {
+          "intelligence": 3
+        },
+        "xpSkill": {
+          "militaryEngineering": 3
+        },
+        "steps": 50
+      },
+      {
+        "time": 5.5,
+        "createCharacter": {
+          "bombard": 1
+        },
+        "bonusTimeSkill": "militaryEngineering",
+        "costRessource": {
+          "castIron": 2,
+          "sulfur": 1
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 11
+        },
+        "xpSecondaryCharacteristic": {
+          "intelligence": 11
+        },
+        "xpSkill": {
+          "militaryEngineering": 11
+        },
+        "steps": 50
+      },
+      {
+        "time": 5.5,
+        "createCharacter": {
+          "heavyCannon": 1
+        },
+        "bonusTimeSkill": "militaryEngineering",
+        "costRessource": {
+          "steel": 2,
+          "sulfur": 1
+        },
+        "costPrimaryCharacteristic": {
+          "stamina": 11
+        },
+        "xpSecondaryCharacteristic": {
+          "intelligence": 11
+        },
+        "xpSkill": {
+          "militaryEngineering": 11
+        },
+        "steps": 50
+      }
+    ],
+    "repair": {
+      "health": 16,
+      "time": 1.5,
+      "costRessource": {
+        "freeStone": 1,
+        "plank": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 3
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 128,
+    "height": 220,
+    "visualHeight": 240,
+    "health": 2400,
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "siegeWorkshopYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "siegeWorkshopYard.png",
+      "file100": "siegeWorkshopYard100.atf"
+    },
+    "name": {
+      "EN": "siege workshop",
+      "FR": "atelier de siège",
+      "JP": "制圧兵器工廠"
+    },
+    "description": {
+      "EN": "The siege workshop allows you to build siege weapons.",
+      "FR": "L'atelier de siège vous permet de fabriquer des armes de siège.",
+      "JP": "各種の制圧兵器の建造が可能です。厚板と切石を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 128,
+    "height": 220,
+    "visualHeight": 240,
+    "defense": 150,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 3
+  },
+  "ironGolem": {
+    "type": "buildingMonster",
+    "age": "ironAge",
+    "no": 10,
+    "picture": {
+      "file": "ironGolem.png",
+      "file100": "ironGolem100.atf"
+    },
+    "name": {
+      "EN": "iron golem",
+      "FR": "golem de fer",
+      "JP": "アイアンゴーレム"
+    },
+    "description": {
+      "EN": "The iron golem is a mighty mobile golem which can punch enemies.",
+      "FR": "Le golem de fer est un golem puissant et mobile qui cogne vos ennemis.",
+      "JP": "腕を敵に振るう鉄製の強力な歩行ゴーレムです。鋳鉄を用いて建造することができます。"
+    },
+    "pluralName": {
+      "EN": "iron golems",
+      "FR": "golems de fer",
+      "JP": "アイアンゴーレム"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "castIron": 200
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "golemology",
+      "xpSkill": {
+        "golemology": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "intelligence": 3
+      },
+      "prebuild": {
+        "id": "ironGolemYard",
+        "time": 1.5
+      }
+    },
+    "repair": {
+      "health": 20,
+      "time": 1.5,
+      "costRessource": {
+        "castIron": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "golemology",
+      "xpSkill": {
+        "golemology": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "intelligence": 3
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction"
+      }
+    },
+    "width": 80,
+    "height": 56,
+    "visualHeight": 80,
+    "health": 2000,
+    "attack": 400,
+    "attackTime": 5,
+    "attackEffect": "default",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 500,
+    "resistance": {
+      "death": 0.5,
+      "electricity": 1.5,
+      "demolition": 2,
+      "golemKiller": 4,
+      "poison": 0
+    },
+    "speed": 3
+  },
+  "ironGolemYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "ironGolemYard.png",
+      "file100": "ironGolemYard100.atf"
+    },
+    "name": {
+      "EN": "iron golem",
+      "FR": "golem de fer",
+      "JP": "アイアンゴーレム"
+    },
+    "description": {
+      "EN": "The iron golem is a mighty mobile golem which punches enemies.",
+      "FR": "Le golem de siège est un golem puissant et mobile qui cogne vos ennemis.",
+      "JP": "腕を敵に振るう鉄製の強力な歩行ゴーレムです。鋳鉄を用いて建造することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction"
+      }
+    },
+    "width": 80,
+    "height": 56,
+    "visualHeight": 80,
+    "defense": 500,
+    "resistance": {
+      "fire": 1.5,
+      "death": 0.5,
+      "electricity": 1.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 3
+  },
+  "flameTower": {
+    "type": "defenseTower",
+    "age": "etherAge",
+    "no": 11,
+    "picture": {
+      "file": "flameTower.png",
+      "file100": "flameTower100.atf"
+    },
+    "name": {
+      "EN": "flame tower",
+      "FR": "tour de flammes",
+      "JP": "炎の塔"
+    },
+    "description": {
+      "EN": "The flame tower is a powerful defence tower which casts fireballs at enemies.",
+      "FR": "La tour de flammes est une puissante tourelle de défense qui tire des boules de feu sur vos ennemis.",
+      "JP": "火球を敵に向かって放つ強力な防衛用の塔です。水晶を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "crystals": 250
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 4
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 4
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 4
+      },
+      "prebuild": {
+        "id": "flameTowerYard",
+        "time": 2
+      }
+    },
+    "repair": {
+      "health": 8,
+      "time": 2,
+      "costRessource": {
+        "crystals": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 4
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 4
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 4
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.25
+      }
+    },
+    "width": 80,
+    "height": 136,
+    "visualHeight": 160,
+    "health": 2000,
+    "attack": 800,
+    "attackTime": 4.5,
+    "range": 500,
+    "missile": "fireball",
+    "attackDY": -114,
+    "damage": [
+      "magic",
+      "fire"
+    ],
+    "defense": 200,
+    "resistance": {
+      "magic": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "flameTowerYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "flameTowerYard.png",
+      "file100": "flameTowerYard100.atf"
+    },
+    "name": {
+      "EN": "flame tower",
+      "FR": "tour de flammes",
+      "JP": "炎の塔"
+    },
+    "description": {
+      "EN": "The flame tower is a powerful defence tower which can throw fireballs at enemies.",
+      "FR": "La tour de flammes est une puissante tourelle qui tire des boules de feu sur vos ennemis.",
+      "JP": "火球を敵に向かって放つ強力な防衛用の塔です。水晶を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.25
+      }
+    },
+    "width": 80,
+    "height": 136,
+    "visualHeight": 160,
+    "defense": 200,
+    "steps": 3,
+    "resistance": {
+      "magic": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "iceTower": {
+    "type": "defenseTower",
+    "age": "etherAge",
+    "no": 11.2,
+    "picture": {
+      "file": "iceTower.png",
+      "file100": "iceTower100.atf"
+    },
+    "name": {
+      "EN": "ice tower",
+      "FR": "tour de glace",
+      "JP": "氷の塔"
+    },
+    "description": {
+      "EN": "The ice tower can slow down the invaders.",
+      "FR": "La tour de glace ralentit les envahisseurs.",
+      "JP": "移動速度を遅くする氷の破片を敵に向かって放つ防衛用の塔です。水晶を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "crystals": 250
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 4
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 4
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 4
+      },
+      "prebuild": {
+        "id": "iceTowerYard",
+        "time": 2
+      }
+    },
+    "repair": {
+      "health": 8,
+      "time": 2,
+      "costRessource": {
+        "crystals": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 4
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 4
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 4
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.25
+      }
+    },
+    "width": 80,
+    "height": 136,
+    "visualHeight": 160,
+    "health": 2000,
+    "attack": 400,
+    "special": {
+      "selfGuided": 0.05,
+      "penality": {
+        "id": "slowdown",
+        "time": 5
+      }
+    },
+    "attackTime": 3,
+    "range": 500,
+    "missile": "iceBolt",
+    "attackDX": 3,
+    "attackDY": -160,
+    "damage": [
+      "magic",
+      "ice"
+    ],
+    "defense": 200,
+    "resistance": {
+      "magic": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "iceTowerYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "iceTowerYard.png",
+      "file100": "iceTowerYard100.atf"
+    },
+    "name": {
+      "EN": "ice tower",
+      "FR": "tour de glace",
+      "JP": "氷の塔"
+    },
+    "description": {
+      "EN": "The ice tower slows down invaders.",
+      "FR": "La tour de glace ralentit les envahisseurs.",
+      "JP": "移動速度を遅くする氷の破片を敵に向かって放つ防衛用の塔です。水晶を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.25
+      }
+    },
+    "width": 80,
+    "height": 136,
+    "visualHeight": 160,
+    "defense": 200,
+    "steps": 3,
+    "resistance": {
+      "magic": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "iceWall": {
+    "type": "wall",
+    "age": "etherAge",
+    "no": 11.5,
+    "picture": {
+      "file": "iceWall.png",
+      "file100": "iceWall100.atf"
+    },
+    "name": {
+      "EN": "ice wall",
+      "FR": "mur de glace",
+      "JP": "氷の壁"
+    },
+    "description": {
+      "EN": "Ice walls can stop your enemies.",
+      "FR": "Le mur de glace bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる氷の壁です。水晶を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "locationStep": 32,
+      "buildable": "all",
+      "costRessource": {
+        "crystals": 20
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 4
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 4
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 4
+      },
+      "prebuild": {
+        "id": "iceWallYard",
+        "time": 2
+      }
+    },
+    "repair": {
+      "health": 75,
+      "time": 2,
+      "costRessource": {
+        "crystals": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 4
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 4
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 4
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 32,
+    "height": 30,
+    "visualHeight": 64,
+    "health": 1500,
+    "defense": 400,
+    "resistance": {
+      "magic": 0.5,
+      "death": 0.5,
+      "demolition": 2,
+      "fire": 4,
+      "poison": 0
+    }
+  },
+  "iceWallYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "iceWallYard.png",
+      "file100": "iceWallYard100.atf"
+    },
+    "name": {
+      "EN": "ice wall",
+      "FR": "mur de glace",
+      "JP": "氷の壁"
+    },
+    "description": {
+      "EN": "Ice walls can stop your enemies.",
+      "FR": "Le mur de glace bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる氷の壁です。水晶を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 32,
+    "height": 30,
+    "visualHeight": 64,
+    "defense": 400,
+    "resistance": {
+      "magic": 0.5,
+      "death": 0.5,
+      "demolition": 2,
+      "fire": 4,
+      "poison": 0
+    },
+    "steps": 0
+  },
+  "iceWallNS": {
+    "type": "wall",
+    "age": "etherAge",
+    "picture": {
+      "file": "iceWallNS.png",
+      "file100": "iceWallNS100.atf"
+    },
+    "name": {
+      "EN": "ice wall",
+      "FR": "mur de glace",
+      "JP": "氷の壁"
+    },
+    "description": {
+      "EN": "Ice walls can stop your enemies.",
+      "FR": "Le mur de glace bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる氷の壁です。水晶を用いて建築することができます。"
+    },
+    "build": {
+      "costRessource": {
+        "crystals": 20
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 4
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 4
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 4
+      },
+      "prebuild": {
+        "id": "iceWallYard",
+        "time": 2
+      }
+    },
+    "repair": {
+      "health": 75,
+      "time": 2,
+      "costRessource": {
+        "crystals": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 4
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 4
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 4
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 32,
+    "height": 30,
+    "visualHeight": 64,
+    "health": 1500,
+    "defense": 400,
+    "resistance": {
+      "magic": 0.5,
+      "death": 0.5,
+      "demolition": 2,
+      "fire": 4,
+      "poison": 0
+    }
+  },
+  "iceWallWE": {
+    "type": "wall",
+    "age": "etherAge",
+    "picture": {
+      "file": "iceWallWE.png",
+      "file100": "iceWallWE100.atf"
+    },
+    "name": {
+      "EN": "ice wall",
+      "FR": "mur de glace",
+      "JP": "氷の壁"
+    },
+    "description": {
+      "EN": "Ice walls can stop your enemies.",
+      "FR": "Le mur de glace bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる氷の壁です。水晶を用いて建築することができます。"
+    },
+    "build": {
+      "costRessource": {
+        "crystals": 20
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 4
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 4
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 4
+      },
+      "prebuild": {
+        "id": "iceWallYard",
+        "time": 2
+      }
+    },
+    "repair": {
+      "health": 75,
+      "time": 2,
+      "costRessource": {
+        "crystals": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 4
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 4
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 4
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 36,
+    "height": 30,
+    "visualHeight": 64,
+    "health": 1500,
+    "defense": 400,
+    "resistance": {
+      "magic": 0.5,
+      "death": 0.5,
+      "demolition": 2,
+      "fire": 4,
+      "poison": 0
+    }
+  },
+  "crystalGolem": {
+    "type": "buildingMonster",
+    "age": "etherAge",
+    "no": 12,
+    "picture": {
+      "file": "crystalGolem.png",
+      "file100": "crystalGolem100.atf"
+    },
+    "name": {
+      "EN": "crystal golem",
+      "FR": "golem de cristal",
+      "JP": "クリスタルゴーレム"
+    },
+    "description": {
+      "EN": "The crystal golem is a flying golem which can throw ice shards.",
+      "FR": "Le golem de cristal est un golem volant qui projette des éclats de glace.",
+      "JP": "敵に、移動速度を遅くする氷の破片を4連射で放つ飛行ゴーレムです。水晶を用いて建造することができます。"
+    },
+    "pluralName": {
+      "EN": "crystal golems",
+      "FR": "golems de cristal",
+      "JP": "クリスタルゴーレム"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "crystals": 200
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 4
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "golemology",
+      "xpSkill": {
+        "golemology": 4
+      },
+      "xpSecondaryCharacteristic": {
+        "intelligence": 4
+      },
+      "prebuild": {
+        "id": "crystalGolemYard",
+        "time": 2
+      }
+    },
+    "repair": {
+      "health": 20,
+      "time": 2,
+      "costRessource": {
+        "crystals": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 4
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "golemology",
+      "xpSkill": {
+        "golemology": 4
+      },
+      "xpSecondaryCharacteristic": {
+        "intelligence": 4
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction"
+      }
+    },
+    "width": 64,
+    "height": 64,
+    "visualHeight": 96,
+    "health": 2000,
+    "attack": 100,
+    "attackTime": 3,
+    "attackEffect": "missileEffect",
+    "attacks": [
+      {
+        "attack": 100,
+        "attackTime": 9,
+        "attackDelay": 1,
+        "range": 400,
+        "missile": "iceBolt",
+        "attackDX": -24,
+        "attackDY": -37,
+        "damage": [
+          "magic",
+          "ice"
+        ],
+        "special": {
+          "selfGuided": 0.05,
+          "penality": {
+            "id": "slowdown",
+            "time": 5
+          }
+        }
+      },
+      {
+        "attack": 100,
+        "attackTime": 9,
+        "attackDelay": 1.2,
+        "range": 400,
+        "missile": "iceBolt",
+        "attackDX": 24,
+        "attackDY": -37,
+        "damage": [
+          "magic",
+          "ice"
+        ],
+        "special": {
+          "selfGuided": 0.05,
+          "penality": {
+            "id": "slowdown",
+            "time": 5
+          }
+        }
+      },
+      {
+        "attack": 100,
+        "attackTime": 9,
+        "attackDelay": 1.4,
+        "range": 400,
+        "missile": "iceBolt",
+        "attackDX": -24,
+        "attackDY": -75,
+        "damage": [
+          "magic",
+          "ice"
+        ],
+        "special": {
+          "selfGuided": 0.05,
+          "penality": {
+            "id": "slowdown",
+            "time": 5
+          }
+        }
+      },
+      {
+        "attack": 100,
+        "attackTime": 9,
+        "attackDelay": 1.6,
+        "range": 400,
+        "missile": "iceBolt",
+        "attackDX": 24,
+        "attackDY": -75,
+        "damage": [
+          "magic",
+          "ice"
+        ],
+        "special": {
+          "selfGuided": 0.05,
+          "penality": {
+            "id": "slowdown",
+            "time": 5
+          }
+        }
+      }
+    ],
+    "damage": [
+      "closeCombat",
+      "piercing"
+    ],
+    "defense": 400,
+    "resistance": {
+      "magic": 0.5,
+      "demolition": 2,
+      "golemKiller": 4,
+      "poison": 0
+    },
+    "speed": 5,
+    "flying": true
+  },
+  "crystalGolemYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "crystalGolemYard.png",
+      "file100": "crystalGolemYard100.atf"
+    },
+    "name": {
+      "EN": "crystal golem",
+      "FR": "golem de cristal",
+      "JP": "クリスタルゴーレム"
+    },
+    "description": {
+      "EN": "The crystal golem is a flying golem which can throw ice shards at enemies.",
+      "FR": "Le golem de cristal est un golem volant qui projette des éclats de glace.",
+      "JP": "敵に、移動速度を遅くする氷の破片を4連射で放つ飛行ゴーレムです。水晶を用いて建造することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction"
+      }
+    },
+    "width": 64,
+    "height": 64,
+    "visualHeight": 96,
+    "defense": 300,
+    "resistance": {
+      "fire": 1.5,
+      "magic": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 4
+  },
+  "cannonTower": {
+    "type": "defenseTower",
+    "age": "goldenAge",
+    "no": 13,
+    "picture": {
+      "file": "cannonTower.png",
+      "file100": "cannonTower100.atf"
+    },
+    "name": {
+      "EN": "bombard tower",
+      "FR": "tour à bombarde",
+      "JP": "砲撃塔"
+    },
+    "description": {
+      "EN": "The bombard tower is a tough defence tower which can shoot cannon balls at enemies.",
+      "FR": "La tour à bombarde est une tourelle de défense solide qui tire des boulets de canon sur vos ennemis.",
+      "JP": "砲弾を敵に向かって放つ強固な防衛用の塔です。切石と硫黄を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "freeStone": 240,
+        "sulfur": 60
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 2
+      },
+      "prebuild": {
+        "id": "cannonTowerYard",
+        "time": 1
+      }
+    },
+    "repair": {
+      "health": 10,
+      "time": 1,
+      "costRessource": {
+        "freeStone": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 2
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.5
+      }
+    },
+    "width": 96,
+    "height": 176,
+    "visualHeight": 224,
+    "health": 2400,
+    "attack": 2000,
+    "attackTime": 20,
+    "range": 600,
+    "missile": "cannonBall",
+    "attackDY": -150,
+    "sound": "soundCannon",
+    "special": {
+      "pierce": true,
+      "area": {
+        "attack": 1000,
+        "range": 32,
+        "effect": "miniExplosion"
+      }
+    },
+    "damage": [
+      "missile",
+      "demolition"
+    ],
+    "defense": 250,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "cannonTowerYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "cannonTowerYard.png",
+      "file100": "cannonTowerYard100.atf"
+    },
+    "name": {
+      "EN": "bombard tower",
+      "FR": "tour à bombarde",
+      "JP": "砲撃塔"
+    },
+    "description": {
+      "EN": "The bombard tower is a tough defence tower which can shoot cannon balls at enemies.",
+      "FR": "La tour à bombarde est une tourelle résistante qui tire des boulets de canon sur vos ennemis.",
+      "JP": "砲弾を敵に向かって放つ強固な防衛用の塔です。切石と硫黄を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.5
+      }
+    },
+    "width": 96,
+    "height": 176,
+    "visualHeight": 224,
+    "defense": 250,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 5
+  },
+  "goldenGolem": {
+    "type": "buildingMonster",
+    "age": "goldenAge",
+    "no": 14,
+    "picture": {
+      "file": "goldenGolem.png",
+      "file100": "goldenGolem100.atf"
+    },
+    "name": {
+      "EN": "golden golem",
+      "FR": "golem d'or",
+      "JP": "ゴールデンゴーレム"
+    },
+    "description": {
+      "EN": "The golden golem is an ultimate mobile golem which can punch enemies.",
+      "FR": "Le golem d'or est un golem suprême et mobile et cogne vos ennemis.",
+      "JP": "腕を敵に振るう素晴らしい性能の歩行ゴーレムです。棒金を用いて建造することができます。"
+    },
+    "pluralName": {
+      "EN": "golden golems",
+      "FR": "golems d'or",
+      "JP": "ゴールデンゴーレム"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "goldBar": 200
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 5
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "golemology",
+      "xpSkill": {
+        "golemology": 5
+      },
+      "xpSecondaryCharacteristic": {
+        "intelligence": 5
+      },
+      "prebuild": {
+        "id": "goldenGolemYard",
+        "time": 2.5
+      }
+    },
+    "repair": {
+      "health": 30,
+      "time": 2.5,
+      "costRessource": {
+        "goldBar": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 5
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "golemology",
+      "xpSkill": {
+        "golemology": 5
+      },
+      "xpSecondaryCharacteristic": {
+        "intelligence": 5
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.1
+      }
+    },
+    "width": 80,
+    "height": 72,
+    "visualHeight": 96,
+    "health": 3000,
+    "attack": 600,
+    "attackTime": 5,
+    "attackEffect": "default",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "defense": 600,
+    "resistance": {
+      "electricity": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "golemKiller": 4,
+      "poison": 0
+    },
+    "speed": 5
+  },
+  "goldenGolemYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "goldenGolemYard.png",
+      "file100": "goldenGolemYard100.atf"
+    },
+    "name": {
+      "EN": "gold golem",
+      "FR": "golem d'or",
+      "JP": "ゴールデンゴーレム"
+    },
+    "description": {
+      "EN": "The gold golem is an ultimate mobile golem which punches enemies.",
+      "FR": "Le golem d'or est un golem suprême. Il est mobile et cogne vos ennemis.",
+      "JP": "腕を敵に振るう素晴らしい性能の歩行ゴーレムです。棒金を用いて建造することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.1
+      }
+    },
+    "width": 80,
+    "height": 72,
+    "visualHeight": 96,
+    "defense": 600,
+    "resistance": {
+      "fire": 1.5,
+      "electricity": 2,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 5
+  },
+  "goldenWall": {
+    "type": "wall",
+    "age": "goldenAge",
+    "no": 14.2,
+    "picture": {
+      "file": "goldenWall.png",
+      "file100": "goldenWall100.atf"
+    },
+    "name": {
+      "EN": "gold wall",
+      "FR": "mur d'or",
+      "JP": "黄金の壁"
+    },
+    "description": {
+      "EN": "Gold walls can stop your enemies.",
+      "FR": "Le mur d'or bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる黄金製の壁です。棒金を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "locationStep": 32,
+      "buildable": "all",
+      "costRessource": {
+        "goldBar": 10
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 5
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "fortification",
+      "xpSkill": {
+        "fortification": 5
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 5
+      },
+      "prebuild": {
+        "id": "goldenWallYard",
+        "time": 2.5
+      }
+    },
+    "repair": {
+      "health": 150,
+      "time": 2.5,
+      "costRessource": {
+        "goldBar": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 5
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 5
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 5
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 32,
+    "height": 30,
+    "visualHeight": 64,
+    "health": 1500,
+    "defense": 500,
+    "resistance": {
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "goldenWallYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "goldenWallYard.png",
+      "file100": "goldenWallYard100.atf"
+    },
+    "name": {
+      "EN": "gold wall",
+      "FR": "mur d'or",
+      "JP": "黄金の壁"
+    },
+    "description": {
+      "EN": "Gold walls can stop your enemies.",
+      "FR": "Le mur d'or bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる黄金製の壁です。棒金を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 32,
+    "height": 30,
+    "visualHeight": 64,
+    "defense": 500,
+    "resistance": {
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 0
+  },
+  "goldenWallNS": {
+    "type": "wall",
+    "age": "goldenAge",
+    "picture": {
+      "file": "goldenWallNS.png",
+      "file100": "goldenWallNS100.atf"
+    },
+    "name": {
+      "EN": "gold wall",
+      "FR": "mur d'or",
+      "JP": "黄金の壁"
+    },
+    "description": {
+      "EN": "Gold walls can stop your enemies.",
+      "FR": "Le mur d'or bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる黄金製の壁です。棒金を用いて建築することができます。"
+    },
+    "build": {
+      "costRessource": {
+        "goldBar": 10
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 5
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "fortification",
+      "xpSkill": {
+        "fortification": 5
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 5
+      },
+      "prebuild": {
+        "id": "goldenWallYard",
+        "time": 2.5
+      }
+    },
+    "repair": {
+      "health": 150,
+      "time": 2.5,
+      "costRessource": {
+        "goldBar": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 5
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 5
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 5
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 32,
+    "height": 30,
+    "visualHeight": 64,
+    "health": 1500,
+    "defense": 500,
+    "resistance": {
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "goldenWallWE": {
+    "type": "wall",
+    "age": "goldenAge",
+    "picture": {
+      "file": "goldenWallWE.png",
+      "file100": "goldenWallWE100.atf"
+    },
+    "name": {
+      "EN": "gold wall",
+      "FR": "mur d'or",
+      "JP": "黄金の壁"
+    },
+    "description": {
+      "EN": "Gold walls can stop your enemies.",
+      "FR": "Le mur d'or bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる黄金製の壁です。棒金を用いて建築することができます。"
+    },
+    "build": {
+      "costRessource": {
+        "goldBar": 10
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 5
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "fortification",
+      "xpSkill": {
+        "fortification": 5
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 5
+      },
+      "prebuild": {
+        "id": "goldenWallYard",
+        "time": 2.5
+      }
+    },
+    "repair": {
+      "health": 150,
+      "time": 2.5,
+      "costRessource": {
+        "goldBar": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 5
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 5
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 5
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 36,
+    "height": 30,
+    "visualHeight": 64,
+    "health": 1500,
+    "defense": 500,
+    "resistance": {
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "sniperTower": {
+    "type": "defenseTower",
+    "age": "steamAge",
+    "no": 15,
+    "picture": {
+      "file": "sniperTower.png",
+      "file100": "sniperTower100.atf"
+    },
+    "name": {
+      "EN": "sniper tower",
+      "FR": "tourelle de sniper",
+      "JP": "狙撃塔"
+    },
+    "description": {
+      "EN": "The sniper tower is a defence tower with long-range attacks.",
+      "FR": "La tourelle de sniper est une tourelle de défense de longue portée.",
+      "JP": "銃弾を遠距離の敵に向かって放つ防衛用の塔です。厚板と鋼鉄を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "plank": 150,
+        "steel": 50
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 2
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 2
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 2
+      },
+      "prebuild": {
+        "id": "sniperTowerYard",
+        "time": 1
+      }
+    },
+    "repair": {
+      "health": 20,
+      "time": 2,
+      "costRessource": {
+        "plank": 1,
+        "steel": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 4
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 4
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 4
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.25
+      }
+    },
+    "width": 64,
+    "height": 128,
+    "visualHeight": 160,
+    "health": 2000,
+    "attack": 560,
+    "attackTime": 4.5,
+    "range": 1000,
+    "missile": "cartridge",
+    "attackDY": -104,
+    "sound": "soundGun",
+    "damage": [
+      "missile",
+      "piercing"
+    ],
+    "defense": 200,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "electricity": 1.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "sniperTowerYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "sniperTowerYard.png",
+      "file100": "sniperTowerYard100.atf"
+    },
+    "name": {
+      "EN": "sniper tower",
+      "FR": "mirador",
+      "JP": "狙撃塔"
+    },
+    "description": {
+      "EN": "The sniper tower is defence tower which can shoot bullets at enemies.",
+      "FR": "Le mirador est une tourelle de défense qui tire des balles sur vos ennemis.",
+      "JP": "銃弾を遠距離の敵に向かって放つ防衛用の塔です。厚板と鋼鉄を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.25
+      }
+    },
+    "width": 64,
+    "height": 128,
+    "visualHeight": 160,
+    "defense": 200,
+    "resistance": {
+      "fire": 2,
+      "death": 0.5,
+      "electricity": 1.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 0
+  },
+  "siegeGolem": {
+    "type": "buildingMonster",
+    "age": "steamAge",
+    "no": 16,
+    "picture": {
+      "file": "siegeGolem.png",
+      "file100": "siegeGolem100.atf"
+    },
+    "name": {
+      "EN": "siege golem",
+      "FR": "golem de siège",
+      "JP": "シージゴーレム"
+    },
+    "description": {
+      "EN": "The siege golem is an over-armed golem with long-range missiles and machine guns.",
+      "FR": "Le golem de siège est un golem surarmé équipé de missiles longue portée et de mitrailleuses.",
+      "JP": "機関銃と長距離ミサイル群で武装した、圧倒的な火力のゴーレムです。鋼鉄を用いて建造することができます。"
+    },
+    "pluralName": {
+      "EN": "siege golems",
+      "FR": "golems de siège",
+      "JP": "シージゴーレム"
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "steel": 600
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "golemology",
+      "xpSkill": {
+        "golemology": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "intelligence": 3
+      },
+      "prebuild": {
+        "id": "siegeGolemYard",
+        "time": 1.5
+      }
+    },
+    "repair": {
+      "health": 16,
+      "time": 1.5,
+      "costRessource": {
+        "steel": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "golemology",
+      "xpSkill": {
+        "golemology": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "intelligence": 3
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.25
+      }
+    },
+    "width": 90,
+    "height": 96,
+    "visualHeight": 120,
+    "health": 4200,
+    "attack": 600,
+    "attackTime": 6,
+    "attackEffect": "default",
+    "damage": [
+      "closeCombat",
+      "crushing"
+    ],
+    "attacks": [
+      {
+        "attack": 800,
+        "attackTime": 50,
+        "damage": [
+          "missile",
+          "demolition"
+        ],
+        "range": 675,
+        "missile": "bigMissile",
+        "sound": "soundRocket",
+        "attackDY": -80,
+        "special": {
+          "fixedAngle": -1.57,
+          "selfGuided": 0.1,
+          "pierce": true
+        }
+      },
+      {
+        "attack": 400,
+        "attackTime": 20,
+        "damage": [
+          "missile",
+          "demolition"
+        ],
+        "range": 675,
+        "missile": "microMissile",
+        "sound": "soundRocket",
+        "attackDX": -30,
+        "attackDY": -90,
+        "special": {
+          "fixedAngle": -3.07,
+          "selfGuided": 0.125
+        }
+      },
+      {
+        "attack": 400,
+        "attackTime": 20,
+        "damage": [
+          "missile",
+          "demolition"
+        ],
+        "range": 675,
+        "missile": "microMissile",
+        "sound": "soundRocket",
+        "attackDX": -26,
+        "attackDY": -94,
+        "special": {
+          "fixedAngle": -2.57,
+          "selfGuided": 0.125
+        }
+      },
+      {
+        "attack": 400,
+        "attackTime": 20,
+        "damage": [
+          "missile",
+          "demolition"
+        ],
+        "range": 675,
+        "missile": "microMissile",
+        "sound": "soundRocket",
+        "attackDX": -22,
+        "attackDY": -98,
+        "special": {
+          "fixedAngle": -2.32,
+          "selfGuided": 0.125
+        }
+      },
+      {
+        "attack": 400,
+        "attackTime": 20,
+        "damage": [
+          "missile",
+          "demolition"
+        ],
+        "range": 675,
+        "missile": "microMissile",
+        "sound": "soundRocket",
+        "attackDX": -18,
+        "attackDY": -102,
+        "special": {
+          "fixedAngle": -2.07,
+          "selfGuided": 0.125
+        }
+      },
+      {
+        "attack": 400,
+        "attackTime": 20,
+        "damage": [
+          "missile",
+          "demolition"
+        ],
+        "range": 675,
+        "missile": "microMissile",
+        "sound": "soundRocket",
+        "attackDX": 18,
+        "attackDY": -102,
+        "special": {
+          "fixedAngle": -1.07,
+          "selfGuided": 0.125
+        }
+      },
+      {
+        "attack": 400,
+        "attackTime": 20,
+        "damage": [
+          "missile",
+          "demolition"
+        ],
+        "range": 675,
+        "missile": "microMissile",
+        "sound": "soundRocket",
+        "attackDX": 22,
+        "attackDY": -98,
+        "special": {
+          "fixedAngle": -0.77,
+          "selfGuided": 0.125
+        }
+      },
+      {
+        "attack": 400,
+        "attackTime": 20,
+        "damage": [
+          "missile",
+          "demolition"
+        ],
+        "range": 675,
+        "missile": "microMissile",
+        "sound": "soundRocket",
+        "attackDX": 26,
+        "attackDY": -94,
+        "special": {
+          "fixedAngle": -0.57,
+          "selfGuided": 0.125
+        }
+      },
+      {
+        "attack": 400,
+        "attackTime": 20,
+        "damage": [
+          "missile",
+          "demolition"
+        ],
+        "range": 675,
+        "missile": "microMissile",
+        "sound": "soundRocket",
+        "attackDX": 30,
+        "attackDY": -90,
+        "special": {
+          "fixedAngle": -0.07,
+          "selfGuided": 0.125
+        }
+      },
+      {
+        "attack": 100,
+        "attackTime": 9,
+        "damage": [
+          "missile",
+          "piercing"
+        ],
+        "range": 200,
+        "missile": "cartridge",
+        "sound": "soundGun",
+        "attackDX": -36,
+        "attackDY": -56
+      },
+      {
+        "attack": 100,
+        "attackTime": 9,
+        "damage": [
+          "missile",
+          "piercing"
+        ],
+        "attackDelay": 0.1,
+        "range": 200,
+        "missile": "cartridge",
+        "sound": "soundGun",
+        "attackDX": -36,
+        "attackDY": -56
+      },
+      {
+        "attack": 100,
+        "attackTime": 9,
+        "damage": [
+          "missile",
+          "piercing"
+        ],
+        "attackDelay": 0.2,
+        "range": 200,
+        "missile": "cartridge",
+        "sound": "soundGun",
+        "attackDX": -36,
+        "attackDY": -56
+      },
+      {
+        "attack": 100,
+        "attackTime": 9,
+        "damage": [
+          "missile",
+          "piercing"
+        ],
+        "range": 200,
+        "missile": "cartridge",
+        "sound": "soundGun",
+        "attackDX": 36,
+        "attackDY": -56
+      },
+      {
+        "attack": 100,
+        "attackTime": 9,
+        "damage": [
+          "missile",
+          "piercing"
+        ],
+        "attackDelay": 0.1,
+        "range": 200,
+        "missile": "cartridge",
+        "sound": "soundGun",
+        "attackDX": 36,
+        "attackDY": -56
+      },
+      {
+        "attack": 100,
+        "attackTime": 9,
+        "damage": [
+          "missile",
+          "piercing"
+        ],
+        "attackDelay": 0.2,
+        "range": 200,
+        "missile": "cartridge",
+        "sound": "soundGun",
+        "attackDX": 36,
+        "attackDY": -56
+      }
+    ],
+    "defense": 500,
+    "resistance": {
+      "death": 0.5,
+      "electricity": 1.5,
+      "demolition": 2,
+      "golemKiller": 4,
+      "poison": 0
+    },
+    "speed": 4
+  },
+  "siegeGolemYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "siegeGolemYard.png",
+      "file100": "siegeGolemYard100.atf"
+    },
+    "name": {
+      "EN": "siege golem",
+      "FR": "golem de siège",
+      "JP": "シージゴーレム"
+    },
+    "description": {
+      "EN": "The siege golem is an over-armed golem with long-range missiles and machine guns.",
+      "FR": "Le golem de siege est un golem sur-armé équipé de missiles longue portée et de mitrailleuses.",
+      "JP": "機関銃と長距離ミサイル群で武装した、圧倒的な火力のゴーレムです。鋼鉄を用いて建造することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 1.25
+      }
+    },
+    "width": 90,
+    "height": 96,
+    "visualHeight": 120,
+    "defense": 500,
+    "resistance": {
+      "fire": 1.5,
+      "death": 0.5,
+      "electricity": 1.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 7
+  },
+  "artillery": {
+    "type": "defenseTower",
+    "age": "steamAge",
+    "no": 17,
+    "picture": {
+      "file": "artillery.png",
+      "file100": "artillery100.atf"
+    },
+    "name": {
+      "EN": "artillery",
+      "FR": "artillerie",
+      "JP": "大砲"
+    },
+    "description": {
+      "EN": "The artillery is a defence tower which can shoot long-range shells.",
+      "FR": "L'artillerie est une tourelle de défense qui tire des obus de longue portée.",
+      "JP": "非常に遠距離まで届く、絶大な威力の榴弾を放つ設備です。鋼鉄を用いて建築することができます。"
+    },
+    "rotateTower": {
+      "file": "artilleryTower.png",
+      "file100": "artilleryTower100.atf",
+      "steps": 4,
+      "effect": "shootSmoke",
+      "x": 0,
+      "y": -144,
+      "pivotX": 57,
+      "pivotY": 31,
+      "startingRotation": 1.57,
+      "width": 220,
+      "height": 60,
+      "length": 160,
+      "speed": 0.01
+    },
+    "build": {
+      "chooseLocation": true,
+      "buildable": "all",
+      "costRessource": {
+        "steel": 2000
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "building",
+      "xpSkill": {
+        "building": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 3
+      },
+      "prebuild": {
+        "id": "artilleryYard",
+        "time": 1.5
+      }
+    },
+    "repair": {
+      "health": 2,
+      "time": 1.5,
+      "costRessource": {
+        "steel": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 3
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 180,
+    "height": 155,
+    "visualHeight": 186,
+    "health": 4000,
+    "attack": 20000,
+    "special": {
+      "selfGuided": 0.0001,
+      "pierce": true
+    },
+    "attackTime": 20,
+    "range": 60000,
+    "missile": "bombshell",
+    "attackDY": -144,
+    "damage": [
+      "missile",
+      "demolition"
+    ],
+    "defense": 250,
+    "resistance": {
+      "fire": 1.5,
+      "death": 0.5,
+      "electricity": 1.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "ironWall": {
+    "type": "wall",
+    "age": "steamAge",
+    "no": 17,
+    "picture": {
+      "file": "ironWall.png",
+      "file100": "ironWall100.atf"
+    },
+    "name": {
+      "EN": "steel wall",
+      "FR": "mur d'acier",
+      "JP": "鋼鉄の壁"
+    },
+    "description": {
+      "EN": "Steel walls can stop your enemies.",
+      "FR": "Le mur d'acier bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる非常に強靭な壁です。鋼鉄を用いて建築することができます。"
+    },
+    "build": {
+      "chooseLocation": true,
+      "locationStep": 32,
+      "buildable": "all",
+      "costRessource": {
+        "steel": 20
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "fortification",
+      "xpSkill": {
+        "fortification": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 3
+      },
+      "prebuild": {
+        "id": "ironWallYard",
+        "time": 1.5
+      }
+    },
+    "repair": {
+      "health": 75,
+      "time": 1.5,
+      "costRessource": {
+        "steel": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 3
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 32,
+    "height": 30,
+    "visualHeight": 64,
+    "health": 1500,
+    "defense": 600,
+    "resistance": {
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "artilleryYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "artilleryYard.png",
+      "file100": "artilleryYard100.atf"
+    },
+    "name": {
+      "EN": "artillery",
+      "FR": "artillerie",
+      "JP": "大砲"
+    },
+    "description": {
+      "EN": "The artillery is a defence tower which can shoot long range shells.",
+      "FR": "L'artillerie est une tourelle qui tire des obus de longue portée.",
+      "JP": "非常に遠距離まで届く、絶大な威力の榴弾を放つ設備です。鋼鉄を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2
+      }
+    },
+    "width": 180,
+    "height": 155,
+    "visualHeight": 186,
+    "defense": 250,
+    "resistance": {
+      "fire": 1.5,
+      "death": 0.5,
+      "electricity": 1.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 2
+  },
+  "ironWallYard": {
+    "type": "prebuild",
+    "picture": {
+      "file": "ironWallYard.png",
+      "file100": "ironWallYard100.atf"
+    },
+    "name": {
+      "EN": "steel wall",
+      "FR": "mur d'acier",
+      "JP": "鋼鉄の壁"
+    },
+    "description": {
+      "EN": "Steel walls can stop your enemies.",
+      "FR": "Le mur d'acier bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる非常に強靭な壁です。鋼鉄を用いて建築することができます。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 32,
+    "height": 30,
+    "visualHeight": 64,
+    "defense": 600,
+    "resistance": {
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "steps": 0
+  },
+  "ironWallNS": {
+    "type": "wall",
+    "age": "ironAge",
+    "picture": {
+      "file": "ironWallNS.png",
+      "file100": "ironWallNS100.atf"
+    },
+    "name": {
+      "EN": "steel wall",
+      "FR": "mur d'acier",
+      "JP": "鋼鉄の壁"
+    },
+    "description": {
+      "EN": "Steel walls can stop your enemies.",
+      "FR": "Le mur d'acier bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる非常に強靭な壁です。鋼鉄を用いて建築することができます。"
+    },
+    "build": {
+      "costRessource": {
+        "steel": 20
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "fortification",
+      "xpSkill": {
+        "fortification": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 3
+      },
+      "prebuild": {
+        "id": "ironWallYard",
+        "time": 1.5
+      }
+    },
+    "repair": {
+      "health": 75,
+      "time": 1.5,
+      "costRessource": {
+        "steel": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 3
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 32,
+    "height": 30,
+    "visualHeight": 64,
+    "health": 1500,
+    "defense": 600,
+    "resistance": {
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  },
+  "ironWallWE": {
+    "type": "wall",
+    "age": "ironAge",
+    "picture": {
+      "file": "ironWallWE.png",
+      "file100": "ironWallWE100.atf"
+    },
+    "name": {
+      "EN": "steel wall",
+      "FR": "mur d'acier",
+      "JP": "鋼鉄の壁"
+    },
+    "description": {
+      "EN": "Steel walls can stop your enemies.",
+      "FR": "Le mur d'acier bloque les ennemis.",
+      "JP": "敵の侵攻を留めることができる非常に強靭な壁です。鋼鉄を用いて建築することができます。"
+    },
+    "build": {
+      "costRessource": {
+        "steel": 20
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "fortification",
+      "xpSkill": {
+        "fortification": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "strength": 3
+      },
+      "prebuild": {
+        "id": "ironWallYard",
+        "time": 1.5
+      }
+    },
+    "repair": {
+      "health": 75,
+      "time": 1.5,
+      "costRessource": {
+        "steel": 1
+      },
+      "costPrimaryCharacteristic": {
+        "stamina": 3
+      },
+      "sound": "soundBuilding",
+      "bonusSkill": "repairing",
+      "xpSkill": {
+        "repairing": 3
+      },
+      "xpSecondaryCharacteristic": {
+        "endurance": 3
+      }
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 0.5
+      }
+    },
+    "width": 30,
+    "visualWidth": 36,
+    "height": 30,
+    "visualHeight": 64,
+    "health": 1500,
+    "defense": 600,
+    "resistance": {
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    }
+  }
+}

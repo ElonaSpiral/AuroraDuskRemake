@@ -1,0 +1,162 @@
+{
+  "_comment": "Enemy faction dungeon HQs. Dungeons attack automatically and spawn waves. 'spawn.interval' = game ticks between spawns. 'timeRegeneration' and 'regeneration' = HP regen per tick.",
+  "_source": "base=dungeons.js + expansion=dungeons2.js",
+  "crepusculumDungeon": {
+    "type": "dungeon",
+    "picture": {
+      "file": "crepusculumDungeon.png",
+      "file100": "crepusculumDungeon100.atf"
+    },
+    "name": {
+      "EN": "crepusculum dungeon",
+      "FR": "donjon du Crépuscule",
+      "DE": "Crepusculum dungeon",
+      "JP": "黄昏のダンジョン"
+    },
+    "description": {
+      "EN": "The Crepusculum dungeon is the headquarters of the Dusk Hordes.",
+      "FR": "Le donjon du Crépuscule est le quartier général des Hordes du Crépuscule.",
+      "DE": "Crepusculums Dungeon ist das Hauptquartier der Dunklen Horde",
+      "JP": "黄昏の軍勢の司令部です。周囲の敵への攻撃能力も持っています。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2.25
+      }
+    },
+    "width": 192,
+    "height": 192,
+    "visualHeight": 224,
+    "health": 8000,
+    "attack": 300,
+    "attackTime": 6,
+    "range": 600,
+    "missile": "blackOrb",
+    "attackDY": -194,
+    "damage": [
+      "magic",
+      "death"
+    ],
+    "defense": 150,
+    "resistance": {
+      "light": 1.5,
+      "fire": 1.25,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "timeRegeneration": 5,
+    "regeneration": 1,
+    "spawn": {
+      "interval": 150,
+      "baseNumber": 0,
+      "coefPopulation": 1
+    }
+  },
+  "beastDungeon": {
+    "type": "dungeon",
+    "picture": {
+      "file": "beastDungeon.png",
+      "file100": "beastDungeon100.atf"
+    },
+    "name": {
+      "EN": "dungeon of the beasts",
+      "FR": "donjon des bêtes",
+      "DE": "Tiere Dungeon",
+      "JP": "獣のダンジョン"
+    },
+    "description": {
+      "EN": "This dungeon is the headquarters of the beasts.",
+      "FR": "Ce donjon est le quartier général des bêtes.",
+      "DE": "Dieser Kerker ist der Hauptsitz der Tiere.",
+      "JP": "獣たちの司令部です。周囲の敵への攻撃能力も持っています。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2.25
+      }
+    },
+    "width": 192,
+    "height": 192,
+    "visualHeight": 224,
+    "health": 8000,
+    "attack": 300,
+    "attackTime": 6,
+    "range": 600,
+    "missile": "stoneJavelinMissile",
+    "attackDY": -194,
+    "damage": [
+      "missile",
+      "piercing"
+    ],
+    "defense": 150,
+    "resistance": {
+      "light": 1.5,
+      "fire": 1.25,
+      "death": 0.5,
+      "demolition": 2,
+      "poison": 0
+    },
+    "timeRegeneration": 5,
+    "regeneration": 1,
+    "spawn": {
+      "interval": 150,
+      "baseNumber": 0,
+      "coefPopulation": 1
+    }
+  },
+  "undeadDungeon": {
+    "type": "dungeon",
+    "picture": {
+      "file": "undeadDungeon.png",
+      "file100": "undeadDungeon100.atf"
+    },
+    "name": {
+      "EN": "dungeon of the undead",
+      "FR": "donjon des morts-vivants",
+      "DE": "Untoter Dungeon",
+      "JP": "不死者のダンジョン"
+    },
+    "description": {
+      "EN": "This dungeon is the headquarters of the undead.",
+      "FR": "Ce donjon est le quartier général des morts-vivants.",
+      "DE": "Dieser Kerker ist der Hauptsitz der Untoter.",
+      "JP": "不死者たちの司令部です。周囲の敵への攻撃能力も持っています。"
+    },
+    "death": {
+      "effect": {
+        "name": "destruction",
+        "scale": 2.25
+      }
+    },
+    "width": 192,
+    "height": 192,
+    "visualHeight": 224,
+    "health": 8000,
+    "attack": 300,
+    "attackTime": 6,
+    "range": 600,
+    "missile": "boneSpearMissile",
+    "attackDY": -194,
+    "damage": [
+      "magic",
+      "death"
+    ],
+    "defense": 150,
+    "resistance": {
+      "light": 2,
+      "death": 0.25,
+      "demolition": 2,
+      "poison": 0
+    },
+    "timeRegeneration": 5,
+    "regeneration": 1,
+    "spawn": {
+      "interval": 150,
+      "baseNumber": 0,
+      "coefPopulation": 1
+    }
+  }
+}

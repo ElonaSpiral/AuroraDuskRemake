@@ -1,0 +1,272 @@
+{
+  "deepWater": {
+    "id": "deepWater",
+    "order": 0,
+    "texture": "deepWater.png",
+    "mask": "mask.png",
+    "color": "#103B6D",
+    "color_int": 1063789,
+    "speed": 0.25,
+    "buildable": false,
+    "level": -2,
+    "translate_y": 16,
+    "effect": "waterEffect",
+    "random_decorations": []
+  },
+  "middleWater": {
+    "id": "middleWater",
+    "order": 1,
+    "texture": "middleWater.png",
+    "mask": "mask.png",
+    "color": "#185AA5",
+    "color_int": 1596069,
+    "speed": 0.5,
+    "buildable": false,
+    "level": -2,
+    "translate_y": 8,
+    "effect": "waterEffect",
+    "random_decorations": []
+  },
+  "swallowWater": {
+    "id": "swallowWater",
+    "order": 2,
+    "texture": "swallowWater.png",
+    "mask": "mask.png",
+    "color": "#278CFF",
+    "color_int": 2591999,
+    "speed": 0.75,
+    "buildable": false,
+    "level": -2,
+    "translate_y": 4,
+    "effect": "waterEffect",
+    "random_decorations": [
+      {
+        "file": "random/rocksWater.png",
+        "rate": 0.05
+      },
+      {
+        "file": "random/rocksWater2.png",
+        "rate": 0.05
+      },
+      {
+        "file": "random/waterlily.png",
+        "rate": 0.05
+      },
+      {
+        "file": "random/waterlily2.png",
+        "rate": 0.05
+      }
+    ]
+  },
+  "sand": {
+    "id": "sand",
+    "order": 3,
+    "texture": "sand.png",
+    "mask": "mask.png",
+    "color": "#F7CE84",
+    "color_int": 16240260,
+    "speed": 0.8,
+    "buildable": true,
+    "level": -1,
+    "translate_y": 0,
+    "effect": null,
+    "random_decorations": [
+      {
+        "file": "random/rocks.png",
+        "rate": 0.05
+      },
+      {
+        "file": "random/rocks2.png",
+        "rate": 0.05
+      },
+      {
+        "file": "random/starfish1.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/starfish2.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/shell1.png",
+        "rate": 0.005
+      }
+    ]
+  },
+  "plain": {
+    "id": "plain",
+    "order": 4,
+    "texture": "plain.png",
+    "mask": "mask.png",
+    "color": "#4AAD08",
+    "color_int": 4893960,
+    "speed": 1,
+    "buildable": true,
+    "level": 0,
+    "translate_y": 0,
+    "effect": null,
+    "random_decorations": [
+      {
+        "file": "random/rocks.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/rocks2.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/plants.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/plants2.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/flower.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/flower2.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/grass.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/mushrooms.png",
+        "rate": 0.005
+      }
+    ]
+  },
+  "grass": {
+    "id": "grass",
+    "order": 5,
+    "texture": "grass.png",
+    "mask": "mask.png",
+    "color": "#298400",
+    "color_int": 2720768,
+    "speed": 1,
+    "buildable": true,
+    "level": 0,
+    "translate_y": 0,
+    "effect": null,
+    "random_decorations": [
+      {
+        "file": "random/plants.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/plants2.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/flower.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/flower2.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/rocks.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/rocks2.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/mushrooms.png",
+        "rate": 0.005
+      }
+    ]
+  },
+  "soil": {
+    "id": "soil",
+    "order": 6,
+    "texture": "soil.png",
+    "mask": "mask.png",
+    "color": "#C69C63",
+    "color_int": 13016163,
+    "speed": 1,
+    "buildable": true,
+    "level": 0,
+    "translate_y": 0,
+    "effect": null,
+    "random_decorations": [
+      {
+        "file": "random/rocks.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/rocks2.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/mushrooms.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/plants.png",
+        "rate": 0.005
+      },
+      {
+        "file": "random/plants2.png",
+        "rate": 0.005
+      }
+    ]
+  },
+  "road": {
+    "id": "road",
+    "order": 7,
+    "texture": "road.png",
+    "mask": "mask2.png",
+    "color": "#A594B5",
+    "color_int": 10851509,
+    "speed": 1.2,
+    "buildable": true,
+    "level": 0.5,
+    "translate_y": 0,
+    "effect": null,
+    "random_decorations": []
+  },
+  "snow": {
+    "id": "snow",
+    "order": 8,
+    "texture": "snow.png",
+    "mask": "mask.png",
+    "color": "#FFFFFF",
+    "color_int": 16777215,
+    "speed": 0.7,
+    "buildable": true,
+    "level": 1,
+    "translate_y": 0,
+    "effect": null,
+    "random_decorations": [
+      {
+        "file": "random/rocksSnow.png",
+        "rate": 0.05
+      },
+      {
+        "file": "random/rocksSnow2.png",
+        "rate": 0.05
+      }
+    ]
+  },
+  "rocks": {
+    "id": "rocks",
+    "order": 9,
+    "texture": "rocks.png",
+    "mask": "mask.png",
+    "color": "#947B39",
+    "color_int": 9730873,
+    "speed": 0.4,
+    "buildable": false,
+    "level": 2,
+    "translate_y": 0,
+    "effect": null,
+    "random_decorations": []
+  }
+}
