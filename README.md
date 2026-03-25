@@ -8,24 +8,59 @@ A community-driven recreation of *Aurora Dusk: Steam Age* using **Godot 4.3+**.
 
 ```
 aurora_dusk/
-├── project.godot
+├── project.godot                  # Main project config
 ├── icon.svg
+├── README.md
+├── coding_rules.md
 │
-├── scenes/
-│   ├── MainMenu.tscn          # ★ Start here
-│   ├── OptionsScene.tscn      # Tabbed config (General / Graphics / Input)
-│   ├── LoadGameScene.tscn     # Save file browser
-│   └── GameScene.tscn         # Placeholder — game world stub
+├── scenes/                        # All .tscn files
+│   ├── MainMenu.tscn              # Entry point
+│   ├── OptionsScene.tscn          # Tabbed settings
+│   ├── LoadGameScene.tscn
+│   ├── GameScene.tscn             # Current placeholder
+│   ├── WorldScene.tscn
+│   ├── LoadingScene.tscn
+│   ├── CharacterCreationScene.tscn
+│   ├── CharactersScene.tscn
+│   ├── GameModeScene.tscn
+│   ├── MapSelectScene.tscn
+│   └── DebugScene.tscn
 │
-├── scripts/
+├── scripts/                       # All GDScript files (~29 files)
 │   ├── MainMenu.gd
-│   ├── OptionsScene.gd        # Builds all tab content programmatically
+│   ├── OptionsScene.gd            # Dynamically builds tabs
 │   ├── LoadGameScene.gd
-│   └── BackToMenu.gd
+│   ├── BackToMenu.gd
+│   ├── SettingsManager.gd
+│   ├── GameState.gd
+│   ├── GameScene.gd
+│   ├── WorldScene.gd
+│   ├── RTSController.gd / RTSUnit.gd
+│   ├── CharacterManager.gd
+│   ├── EntityDataManager.gd
+│   ├── MapManager.gd / GroundsManager.gd
+│   ├── FactionsManager.gd / AgesManager.gd
+│   ├── FPSOverlay.gd
+│   ├── UIEffects.gd
+│   ├── UnitSpriteHelper.gd / BuildingSpriteHelper.gd
+│   ├── WorldRenderer.gd / ImageLayerManager.gd / MinimapDrawer.gd
+│   ├── DebugScene.gd
+│   └── ... (several more helpers)
 │
-└── theme/
-    ├── ElinTheme.tres          # ★ Active theme — Elin parchment palette
-    └── SteampunkTheme.tres     # Legacy reference (unused)
+├── theme/
+│   ├── ElinTheme.tres             # Active parchment/Elin-style theme (warm paper tones)
+│   └── SteampunkTheme.tres        # Old unused reference
+│
+├── data/                          # Currently mostly empty or minimal
+├── docs/                          # Documentation & raw data
+│   ├── aurora_dusk_swf_analysis.md
+│   ├── aurora_full.md
+│   ├── game_full.md
+│   ├── raw_original_full.md       # Your repomix of original JS definitions
+│   ├── coding_rules.md
+│   └── (the two swf zips)
+│
+└── (no addons/, no resources/ yet)
 ```
 
 ---
@@ -113,17 +148,51 @@ Search in Godot's built-in **AssetLib** tab:
 
 ---
 
-## 🗺️ Development Roadmap
+## 🗺️ Development Roadmap Estimate
 
-- [x] **Phase 1.0** — Main Menu (Start · Load · Options · Exit)
-- [x] **Phase 1.5** — Elin-style UI overhaul + expanded tabbed Options
-- [ ] **Phase 2** — World Map + Camera system (TileMap)
-- [ ] **Phase 3** — Village Builder + resource nodes
-- [ ] **Phase 4** — Character Controller + RPG stats
-- [ ] **Phase 5** — Combat + Tower Defense layer
-- [ ] **Phase 6** — Automation / AI followers editor
-- [ ] **Phase 7** — Co-op Multiplayer
-- [ ] **Phase 8** — Age Progression (Wood Age → Steam Age)
+Phase 1 – UI & Foundation (mostly done / 70-80% complete)
+
+Main menu, options, load/save UI, theming, basic navigation
+Settings persistence
+Character creation / selection UI
+Debug tools
+
+Phase 2 – Core Simulation Framework (next 4–8 weeks of part-time work)
+
+Set up autoload singletons (GameWorld, EntityManager, TerrainManager, EconomyManager, CombatManager, AIManager, MessageBus)
+Implement Terrain grid + elevation/decalageY system (GroundsManager)
+Basic entity system (Perso → Vivant → Mobile/Combattant/Artisan hierarchy)
+Data loading pipeline from your unified JSON files (resources, ages, skills, items, etc.)
+Save/Load system (entity states + resources)
+
+Phase 3 – Gameplay Loop (2–4 months)
+
+Map generation / loading
+Entity spawning & movement (with terrain speed)
+Basic production / Atelier system
+Resource gathering & economy
+Epoch / Age progression (AgesManager + BatimentCentreVille)
+Simple AI and wave system
+
+Phase 4 – Combat & Polish (2–3 months)
+
+Full combat system (attacks, projectiles, poison, multi-hit)
+RTS-style controls or hybrid input
+Visual effects, minimap, world rendering
+Sound & music integration
+
+Phase 5 – Content & Expansion
+
+Full item system (handheld/wearable/misc from your JSONs)
+Buildings, workshops, resurrection, etc.
+Multiplayer foundations (if desired)
+Balancing, bestiary, campaign/missions
+
+Overall Timeline Estimate (part-time, solo):
+
+Playable prototype (walk around map, basic production & combat) → 3–5 months
+Faithful remake with most original systems → 8–14 months
+Polished, content-complete version → 12–18+ months
 
 ---
 
