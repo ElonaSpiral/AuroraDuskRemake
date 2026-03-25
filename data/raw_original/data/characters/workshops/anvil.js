@@ -1,0 +1,241 @@
+{
+	"anvil":{
+		"type":"workshop",
+		"age":"ironAge",
+		"no":14,
+		"picture":{"file":"anvil.png",
+				   "file100":"anvil100.atf"},
+		"name":{"EN":"anvil",
+				"FR":"enclume",
+				"JP":"金床"},
+		"description":{"EN":"The anvil is a workshop which allows you to manufacture iron melee weapons.",
+					   "FR":"L'enclume est un atelier sur lequel vous pouvez fabriquer des armes de contact en fer.",
+					   "JP":"鋳鉄や鋼鉄を用いて近接武器の製造が可能です。鋳鉄を用いて建築することができます。"},
+		"build":{
+			"buildable":"all",
+			"costRessource":{"castIron":10},
+			"costPrimaryCharacteristic":{"stamina":3},
+			"sound":"soundBuilding",
+			"bonusSkill":"building",
+			"xpSkill":{"building":3},
+			"xpSecondaryCharacteristic":{"strength":3},
+			"prebuild":{"id":"anvilYard", "time":1.5}
+		},
+		"quantity":60,
+		"zero":{"EN":{"D":["I cannot find any anvil."]},
+				"FR":{"D":["Je ne trouve pas d'enclume."]},
+				"JP":{"D":["金床が見当たらないな。"]}},
+		"title":{"EN":"Manufacture iron weapons",
+				 "FR":"Fabriquer des armes en fer",
+				 "JP":"金属武器の製造"},
+		"produce":[{
+				"time":3,
+				"gainItem":{"dagger":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"castIron":2},
+				"costPrimaryCharacteristic":{"stamina":6},
+				"xpSecondaryCharacteristic":{"strength":6},
+				"xpSkill":{"weaponsForging":6},
+				"quantity":-2
+			},{
+				"time":6,
+				"gainItem":{"shortSword":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"castIron":3},
+				"costPrimaryCharacteristic":{"stamina":9},
+				"xpSecondaryCharacteristic":{"strength":9},
+				"xpSkill":{"weaponsForging":9},
+				"quantity":-3
+			},{
+				"time":6,
+				"gainItem":{"battleAxe":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"wood":12, "castIron":1},
+				"costPrimaryCharacteristic":{"stamina":9},
+				"xpSecondaryCharacteristic":{"strength":9},
+				"xpSkill":{"weaponsForging":9},
+				"quantity":-3
+			},{
+				"time":6,
+				"gainItem":{"mace":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"wood":6, "castIron":2},
+				"costPrimaryCharacteristic":{"stamina":9},
+				"xpSecondaryCharacteristic":{"strength":9},
+				"xpSkill":{"weaponsForging":9},
+				"quantity":-3
+			},{
+				"time":12,
+				"gainItem":{"pike":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"wood":12, "castIron":4},
+				"costPrimaryCharacteristic":{"stamina":18},
+				"xpSecondaryCharacteristic":{"strength":18},
+				"xpSkill":{"weaponsForging":18},
+				"quantity":-6
+			},{
+				"time":4.5,
+				"gainItem":{"cutlass":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"castIron":3},
+				"costPrimaryCharacteristic":{"stamina":9},
+				"xpSecondaryCharacteristic":{"strength":9},
+				"xpSkill":{"weaponsForging":9},
+				"quantity":-3
+			},{
+				"time":6,
+				"gainItem":{"longSword":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"castIron":4},
+				"costPrimaryCharacteristic":{"stamina":12},
+				"xpSecondaryCharacteristic":{"strength":12},
+				"xpSkill":{"weaponsForging":12},
+				"quantity":-4
+			},{
+				"time":12,
+				"gainItem":{"twoHandedSword":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"castIron":8},
+				"costPrimaryCharacteristic":{"stamina":24},
+				"xpSecondaryCharacteristic":{"strength":24},
+				"xpSkill":{"weaponsForging":24},
+				"quantity":-8
+			},{
+				"time":6,
+				"gainItem":{"warAxe":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"wood":12, "castIron":2},
+				"costPrimaryCharacteristic":{"stamina":12},
+				"xpSecondaryCharacteristic":{"strength":12},
+				"xpSkill":{"weaponsForging":12},
+				"quantity":-4
+			},{
+				"time":6,
+				"gainItem":{"warHammer":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"wood":6, "castIron":3},
+				"costPrimaryCharacteristic":{"stamina":12},
+				"xpSecondaryCharacteristic":{"strength":12},
+				"xpSkill":{"weaponsForging":12},
+				"quantity":-4
+			},{
+				"time":12,
+				"gainItem":{"twoHandedHammer":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"wood":12, "castIron":6},
+				"costPrimaryCharacteristic":{"stamina":24},
+				"xpSecondaryCharacteristic":{"strength":24},
+				"xpSkill":{"weaponsForging":24},
+				"quantity":-8
+			},{
+				"time":12,
+				"gainItem":{"vouge":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"wood":18, "castIron":5},
+				"costPrimaryCharacteristic":{"stamina":24},
+				"xpSecondaryCharacteristic":{"strength":24},
+				"xpSkill":{"weaponsForging":24},
+				"quantity":-8
+			},{
+				"time":6,
+				"gainItem":{"saber":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"castIron":4},
+				"costPrimaryCharacteristic":{"stamina":12},
+				"xpSecondaryCharacteristic":{"strength":12},
+				"xpSkill":{"weaponsForging":12},
+				"quantity":-4
+			},{
+				"time":7.5,
+				"gainItem":{"bastardSword":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"castIron":5},
+				"costPrimaryCharacteristic":{"stamina":15},
+				"xpSecondaryCharacteristic":{"strength":15},
+				"xpSkill":{"weaponsForging":15},
+				"quantity":-5
+			},{
+				"time":7.5,
+				"gainItem":{"flail":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"wood":6, "castIron":4},
+				"costPrimaryCharacteristic":{"stamina":15},
+				"xpSecondaryCharacteristic":{"strength":15},
+				"xpSkill":{"weaponsForging":15},
+				"quantity":-5
+			},{
+				"time":15,
+				"gainItem":{"broadSword":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"castIron":10},
+				"costPrimaryCharacteristic":{"stamina":30},
+				"xpSecondaryCharacteristic":{"strength":30},
+				"xpSkill":{"weaponsForging":30},
+				"quantity":-10
+			},{
+				"time":15,
+				"gainItem":{"twoHandedAxe":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"wood":12, "castIron":8},
+				"costPrimaryCharacteristic":{"stamina":30},
+				"xpSecondaryCharacteristic":{"strength":30},
+				"xpSkill":{"weaponsForging":30},
+				"quantity":-10
+			},{
+				"time":15,
+				"gainItem":{"halberd":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"wood":24, "castIron":6},
+				"costPrimaryCharacteristic":{"stamina":30},
+				"xpSecondaryCharacteristic":{"strength":30},
+				"xpSkill":{"weaponsForging":30},
+				"quantity":-10
+			},{
+				"time":6,
+				"gainItem":{"anvilHammer":1},
+				"bonusTimeSkill":"weaponsForging",
+				"costRessource":{"wood":12},
+				"costPrimaryCharacteristic":{"stamina":12},
+				"xpSecondaryCharacteristic":{"strength":12},
+				"xpSkill":{"weaponsForging":12},
+				"quantity":-100
+			}],
+		"repair":{
+			"health":15,
+			"time":1.5,
+			"costRessource":{"castIron":1},
+			"costPrimaryCharacteristic":{"stamina":3},
+			"sound":"soundBuilding",
+			"bonusSkill":"repairing",
+			"xpSkill":{"repairing":3},
+			"xpSecondaryCharacteristic":{"endurance":3}
+		},
+		"death":{
+			"effect":{"name":"destruction"}
+		},
+		"width":48,
+		"height":40,
+		"health":150,
+		"defense":300,
+		"resistance":{"fire":1.5, "death":0.5, "demolition":2, "poison":0}
+	},
+	"anvilYard":{
+		"type":"prebuild",
+		"picture":{"file":"anvilYard.png",
+				   "file100":"anvilYard100.atf"},
+		"name":{"EN":"anvil",
+				"FR":"enclume",
+				"JP":"金床"},
+		"description":{"EN":"The anvil is a workshop which allows you to manufacture iron melee weapons.",
+					   "FR":"L'enclume est un atelier sur lequel vous pouvez fabriquer des armes en fer de contact.",
+					   "JP":"鋳鉄や鋼鉄を用いて近接武器の製造が可能です。鋳鉄を用いて建築することができます。"},
+		"death":{
+			"effect":{"name":"destruction"}
+		},
+		"width":48,
+		"height":40,
+		"defense":300,
+		"resistance":{"fire":2, "death":0.5, "demolition":2, "poison":0},
+		"steps":0
+	}
+}

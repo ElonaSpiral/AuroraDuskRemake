@@ -1,0 +1,147 @@
+{
+	"laboratory":{
+		"type":"workshop",
+		"age":"etherAge",
+		"no":18,
+		"picture":{"file":"laboratory.png",
+				   "file100":"laboratory100.atf"},
+		"name":{"EN":"laboratory",
+				"FR":"laboratoire",
+				"JP":"製剤所"},
+		"description":{"EN":"The laboratory is a workshop which allows you to manufacture potions.",
+					   "FR":"Le laboratoire est un atelier dans lequel vous pouvez fabriquer des potions.",
+					   "JP":"薬草や水晶などを用いて様々な薬品の調剤が可能です。厚板を用いて建築することができます。"},
+		"build":{
+			"buildable":"all",
+			"costRessource":{"plank":10},
+			"costPrimaryCharacteristic":{"stamina":1},
+			"sound":"soundBuilding",
+			"bonusSkill":"building",
+			"xpSkill":{"building":1},
+			"xpSecondaryCharacteristic":{"address":1},
+			"prebuild":{"id":"laboratoryYard", "time":0.5}
+		},
+		"quantity":100,
+		"zero":{"EN":{"D":["I cannot find any laboratory."]},
+				"FR":{"D":["Je ne trouve pas de laboratoire."]},
+				"JP":{"D":["製剤所が見当たらないな。"]}},
+		"title":{"EN":"Concoct potions",
+				 "FR":"Concocter des potions",
+				 "JP":"薬品の調合"},
+		"produce":[{
+				"time":4.5,
+				"gainItem":{"lightLifePotion":3},
+				"sound":"soundBottle",
+				"bonusSkill":"apothecary",
+				"costRessource":{"medicinalHerbs":9},
+				"costPrimaryCharacteristic":{"stamina":9},
+				"xpSecondaryCharacteristic":{"willpower":9},
+				"xpSkill":{"apothecary":9},
+				"repeat":true,
+				"quantity":-4
+			},{
+				"time":4,
+				"gainItem":{"lightEther":3},
+				"sound":"soundBottle",
+				"bonusSkill":"apothecary",
+				"costRessource":{"crystals":2},
+				"costPrimaryCharacteristic":{"stamina":8},
+				"xpSecondaryCharacteristic":{"willpower":8},
+				"xpSkill":{"apothecary":8},
+				"repeat":true,
+				"quantity":-4
+			},{
+				"time":5,
+				"gainItem":{"regenerationElixir":1},
+				"sound":"soundBottle",
+				"bonusSkill":"apothecary",
+				"costRessource":{"medicinalHerbs":10},
+				"costPrimaryCharacteristic":{"stamina":10},
+				"xpSecondaryCharacteristic":{"willpower":10},
+				"xpSkill":{"apothecary":10},
+				"repeat":true,
+				"quantity":-5
+			},{
+				"time":6,
+				"gainItem":{"lifePotion":3},
+				"sound":"soundBottle",
+				"bonusSkill":"apothecary",
+				"costRessource":{"medicinalHerbs":12},
+				"costPrimaryCharacteristic":{"stamina":12},
+				"xpSecondaryCharacteristic":{"willpower":12},
+				"xpSkill":{"apothecary":12},
+				"repeat":true,
+				"quantity":-6
+			},{
+				"time":6,
+				"gainItem":{"ether":3},
+				"sound":"soundBottle",
+				"bonusSkill":"apothecary",
+				"costRessource":{"crystals":3},
+				"costPrimaryCharacteristic":{"stamina":12},
+				"xpSecondaryCharacteristic":{"willpower":12},
+				"xpSkill":{"apothecary":12},
+				"repeat":true,
+				"quantity":-6
+			},{
+				"time":8,
+				"gainItem":{"lifeElixir":1},
+				"sound":"soundBottle",
+				"bonusSkill":"apothecary",
+				"costRessource":{"medicinalHerbs":16},
+				"costPrimaryCharacteristic":{"stamina":16},
+				"xpSecondaryCharacteristic":{"willpower":16},
+				"xpSkill":{"apothecary":16},
+				"repeat":true,
+				"quantity":-8
+			},{
+				"time":8,
+				"gainItem":{"manaElixir":1},
+				"sound":"soundBottle",
+				"bonusSkill":"apothecary",
+				"costRessource":{"crystals":4},
+				"costPrimaryCharacteristic":{"stamina":16},
+				"xpSecondaryCharacteristic":{"willpower":16},
+				"xpSkill":{"apothecary":16},
+				"repeat":true,
+				"quantity":-8
+			}],
+		"repair":{
+			"health":10,
+			"time":0.5,
+			"costRessource":{"plank":1},
+			"costPrimaryCharacteristic":{"stamina":1},
+			"sound":"soundBuilding",
+			"bonusSkill":"repairing",
+			"xpSkill":{"repairing":1},
+			"xpSecondaryCharacteristic":{"rapidity":1}
+		},
+		"death":{
+			"effect":{"name":"destruction"}
+		},
+		"width":64,
+		"height":64,
+		"health":100,
+		"defense":150,
+		"resistance":{"fire":2, "death":0.5, "demolition":2, "poison":0}
+	},
+	"laboratoryYard":{
+		"type":"prebuild",
+		"picture":{"file":"laboratoryYard.png",
+				   "file100":"laboratoryYard100.atf"},
+		"name":{"EN":"laboratory",
+				"FR":"laboratoire",
+				"JP":"製剤所"},
+		"description":{"EN":"The laboratory is a workshop which allows you to manufacture potions.",
+					   "FR":"Le laboratoire est un atelier dans lequel vous pouvez fabriquer des potions.",
+					   "JP":"薬草や水晶などを用いて様々な薬品の調剤が可能です。厚板を用いて建築することができます。"},
+		"death":{
+			"effect":{"name":"destruction"}
+		},
+		"width":64,
+		"height":64,
+		"defense":150,
+		"resistance":{"fire":2, "death":0.5, "demolition":2, "poison":0},
+		"steps":0
+	}
+}
