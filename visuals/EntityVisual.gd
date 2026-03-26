@@ -71,5 +71,6 @@ func update_visual(delta: float) -> void:
 
 # Cleanup when entity is removed
 func _exit_tree() -> void:
-	if current_sprite:
+	if current_sprite and is_instance_valid(current_sprite):
 		current_sprite.queue_free()
+	current_sprite = null
