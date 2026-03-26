@@ -45,14 +45,14 @@
           "id":      "character",
           "file":    "home.png",
           "stretch": "keep_aspect_covered",
-          "blend":   "add",
+          "blend":   "normal",
           "_note":   "home.png has a pure-black background (no real alpha). ADD blending makes black transparent.",
           "opacity": 1.0
         },
         {
           "id":      "vignette",
           "file":    null,
-          "color":   [0.0, 0.0, 0.0, 0.45],
+          "color":   [0.0, 0.0, 0.0, 0.0],
           "_note":   "Darkening overlay. Set opacity to 0 to disable."
         }
       ]
