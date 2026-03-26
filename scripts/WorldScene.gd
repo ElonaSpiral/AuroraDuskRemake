@@ -411,19 +411,15 @@ func _spawn_test_unit(id: int, sprite_file: String, start_pos: Vector2, move_typ
 	}
 	
 	var visual = SpriteManager.create_entity_visual(test_unit)
-	if not visual or not visual is UnitVisual:
-		print("Failed to create test unit ", id)
+	if not visual:
 		return
 	
-	print("Spawned test unit ", id, " with sprite: ", sprite_file)
-	
-	# Create back-and-forth movement
 	var tween = create_tween()
-	tween.set_loops()  # Make it repeat forever
+	tween.set_loops()
 	
 	if move_type == "horizontal":
-		tween.tween_property(visual, "position:x", start_pos.x + 600, 5.0)
-		tween.tween_property(visual, "position:x", start_pos.x, 5.0)
-	else:  # vertical
-		tween.tween_property(visual, "position:y", start_pos.y + 400, 4.0)
-		tween.tween_property(visual, "position:y", start_pos.y, 4.0)
+		tween.tween_property(visual, "position:x", start_pos.x + 600, 8.0)
+		tween.tween_property(visual, "position:x", start_pos.x, 8.0)
+	else:
+		tween.tween_property(visual, "position:y", start_pos.y + 400, 8.0)
+		tween.tween_property(visual, "position:y", start_pos.y, 8.0)

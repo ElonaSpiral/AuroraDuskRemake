@@ -48,3 +48,6 @@ func _on_back() -> void:
 	t.tween_callback(func() -> void:
 		get_tree().change_scene_to_file(SCENE_MAIN)
 	)
+
+func _on_test_map_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/WorldScene.tscn")
