@@ -1,74 +1,66 @@
 # visuals/UnitVisual.gd
-# Visual representation for living/moving entities (units, artisans, combatants, player, etc.)
-# Extends the base EntityVisual
+# Enhanced UnitVisual with sprite sheet + basic paper-doll support
 
 extends EntityVisual
 class_name UnitVisual
 
-# Extra nodes specific to units
-var shadow_sprite: Sprite2D = null
-var mount_sprite: Sprite2D = null   # For mounts like Pegasus, horses, etc.
+var animated_sprite: AnimatedSprite2D = null
+var paper_doll_layers: Dictionary = {}  # "hair", "armor", "weapon", "mount", etc.
 
 func setup(data: Dictionary) -> void:
-    super.setup(data)  # Call base class setup first
+	super.setup(data)
+	
+	# Remove base sprite and use AnimatedSprite2D instead
+	if current_sprite:
+		current_sprite.queue_free()
+		current_sprite = null
+	
+	animated_sprite = AnimatedSprite2D.new()
+	animated_sprite.sprite_frames = SpriteFrames.new()
+	animated_sprite.centered = true
+	add_child(animated_sprite)
+	
+	# Load main body / unit sprite sheet
+	var main_sheet = data.get("picture", {}).get("file", "")
+	_load_main_sprite_sheet(main_sheet)
+	
+	# Load paper-doll layers (hair, equipment, etc.)
+	_load_paper_doll_layers(data)
 
-    # Add shadow (simple circle or custom shadow texture)
-    shadow_sprite = Sprite2D.new()
-    shadow_sprite.texture = SpriteManager.load_texture("shadow.png")  # We'll create this later or use a simple one
-    shadow_sprite.modulate = Color(0, 0, 0, 0.4)
-    shadow_sprite.position = Vector2(0, 8)   # Slight offset below the unit
-    shadow_sprite.z_index = -5
-    add_child(shadow_sprite)
+func _load_main_sprite_sheet(filename: String) -> void:
+	if filename.is_empty():
+		return
+	
+	var texture = SpriteManager.load_texture(filename)
+	if not texture:
+		return
+	
+	# Create a default animation from the sheet
+	# TODO: Improve this with proper frame slicing based on your sheet layout (3 columns, multiple rows)
+	animated_sprite.sprite_frames.add_animation("idle")
+	animated_sprite.sprite_frames.add_frame("idle", texture)
+	animated_sprite.play("idle")
 
-    # Check if this unit has a mount (Pegasus, horse, etc.)
-    if data.has("mount") and data["mount"] != null:
-        _setup_mount(data["mount"])
+func _load_paper_doll_layers(data: Dictionary) -> void:
+	# Example layers - expand based on your actual data structure
+	var layers_to_load = ["hair", "armor", "helmet", "weapon", "mount"]
+	
+	for layer_name in layers_to_load:
+		var layer_data = data.get(layer_name)
+		if layer_data and layer_data is Dictionary:
+			var file = layer_data.get("file", "")
+			if not file.is_empty():
+				var layer_sprite = Sprite2D.new()
+				layer_sprite.texture = SpriteManager.load_texture(file)
+				layer_sprite.z_index = 10 + layers_to_load.find(layer_name)  # Higher layers on top
+				add_child(layer_sprite)
+				paper_doll_layers[layer_name] = layer_sprite
 
-func _setup_mount(mount_data: Dictionary) -> void:
-    mount_sprite = Sprite2D.new()
-    var mount_filename = mount_data.get("picture", {}).get("file", "missing.png")
-    mount_sprite.texture = SpriteManager.load_texture(mount_filename)
-    mount_sprite.z_index = -1   # Behind the rider
-    add_child(mount_sprite)
-
-# Override appearance refresh for units (handles orientation, animation state, etc.)
+# Update orientation / facing
 func refresh_appearance() -> void:
-    super.refresh_appearance()
+	var orientation = entity_data.get("orientation", 0)
+	if animated_sprite:
+		animated_sprite.flip_h = orientation > 180
 
-    # Handle orientation / facing direction (original game used "orientation")
-    var orientation = entity_data.get("orientation", 0)
-    if current_sprite:
-        # Simple flip for left/right facing (can be expanded to 8 directions later)
-        current_sprite.flip_h = orientation > 180
-
-    # TODO: Add AnimatedSprite2D support for walk/idle/attack animations
-    # This will be expanded once we integrate with your animation assets
-
-# Update position with smooth movement (optional interpolation)
-func update_visual(delta: float) -> void:
-    # You can add lerp/smoothing here later for nicer movement
-    update_position()
-
-# Special method for combat effects (damage flash, poison tint, etc.)
-func apply_combat_effect(effect_type: String) -> void:
-    if not current_sprite:
-        return
-
-    match effect_type:
-        "damage":
-            current_sprite.modulate = Color(1, 0.3, 0.3, 1)  # Red flash
-            await get_tree().create_timer(0.15).timeout
-            current_sprite.modulate = Color.WHITE
-        "poison":
-            current_sprite.modulate = Color(0.6, 1.0, 0.4, 1)  # Green tint
-        "heal":
-            current_sprite.modulate = Color(0.4, 1.0, 0.6, 1)
-            await get_tree().create_timer(0.3).timeout
-            current_sprite.modulate = Color.WHITE
-
-# Called when the unit dies
-func play_death_animation() -> void:
-    if current_sprite:
-        var tween = create_tween()
-        tween.tween_property(current_sprite, "modulate:a", 0.0, 0.6)  # Fade out
-        tween.tween_callback(queue_free)
+func update_visual(_delta: float) -> void:
+	update_position()
