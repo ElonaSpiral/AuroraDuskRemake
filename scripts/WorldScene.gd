@@ -59,17 +59,14 @@ func _ready() -> void:
 	_populate_map_picker()
 	_setup_hud()
 	_setup_camera()
-
-    SpriteManager.initialize($VisualRoot)   # Make sure you have a Node2D named VisualRoot in the scene
-# Make sure SpriteManager is ready
-    if not SpriteManager.visual_root:
-        SpriteManager.initialize($VisualRoot)   # $VisualRoot must exist in the scene
-
-    print("WorldScene ready - SpriteManager initialized")
-
-    # === TEMPORARY TEST CODE ===
-    # Remove or comment this out later
-    _create_test_unit()
+	
+	# Initialize SpriteManager
+	SpriteManager.initialize($VisualRoot)
+	
+	print("WorldScene ready - SpriteManager initialized")
+	
+	# === TEST ENTITIES ===
+	_create_test_entities()
 
 	btn_back.pressed.connect(_on_back)
 	btn_grid.pressed.connect(_on_toggle_grid)
@@ -111,22 +108,6 @@ func _ready() -> void:
 	modulate.a = 0.0
 	create_tween().tween_property(self, "modulate:a", 1.0, 0.40)
 
-
-func _create_test_unit() -> void:
-    # Example entity data (similar to original game structure)
-    var test_entity = {
-        "id": 1001,
-        "type": "unit",
-        "x": 400,
-        "y": 300,
-        "decalageY": 0,
-        "picture": { "file": "unit_test.png" },   # Change to a real sprite later
-        "orientation": 0
-    }
-
-    var visual = SpriteManager.create_entity_visual(test_entity)
-    if visual:
-        print("Test unit visual created successfully!")
 
 
 # ─────────────────────────────────────────────────────────────
@@ -405,3 +386,49 @@ func _on_toggle_grid() -> void:
 
 func _on_map_selected(idx: int) -> void:
 	_load_map_by_idx(idx)
+
+
+
+# ==================== IMPROVED TEST CODE ====================
+# Put this at the bottom of WorldScene.gd
+
+func _create_test_unit() -> void:
+	var test_unit = {
+		"id": 1001,
+		"type": "unit",
+		"x": 3000,
+		"y": 4000,
+		"decalageY": 10,
+		"picture": { "file": "unit_test.png" },
+		"orientation": 90,
+		"health_percent": 1.0
+	}
+	
+	var visual = SpriteManager.create_entity_visual(test_unit)
+	if visual:
+		print("✅ Test Unit created at ", visual.position)
+	else:
+		print("❌ Failed to create test unit")
+
+func _create_test_building() -> void:
+	var test_building = {
+		"id": 2001,
+		"type": "building",
+		"x": 3200,
+		"y": 4100,
+		"decalageY": 0,
+		"picture": { "file": "building_test.png" },
+		"is_construction": false,
+		"health_percent": 0.85
+	}
+	
+	var visual = SpriteManager.create_entity_visual(test_building)
+	if visual:
+		print("✅ Test Building created at ", visual.position)
+	else:
+		print("❌ Failed to create test building")
+
+# Call both tests
+func _create_test_entities() -> void:
+	_create_test_unit()
+	_create_test_building()
