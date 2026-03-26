@@ -35,11 +35,15 @@ func _load_main_sprite_sheet(filename: String) -> void:
 	if not texture:
 		return
 	
-	# Create a default animation from the sheet
-	# TODO: Improve this with proper frame slicing based on your sheet layout (3 columns, multiple rows)
-	animated_sprite.sprite_frames.add_animation("idle")
-	animated_sprite.sprite_frames.add_frame("idle", texture)
-	animated_sprite.play("idle")
+	# Force use of the sheet loader
+	var sprite_frames = SpriteSheetLoader.create_sprite_frames(texture)
+	if sprite_frames and animated_sprite:
+		animated_sprite.sprite_frames = sprite_frames
+		animated_sprite.play("idle_down")
+		animated_sprite.speed_scale = 10.0
+		print("Loaded sprite sheet: " + filename + " with proper slicing")
+	else:
+		print("Failed to create sprite frames for " + filename)
 
 func _load_paper_doll_layers(data: Dictionary) -> void:
 	# Example layers - expand based on your actual data structure
