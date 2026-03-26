@@ -60,14 +60,10 @@ func _ready() -> void:
 	_setup_hud()
 	_setup_camera()
 	
-	# Initialize SpriteManager
 	SpriteManager.initialize($VisualRoot)
-	
 	print("WorldScene ready - SpriteManager initialized")
 	
-	# === TEST ENTITIES ===
-	_create_test_entities()
-	_test_unit_movement()
+	_create_test_units()   # <--- This spawns multiple moving units
 
 	btn_back.pressed.connect(_on_back)
 	btn_grid.pressed.connect(_on_toggle_grid)
@@ -390,64 +386,44 @@ func _on_map_selected(idx: int) -> void:
 
 
 
-# ==================== IMPROVED TEST CODE ====================
-# Put this at the bottom of WorldScene.gd
+# ==================== IMPROVED MULTI-UNIT TEST ====================
+# Add this at the bottom of WorldScene.gd
 
-func _create_test_unit() -> void:
-	var test_unit = {
-		"id": 1001,
-		"type": "unit",
-		"x": 3000,
-		"y": 4000,
-		"decalageY": 10,
-		"picture": { "file": "soldiers/infantryman.png" },
-		"orientation": 0,
-		"health_percent": 1.0
-	}
+func _create_test_units() -> void:
+	# Test 1: Infantry moving right/left (horizontal)
+	_spawn_test_unit(1001, "soldiers/infantryman.png", Vector2(2800, 3800), "horizontal")
 	
-	var visual = SpriteManager.create_entity_visual(test_unit)
-	if visual:
-		print("✅ Test Unit created at ", visual.position)
-	else:
-		print("❌ Failed to create test unit")
-
-func _create_test_building() -> void:
-	var test_building = {
-		"id": 2001,
-		"type": "building",
-		"x": 3200,
-		"y": 4100,
-		"decalageY": 0,
-		"picture": { "file": "building_test.png" },
-		"is_construction": false,
-		"health_percent": 0.85
-	}
+	# Test 2: Black Bear moving up/down (vertical)
+	_spawn_test_unit(1002, "monsters/blackBear.png", Vector2(3400, 4200), "vertical")
 	
-	var visual = SpriteManager.create_entity_visual(test_building)
-	if visual:
-		print("✅ Test Building created at ", visual.position)
-	else:
-		print("❌ Failed to create test building")
+	# Test 3: Another soldier for variety
+	_spawn_test_unit(1003, "soldiers/lightHorseman.png", Vector2(3000, 4500), "horizontal")
 
-# Call both tests
-func _create_test_entities() -> void:
-	_create_test_unit()
-	_create_test_building()
-# Temporary auto-move test - add this as a new function
-
-func _test_unit_movement() -> void:
+# Helper to spawn and auto-move a unit
+func _spawn_test_unit(id: int, sprite_file: String, start_pos: Vector2, move_type: String = "horizontal") -> void:
 	var test_unit = {
-		"id": 1001,
+		"id": id,
 		"type": "unit",
-		"x": 2800,
-		"y": 3800,
-		"picture": { "file": "soldiers/infantryman.png" },
+		"x": start_pos.x,
+		"y": start_pos.y,
+		"picture": { "file": sprite_file },
 		"orientation": 0
 	}
 	
 	var visual = SpriteManager.create_entity_visual(test_unit)
-	if visual and visual is UnitVisual:
-		# Simple movement test - move right slowly
-		var tween = create_tween()
-		tween.tween_property(visual, "position:x", visual.position.x + 600, 6.0)  # Slower movement
-		tween.tween_callback(func(): print("Test unit finished moving"))
+	if not visual or not visual is UnitVisual:
+		print("Failed to create test unit ", id)
+		return
+	
+	print("Spawned test unit ", id, " with sprite: ", sprite_file)
+	
+	# Create back-and-forth movement
+	var tween = create_tween()
+	tween.set_loops()  # Make it repeat forever
+	
+	if move_type == "horizontal":
+		tween.tween_property(visual, "position:x", start_pos.x + 600, 5.0)
+		tween.tween_property(visual, "position:x", start_pos.x, 5.0)
+	else:  # vertical
+		tween.tween_property(visual, "position:y", start_pos.y + 400, 4.0)
+		tween.tween_property(visual, "position:y", start_pos.y, 4.0)
