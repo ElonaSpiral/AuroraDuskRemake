@@ -97,18 +97,24 @@ func load_texture(filename: String) -> Texture2D:
 	if filename.is_empty():
 		filename = "missing.png"
 	
-	# Return from cache if already loaded
 	if _texture_cache.has(filename):
 		return _texture_cache[filename]
 	
-	var path = "res://assets/sprites/" + filename
+	# Try multiple possible paths
+	var possible_paths = [
+		"res://assets/characters/" + filename,                    # direct filename
+		"res://assets/characters/soldiers/" + filename,
+		"res://assets/characters/monsters/" + filename,
+		"res://assets/characters/playables/" + filename,
+		"res://assets/sprites/" + filename                        # fallback folder
+	]
 	
-	# Try to load real texture first
-	if ResourceLoader.exists(path):
-		var texture: Texture2D = load(path)
-		if texture:
-			_texture_cache[filename] = texture
-			return texture
+	for path in possible_paths:
+		if ResourceLoader.exists(path):
+			var texture: Texture2D = load(path)
+			if texture:
+				_texture_cache[filename] = texture
+				return texture
 	
 	# === FALLBACK: Colored gradient square based on type ===
 	push_warning("SpriteManager: Missing texture '" + filename + "' → using colored placeholder")
@@ -208,3 +214,6 @@ func debug_print_status() -> void:
 	print("SpriteManager Status:")
 	print("  Active visuals: ", _visual_resources.size())
 	print("  Cached textures: ", _texture_cache.size())
+
+func _process(delta: float) -> void:
+	update_all_visuals(delta)
