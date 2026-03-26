@@ -33,17 +33,17 @@ func _load_main_sprite_sheet(filename: String) -> void:
 	
 	var texture = SpriteManager.load_texture(filename)
 	if not texture:
+		print("Failed to load texture for: " + filename)
 		return
 	
-	# Force use of the sheet loader
 	var sprite_frames = SpriteSheetLoader.create_sprite_frames(texture)
 	if sprite_frames and animated_sprite:
 		animated_sprite.sprite_frames = sprite_frames
 		animated_sprite.play("idle_down")
 		animated_sprite.speed_scale = 10.0
-		print("Loaded sprite sheet: " + filename + " with proper slicing")
+		print("Successfully loaded and sliced sprite sheet: " + filename)
 	else:
-		print("Failed to create sprite frames for " + filename)
+		print("Failed to create sprite frames for: " + filename)
 
 func _load_paper_doll_layers(data: Dictionary) -> void:
 	# Example layers - expand based on your actual data structure
