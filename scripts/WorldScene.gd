@@ -67,6 +67,7 @@ func _ready() -> void:
 	
 	# === TEST ENTITIES ===
 	_create_test_entities()
+	_test_unit_movement()
 
 	btn_back.pressed.connect(_on_back)
 	btn_grid.pressed.connect(_on_toggle_grid)
@@ -399,8 +400,8 @@ func _create_test_unit() -> void:
 		"x": 3000,
 		"y": 4000,
 		"decalageY": 10,
-		"picture": { "file": "unit_test.png" },
-		"orientation": 90,
+		"picture": { "file": "soldiers/infantryman.png" },
+		"orientation": 0,
 		"health_percent": 1.0
 	}
 	
@@ -432,3 +433,21 @@ func _create_test_building() -> void:
 func _create_test_entities() -> void:
 	_create_test_unit()
 	_create_test_building()
+# Temporary auto-move test - add this as a new function
+
+func _test_unit_movement() -> void:
+	var test_unit = {
+		"id": 1001,
+		"type": "unit",
+		"x": 2800,
+		"y": 3800,
+		"picture": { "file": "soldiers/infantryman.png" },
+		"orientation": 0
+	}
+	
+	var visual = SpriteManager.create_entity_visual(test_unit)
+	if visual and visual is UnitVisual:
+		# Simple movement test - move right slowly
+		var tween = create_tween()
+		tween.tween_property(visual, "position:x", visual.position.x + 600, 6.0)  # Slower movement
+		tween.tween_callback(func(): print("Test unit finished moving"))
