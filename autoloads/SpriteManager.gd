@@ -22,63 +22,146 @@ func _ready() -> void:
     # Register as autoload in project.godot or add via code
     process_mode = Node.PROCESS_MODE_ALWAYS
 
-    # ------------------------------------------------------------------
-    # Initialization - Call this from WorldScene or GameState after data is loaded
-    # ------------------------------------------------------------------
-    func initialize(root: Node2D) -> void:
-        visual_root = root
-        _load_all_visual_resources()
-        print("SpriteManager initialized")
+# ------------------------------------------------------------------
+# Initialization - Call this from WorldScene or GameState after data is loaded
+# ------------------------------------------------------------------
+func initialize(root: Node2D) -> void:
+    visual_root = root
+    _load_all_visual_resources()
+    print("SpriteManager initialized")
 
-        # ------------------------------------------------------------------
-        # Load visual definitions from your data/ JSONs (to be expanded)
-        # ------------------------------------------------------------------
-        func _load_all_visual_resources() -> void:
-            # Example: Load from EntityDataManager or directly from JSON
-            # For now, placeholder - we'll expand this with your item/entity JSONs
-            pass
+# ------------------------------------------------------------------
+# Load visual definitions from your data/ JSONs (to be expanded)
+# ------------------------------------------------------------------
+func _load_all_visual_resources() -> void:
+    # Example: Load from EntityDataManager or directly from JSON
+    # For now, placeholder - we'll expand this with your item/entity JSONs
+    pass
 
-        # ------------------------------------------------------------------
-        # Create a visual for any entity (Perso / Vivant / etc.)
-        # ------------------------------------------------------------------
-        func create_entity_visual(entity_data: Dictionary) -> Node2D:
-            if not visual_root:
-                push_error("SpriteManager: visual_root not set!")
-                return null
+# ------------------------------------------------------------------
+# Create a visual for any entity (Perso / Vivant / etc.)
+# ------------------------------------------------------------------
+func create_entity_visual(entity_data: Dictionary) -> Node2D:
+    if not visual_root:
+        push_error("SpriteManager: visual_root not set!")
+        return null
 
-            var entity_id = entity_data.get("id", -1)
-            if entity_id == -1:
-                return null
+    var entity_id = entity_data.get("id", -1)
+    if entity_id == -1:
+        return null
 
-            var visual_type = entity_data.get("type", "unit")  # "unit", "building", "projectile", etc.
+    var visual_type = entity_data.get("type", "unit")  # "unit", "building", "projectile", etc.
 
-            var visual_node: Node2D
+    var visual_node: Node2D
 
-            match visual_type:
-                "unit":
-                    visual_node = UnitVisual.new()
-                    "building":
-                        visual_node = BuildingVisual.new()
-                        "projectile":
-                            visual_node = ProjectileVisual.new()
-                            _:
-                                visual_node = EntityVisual.new()
+    match visual_type:
+        "unit":
+            visual_node = UnitVisual.new()
+        "building":
+            visual_node = BuildingVisual.new()
+        "projectile":
+            visual_node = ProjectileVisual.new()
+        _:
+            visual_node = EntityVisual.new()
 
-                                visual_node.setup(entity_data)
-                                visual_root.add_child(visual_node)
+    visual_node.setup(entity_data)
+    visual_root.add_child(visual_node)
 
-                                _visual_resources[entity_id] = visual_node
-                                entity_visual_created.emit(entity_id, visual_node)
+    _visual_resources[entity_id] = visual_node
+    entity_visual_created.emit(entity_id, visual_node)
 
-                                return visual_node
+    return visual_node
 
-                            # ------------------------------------------------------------------
-                            # Update visual when simulation sends new data (position, appearance, etc.)
-                            # ------------------------------------------------------------------
-                            func update_entity_visual(entity_id: int, update_data: Dictionary) -> void:
-                                var visual = _visual_resources.get(entity_id)
-                                if not visual:
-                                    return
+# ------------------------------------------------------------------
+# Update visual when simulation sends new data (position, appearance, etc.)
+# ------------------------------------------------------------------
+func update_entity_visual(entity_id: int, update_data: Dictionary) -> void:
+    var visual = _visual_resources.get(entity_id)
+    if not visual:
+        return
 
-                                visual.apply_update(update_data)
-                                entity_visual_updated.emit(entity_id, visual)
+    visual.apply_update(update_data)
+    entity_visual_updated.emit(entity_id, visual)
+
+# ------------------------------------------------------------------
+# Asset Loading Helpers
+# ------------------------------------------------------------------
+func load_texture(filename: String) -> Texture2D:
+    if _texture_cache.has(filename):
+        return _texture_cache[filename]
+
+    var path = "res://assets/sprites/" + filename
+    if not ResourceLoader.exists(path):
+        # Fallback for missing assets during development
+        push_warning("SpriteManager: Missing texture " + filename)
+        path = "res://assets/sprites/missing.png"
+
+    var texture = load(path) as Texture2D
+    if texture:
+        _texture_cache[filename] = texture
+    return texture
+
+func load_atlas_texture(filename: String, region: Rect2) -> AtlasTexture:
+    var base_texture = load_texture(filename)
+    if not base_texture:
+        return null
+
+    var atlas = AtlasTexture.new()
+    atlas.atlas = base_texture
+    atlas.region = region
+    return atlas
+
+# ------------------------------------------------------------------
+# Clear cache when changing scenes or for memory management
+# ------------------------------------------------------------------
+func clear_texture_cache() -> void:
+    for tex in _texture_cache.values():
+        if tex is Texture2D and tex.has_method("dispose"):
+            tex.dispose()
+    _texture_cache.clear()
+    print("SpriteManager: Texture cache cleared")
+
+# ------------------------------------------------------------------
+# Remove a visual entity
+# ------------------------------------------------------------------
+func remove_entity_visual(entity_id: int) -> void:
+    var visual = _visual_resources.get(entity_id)
+    if visual and is_instance_valid(visual):
+        visual.queue_free()
+
+    _visual_resources.erase(entity_id)
+    entity_visual_removed.emit(entity_id)
+
+# ------------------------------------------------------------------
+# Mass removal (useful when changing maps or resetting game)
+# ------------------------------------------------------------------
+func clear_all_visuals() -> void:
+    if visual_root:
+        for child in visual_root.get_children():
+            child.queue_free()
+
+    _visual_resources.clear()
+    print("SpriteManager: All visuals cleared")
+
+# ------------------------------------------------------------------
+# Get visual node by entity ID (useful for debug or special effects)
+# ------------------------------------------------------------------
+func get_visual(entity_id: int) -> Node2D:
+    return _visual_resources.get(entity_id) as Node2D
+
+# ------------------------------------------------------------------
+# Update all visuals (called from WorldScene _process if needed)
+# Optional: can be used for smooth interpolation later
+# ------------------------------------------------------------------
+func update_all_visuals(delta: float) -> void:
+    for visual in _visual_resources.values():
+        if is_instance_valid(visual) and visual.has_method("update_visual"):
+            visual.update_visual(delta)
+
+# ------------------------------------------------------------------
+# Debug helper - Print current visual count
+# ------------------------------------------------------------------
+func debug_print_status() -> void:
+    print("SpriteManager Status:")
+    print("  Active visuals: ", _visual_resources.size())
+    print("  Cached textures: ", _texture_cache.size())
