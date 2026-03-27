@@ -63,7 +63,10 @@ func _ready() -> void:
 	SpriteManager.initialize($VisualRoot)
 	print("WorldScene ready - SpriteManager initialized")
 	
-	_create_test_units()   # <--- This spawns multiple moving units
+	# Spawn multiple test units with different movement patterns
+	_spawn_test_unit(1001, "soldiers/infantryman.png", Vector2(2800, 3800), "horizontal")
+	_spawn_test_unit(1002, "monsters/blackDragon.png", Vector2(3400, 4200), "vertical")
+	_spawn_test_unit(1003, "monsters/wolfRider.png", Vector2(3000, 4500), "horizontal")
 
 	btn_back.pressed.connect(_on_back)
 	btn_grid.pressed.connect(_on_toggle_grid)
@@ -386,20 +389,8 @@ func _on_map_selected(idx: int) -> void:
 
 
 
-# ==================== IMPROVED MULTI-UNIT TEST ====================
-# Add this at the bottom of WorldScene.gd
 
-func _create_test_units() -> void:
-	# Test 1: Infantry moving right/left (horizontal)
-	_spawn_test_unit(1001, "soldiers/infantryman.png", Vector2(2800, 3800), "horizontal")
-	
-	# Test 2: Black Bear moving up/down (vertical)
-	_spawn_test_unit(1002, "monsters/blackBear.png", Vector2(3400, 4200), "vertical")
-	
-	# Test 3: Another soldier for variety
-	_spawn_test_unit(1003, "soldiers/lightHorseman.png", Vector2(3000, 4500), "horizontal")
-
-# Helper to spawn and auto-move a unit
+# Improved test with move → stop 1 second → repeat
 func _spawn_test_unit(id: int, sprite_file: String, start_pos: Vector2, move_type: String = "horizontal") -> void:
 	var test_unit = {
 		"id": id,
@@ -414,12 +405,26 @@ func _spawn_test_unit(id: int, sprite_file: String, start_pos: Vector2, move_typ
 	if not visual:
 		return
 	
+	print("Spawned test unit ", id, " with sprite: ", sprite_file)
+	
+	# Create repeating move → stop cycle
+	_start_move_cycle(visual, start_pos, move_type)
+
+func _start_move_cycle(visual: Node2D, start_pos: Vector2, move_type: String) -> void:
 	var tween = create_tween()
-	tween.set_loops()
+	tween.set_loops()  # Repeat forever
 	
 	if move_type == "horizontal":
-		tween.tween_property(visual, "position:x", start_pos.x + 600, 8.0)
-		tween.tween_property(visual, "position:x", start_pos.x, 8.0)
-	else:
-		tween.tween_property(visual, "position:y", start_pos.y + 400, 8.0)
-		tween.tween_property(visual, "position:y", start_pos.y, 8.0)
+		# Move right
+		tween.tween_property(visual, "position:x", start_pos.x + 600, 5.0)
+		# Stop for 1 second
+		tween.tween_interval(1.0)
+		# Move back left
+		tween.tween_property(visual, "position:x", start_pos.x, 5.0)
+		# Stop for 1 second
+		tween.tween_interval(1.0)
+	else:  # vertical
+		tween.tween_property(visual, "position:y", start_pos.y + 400, 4.0)
+		tween.tween_interval(1.0)
+		tween.tween_property(visual, "position:y", start_pos.y, 4.0)
+		tween.tween_interval(1.0)
