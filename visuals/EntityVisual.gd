@@ -40,14 +40,20 @@ func apply_initial_appearance() -> void:
 
 # Update position + decalageY (elevation offset from original game)
 func update_position() -> void:
+	# For test units using tween, skip entity_data sync to avoid fighting the tween
+	if entity_data.get("test_unit", false):
+		return   # Let the tween control position freely
+
 	if not entity_data.has("x") or not entity_data.has("y"):
 		return
 
 	var world_x = entity_data.get("x", 0)
 	var world_y = entity_data.get("y", 0)
-	var decalage_y = entity_data.get("decalageY", 0)  # Original game's elevation offset
+	var decalage_y = entity_data.get("decalageY", 0)
 
-	position = Vector2(world_x, world_y + decalage_y)
+	var target_pos = Vector2(world_x, world_y + decalage_y)
+	if position.distance_to(target_pos) > 10.0:
+		position = target_pos
 
 # Called by SpriteManager when simulation sends updates (movement, appearance change, damage, etc.)
 func apply_update(update_data: Dictionary) -> void:
