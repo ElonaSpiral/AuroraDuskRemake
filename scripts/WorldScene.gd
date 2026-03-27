@@ -63,11 +63,12 @@ func _ready() -> void:
 	SpriteManager.initialize($VisualRoot)
 	print("WorldScene ready - SpriteManager initialized")
 	
-	# Spawn multiple test units with different movement patterns
-	_spawn_test_unit(1001, "soldiers/infantryman.png", Vector2(2800, 3800), "horizontal")
-	_spawn_test_unit(1002, "monsters/blackDragon.png", Vector2(3400, 4200), "vertical")
-	_spawn_test_unit(1003, "monsters/wolfRider.png", Vector2(3000, 4500), "horizontal")
-
+	# Test 1: 4 units continuously running laps anti-clockwise
+	_spawn_square_lap_test(900.0)
+	
+	# Test 2: 4 units moving corner-to-corner with 1 second stop
+	_spawn_square_stop_test(600.0)
+	
 	btn_back.pressed.connect(_on_back)
 	btn_grid.pressed.connect(_on_toggle_grid)
 	map_picker.item_selected.connect(_on_map_selected)
@@ -388,43 +389,125 @@ func _on_map_selected(idx: int) -> void:
 	_load_map_by_idx(idx)
 
 
-
-
-# Improved test with move → stop 1 second → repeat
-func _spawn_test_unit(id: int, sprite_file: String, start_pos: Vector2, move_type: String = "horizontal") -> void:
+# ─────────────────────────────────────────────────────────────
+# 	TESTING AREA
+# ─────────────────────────────────────────────────────────────
+# Helper to create a test visual unit
+func _create_test_visual(id: int, sprite_file: String, start_pos: Vector2) -> Node2D:
 	var test_unit = {
 		"id": id,
 		"type": "unit",
 		"x": start_pos.x,
 		"y": start_pos.y,
 		"picture": { "file": sprite_file },
-		"orientation": 0
+		"orientation": 0,
+		"test_unit": true
 	}
 	
 	var visual = SpriteManager.create_entity_visual(test_unit)
-	if not visual:
-		return
-	
-	print("Spawned test unit ", id, " with sprite: ", sprite_file)
-	
-	# Create repeating move → stop cycle
-	_start_move_cycle(visual, start_pos, move_type)
+	if visual:
+		visual.position = start_pos
+		print("Spawned test unit ", id, " at ", start_pos)
+	return visual
 
-func _start_move_cycle(visual: Node2D, start_pos: Vector2, move_type: String) -> void:
-	var tween = create_tween()
-	tween.set_loops()  # Repeat forever
+# ─────────────────────────────────────────────────────────────
+#  TEST 1: 4 units running continuous anti-clockwise laps
+# ─────────────────────────────────────────────────────────────
+func _spawn_square_lap_test(square_size: float = 900.0) -> void:
+	var center := Vector2(3000, 4000)
+	var half := square_size / 2.0
 	
-	if move_type == "horizontal":
-		# Move right
-		tween.tween_property(visual, "position:x", start_pos.x + 600, 5.0)
-		# Stop for 1 second
-		tween.tween_interval(1.0)
-		# Move back left
-		tween.tween_property(visual, "position:x", start_pos.x, 5.0)
-		# Stop for 1 second
-		tween.tween_interval(1.0)
-	else:  # vertical
-		tween.tween_property(visual, "position:y", start_pos.y + 400, 4.0)
-		tween.tween_interval(1.0)
-		tween.tween_property(visual, "position:y", start_pos.y, 4.0)
-		tween.tween_interval(1.0)
+	var corners = [
+		center + Vector2(-half, -half),  # 0 Top-left
+		center + Vector2(-half,  half),  # 1 Bottom-left
+		center + Vector2( half,  half),  # 2 Bottom-right
+		center + Vector2( half, -half)   # 3 Top-right
+	]
+	
+	var sprite_file := "monsters/blackDragon.png"
+	
+	for i in 4:
+		var start_pos = corners[i]
+		var visual = _create_test_visual(i + 1001, sprite_file, start_pos)
+		if visual:
+			_start_anti_clockwise_lap(visual, corners, i)
+
+func _start_anti_clockwise_lap(visual: Node2D, corners: Array, start_index: int) -> void:
+	var tween = create_tween()
+	tween.set_loops()
+	
+	var current = start_index
+	for _loop in range(30):
+		var next_idx = (current + 1) % 4
+		tween.tween_property(visual, "position", corners[next_idx], 4.0)
+		current = next_idx
+
+# ─────────────────────────────────────────────────────────────
+#  TEST 2: 4 units moving corner-to-corner with 1 second stop
+# ─────────────────────────────────────────────────────────────
+func _spawn_square_stop_test(square_size: float = 900.0) -> void:
+	var center := Vector2(3000, 4000)
+	var half := square_size / 2.0
+	
+	var corners = [
+		center + Vector2(-half, -half),  # 0
+		center + Vector2(-half,  half),  # 1
+		center + Vector2( half,  half),  # 2
+		center + Vector2( half, -half)   # 3
+	]
+	
+	var sprite_file := "monsters/blackDragon.png"
+	
+	for i in 4:
+		var start_pos = corners[i]
+		var visual = _create_test_visual(i + 2001, sprite_file, start_pos)
+		if visual:
+			_start_corner_to_corner_with_stop(visual, corners, i)
+
+func _start_corner_to_corner_with_stop(visual: Node2D, corners: Array, start_index: int) -> void:
+	var tween = create_tween()
+	tween.set_loops()
+	
+	var current = start_index
+	for _loop in range(30):
+		var next_idx = (current + 1) % 4
+		tween.tween_property(visual, "position", corners[next_idx], 4.0)
+		tween.tween_interval(1.0)   # Stop 1 second at each corner
+		current = next_idx
+
+# Test all 9 animations at once with 9 units
+func _test_all_animations() -> void:
+	var animations = [
+		"idle_down", "idle_up", "idle_left", "idle_right",
+		"walk_down", "walk_up", "walk_left", "walk_right",
+		"default"
+	]
+	
+	var start_x = 2800
+	var start_y = 3800
+	var spacing = 250
+	
+	for i in range(animations.size()):
+		var col = i % 3
+		var row = i / 3
+		
+		var pos = Vector2(start_x + col * spacing, start_y + row * spacing)
+		
+		var test_unit = {
+			"id": 2000 + i,
+			"type": "unit",
+			"x": pos.x,
+			"y": pos.y,
+			"picture": { "file": "monsters/blackDragon.png" },
+			"orientation": 0
+		}
+		
+		var visual = SpriteManager.create_entity_visual(test_unit)
+		if visual and visual is UnitVisual:
+			visual.forced_animation = animations[i]
+		if visual:
+			# Force specific animation on this unit
+			var anim = visual.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+			if anim and anim.sprite_frames:
+				anim.play(animations[i])
+				print("Playing animation: ", animations[i], " at position ", pos)
