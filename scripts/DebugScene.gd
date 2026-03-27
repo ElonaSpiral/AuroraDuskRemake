@@ -33,12 +33,15 @@ func _ready() -> void:
 
 
 func _on_test_map() -> void:
-	# Set debug mode — WorldScene will populate the picker with debug maps
 	GameState.selected_mode = "debug"
+	
+	# Tell WorldScene to load the first test map and run our test cases
+	GameState.selected_map_id = "test_map_auto"  # Special flag we'll handle in WorldScene
+	
 	var t := create_tween()
 	t.tween_property(self, "modulate:a", 0.0, 0.35)
 	t.tween_callback(func() -> void:
-		get_tree().change_scene_to_file(SCENE_GAME)
+		get_tree().change_scene_to_file("res://scenes/WorldScene.tscn")
 	)
 
 

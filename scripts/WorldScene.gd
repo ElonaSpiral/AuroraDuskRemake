@@ -21,6 +21,7 @@ extends Node2D
 const SCENE_MAIN     := "res://scenes/MainMenu.tscn"
 const SCENE_GAMEMODE := "res://scenes/GameModeScene.tscn"
 const SCENE_DEBUG    := "res://scenes/DebugScene.tscn"
+const TEST_MAP_FOLDER := "res://assets/maps/test/"
 
 const PAN_SPEED  := 400.0
 const ZOOM_STEP  := 0.15
@@ -44,6 +45,34 @@ const ZOOM_MAX   := 4.0
 @onready var btn_grid       : Button       = $HUDLayer/HUD/BtnGrid
 @onready var map_picker     : OptionButton = $HUDLayer/HUD/TopBar/TopMargin/TopHBox/MapPicker
 
+# Debug Panel
+# ── Debug Panel Node References (simplified paths) ─────────────────────
+@onready var debug_panel: Control = $HUDLayer/HUD/DebugPanel
+
+@onready var slider_lap_size: HSlider = $HUDLayer/HUD/DebugPanel/DebugTestControls/LapSquareControls/LapSquareSize/HSlider
+@onready var slider_stop_size: HSlider = $HUDLayer/HUD/DebugPanel/DebugTestControls/StopSquareControls/StopSquareSize/HSlider
+
+@onready var spin_lap_x: SpinBox = $HUDLayer/HUD/DebugPanel/DebugTestControls/LapSquareControls/LapSquarePosition/Values/X/SpinBox
+@onready var spin_lap_y: SpinBox = $HUDLayer/HUD/DebugPanel/DebugTestControls/LapSquareControls/LapSquarePosition/Values/Y/SpinBox
+
+@onready var spin_stop_x: SpinBox = $HUDLayer/HUD/DebugPanel/DebugTestControls/StopSquareControls/StopSquarePosition/Values/X/SpinBox
+@onready var spin_stop_y: SpinBox = $HUDLayer/HUD/DebugPanel/DebugTestControls/StopSquareControls/StopSquarePosition/Values/Y/SpinBox
+
+@onready var btn_respawn: Button = $HUDLayer/HUD/DebugPanel/DebugTestControls/BtnRespawn
+
+# Debug Test Controls
+var lap_square_size: float = 900.0
+var stop_square_size: float = 900.0
+var lap_center: Vector2 = Vector2(3000, 4000)
+var stop_center: Vector2 = Vector2(3000, 4000)
+
+# Keep references to the current test visuals so we can update them live
+var current_lap_visuals: Array = []
+var current_stop_visuals: Array = []
+
+
+
+
 # ── State ──────────────────────────────────────────────────────
 var _terrain_grid  : Array  = []
 var _spawn_points  : Array  = []
@@ -52,7 +81,6 @@ var _map_height    : int    = 0
 var _map_id        : String = ""
 var _dragging      : bool   = false   # middle-mouse pan drag
 var _drag_start    : Vector2
-
 
 # ─────────────────────────────────────────────────────────────
 func _ready() -> void:
@@ -63,48 +91,31 @@ func _ready() -> void:
 	SpriteManager.initialize($VisualRoot)
 	print("WorldScene ready - SpriteManager initialized")
 	
-	# Test 1: 4 units continuously running laps anti-clockwise
-	_spawn_square_lap_test(900.0)
+	var is_debug_test := (GameState.selected_mode == "debug" and GameState.selected_map_id == "test_map_auto")
 	
-	# Test 2: 4 units moving corner-to-corner with 1 second stop
-	_spawn_square_stop_test(600.0)
-	
-	btn_back.pressed.connect(_on_back)
-	btn_grid.pressed.connect(_on_toggle_grid)
-	map_picker.item_selected.connect(_on_map_selected)
-
-	var ctrl := rts_controller as RTSController
-	ctrl.selection_changed.connect(_on_selection_changed)
-
-	# Minimap click-to-pan
-	var mm := minimap as MinimapDrawer
-	mm.camera_move_requested.connect(_on_minimap_camera_move)
-
-	# In debug mode show the map picker so devs can switch maps.
-	# In all other modes the map was already chosen on MapSelectScene.
-	var is_debug : bool = GameState.selected_mode == "debug"
-	map_picker.visible = is_debug
-	$HUDLayer/HUD/TopBar/TopMargin/TopHBox/LblMapLabel.visible = is_debug
-
-	if is_debug:
-		# Debug: load the stored map id if valid, otherwise load the first
-		# entry in the picker. _populate_map_picker() guarantees at least
-		# one entry (skirmish fallback) so item_count is always > 0 here.
-		var stored_id := GameState.selected_map_id
-		if stored_id != "" and MapManager.maps.has(stored_id):
-			_load_map(stored_id)
-		elif map_picker.item_count > 0:
-			_load_map_by_idx(0)
-		else:
-			push_error("WorldScene: no maps available for debug mode")
+	if is_debug_test:
+		_load_first_test_map()
+		_spawn_square_tests()
+		
+		if debug_panel:
+			debug_panel.visible = true
+			_setup_debug_hud()
 	else:
-		# Normal game: use map chosen on MapSelectScene
-		var mid := GameState.selected_map_id
-		if mid == "":
-			push_warning("WorldScene: no map selected, defaulting to first available")
-			var ids := MapManager.get_maps_for_mode(GameState.selected_mode)
-			mid = ids[0] if not ids.is_empty() else "middleBridge"
-		_load_map(mid)
+		if GameState.selected_mode == "debug":
+			var stored_id := GameState.selected_map_id
+			if stored_id != "" and MapManager.maps.has(stored_id):
+				_load_map(stored_id)
+			elif map_picker.item_count > 0:
+				_load_map_by_idx(0)
+			else:
+				push_error("WorldScene: no maps available for debug mode")
+		else:
+			var mid := GameState.selected_map_id
+			if mid == "":
+				push_warning("WorldScene: no map selected, defaulting to first available")
+				var ids := MapManager.get_maps_for_mode(GameState.selected_mode)
+				mid = ids[0] if not ids.is_empty() else "middleBridge"
+			_load_map(mid)
 
 	modulate.a = 0.0
 	create_tween().tween_property(self, "modulate:a", 1.0, 0.40)
@@ -392,6 +403,91 @@ func _on_map_selected(idx: int) -> void:
 # ─────────────────────────────────────────────────────────────
 # 	TESTING AREA
 # ─────────────────────────────────────────────────────────────
+func _setup_debug_hud() -> void:
+	if not debug_panel:
+		return
+	
+	# Initial values
+	slider_lap_size.value = lap_square_size
+	slider_stop_size.value = stop_square_size
+	spin_lap_x.value = lap_center.x
+	spin_lap_y.value = lap_center.y
+	spin_stop_x.value = stop_center.x
+	spin_stop_y.value = stop_center.y
+	
+	# Live updates
+	slider_lap_size.value_changed.connect(_on_lap_size_changed_live)
+	slider_stop_size.value_changed.connect(_on_stop_size_changed_live)
+	
+	# Position changes require respawn (harder to do live)
+	spin_lap_x.value_changed.connect(_on_center_changed)
+	spin_lap_y.value_changed.connect(_on_center_changed)
+	spin_stop_x.value_changed.connect(_on_center_changed)
+	spin_stop_y.value_changed.connect(_on_center_changed)
+	
+	btn_respawn.pressed.connect(_on_respawn_tests)
+	
+	if not slider_lap_size or not slider_stop_size:
+		print("Warning: Some debug sliders not found")
+	return
+
+func _on_lap_size_changed_live(value: float) -> void:
+	lap_square_size = value
+	_update_lap_square_live()
+
+func _on_stop_size_changed_live(value: float) -> void:
+	stop_square_size = value
+	_update_stop_square_live()
+
+func _on_center_changed(_value: float) -> void:
+	lap_center = Vector2(spin_lap_x.value, spin_lap_y.value)
+	stop_center = Vector2(spin_stop_x.value, spin_stop_y.value)
+
+# Live size update (simple version - respawn only the affected group)
+func _update_lap_square_live() -> void:
+	SpriteManager.clear_all_visuals()  # Simple but works for now
+	_spawn_square_lap_test(lap_square_size)
+
+func _update_stop_square_live() -> void:
+	SpriteManager.clear_all_visuals()
+	_spawn_square_stop_test(stop_square_size)
+
+func _on_respawn_tests() -> void:
+	SpriteManager.clear_all_visuals()
+	_spawn_square_lap_test(lap_square_size)
+	_spawn_square_stop_test(stop_square_size)
+	print("Respawned test units with new settings")
+
+# Load the first map found in assets/maps/test/
+func _load_first_test_map() -> void:
+	var dir = DirAccess.open("res://assets/maps/test/")
+	if not dir:
+		push_error("Cannot open test map folder: res://assets/maps/test/")
+		# Fallback
+		_load_map("middleBridge")
+		return
+	
+	var files = dir.get_files()
+	var first_map_id := ""
+	
+	for file in files:
+		if file.ends_with(".tscn") or file.ends_with(".tres") or file.ends_with(".png"):
+			first_map_id = file.get_basename()
+			break
+	
+	if first_map_id != "":
+		print("Debug Test Mode: Loading first test map: " + first_map_id)
+		GameState.selected_map_id = first_map_id
+		_load_map(first_map_id)
+	else:
+		push_warning("No maps found in assets/maps/test/. Using fallback.")
+		_load_map("middleBridge")
+
+# Spawn both square test groups
+func _spawn_square_tests() -> void:
+	_spawn_square_lap_test(900.0)      # Continuous anti-clockwise laps
+	_spawn_square_stop_test(1200.0)     # Corner-to-corner with 1s stop
+
 # Helper to create a test visual unit
 func _create_test_visual(id: int, sprite_file: String, start_pos: Vector2) -> Node2D:
 	var test_unit = {
