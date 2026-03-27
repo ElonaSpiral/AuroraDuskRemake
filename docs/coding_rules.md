@@ -347,12 +347,11 @@ Maps are discovered by scanning `assets/maps/` subfolders, not by reading a hard
 `maps.json` is enrichment only (names, spawn points, size overrides). **Never hardcode a map list.**
 
 ### Folder → mode rules (the only valid folder names)
-| Folder | Factions | Modes |
-|--------|----------|-------|
-| `1`    | 1        | survival only |
-| `2`–`8`| N        | skirmish + multiplayer |
-| `10`   | 10       | skirmish + multiplayer |
-| `test` | 2        | debug only |
+| Folder  | Factions | Modes |
+|---------|----------|-------|
+| `1`     | 1        | survival only |
+| `2`–`10`| N        | skirmish + multiplayer |
+| `test`  | 2        | debug only |
 
 Adventure mode is **not** handled here — it reads from a `missions/` folder (separate system, deferred).
 Multiplayer shares the full skirmish map pool (folders 2–10), not just folder 10.
@@ -397,3 +396,43 @@ When `TILE_PX` changes, all of these scale proportionally and nothing else needs
 - Camera clamp bounds (computed from `WorldRenderer.world_size()`)
 - Spawn point world positions (use `WorldRenderer.TILE_PX` reference)
 - Unit terrain grid lookup
+
+## 15. Visual vs Logic Separation (Core Rule)
+
+Never let visuals modify logical data.
+EntityVisual / UnitVisual only react to data from simulation (via apply_update or direct position for tests).
+Tween-based test movement must not fight update_position() — use a "test_unit": true flag to skip entity_data sync during testing.
+
+## 16. Animation & Facing Rules
+
+Always use the 3×4 sprite sheet layout for units (idle_* and walk_* for down/up/left/right).
+While moving: choose walk animation based on dominant movement vector (walk_right if |dx| > |dy| and dx > 0, etc.).
+When stopping: keep the last facing direction for idle (idle_right, idle_left, etc.). Never default to idle_down.
+AnimatedSprite2D.speed_scale = 8.0 works well for walk cycles.
+play() must be called when the target animation actually changes to avoid jitter.
+
+## 17. Tween + Visual Pitfalls (Critical)
+
+Setting visual.position via tween aftercreate_entity_visual() can cause "flying in from (0,0)" if not explicitly set with visual.position = start_pos immediately after creation.
+Tweening position while EntityVisual.update_position() runs every frame causes snap-back and unstable movement detection.
+Solution: Use "test_unit": true flag + skip sync in update_position() for test visuals, or let real simulation control position.
+
+## 18. Debug / Test Practices
+
+Keep a dedicated debug panel with sliders for quick iteration (square size, centers, respawn button).
+Live size updates are acceptable via clear_all_visuals() + respawn for tests.
+Live position updates are trickier — prefer respawn for now.
+Always have a "Respawn Tests" button when using tweens.
+
+## 19. Node & Scene Rules (from coding_rules.md + our experience)
+
+Never add class_name to autoloads (SpriteManager).
+Be extremely careful with deep @onready paths — they break easily when HUD structure changes.
+When clearing visuals (SpriteManager.clear_all_visuals()), make sure all tweens are stopped or use queue_free() safely to avoid "Target object freed before starting Tween" and infinite loop errors.
+
+## 20. General Godot 4.3 Lessons from This Sprint
+
+AnimatedSprite2D.play() works reliably once sprite_frames is assigned and the node is in the tree.
+Movement detection (distance_to(last_position) > 5.0) needs hysteresis and must run every frame via _process.
+SpriteManager._process() should directly call visual.update_visual(delta) for UnitVisual instances.
+Always set initial visual.position = start_pos right after create_entity_visual() when using tweens.
