@@ -176,6 +176,123 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 18
 text = "Grid: OFF"
 
+[node name="DebugPanel" type="Panel" parent="HUDLayer/HUD"]
+layout_mode = 0
+offset_left = 1640.0
+offset_top = 150.0
+offset_right = 1898.0
+offset_bottom = 494.0
+
+[node name="DebugTestControls" type="VBoxContainer" parent="HUDLayer/HUD/DebugPanel"]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 252.0
+offset_bottom = 332.0
+
+[node name="Debug Test Controls" type="Label" parent="HUDLayer/HUD/DebugPanel/DebugTestControls"]
+layout_mode = 2
+text = "Debug Test Controls"
+
+[node name="LapSquareControls" type="VBoxContainer" parent="HUDLayer/HUD/DebugPanel/DebugTestControls"]
+layout_mode = 2
+
+[node name="LapSquareSize" type="VBoxContainer" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/LapSquareControls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/LapSquareControls/LapSquareSize"]
+layout_mode = 2
+text = "Lap Square Size"
+
+[node name="HSlider" type="HSlider" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/LapSquareControls/LapSquareSize"]
+layout_mode = 2
+min_value = 200.0
+max_value = 2000.0
+value = 900.0
+
+[node name="LapSquarePosition" type="VBoxContainer" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/LapSquareControls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/LapSquareControls/LapSquarePosition"]
+layout_mode = 2
+text = "Lap Square Position"
+
+[node name="Values" type="HBoxContainer" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/LapSquareControls/LapSquarePosition"]
+layout_mode = 2
+
+[node name="X" type="HBoxContainer" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/LapSquareControls/LapSquarePosition/Values"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/LapSquareControls/LapSquarePosition/Values/X"]
+layout_mode = 2
+text = "X"
+
+[node name="SpinBox" type="SpinBox" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/LapSquareControls/LapSquarePosition/Values/X"]
+layout_mode = 2
+max_value = 0.0
+
+[node name="Y" type="HBoxContainer" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/LapSquareControls/LapSquarePosition/Values"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/LapSquareControls/LapSquarePosition/Values/Y"]
+layout_mode = 2
+text = "Y"
+
+[node name="SpinBox" type="SpinBox" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/LapSquareControls/LapSquarePosition/Values/Y"]
+layout_mode = 2
+max_value = 0.0
+
+[node name="StopSquareControls" type="VBoxContainer" parent="HUDLayer/HUD/DebugPanel/DebugTestControls"]
+layout_mode = 2
+
+[node name="StopSquareSize" type="VBoxContainer" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/StopSquareControls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/StopSquareControls/StopSquareSize"]
+layout_mode = 2
+text = "Stop Square Size"
+
+[node name="HSlider" type="HSlider" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/StopSquareControls/StopSquareSize"]
+layout_mode = 2
+min_value = 200.0
+max_value = 2000.0
+value = 900.0
+
+[node name="StopSquarePosition" type="VBoxContainer" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/StopSquareControls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/StopSquareControls/StopSquarePosition"]
+layout_mode = 2
+text = "Stop Square Position"
+
+[node name="Values" type="HBoxContainer" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/StopSquareControls/StopSquarePosition"]
+layout_mode = 2
+
+[node name="X" type="HBoxContainer" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/StopSquareControls/StopSquarePosition/Values"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/StopSquareControls/StopSquarePosition/Values/X"]
+layout_mode = 2
+text = "X"
+
+[node name="SpinBox" type="SpinBox" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/StopSquareControls/StopSquarePosition/Values/X"]
+layout_mode = 2
+max_value = 0.0
+
+[node name="Y" type="HBoxContainer" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/StopSquareControls/StopSquarePosition/Values"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/StopSquareControls/StopSquarePosition/Values/Y"]
+layout_mode = 2
+text = "Y"
+
+[node name="SpinBox" type="SpinBox" parent="HUDLayer/HUD/DebugPanel/DebugTestControls/StopSquareControls/StopSquarePosition/Values/Y"]
+layout_mode = 2
+max_value = 0.0
+
+[node name="BtnRespawn" type="Button" parent="HUDLayer/HUD/DebugPanel/DebugTestControls"]
+layout_mode = 2
+text = "Respawn Tests"
+
 [node name="VisualRoot" type="Node2D" parent="HUDLayer"]
 
 [node name="VisualRoot" type="Node2D" parent="."]
