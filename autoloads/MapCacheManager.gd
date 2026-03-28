@@ -2,119 +2,123 @@
 extends Node
 
 const CACHE_DIR := "user://cache/maps/"
-const MAPS_DIR := "res://assets/maps/"
+const MANIFEST_PATH := "user://cache/maps/cache_manifest.json"
+const MAPS_ROOT := "res://assets/maps/"
+const TILE_SIZE := 64
+const MAX_SAFE_DIMENSION := 8192
 
-var _cache_ready := false
+var _manifest: Dictionary = {}   # Key = official map_id (e.g. "AuroraFields"), Value = filename on disk (e.g. "aurorafields.png")
 
 func _ready() -> void:
 	ensure_cache_dir()
-	# Optional: auto-generate on first run, or call manually from debug HUD
+	_load_manifest()
 
 func ensure_cache_dir() -> void:
 	var dir = DirAccess.open("user://")
-	if not dir.dir_exists("cache/maps"):
+	if dir:
 		dir.make_dir_recursive("cache/maps")
 
-# Generate cache for all maps (call from debug button or startup)
-func generate_all_caches() -> void:
-	var dir = DirAccess.open(MAPS_DIR)
-	if not dir:
-		push_error("MapCacheManager: Cannot open maps folder")
-		return
-	
-	for file in dir.get_files():
-		if file.ends_with(".png"):
-			var map_id = file.get_basename()
-			generate_cache_for_map(map_id)
+func _load_manifest() -> void:
+	if ResourceLoader.exists(MANIFEST_PATH):
+		var file = FileAccess.open(MANIFEST_PATH, FileAccess.READ)
+		if file:
+			var json_text = file.get_as_text()
+			var parsed = JSON.parse_string(json_text)
+			if parsed is Dictionary:
+				_manifest = parsed
+				print("MapCacheManager: Loaded manifest with " + str(_manifest.size()) + " entries")
+			file.close()
 
-# Main baking function
-func generate_cache_for_map(map_id: String) -> bool:
-	var png_path = MAPS_DIR + map_id + ".png"
-	if not ResourceLoader.exists(png_path):
-		push_error("MapCacheManager: Map PNG not found: " + png_path)
-		return false
-	
-	var image = Image.load_from_file(png_path)
+func _save_manifest() -> void:
+	var file = FileAccess.open(MANIFEST_PATH, FileAccess.WRITE)
+	if file:
+		file.store_string(JSON.stringify(_manifest, "  ", true))
+		file.close()
+		print("MapCacheManager: Manifest saved (" + str(_manifest.size()) + " entries)")
+
+func generate_all_caches() -> void:
+	print("=== MapCacheManager: Starting full cache regeneration ===")
+	_manifest.clear()
+	var processed := 0
+	_scan_directory(MAPS_ROOT, processed)
+	_save_manifest()
+	print("=== MapCacheManager: Finished. Processed ", processed, " maps. ===")
+
+func _scan_directory(path: String, processed: int) -> void:
+	var dir = DirAccess.open(path)
+	if not dir: return
+
+	for file in dir.get_files():
+		if not file.ends_with(".png"): continue
+		if file == "random.png" or file.begins_with("icon") or "preview" in file: continue
+		var map_id = file.get_basename()          # Official map_id (e.g. "AuroraFields")
+		if generate_cache_for_map(map_id, path + file):
+			processed += 1
+
+	for subdir in dir.get_directories():
+		_scan_directory(path + subdir + "/", processed)
+
+func generate_cache_for_map(map_id: String, full_png_path: String) -> bool:
+	var image = load(full_png_path) as Image
 	if not image:
-		push_error("MapCacheManager: Failed to load image: " + png_path)
+		image = Image.load_from_file(full_png_path)
+	if not image:
+		push_warning("MapCacheManager: Failed to load " + full_png_path)
 		return false
-	
-	var width = image.get_width()
-	var height = image.get_height()
-	
-	# Create output image for baked terrain
-	var baked = Image.create(width * WorldRenderer.TILE_PX, height * WorldRenderer.TILE_PX, false, Image.FORMAT_RGBA8)
-	
-	# TODO: For better "blot" effect, we can add slight noise or edge blending here later
-	
-	for y in height:
-		for x in width:
-			var color = image.get_pixel(x, y)
-			var r = int(color.r * 255)
-			var g = int(color.g * 255)
-			var b = int(color.b * 255)
-			
-			var terrain_id = GroundsManager.nearest_terrain_id(r, g, b)
+
+	var map_w := image.get_width()
+	var map_h := image.get_height()
+	var baked_w := map_w * TILE_SIZE
+	var baked_h := map_h * TILE_SIZE
+
+	if baked_w > MAX_SAFE_DIMENSION or baked_h > MAX_SAFE_DIMENSION:
+		push_warning("MapCacheManager: Map " + map_id + " (" + str(baked_w) + "x" + str(baked_h) + ") too large. Skipping.")
+		return false
+
+	var baked := Image.create(baked_w, baked_h, false, Image.FORMAT_RGBA8)
+
+	for y in map_h:
+		for x in map_w:
+			var col = image.get_pixel(x, y)
+			var terrain_id = GroundsManager.nearest_terrain_id(int(col.r*255), int(col.g*255), int(col.b*255))
 			var tile_tex = GroundsManager.get_texture(terrain_id)
-			
 			if tile_tex:
 				var tile_img = tile_tex.get_image()
 				if tile_img:
-					baked.blit_rect(tile_img, Rect2(0, 0, WorldRenderer.TILE_PX, WorldRenderer.TILE_PX),
-									Vector2i(x * WorldRenderer.TILE_PX, y * WorldRenderer.TILE_PX))
-	
-	# Save baked texture
-	var cache_path = CACHE_DIR + map_id + ".png"
-	baked.save_png(cache_path)
-	
-	# Save terrain data JSON (for water, buildable, etc.)
-	var terrain_data = _extract_terrain_data(image, width, height)
-	var json_path = CACHE_DIR + map_id + ".json"
-	var file = FileAccess.open(json_path, FileAccess.WRITE)
-	file.store_string(JSON.stringify(terrain_data))
-	file.close()
-	
-	print("MapCacheManager: Cached map " + map_id)
+					if tile_img.get_format() != Image.FORMAT_RGBA8:
+						tile_img.convert(Image.FORMAT_RGBA8)
+					baked.blit_rect(tile_img, Rect2(0, 0, TILE_SIZE, TILE_SIZE),
+									Vector2i(x * TILE_SIZE, y * TILE_SIZE))
+
+	var safe_filename = map_id.to_lower() + ".png"
+	var cache_path = CACHE_DIR + safe_filename
+
+	var err = baked.save_png(cache_path)
+	if err != OK:
+		push_error("MapCacheManager: Failed to save " + map_id + " (err " + str(err) + ")")
+		return false
+
+	_manifest[map_id] = safe_filename   # Official ID → lowercase filename
+	print("MapCacheManager: ✓ Cached " + map_id + " as " + safe_filename + " (" + str(map_w) + "×" + str(map_h) + ")")
 	return true
 
-# Extract basic terrain info (water mask, etc.)
-func _extract_terrain_data(image: Image, width: int, height: int) -> Dictionary:
-	var data = {
-		"width": width,
-		"height": height,
-		"water_tiles": [],
-		"spawn_points": []
-	}
-	
-	for y in height:
-		for x in width:
-			var color = image.get_pixel(x, y)
-			var r = int(color.r * 255)
-			var g = int(color.g * 255)
-			var b = int(color.b * 255)
-			var terrain_id = GroundsManager.nearest_terrain_id(r, g, b)
-			
-			if GroundsManager.is_water(terrain_id):
-				data.water_tiles.append({"x": x, "y": y})
-	
-	# TODO: Detect black dots as spawn points if needed
-	return data
-
-# Load cached texture (fast path)
 func load_cached_texture(map_id: String) -> Texture2D:
-	var path = CACHE_DIR + map_id + ".png"
-	if ResourceLoader.exists(path):
-		return load(path) as Texture2D
-	return null
+	if map_id.is_empty():
+		return null
 
-# Check if cache is valid (simple timestamp check for now)
-func is_cache_valid(map_id: String) -> bool:
-	var cache_path = CACHE_DIR + map_id + ".png"
-	var source_path = MAPS_DIR + map_id + ".png"
-	
-	if not FileAccess.file_exists(cache_path) or not FileAccess.file_exists(source_path):
-		return false
-	
-	var cache_time = FileAccess.get_modified_time(cache_path)
-	var source_time = FileAccess.get_modified_time(source_path)
-	return cache_time > source_time
+	# Primary lookup: manifest (most reliable)
+	if _manifest.has(map_id):
+		var filename = _manifest[map_id]
+		var path = CACHE_DIR + filename
+		if ResourceLoader.exists(path):
+			print("MapCacheManager: ✓ CACHE HIT for '" + map_id + "' → " + filename)
+			return load(path) as Texture2D
+
+	# Fallback: direct lowercase
+	var lower_path = CACHE_DIR + map_id.to_lower() + ".png"
+	if ResourceLoader.exists(lower_path):
+		print("MapCacheManager: ✓ Fallback hit for " + map_id)
+		return load(lower_path) as Texture2D
+
+	print("MapCacheManager: Cache miss for '" + map_id + "'")
+	return null
