@@ -35,6 +35,8 @@ func _save_manifest() -> void:
 		file.store_string(JSON.stringify(_manifest, "  ", true))
 		file.close()
 		print("MapCacheManager: Manifest saved (" + str(_manifest.size()) + " entries)")
+	else:
+		push_error("MapCacheManager: Failed to save manifest!")
 
 func generate_all_caches() -> void:
 	print("=== MapCacheManager: Starting full cache regeneration ===")
@@ -98,27 +100,44 @@ func generate_cache_for_map(map_id: String, full_png_path: String) -> bool:
 		push_error("MapCacheManager: Failed to save " + map_id + " (err " + str(err) + ")")
 		return false
 
-	_manifest[map_id] = safe_filename   # Official ID → lowercase filename
+	_manifest[map_id] = safe_filename
 	print("MapCacheManager: ✓ Cached " + map_id + " as " + safe_filename + " (" + str(map_w) + "×" + str(map_h) + ")")
+
+	# Small delay to help filesystem settle
+	OS.delay_msec(50)
 	return true
 
 func load_cached_texture(map_id: String) -> Texture2D:
 	if map_id.is_empty():
 		return null
 
-	# Primary lookup: manifest (most reliable)
+	# Force reload manifest
+	_load_manifest()
+
+	var filename := ""
 	if _manifest.has(map_id):
-		var filename = _manifest[map_id]
-		var path = CACHE_DIR + filename
-		if ResourceLoader.exists(path):
-			print("MapCacheManager: ✓ CACHE HIT for '" + map_id + "' → " + filename)
-			return load(path) as Texture2D
+		filename = _manifest[map_id]
+	else:
+		filename = map_id.to_lower() + ".png"
 
-	# Fallback: direct lowercase
-	var lower_path = CACHE_DIR + map_id.to_lower() + ".png"
-	if ResourceLoader.exists(lower_path):
-		print("MapCacheManager: ✓ Fallback hit for " + map_id)
-		return load(lower_path) as Texture2D
+	var full_path = CACHE_DIR + filename
 
-	print("MapCacheManager: Cache miss for '" + map_id + "'")
+	# Force directory refresh
+	DirAccess.open(CACHE_DIR)
+
+	# Method 1: Try direct Image load (most reliable for user://)
+	var img := Image.load_from_file(full_path)
+	if img:
+		print("MapCacheManager: ✓ Loaded via Image.load_from_file: " + filename)
+		var tex := ImageTexture.create_from_image(img)
+		return tex
+
+	# Method 2: Fallback to ResourceLoader
+	if ResourceLoader.exists(full_path):
+		var tex = load(full_path) as Texture2D
+		if tex:
+			print("MapCacheManager: ✓ Loaded via ResourceLoader: " + filename)
+			return tex
+
+	print("MapCacheManager: Failed to load cache for '" + map_id + "' (file " + filename + " exists but could not be loaded)")
 	return null
