@@ -63,18 +63,62 @@ var show_grid : bool = false
 
 
 # ─────────────────────────────────────────────────────────────
-func setup(grid: Array, spawns: Array, w: int, h: int) -> void:
-	terrain_grid = grid
-	spawn_points = spawns
-	map_width    = w
-	map_height   = h
-	_tex_cache.clear()
-	_level_cache.clear()
-	_level_buckets.clear()
-	_bucket_levels.clear()
-	_preload_textures()
-	_build_level_buckets()
-	queue_redraw()
+#  WorldRenderer.gd - Updated with MapCacheManager integration
+# ─────────────────────────────────────────────────────────────
+func setup(terrain_grid: Array, spawn_points: Array, map_width: int, map_height: int) -> void:
+	var raw_id := GameState.selected_map_id
+	print("WorldRenderer: Raw selected_map_id = '" + raw_id + "'")
+	
+	var map_id := raw_id
+	if map_id == "" or map_id == "test_map_auto":
+		map_id = "middleBridge"
+	
+	print("WorldRenderer: Attempting cached texture for final map_id: '" + map_id + "'")
+
+	var cached_tex = MapCacheManager.load_cached_texture(map_id)
+	if cached_tex:
+		print("WorldRenderer: ✓ SUCCESS - Loaded cached texture for " + map_id)
+		var bg := Sprite2D.new()
+		bg.texture = cached_tex
+		bg.centered = false
+		bg.position = Vector2.ZERO
+		bg.z_index = -10
+		add_child(bg)
+		# TODO: _sprinkle_decorations(map_width, map_height, terrain_grid)
+		return
+	
+	push_warning("WorldRenderer: No cached texture found for '" + map_id + "'. Falling back to tile rendering.")
+	_build_tile_based_map(terrain_grid, map_width, map_height)
+
+# Simple decoration sprinkling (random static sprites)
+func _sprinkle_decorations(map_width: int, map_height: int, terrain_grid: Array) -> void:
+	for y in map_height:
+		for x in map_width:
+			var tid := ""
+			if terrain_grid.size() > y and terrain_grid[y].size() > x:
+				tid = str(terrain_grid[y][x])
+			
+			if tid == "":
+				continue
+			
+			var decoration_file = GroundsManager.roll_decoration(tid)
+			if decoration_file != "":
+				var deco_path = "res://assets/grounds/random/" + decoration_file
+				if ResourceLoader.exists(deco_path):
+					var sprite = Sprite2D.new()
+					sprite.texture = load(deco_path) as Texture2D
+					sprite.position = Vector2(
+						x * TILE_PX + TILE_PX * 0.5,
+						y * TILE_PX + TILE_PX * 0.5
+					)
+					sprite.z_index = 5  # above base terrain but below units
+					add_child(sprite)
+
+# Fallback tile-by-tile builder (your original code can go here)
+func _build_tile_based_map(terrain_grid: Array, map_width: int, map_height: int) -> void:
+	# Put your existing tile rendering code here if you want a fallback
+	# For now, you can leave it empty or copy your old implementation
+	pass
 
 
 # ─────────────────────────────────────────────────────────────

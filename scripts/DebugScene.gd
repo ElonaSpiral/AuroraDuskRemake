@@ -17,6 +17,7 @@ const SCENE_GAME  := "res://scenes/GameScene.tscn"
 @onready var btn_test_map : Button  = $ContentArea/ContentCenter/BtnVBox/BtnTestMap
 @onready var btn_back     : Button  = $BackPanel/BtnBack
 @onready var bg_layers    : Control = $BgLayers
+@onready var btn_regenerate_cache: Button = $ContentArea/ContentCenter/BtnVBox/BtnRegenerateMapCache  # adjust path to match your DebugScene layout
 
 
 func _ready() -> void:
@@ -27,6 +28,9 @@ func _ready() -> void:
 
 	UIEffects.apply_hover(btn_test_map)
 	UIEffects.apply_hover(btn_back)
+	
+	if btn_regenerate_cache:
+		btn_regenerate_cache.pressed.connect(_on_regenerate_cache)
 
 	modulate.a = 0.0
 	create_tween().tween_property(self, "modulate:a", 1.0, 0.35)
@@ -54,3 +58,9 @@ func _on_back() -> void:
 
 func _on_test_map_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/WorldScene.tscn")
+
+func _on_regenerate_cache() -> void:
+	print("Regenerating all map caches...")
+	MapCacheManager.generate_all_caches()
+	# Optional: show a short message or progress
+	# You can add a Label or use print for now

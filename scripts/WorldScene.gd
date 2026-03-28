@@ -406,6 +406,10 @@ func _on_map_selected(idx: int) -> void:
 func _setup_debug_hud() -> void:
 	if not debug_panel:
 		return
+		
+	if not slider_lap_size or not slider_stop_size:
+		print("Warning: Some debug sliders not found")
+		return
 	
 	# Initial values
 	slider_lap_size.value = lap_square_size
@@ -426,10 +430,6 @@ func _setup_debug_hud() -> void:
 	spin_stop_y.value_changed.connect(_on_center_changed)
 	
 	btn_respawn.pressed.connect(_on_respawn_tests)
-	
-	if not slider_lap_size or not slider_stop_size:
-		print("Warning: Some debug sliders not found")
-	return
 
 func _on_lap_size_changed_live(value: float) -> void:
 	lap_square_size = value
