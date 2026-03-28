@@ -436,3 +436,21 @@ AnimatedSprite2D.play() works reliably once sprite_frames is assigned and the no
 Movement detection (distance_to(last_position) > 5.0) needs hysteresis and must run every frame via _process.
 SpriteManager._process() should directly call visual.update_visual(delta) for UnitVisual instances.
 Always set initial visual.position = start_pos right after create_entity_visual() when using tweens.
+
+## 21. Map Rendering & Caching Rules (New Section)
+
+Maps are color-coded PNGs in assets/maps/. One pixel = one 64×64 world tile (WorldRenderer.TILE_PX).
+Black dots in multi-faction maps = spawn points.
+Never render maps as thousands of individual tiles at runtime (high draw calls → low FPS).
+Cache Strategy:
+On first run or when source PNG/tileset changes: Generate baked texture + terrain JSON in user://cache/maps/.
+Runtime: Load baked texture + sprinkle random decorations from data/grounds/random.
+This allows different decoration layouts per game, matching original.
+
+Layering: Base terrain → decoration layer → objects/units (Z-sorting).
+Rounded/blot effect: Apply during baking (simple dilation, noise, or tile blending).
+
+Performance Rule:
+
+Prefer 1–4 large textured layers over many small Sprite2D/TileMap cells for ground.
+Use MultiMeshInstance2D or GPUParticles2D for dense static decorations if needed.
