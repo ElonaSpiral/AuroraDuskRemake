@@ -55,7 +55,7 @@ func update_viewport(camera: Camera2D, world_size: Vector2) -> void:
 	# Convert world rect (centred on camera) to minimap pixel space
 	var cam_world := camera.position
 	var tl_world  := cam_world - vp_world * 0.5
-	var br_world  := cam_world + vp_world * 0.5
+#	var br_world  := cam_world + vp_world * 0.5
 
 	var scale_x := cw / world_size.x
 	var scale_y := ch / world_size.y
