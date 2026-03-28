@@ -1,124 +1,111 @@
-[gd_scene load_steps=3 format=3 uid="uid://aurora_debug"]
+[gd_scene load_steps=3 format=3 uid="uid://bd1mktc0tfx8f"]
 
 [ext_resource type="Script" path="res://scripts/DebugScene.gd" id="1_script"]
-[ext_resource type="Theme"  path="res://theme/ElinTheme.tres"  id="2_theme"]
-
-; ──────────────────────────────────────────────────────────────
-;  DebugScene — quick-launch panel for development testing
-;
-;  Root
-;  ├── BgBase       (dark fallback)
-;  ├── BgLayers     (ImageLayerManager — reuses main_menu bg)
-;  ├── TitleLabel   ("DEBUG")
-;  ├── SubtitleLabel
-;  ├── ContentArea  (centred button column)
-;  │   └── ContentCenter → BtnVBox
-;  │       └── BtnTestMap
-;  └── BackPanel    (bottom-left, consistent with all scenes)
-; ──────────────────────────────────────────────────────────────
+[ext_resource type="Theme" uid="uid://b2fiwl33j2vsw" path="res://theme/ElinTheme.tres" id="2_theme"]
 
 [node name="DebugScene" type="Control"]
-layout_mode    = 3
+layout_mode = 3
 anchors_preset = 15
-anchor_right   = 1.0
-anchor_bottom  = 1.0
-theme          = ExtResource("2_theme")
-script         = ExtResource("1_script")
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_script")
 
-; ── Dark fallback ─────────────────────────────────────────────
 [node name="BgBase" type="ColorRect" parent="."]
-layout_mode    = 1
+layout_mode = 1
 anchors_preset = 15
-anchor_right   = 1.0
-anchor_bottom  = 1.0
-color          = Color(0.072, 0.055, 0.040, 1.0)
-mouse_filter   = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.072, 0.055, 0.04, 1)
 
-; ── ImageLayerManager fills this ──────────────────────────────
 [node name="BgLayers" type="Control" parent="."]
-layout_mode    = 1
+layout_mode = 1
 anchors_preset = 15
-anchor_right   = 1.0
-anchor_bottom  = 1.0
-mouse_filter   = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-; ── Title ─────────────────────────────────────────────────────
 [node name="TitleLabel" type="Label" parent="."]
-layout_mode           = 1
-anchors_preset        = -1
-anchor_left           = 0.0
-anchor_top            = 0.0
-anchor_right          = 1.0
-anchor_bottom         = 0.0
-offset_top            = 50.0
-offset_bottom         = 115.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 50.0
+offset_bottom = 115.0
 size_flags_horizontal = 3
-text                  = "DEBUG"
-horizontal_alignment  = 1
-theme_override_font_sizes/font_size = 64
-theme_override_colors/font_color    = Color(0.940, 0.800, 0.380, 1.0)
-theme_override_colors/font_shadow_color  = Color(0.0, 0.0, 0.0, 0.85)
+theme_override_colors/font_color = Color(0.94, 0.8, 0.38, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.85)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 64
+text = "DEBUG"
+horizontal_alignment = 1
 
 [node name="SubtitleLabel" type="Label" parent="."]
-layout_mode           = 1
-anchors_preset        = -1
-anchor_left           = 0.0
-anchor_top            = 0.0
-anchor_right          = 1.0
-anchor_bottom         = 0.0
-offset_top            = 120.0
-offset_bottom         = 158.0
-size_flags_horizontal = 3
-text                  = "Development tools — not visible in release builds"
-horizontal_alignment  = 1
-theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color    = Color(0.816, 0.753, 0.565, 0.70)
-
-; ── Button column ─────────────────────────────────────────────
-[node name="ContentArea" type="Control" parent="."]
-layout_mode    = 1
+layout_mode = 1
 anchors_preset = -1
-anchor_left    = 0.0
-anchor_top     = 0.28
-anchor_right   = 1.0
-anchor_bottom  = 0.80
-mouse_filter   = 2
+anchor_right = 1.0
+offset_top = 120.0
+offset_bottom = 158.0
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.816, 0.753, 0.565, 0.7)
+theme_override_font_sizes/font_size = 18
+text = "Development tools — not visible in release builds"
+horizontal_alignment = 1
+
+[node name="ContentArea" type="Control" parent="."]
+layout_mode = 1
+anchor_top = 0.28
+anchor_right = 1.0
+anchor_bottom = 0.8
+mouse_filter = 2
 
 [node name="ContentCenter" type="CenterContainer" parent="ContentArea"]
-layout_mode    = 1
+layout_mode = 1
 anchors_preset = 15
-anchor_right   = 1.0
-anchor_bottom  = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="BtnVBox" type="VBoxContainer" parent="ContentArea/ContentCenter"]
-layout_mode                         = 2
+layout_mode = 2
 theme_override_constants/separation = 16
 
-; ── Test Map button ───────────────────────────────────────────
 [node name="BtnTestMap" type="Button" parent="ContentArea/ContentCenter/BtnVBox"]
-layout_mode         = 2
 custom_minimum_size = Vector2(460, 64)
-text                = "  🗺  TEST MAP"
-pivot_offset        = Vector2(230, 32)
+layout_mode = 2
 theme_override_font_sizes/font_size = 24
+text = "  🗺  TEST MAP"
 
-; ── Back button — bottom-left ─────────────────────────────────
+[node name="BtnRegenerateMapCache" type="Button" parent="ContentArea/ContentCenter/BtnVBox"]
+custom_minimum_size = Vector2(460, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "  🗺  Regenerate Map Cache"
+
 [node name="BackPanel" type="PanelContainer" parent="."]
-layout_mode   = 1
-anchor_left   = 0.0
-anchor_top    = 1.0
-anchor_right  = 0.0
+z_index = 2
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left   = 20.0
-offset_top    = -70.0
-offset_right  = 260.0
+offset_left = 20.0
+offset_top = -70.0
+offset_right = 260.0
 offset_bottom = -12.0
-z_index       = 2
+grow_vertical = 0
 
 [node name="BtnBack" type="Button" parent="BackPanel"]
-layout_mode         = 2
 custom_minimum_size = Vector2(220, 48)
-text                = "BACK"
+layout_mode = 2
 theme_override_font_sizes/font_size = 22
+text = "BACK"
