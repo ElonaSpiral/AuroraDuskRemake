@@ -7,7 +7,7 @@ const MAPS_ROOT := "res://assets/maps/"
 const TILE_SIZE := 64
 const MAX_SAFE_DIMENSION := 8192
 
-var _manifest: Dictionary = {}   # Key = official map_id (e.g. "AuroraFields"), Value = filename on disk (e.g. "aurorafields.png")
+var _manifest: Dictionary = {}   # map_id → { "visual": "...png", "terrain": "...json" }
 
 func _ready() -> void:
 	ensure_cache_dir()
@@ -22,8 +22,7 @@ func _load_manifest() -> void:
 	if ResourceLoader.exists(MANIFEST_PATH):
 		var file = FileAccess.open(MANIFEST_PATH, FileAccess.READ)
 		if file:
-			var json_text = file.get_as_text()
-			var parsed = JSON.parse_string(json_text)
+			var parsed = JSON.parse_string(file.get_as_text())
 			if parsed is Dictionary:
 				_manifest = parsed
 				print("MapCacheManager: Loaded manifest with " + str(_manifest.size()) + " entries")
@@ -35,9 +34,10 @@ func _save_manifest() -> void:
 		file.store_string(JSON.stringify(_manifest, "  ", true))
 		file.close()
 		print("MapCacheManager: Manifest saved (" + str(_manifest.size()) + " entries)")
-	else:
-		push_error("MapCacheManager: Failed to save manifest!")
 
+# ------------------------------------------------------------------
+#  GENERATE CACHE + TERRAIN DATA
+# ------------------------------------------------------------------
 func generate_all_caches() -> void:
 	print("=== MapCacheManager: Starting full cache regeneration ===")
 	_manifest.clear()
@@ -53,7 +53,7 @@ func _scan_directory(path: String, processed: int) -> void:
 	for file in dir.get_files():
 		if not file.ends_with(".png"): continue
 		if file == "random.png" or file.begins_with("icon") or "preview" in file: continue
-		var map_id = file.get_basename()          # Official map_id (e.g. "AuroraFields")
+		var map_id = file.get_basename()
 		if generate_cache_for_map(map_id, path + file):
 			processed += 1
 
@@ -74,11 +74,11 @@ func generate_cache_for_map(map_id: String, full_png_path: String) -> bool:
 	var baked_h := map_h * TILE_SIZE
 
 	if baked_w > MAX_SAFE_DIMENSION or baked_h > MAX_SAFE_DIMENSION:
-		push_warning("MapCacheManager: Map " + map_id + " (" + str(baked_w) + "x" + str(baked_h) + ") too large. Skipping.")
+		push_warning("MapCacheManager: Map " + map_id + " too large (" + str(baked_w) + "x" + str(baked_h) + "). Skipping.")
 		return false
 
+	# 1. Create visual cache
 	var baked := Image.create(baked_w, baked_h, false, Image.FORMAT_RGBA8)
-
 	for y in map_h:
 		for x in map_w:
 			var col = image.get_pixel(x, y)
@@ -92,52 +92,100 @@ func generate_cache_for_map(map_id: String, full_png_path: String) -> bool:
 					baked.blit_rect(tile_img, Rect2(0, 0, TILE_SIZE, TILE_SIZE),
 									Vector2i(x * TILE_SIZE, y * TILE_SIZE))
 
-	var safe_filename = map_id.to_lower() + ".png"
-	var cache_path = CACHE_DIR + safe_filename
-
-	var err = baked.save_png(cache_path)
+	var visual_filename = map_id.to_lower() + ".png"
+	var visual_path = CACHE_DIR + visual_filename
+	var err = baked.save_png(visual_path)
 	if err != OK:
-		push_error("MapCacheManager: Failed to save " + map_id + " (err " + str(err) + ")")
+		push_error("MapCacheManager: Failed to save visual for " + map_id)
 		return false
 
-	_manifest[map_id] = safe_filename
-	print("MapCacheManager: ✓ Cached " + map_id + " as " + safe_filename + " (" + str(map_w) + "×" + str(map_h) + ")")
+	# 2. Create terrain data
+	var terrain_data = _generate_terrain_data(image, map_w, map_h)
+	var terrain_filename = map_id.to_lower() + "_terrain.json"
+	var terrain_path = CACHE_DIR + terrain_filename
 
-	# Small delay to help filesystem settle
-	OS.delay_msec(50)
+	var terrain_file = FileAccess.open(terrain_path, FileAccess.WRITE)
+	if terrain_file:
+		terrain_file.store_string(JSON.stringify(terrain_data, "  ", true))
+		terrain_file.close()
+
+	# 3. Update manifest
+	_manifest[map_id] = {
+		"visual": visual_filename,
+		"terrain": terrain_filename,
+		"width": map_w,
+		"height": map_h
+	}
+
+	print("MapCacheManager: ✓ Cached " + map_id + " (visual + terrain)")
 	return true
 
+func _generate_terrain_data(image: Image, map_w: int, map_h: int) -> Dictionary:
+	image.convert(Image.FORMAT_RGB8)
+	var grid := []
+	var spawns := []
+
+	for y in map_h:
+		var row := []
+		for x in map_w:
+			var c = image.get_pixel(x, y)
+			var r = int(c.r * 255)
+			var g = int(c.g * 255)
+			var b = int(c.b * 255)
+
+			if r + g + b < 60 and (g > r + b or r > g + b):  # spawn pixel
+				spawns.append({"x": x, "y": y})
+				# Use terrain from pixel above or default
+				if y > 0:
+					var above = image.get_pixel(x, y-1)
+					row.append(GroundsManager.nearest_terrain_id(int(above.r*255), int(above.g*255), int(above.b*255)))
+				else:
+					row.append("plain")
+			else:
+				row.append(GroundsManager.nearest_terrain_id(r, g, b))
+		grid.append(row)
+
+	return {
+		"grid": grid,
+		"spawns": spawns,
+		"width": map_w,
+		"height": map_h
+	}
+
+# ------------------------------------------------------------------
+#  LOAD CACHED MAP
+# ------------------------------------------------------------------
 func load_cached_texture(map_id: String) -> Texture2D:
-	if map_id.is_empty():
+	if not _manifest.has(map_id):
+		_load_manifest()
+	if not _manifest.has(map_id):
 		return null
 
-	# Force reload manifest
-	_load_manifest()
+	var entry = _manifest[map_id]
+	var path = CACHE_DIR + entry.get("visual", "")
+	if ResourceLoader.exists(path):
+		return load(path) as Texture2D
 
-	var filename := ""
-	if _manifest.has(map_id):
-		filename = _manifest[map_id]
-	else:
-		filename = map_id.to_lower() + ".png"
-
-	var full_path = CACHE_DIR + filename
-
-	# Force directory refresh
-	DirAccess.open(CACHE_DIR)
-
-	# Method 1: Try direct Image load (most reliable for user://)
-	var img := Image.load_from_file(full_path)
+	# Fallback direct load
+	var img = Image.load_from_file(path)
 	if img:
-		print("MapCacheManager: ✓ Loaded via Image.load_from_file: " + filename)
-		var tex := ImageTexture.create_from_image(img)
-		return tex
-
-	# Method 2: Fallback to ResourceLoader
-	if ResourceLoader.exists(full_path):
-		var tex = load(full_path) as Texture2D
-		if tex:
-			print("MapCacheManager: ✓ Loaded via ResourceLoader: " + filename)
-			return tex
-
-	print("MapCacheManager: Failed to load cache for '" + map_id + "' (file " + filename + " exists but could not be loaded)")
+		return ImageTexture.create_from_image(img)
 	return null
+
+func load_terrain_data(map_id: String) -> Dictionary:
+	if not _manifest.has(map_id):
+		_load_manifest()
+	if not _manifest.has(map_id):
+		return {}
+
+	var entry = _manifest[map_id]
+	var path = CACHE_DIR + entry.get("terrain", "")
+	if not ResourceLoader.exists(path):
+		return {}
+
+	var file = FileAccess.open(path, FileAccess.READ)
+	if file:
+		var data = JSON.parse_string(file.get_as_text())
+		file.close()
+		return data if data is Dictionary else {}
+	return {}
