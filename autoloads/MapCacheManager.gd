@@ -4,10 +4,12 @@ extends Node
 const CACHE_DIR := "user://cache/maps/"
 const MANIFEST_PATH := "user://cache/maps/cache_manifest.json"
 const MAPS_ROOT := "res://assets/maps/"
-const TILE_SIZE := 64
-const MAX_SAFE_DIMENSION := 8192
 
-var _manifest: Dictionary = {}   # map_id → { "visual": "...png", "terrain": "...json" }
+const TILE_SIZE := 64
+const CHUNK_SIZE_TILES := 32          # 32×32 tiles per chunk
+const CHUNK_SIZE_PX := CHUNK_SIZE_TILES * TILE_SIZE   # 2048
+
+var _manifest: Dictionary = {}   # map_id → { "chunks": [...], "terrain": "...", "width": int, "height": int }
 
 func _ready() -> void:
 	ensure_cache_dir()
@@ -36,10 +38,10 @@ func _save_manifest() -> void:
 		print("MapCacheManager: Manifest saved (" + str(_manifest.size()) + " entries)")
 
 # ------------------------------------------------------------------
-#  GENERATE CACHE + TERRAIN DATA
+#  GENERATE CACHE WITH CHUNKING
 # ------------------------------------------------------------------
 func generate_all_caches() -> void:
-	print("=== MapCacheManager: Starting full cache regeneration ===")
+	print("=== MapCacheManager: Starting full cache regeneration (chunked) ===")
 	_manifest.clear()
 	var processed := 0
 	_scan_directory(MAPS_ROOT, processed)
@@ -70,36 +72,8 @@ func generate_cache_for_map(map_id: String, full_png_path: String) -> bool:
 
 	var map_w := image.get_width()
 	var map_h := image.get_height()
-	var baked_w := map_w * TILE_SIZE
-	var baked_h := map_h * TILE_SIZE
 
-	if baked_w > MAX_SAFE_DIMENSION or baked_h > MAX_SAFE_DIMENSION:
-		push_warning("MapCacheManager: Map " + map_id + " too large (" + str(baked_w) + "x" + str(baked_h) + "). Skipping.")
-		return false
-
-	# 1. Create visual cache
-	var baked := Image.create(baked_w, baked_h, false, Image.FORMAT_RGBA8)
-	for y in map_h:
-		for x in map_w:
-			var col = image.get_pixel(x, y)
-			var terrain_id = GroundsManager.nearest_terrain_id(int(col.r*255), int(col.g*255), int(col.b*255))
-			var tile_tex = GroundsManager.get_texture(terrain_id)
-			if tile_tex:
-				var tile_img = tile_tex.get_image()
-				if tile_img:
-					if tile_img.get_format() != Image.FORMAT_RGBA8:
-						tile_img.convert(Image.FORMAT_RGBA8)
-					baked.blit_rect(tile_img, Rect2(0, 0, TILE_SIZE, TILE_SIZE),
-									Vector2i(x * TILE_SIZE, y * TILE_SIZE))
-
-	var visual_filename = map_id.to_lower() + ".png"
-	var visual_path = CACHE_DIR + visual_filename
-	var err = baked.save_png(visual_path)
-	if err != OK:
-		push_error("MapCacheManager: Failed to save visual for " + map_id)
-		return false
-
-	# 2. Create terrain data
+	# Generate terrain data first (we always need this)
 	var terrain_data = _generate_terrain_data(image, map_w, map_h)
 	var terrain_filename = map_id.to_lower() + "_terrain.json"
 	var terrain_path = CACHE_DIR + terrain_filename
@@ -109,15 +83,58 @@ func generate_cache_for_map(map_id: String, full_png_path: String) -> bool:
 		terrain_file.store_string(JSON.stringify(terrain_data, "  ", true))
 		terrain_file.close()
 
-	# 3. Update manifest
+	# === Chunked Visual Cache ===
+	var chunks := []
+	var chunk_w := CHUNK_SIZE_TILES
+	var chunk_h := CHUNK_SIZE_TILES
+	var num_chunks_x := (map_w + chunk_w - 1) / chunk_w
+	var num_chunks_y := (map_h + chunk_h - 1) / chunk_h
+
+	print("MapCacheManager: Generating ", num_chunks_x * num_chunks_y, " chunks for ", map_id)
+
+	for cy in num_chunks_y:
+		for cx in num_chunks_x:
+			var chunk_x := cx * chunk_w
+			var chunk_y := cy * chunk_h
+			var cw := mini(chunk_w, map_w - chunk_x)
+			var ch := mini(chunk_h, map_h - chunk_y)
+
+			var chunk_img := Image.create(cw * TILE_SIZE, ch * TILE_SIZE, false, Image.FORMAT_RGBA8)
+
+			for y in ch:
+				for x in cw:
+					var gx := chunk_x + x
+					var gy := chunk_y + y
+					var col = image.get_pixel(gx, gy)
+					var terrain_id = GroundsManager.nearest_terrain_id(int(col.r*255), int(col.g*255), int(col.b*255))
+					var tile_tex = GroundsManager.get_texture(terrain_id)
+					if tile_tex:
+						var tile_img = tile_tex.get_image()
+						if tile_img:
+							if tile_img.get_format() != Image.FORMAT_RGBA8:
+								tile_img.convert(Image.FORMAT_RGBA8)
+							chunk_img.blit_rect(tile_img, Rect2(0, 0, TILE_SIZE, TILE_SIZE),
+												Vector2i(x * TILE_SIZE, y * TILE_SIZE))
+
+			var chunk_filename = map_id.to_lower() + "_chunk_" + str(cx) + "_" + str(cy) + ".png"
+			var chunk_path = CACHE_DIR + chunk_filename
+			var err = chunk_img.save_png(chunk_path)
+			if err != OK:
+				push_error("Failed to save chunk " + chunk_filename)
+				return false
+
+			chunks.append(chunk_filename)
+
+	# Update manifest
 	_manifest[map_id] = {
-		"visual": visual_filename,
+		"chunks": chunks,
+		"chunk_size_tiles": CHUNK_SIZE_TILES,
 		"terrain": terrain_filename,
 		"width": map_w,
 		"height": map_h
 	}
 
-	print("MapCacheManager: ✓ Cached " + map_id + " (visual + terrain)")
+	print("MapCacheManager: ✓ Cached " + map_id + " (" + str(chunks.size()) + " chunks + terrain)")
 	return true
 
 func _generate_terrain_data(image: Image, map_w: int, map_h: int) -> Dictionary:
@@ -133,9 +150,8 @@ func _generate_terrain_data(image: Image, map_w: int, map_h: int) -> Dictionary:
 			var g = int(c.g * 255)
 			var b = int(c.b * 255)
 
-			if r + g + b < 60 and (g > r + b or r > g + b):  # spawn pixel
+			if r + g + b < 60 and (g > r + b or r > g + b):
 				spawns.append({"x": x, "y": y})
-				# Use terrain from pixel above or default
 				if y > 0:
 					var above = image.get_pixel(x, y-1)
 					row.append(GroundsManager.nearest_terrain_id(int(above.r*255), int(above.g*255), int(above.b*255)))
@@ -153,23 +169,11 @@ func _generate_terrain_data(image: Image, map_w: int, map_h: int) -> Dictionary:
 	}
 
 # ------------------------------------------------------------------
-#  LOAD CACHED MAP
+#  LOAD CACHED MAP (with chunk stitching + fallback)
 # ------------------------------------------------------------------
 func load_cached_texture(map_id: String) -> Texture2D:
-	if not _manifest.has(map_id):
-		_load_manifest()
-	if not _manifest.has(map_id):
-		return null
-
-	var entry = _manifest[map_id]
-	var path = CACHE_DIR + entry.get("visual", "")
-	if ResourceLoader.exists(path):
-		return load(path) as Texture2D
-
-	# Fallback direct load
-	var img = Image.load_from_file(path)
-	if img:
-		return ImageTexture.create_from_image(img)
+	# For now we return null — we will stitch chunks in WorldRenderer instead
+	# This keeps the old single-texture API if you ever want to fall back
 	return null
 
 func load_terrain_data(map_id: String) -> Dictionary:
@@ -189,3 +193,12 @@ func load_terrain_data(map_id: String) -> Dictionary:
 		file.close()
 		return data if data is Dictionary else {}
 	return {}
+
+# New: Returns list of chunk filenames + metadata
+func get_chunk_info(map_id: String) -> Dictionary:
+	if not _manifest.has(map_id):
+		_load_manifest()
+	if not _manifest.has(map_id):
+		return {}
+
+	return _manifest[map_id]
