@@ -18,6 +18,7 @@ var map_height   : int   = 0
 
 var show_grid : bool = false
 
+# Optional global multiplier to easily adjust overall decoration density
 var decoration_density_multiplier := 1.0   # 0.5 = half, 1.5 = 50% more, etc.
 
 # ─────────────────────────────────────────────────────────────
@@ -57,20 +58,21 @@ func setup(terrain_grid: Array, spawn_points: Array, map_width: int, map_height:
 			self.map_width = map_width
 			self.map_height = map_height
 
-		# Sprinkle using real terrain data + rates from grounds.json
+		# Sprinkle decorations using real terrain data + rates from grounds.json
 		_sprinkle_decorations(self.map_width, self.map_height, self.terrain_grid)
 		return
 
-	# Fallback
-	push_warning("WorldRenderer: No cached texture found for '" + map_id + "'.")
+	# Fallback if cache fails
+	push_warning("WorldRenderer: No cached texture found for '" + map_id + "'. Falling back to tile rendering.")
 	self.terrain_grid = terrain_grid
 	self.spawn_points = spawn_points
 	self.map_width = map_width
 	self.map_height = map_height
-#	_build_tile_based_map(terrain_grid, map_width, map_height)
+	# _build_tile_based_map(terrain_grid, map_width, map_height)  # re-enable if needed later
+
 
 # ─────────────────────────────────────────────────────────────
-#  2. DECORATION SPRINKLING (on cached background)
+#  2. DECORATION SPRINKLING (rate-based, per-terrain)
 # ─────────────────────────────────────────────────────────────
 func _sprinkle_decorations(map_width: int, map_height: int, terrain_grid: Array) -> void:
 	# Clear old decorations
@@ -100,13 +102,14 @@ func _sprinkle_decorations(map_width: int, map_height: int, terrain_grid: Array)
 			if tid.is_empty(): continue
 			terrain_tile_count[tid] = terrain_tile_count.get(tid, 0) + 1
 
-	# Spawn according to rates in grounds.json
+	# Spawn according to rates defined in grounds.json
 	for tid in terrain_tile_count.keys():
 		var tile_count : int = terrain_tile_count[tid]
 		var target_count : int = int(GroundsManager.get_decoration_target_count(tid, tile_count) * decoration_density_multiplier + 0.5)
 		if target_count <= 0:
 			continue
 
+		# Collect all positions of this terrain type
 		var positions := []
 		for y in map_height:
 			for x in map_width:
@@ -123,17 +126,17 @@ func _sprinkle_decorations(map_width: int, map_height: int, terrain_grid: Array)
 			if decoration_file.is_empty():
 				continue
 
-			# FIXED: Use the full path from grounds.json ("random/xxx.png")
 			var deco_path: String = "res://assets/grounds/" + decoration_file
-
 			var texture = load(deco_path) as Texture2D
 			if texture == null:
-				print("Failed to load texture: ", deco_path)
 				continue
 
 			var sprite := Sprite2D.new()
 			sprite.texture = texture
-			sprite.position = Vector2(pos.x * tile_size + tile_size * 0.5, pos.y * tile_size + tile_size * 0.5)
+			sprite.position = Vector2(
+				pos.x * tile_size + tile_size * 0.5,
+				pos.y * tile_size + tile_size * 0.5
+			)
 			sprite.z_index = 5
 			sprite.set_meta("is_decoration", true)
 			sprite.scale = Vector2.ONE * (0.9 + randf() * 0.4)
@@ -144,14 +147,13 @@ func _sprinkle_decorations(map_width: int, map_height: int, terrain_grid: Array)
 
 	print("=== Decoration sprinkling FINISHED === Total spawned: ", spawn_count, " ===")
 
+
 # ─────────────────────────────────────────────────────────────
-#  3. FALLBACK: Tile-based rendering (minimal)
+#  3. FALLBACK: Tile-based rendering (minimal - disabled for now)
 # ─────────────────────────────────────────────────────────────
 #func _build_tile_based_map(terrain_grid: Array, map_width: int, map_height: int) -> void:
-	# TODO: If you still need the old per-tile drawing, put it here.
-	# For now we keep it minimal so the game doesn't break if cache fails.
-#	print("WorldRenderer: Using fallback tile rendering (cache unavailable)")
-	# You can re-add your old _draw_terrain_pass1 etc. if needed later.
+	# TODO: Re-add old per-tile rendering here only if cache fails badly
+
 
 # ─────────────────────────────────────────────────────────────
 #  4. PUBLIC API
@@ -164,7 +166,6 @@ func terrain_at_world(pos: Vector2) -> String:
 	var ty := int(pos.y / TILE_PX)
 	return MapManager.get_terrain_at(terrain_grid, tx, ty)
 
-# Optional: toggle grid if you still use it
 func toggle_grid() -> void:
 	show_grid = not show_grid
 	queue_redraw()
