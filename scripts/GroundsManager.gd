@@ -190,14 +190,45 @@ func get_mask(id: String) -> Texture2D:
 ## Each entry is a Dictionary with "file" (String) and "rate" (float 0–1).
 func get_decorations(id: String) -> Array:
 	var g := get_ground(id)
-	return Array(g.get("random_decorations", []))
+	if g.is_empty():
+		return []
+	return Array(g.get("random_decorations", [])) as Array
 
 
-## Chooses a random decoration file for a ground tile based on spawn rates.
-## Returns "" if no decoration should spawn this tile (most tiles will return "").
-func roll_decoration(id: String) -> String:
-	for dec in get_decorations(id):
-		var rate := float(dec.get("rate", 0.0))
-		if randf() < rate:
+## Returns how many decorations should appear for this terrain type.
+## Example: rate = 0.05 on 2000 tiles → 100 decorations.
+func get_decoration_target_count(id: String, tile_count: int) -> int:
+	var dec_list := get_decorations(id)
+	if dec_list.is_empty():
+		return 0
+
+	var total_rate := 0.0
+	for dec in dec_list:
+		total_rate += float(dec.get("rate", 0.0))
+
+	return int(tile_count * total_rate + 0.5)
+
+
+## Picks one random decoration file for the terrain (weighted by rate).
+func pick_random_decoration(id: String) -> String:
+	var dec_list := get_decorations(id)
+	if dec_list.is_empty():
+		return ""
+
+	var total_weight := 0.0
+	for dec in dec_list:
+		total_weight += float(dec.get("rate", 0.0))
+
+	if total_weight <= 0.0:
+		return ""
+
+	# FIXED: Proper weighted selection
+	var roll := randf() * total_weight
+	var current := 0.0
+
+	for dec in dec_list:
+		current += float(dec.get("rate", 0.0))
+		if roll < current:          # This was the main bug area
 			return str(dec.get("file", ""))
+
 	return ""
