@@ -455,9 +455,14 @@ Performance Rule:
 Prefer 1–4 large textured layers over many small Sprite2D/TileMap cells for ground.
 Use MultiMeshInstance2D or GPUParticles2D for dense static decorations if needed.
 
-## 22. Node Property Access Rules
+## 22. Safe Property Access on Nodes / Autoloads
 
 Never use node.get("property", default_value) on a Node (it only accepts 1 argument).
-Use if "property" in node: or node.has_method("get_property") instead.
+
+Correct ways:
+if "property" in node: var value = node.property
+if node.has_method("get_property"): var value = node.get_property()
 For simple variables, direct access (node.my_var) is preferred when possible.
-Always prefer explicit helper methods (get_current_map_id()) over raw property access when dealing with autoloads.
+Prefer explicit getter methods (e.g. get_current_map_id()).
+
+This is a very common source of parser errors in Godot 4.3.
