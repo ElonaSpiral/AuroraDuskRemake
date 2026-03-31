@@ -466,3 +466,11 @@ For simple variables, direct access (node.my_var) is preferred when possible.
 Prefer explicit getter methods (e.g. get_current_map_id()).
 
 This is a very common source of parser errors in Godot 4.3.
+
+## 23. User Directory File Loading
+
+For files in user:// (especially freshly saved PNGs), never use load(path) directly.
+Use Image.load_from_file(path) + ImageTexture.create_from_image(img) instead.
+This avoids "Resource file not found" errors on user:// files.
+
+
