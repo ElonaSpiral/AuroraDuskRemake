@@ -1,234 +1,160 @@
+# GroundsManager.gd
+# Autoload - Manages terrain data, movement costs, buildability, water, and decorations
+
 extends Node
 
-# ─────────────────────────────────────────────────────────────
-#  Aurora Dusk: Steam Age — Grounds Manager  (Autoload)
-#  Godot 4.x  |  GDScript 2.0
-#
-#  Loads terrain type definitions from res://data/grounds.json
-#  (converted from the original game's data/grounds/*.js).
-#
-#  Asset paths (relative to res://assets/grounds/):
-#    Tile textures : <id>.png           e.g. "grass.png"
-#    Masks         : masks/<file>       e.g. "masks/mask.png"
-#    Decorations   : random/<file>      e.g. "random/plants.png"
-#
-#  Data fields per ground type:
-#    id              String   — unique key  (e.g. "grass")
-#    order           int      — original sort index
-#    texture         String   — tile image filename
-#    mask            String   — edge-blend mask filename
-#    color           String   — hex colour for minimap ("#298400")
-#    color_int       int      — colour as integer (original game format)
-#    speed           float    — unit movement multiplier (1.0 = normal)
-#    buildable       bool     — whether structures may be placed here
-#    level           float    — elevation tier
-#                              -2 = deep water … 2 = mountains
-#    translate_y     int      — vertical sprite offset (water animation)
-#    effect          String?  — rendering effect name ("waterEffect" / null)
-#    random_decorations Array — [{file, rate}] decoration spawn entries
-#
-#  Speed interpretation (from grounds.js):
-#    0.25  deep water   — nearly impassable
-#    0.40  rocks        — very slow
-#    0.50  mid water    — slow
-#    0.70  snow / swamp — hindered
-#    0.75  shallow water
-#    0.80  sand
-#    1.00  plain/grass/soil — normal
-#    1.20  road         — bonus speed
-# ─────────────────────────────────────────────────────────────
+# ==================== DATA ====================
+var _grounds_data: Dictionary = {}     # terrain_id -> terrain properties
+var _terrain_grid: Array = []          # 2D array of terrain_id strings
+var _terrain_tile_cache: Dictionary = {}  # terrain_id -> Array[Vector2i]
 
-const DATA_PATH     := "res://data/grounds.json"
-const ASSETS_ROOT   := "res://assets/grounds/"
+var _loaded: bool = false
 
-## All ground definitions keyed by id.
-var grounds : Dictionary = {}
+# ==================== PUBLIC API ====================
 
-## Ground ids ordered by their original sort index.
-var ground_ids : Array[String] = []
-
-## Tile textures cached by id (loaded on first request).
-var _texture_cache : Dictionary = {}
-
-
-# ─────────────────────────────────────────────────────────────
-func _ready() -> void:
-	_load_data()
-
-
-func _load_data() -> void:
-	if not FileAccess.file_exists(DATA_PATH):
-		push_error("GroundsManager: data file not found — %s" % DATA_PATH)
+func load_grounds_json() -> void:
+	var file_path = "res://data/grounds.json"
+	if not FileAccess.file_exists(file_path):
+		push_error("GroundsManager: grounds.json not found!")
 		return
-
-	var f := FileAccess.open(DATA_PATH, FileAccess.READ)
-	if f == null:
-		push_error("GroundsManager: cannot open — %s" % DATA_PATH)
+	
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	var json_text = file.get_as_text()
+	file.close()
+	
+	var json = JSON.new()
+	var error = json.parse(json_text)
+	if error != OK:
+		push_error("GroundsManager: JSON parse error!")
 		return
-
-	var result : Variant = JSON.parse_string(f.get_as_text())
-	f.close()
-
-	if not result is Dictionary:
-		push_error("GroundsManager: JSON parse failed — %s" % DATA_PATH)
-		return
-
-	grounds = result as Dictionary
-
-	# Build ordered id list sorted by the "order" field
-	var entries := grounds.values()
-	entries.sort_custom(func(a, b): return int(a.order) < int(b.order))
-	for entry in entries:
-		ground_ids.append(str(entry.id))
+	
+	_grounds_data = json.data
+	print("GroundsManager: Loaded %d terrain types" % _grounds_data.size())
+	_loaded = true
 
 
-# ─────────────────────────────────────────────────────────────
-#  PUBLIC API
-# ─────────────────────────────────────────────────────────────
-
-## Returns the full data dictionary for a ground id, or empty dict.
-func get_ground(id: String) -> Dictionary:
-	return grounds.get(id, {}) as Dictionary
+func set_terrain_grid(grid: Array) -> void:
+	_terrain_grid = grid
+	_build_terrain_cache()
 
 
-## Returns the movement speed multiplier for a ground id.
-## Falls back to 1.0 (normal speed) for unknown types.
-func get_speed(id: String) -> float:
-	return float(grounds.get(id, {}).get("speed", 1.0))
+func get_terrain_grid() -> Array:
+	return _terrain_grid
 
 
-## Returns true if structures can be placed on this ground type.
-func is_buildable(id: String) -> bool:
-	return bool(grounds.get(id, {}).get("buildable", false))
+func get_terrain_at(x: int, y: int) -> String:
+	if y < 0 or y >= _terrain_grid.size() or x < 0 or x >= _terrain_grid[y].size():
+		return "plain"  # fallback
+	return _terrain_grid[y][x]
 
 
-## Returns the elevation level for a ground id.
-## Negative = underwater, 0 = flat land, positive = elevated.
-func get_level(id: String) -> float:
-	return float(grounds.get(id, {}).get("level", 0.0))
+# ==================== DECORATION METHODS ====================
+
+func get_decoration_rate(terrain_id: String) -> float:
+	if not _grounds_data.has(terrain_id):
+		return 0.0
+	return _grounds_data[terrain_id].get("decoration_rate", 0.0)
 
 
-## Returns the minimap colour (as Color) for a ground id.
-func get_color(id: String) -> Color:
-	var ci : int = int(grounds.get(id, {}).get("color_int", 0x808080))
-	var r := ((ci >> 16) & 0xFF) / 255.0
-	var g := ((ci >>  8) & 0xFF) / 255.0
-	var b := ( ci        & 0xFF) / 255.0
-	return Color(r, g, b, 1.0)
+func get_decoration_target_count(terrain_id: String, map_width: int, map_height: int) -> int:
+	var rate = get_decoration_rate(terrain_id)
+	return int(map_width * map_height * rate)
 
 
-## Returns true if the ground has a water-type effect.
-func is_water(id: String) -> bool:
-	var g := get_ground(id)
-	return str(g.get("effect", "")) == "waterEffect"
+func pick_random_decoration(terrain_id: String) -> String:
+	if not _grounds_data.has(terrain_id):
+		return ""
+	var list = _grounds_data[terrain_id].get("decorations", [])
+	if list.is_empty():
+		return ""
+	return list[randi() % list.size()]
 
 
-## Returns the ground id whose canonical color is nearest to the given RGB.
-## This is the core terrain-identification function used when parsing map PNGs.
+func get_tiles_of_terrain(terrain_id: String) -> Array[Vector2i]:
+	if _terrain_tile_cache.has(terrain_id):
+		return _terrain_tile_cache[terrain_id]
+	return []
+
+
+func get_all_terrain_ids() -> Array:
+	return _grounds_data.keys()
+
+
+# ==================== INTERNAL ====================
+
+func _build_terrain_cache() -> void:
+	_terrain_tile_cache.clear()
+	for y in _terrain_grid.size():
+		for x in _terrain_grid[y].size():
+			var tid = _terrain_grid[y][x]
+			if not _terrain_tile_cache.has(tid):
+				_terrain_tile_cache[tid] = []
+			_terrain_tile_cache[tid].append(Vector2i(x, y))
+	
+	print("GroundsManager: Built terrain cache for %d terrain types" % _terrain_tile_cache.size())
+
+
+# ==================== OTHER TERRAIN HELPERS ====================
+
+func get_movement_speed(terrain_id: String) -> float:
+	if not _grounds_data.has(terrain_id):
+		return 1.0
+	return _grounds_data[terrain_id].get("movement_speed", 1.0)
+
+
+func is_buildable(terrain_id: String) -> bool:
+	if not _grounds_data.has(terrain_id):
+		return false
+	return _grounds_data[terrain_id].get("buildable", false)
+
+
+func is_water(terrain_id: String) -> bool:
+	if not _grounds_data.has(terrain_id):
+		return false
+	return _grounds_data[terrain_id].get("is_water", false)
+
+
+# Add more helpers as needed (color tint, etc.)
+
+## Returns the closest terrain_id based on RGB color.
+## Used by MapManager when parsing color-coded PNG maps.
 func nearest_terrain_id(r: int, g: int, b: int) -> String:
-	var best_id   := "plain"
-	var best_dist := INF
-	for gid : String in grounds.keys():
-		var entry := grounds[gid] as Dictionary
-		var ci    : int = int(entry.get("color_int", 0))
-		var rc := (ci >> 16) & 0xFF
-		var gc := (ci >>  8) & 0xFF
-		var bc :=  ci        & 0xFF
-		var d  : float = ((r - rc) * (r - rc) + (g - gc) * (g - gc) + (b - bc) * (b - bc))
-		if d < best_dist:
-			best_dist = d
-			best_id   = gid
+	if not _loaded:
+		load_grounds_json()
+	
+	var best_id := "plain"
+	var best_dist := 999999.0
+	
+	for tid in _grounds_data.keys():
+		var data = _grounds_data[tid]
+		if not data.has("color"):
+			continue
+		
+		var c = data["color"] as Color
+		var dr = r - int(c.r8)
+		var dg = g - int(c.g8)
+		var db = b - int(c.b8)
+		var dist = dr*dr + dg*dg + db*db
+		
+		if dist < best_dist:
+			best_dist = dist
+			best_id = tid
+	
 	return best_id
 
-
-## Returns the ground id AND distance for diagnostics / editor tools.
-func nearest_terrain_with_dist(r: int, g: int, b: int) -> Dictionary:
-	var best_id   := "plain"
-	var best_dist := INF
-	for gid : String in grounds.keys():
-		var entry := grounds[gid] as Dictionary
-		var ci    : int = int(entry.get("color_int", 0))
-		var rc := (ci >> 16) & 0xFF
-		var gc := (ci >>  8) & 0xFF
-		var bc :=  ci        & 0xFF
-		var d  : float = ((r - rc) * (r - rc) + (g - gc) * (g - gc) + (b - bc) * (b - bc))
-		if d < best_dist:
-			best_dist = d
-			best_id   = gid
-	return {"id": best_id, "dist": sqrt(best_dist)}
+func get_speed(terrain_id: String) -> float:
+	if not _grounds_data.has(terrain_id):
+		return 1.0
+	return _grounds_data[terrain_id].get("movement_speed", 1.0)
 
 
-## Returns the Texture2D for a ground tile, loading and caching on first call.
-## Returns null if the texture file does not exist.
-func get_texture(id: String) -> Texture2D:
-	if _texture_cache.has(id):
-		return _texture_cache[id] as Texture2D
-	var g := get_ground(id)
-	if g.is_empty():
+func get_texture(terrain_id: String) -> Texture2D:
+	if not _grounds_data.has(terrain_id):
 		return null
-	var path := ASSETS_ROOT + str(g.get("texture", ""))
-	if not ResourceLoader.exists(path):
-		push_warning("GroundsManager: texture not found — %s" % path)
-		return null
-	var tex := load(path) as Texture2D
-	_texture_cache[id] = tex
-	return tex
-
-
-## Returns the mask Texture2D for a ground tile (edge-blending mask).
-func get_mask(id: String) -> Texture2D:
-	var g := get_ground(id)
-	if g.is_empty():
-		return null
-	var path := ASSETS_ROOT + "masks/" + str(g.get("mask", "mask.png"))
-	if not ResourceLoader.exists(path):
+	var path = _grounds_data[terrain_id].get("texture_path", "")
+	if path.is_empty():
 		return null
 	return load(path) as Texture2D
-
-
-## Returns a list of random decoration spawn definitions for a ground id.
-## Each entry is a Dictionary with "file" (String) and "rate" (float 0–1).
-func get_decorations(id: String) -> Array:
-	var g := get_ground(id)
-	if g.is_empty():
-		return []
-	return Array(g.get("random_decorations", [])) as Array
-
-
-## Returns how many decorations should appear for this terrain type.
-## Example: rate = 0.05 on 2000 tiles → 100 decorations.
-func get_decoration_target_count(id: String, tile_count: int) -> int:
-	var dec_list := get_decorations(id)
-	if dec_list.is_empty():
-		return 0
-
-	var total_rate := 0.0
-	for dec in dec_list:
-		total_rate += float(dec.get("rate", 0.0))
-
-	return int(tile_count * total_rate + 0.5)
-
-
-## Picks one random decoration file for the terrain (weighted by rate).
-func pick_random_decoration(id: String) -> String:
-	var dec_list := get_decorations(id)
-	if dec_list.is_empty():
-		return ""
-
-	var total_weight := 0.0
-	for dec in dec_list:
-		total_weight += float(dec.get("rate", 0.0))
-
-	if total_weight <= 0.0:
-		return ""
-
-	# FIXED: Proper weighted selection
-	var roll := randf() * total_weight
-	var current := 0.0
-
-	for dec in dec_list:
-		current += float(dec.get("rate", 0.0))
-		if roll < current:          # This was the main bug area
-			return str(dec.get("file", ""))
-
-	return ""
+	
+func _ready() -> void:
+	load_grounds_json()

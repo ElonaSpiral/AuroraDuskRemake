@@ -402,8 +402,14 @@ func parse_map(map_id: String) -> Dictionary:
 	# Enrichment spawn points override auto-detected ones
 	var meta_spawns : Array = Array(m.get("spawn_points", []))
 	var final_spawns : Array = meta_spawns if not meta_spawns.is_empty() else spawns
-
-	return {"grid": grid, "spawns": final_spawns, "width": w, "height": h}
+	
+	var result = {"grid": grid, "spawns": final_spawns, "width": w, "height": h}
+	
+	current_map_width = w
+	current_map_height = h
+	last_parse_result = result
+	
+	return result
 
 
 ## Returns the terrain id at a given pixel coordinate on a parsed grid.
@@ -467,3 +473,18 @@ func _is_spawn_pixel(r: int, g: int, b: int) -> bool:
 	if r > g + b:
 		return true
 	return false
+
+# Add these at the bottom of MapManager.gd
+
+var current_map_width: int = 0
+var current_map_height: int = 0
+var last_parse_result: Dictionary = {}
+
+# Add at the bottom of MapManager.gd
+
+func get_current_map_width() -> int:
+	return current_map_width
+
+
+func get_current_map_height() -> int:
+	return current_map_height

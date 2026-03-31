@@ -3,8 +3,8 @@ extends Node2D
 class_name WorldScene
 
 # ─────────────────────────────────────────────────────────────
-#  Aurora Dusk: Steam Age — World Scene (Cleaned)
-#  Core: map loading, camera, RTS, HUD. Tests moved to DebugManager.
+#  Aurora Dusk: Steam Age — World Scene (Updated)
+#  Now uses optimized DecorationManager + lightweight MinimapDrawer
 # ─────────────────────────────────────────────────────────────
 
 const SCENE_MAIN     := "res://scenes/MainMenu.tscn"
@@ -34,7 +34,7 @@ const ZOOM_MAX  := 4.0
 @onready var btn_grid       : Button       = $HUDLayer/HUD/BtnGrid
 @onready var map_picker     : OptionButton = $HUDLayer/HUD/TopBar/TopMargin/TopHBox/MapPicker
 
-# Debug panel (only shown in Test Map mode)
+# Debug panel
 @onready var debug_panel    : Control      = $HUDLayer/HUD/DebugPanel
 
 # ── State ─────────────────────────────────────────────────────
@@ -45,6 +45,9 @@ var _map_height   : int   = 0
 var _map_id       : String = ""
 var _dragging     : bool  = false
 var _drag_start   : Vector2
+
+var world_size_px : Vector2 = Vector2.ZERO
+
 
 func _ready() -> void:
 	_populate_map_picker()
@@ -76,9 +79,10 @@ func _ready() -> void:
 	if minimap and minimap.has_signal("camera_move_requested"):
 		minimap.camera_move_requested.connect(_on_minimap_camera_move)
 
-# ─────────────────────────────────────────────────────────────
-#  MAP LOADING
-# ─────────────────────────────────────────────────────────────
+
+# ================================================================
+# MAP LOADING (Updated)
+# ================================================================
 
 func _populate_map_picker() -> void:
 	var mode := GameState.selected_mode
@@ -97,9 +101,6 @@ func _populate_map_picker() -> void:
 		map_picker.add_item(label)
 		map_picker.set_item_metadata(map_picker.item_count - 1, mid)
 
-func _load_map_by_idx(idx: int) -> void:
-	var mid := str(map_picker.get_item_metadata(idx))
-	_load_map(mid)
 
 func _load_map(map_id: String) -> void:
 	_map_id = map_id
@@ -122,22 +123,34 @@ func _load_map(map_id: String) -> void:
 	_map_width    = result.width
 	_map_height   = result.height
 
-	renderer.setup(_terrain_grid, _spawn_points, _map_width, _map_height)
+	# === NEW: Pass map to WorldRenderer (handles chunks + decorations) ===
+	renderer.load_map(MapManager)
+
+	# Calculate world size for camera & minimap
+	world_size_px = Vector2(_map_width * 64.0, _map_height * 64.0)
+
+# === NEW: Setup optimized Minimap using ORIGINAL PNG ===
+	var folder = MapManager.get_map_data(map_id).get("folder", "1")
+	var original_png_path = "res://assets/maps/" + folder + "/" + map_id + ".png"
+	
+	if minimap.has_method("setup"):
+		minimap.setup(original_png_path, _map_width, _map_height)
+	else:
+		print("Warning: MinimapDrawer.setup() method not found")
 
 	var ctrl := rts_controller as RTSController
 	if ctrl:
 		ctrl.setup(camera, units_layer, _terrain_grid, _map_width, _map_height)
 
 	lbl_map.text = str(mdata.get("name", map_id))
-	_update_minimap()
 	_centre_camera()
 
-	print("WorldScene: Loaded map " + map_id)
+	print("WorldScene: Loaded map '" + map_id + "' | Decorations & Minimap initialized")
+
 
 func _load_first_test_map() -> void:
 	var dir = DirAccess.open("res://assets/maps/test/")
 	if not dir:
-		push_warning("No test folder found, falling back to middleBridge")
 		_load_map("middleBridge")
 		return
 
@@ -145,29 +158,32 @@ func _load_first_test_map() -> void:
 	for file in files:
 		if file.ends_with(".png"):
 			var mid = file.get_basename()
-			print("Debug Test Mode: Loading first test map: " + mid)
 			GameState.selected_map_id = mid
 			_load_map(mid)
 			return
 
 	_load_map("middleBridge")
 
-# ─────────────────────────────────────────────────────────────
-#  CAMERA & INPUT
-# ─────────────────────────────────────────────────────────────
+
+# ================================================================
+# CAMERA & INPUT
+# ================================================================
 
 func _setup_camera() -> void:
 	camera.zoom = Vector2(1.0, 1.0)
 
 func _centre_camera() -> void:
-	var ws := Vector2(_map_width * 64, _map_height * 64)
-	camera.position = ws * 0.5
+	if world_size_px.x > 0:
+		camera.position = world_size_px * 0.5
 
 func _process(delta: float) -> void:
 	_handle_keyboard_pan(delta)
 	_update_terrain_label()
+	
+	# Update minimap viewport rectangle every frame
 	if minimap and minimap.has_method("update_viewport"):
-		minimap.update_viewport(camera, Vector2(_map_width * 64, _map_height * 64))
+		minimap.update_viewport(camera, world_size_px)
+
 
 func _handle_keyboard_pan(delta: float) -> void:
 	var dir := Vector2.ZERO
@@ -180,13 +196,15 @@ func _handle_keyboard_pan(delta: float) -> void:
 		camera.position += dir.normalized() * PAN_SPEED * delta / camera.zoom.x
 		_clamp_camera()
 
-func _clamp_camera() -> void:
-	if _map_width == 0: return
-	var ws := Vector2(_map_width * 64, _map_height * 64)
-	var half := get_viewport_rect().size * 0.5 / camera.zoom
-	camera.position.x = clampf(camera.position.x, half.x, maxf(ws.x - half.x, half.x))
-	camera.position.y = clampf(camera.position.y, half.y, maxf(ws.y - half.y, half.y))
 
+func _clamp_camera() -> void:
+	if world_size_px.x == 0: return
+	var half := get_viewport_rect().size * 0.5 / camera.zoom
+	camera.position.x = clampf(camera.position.x, half.x, maxf(world_size_px.x - half.x, half.x))
+	camera.position.y = clampf(camera.position.y, half.y, maxf(world_size_px.y - half.y, half.y))
+
+
+# (Rest of your input, zoom, and HUD functions remain unchanged)
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		var mb := event as InputEventMouseButton
@@ -207,20 +225,22 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.physical_keycode == KEY_G:
 		_on_toggle_grid()
 
+
 func _zoom_by(delta: float) -> void:
 	var new_z := clampf(camera.zoom.x + delta, ZOOM_MIN, ZOOM_MAX)
 	camera.zoom = Vector2(new_z, new_z)
 	_clamp_camera()
 
+
 func _on_minimap_camera_move(fraction: Vector2) -> void:
-	if _map_width == 0: return
-	var ws := Vector2(_map_width * 64, _map_height * 64)
-	camera.position = fraction * ws
+	if world_size_px.x == 0: return
+	camera.position = fraction * world_size_px
 	_clamp_camera()
 
-# ─────────────────────────────────────────────────────────────
-#  HUD
-# ─────────────────────────────────────────────────────────────
+
+# ================================================================
+# HUD & OTHER
+# ================================================================
 
 func _setup_hud() -> void:
 	var mode_names := {"adventure": "Adventure", "survival": "Survival", "skirmish": "Skirmish", "multiplayer": "Multiplayer", "debug": "DEBUG"}
@@ -233,6 +253,7 @@ func _setup_hud() -> void:
 	btn_grid.pressed.connect(_on_toggle_grid)
 	map_picker.item_selected.connect(_on_map_selected)
 
+
 func _update_terrain_label() -> void:
 	if _terrain_grid.is_empty(): return
 	var mp := get_viewport().get_mouse_position()
@@ -244,12 +265,10 @@ func _update_terrain_label() -> void:
 		lbl_terrain.text = "%s ×%.2f%s" % [tid.capitalize(), GroundsManager.get_speed(tid), " 🏗" if GroundsManager.is_buildable(tid) else ""]
 		lbl_coords.text = "(%d, %d)" % [tx, ty]
 
-func _update_minimap() -> void:
-	if minimap and minimap.has_method("setup"):
-		minimap.setup(_terrain_grid, _spawn_points, _map_width, _map_height)
 
 func _on_selection_changed(count: int) -> void:
 	lbl_selection.text = "" if count == 0 else "%d unit%s selected" % [count, "s" if count > 1 else ""]
+
 
 func _on_back() -> void:
 	var target := SCENE_DEBUG if GameState.selected_mode == "debug" else SCENE_GAMEMODE
@@ -257,10 +276,17 @@ func _on_back() -> void:
 	t.tween_property(self, "modulate:a", 0.0, 0.35)
 	t.tween_callback(func(): get_tree().change_scene_to_file(target))
 
+
 func _on_toggle_grid() -> void:
 	if renderer.has_method("toggle_grid"):
 		renderer.toggle_grid()
 	btn_grid.text = "Grid: ON" if renderer.get("show_grid") else "Grid: OFF"
 
+
 func _on_map_selected(idx: int) -> void:
 	_load_map_by_idx(idx)
+
+
+func _load_map_by_idx(idx: int) -> void:
+	var mid := str(map_picker.get_item_metadata(idx))
+	_load_map(mid)
