@@ -343,7 +343,8 @@ aurora_dusk/
 - Declare **all** local variables at the **very top** of the function, before any `if`, `return`, or control flow.
 - Never declare a variable after a possible early return.
 - Good:
-```gdscript
+gdscript
+```
   func example(res_path: String):
       var path: String = ""
       if res_path.is_empty():
@@ -351,6 +352,21 @@ aurora_dusk/
       path = ...
 ```
 - Bad: declaring var path after the if block.
+
+### 12.3 JSON Parsing (Godot 4.3 Strict Typing)
+
+JSON.parse_string() returns Variant. To avoid "variable type is being inferred from a Variant value" error:
+
+gdscript
+```
+var parsed = JSON.parse_string(json_text)  # no explicit type here
+if parsed is Dictionary:
+    return parsed
+return {}
+```
+Never do var data: Dictionary = JSON.parse_string(...) — it triggers the warning treated as error.
+
+
 
 
 ---
