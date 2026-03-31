@@ -474,3 +474,38 @@ Use Image.load_from_file(path) + ImageTexture.create_from_image(img) instead.
 This avoids "Resource file not found" errors on user:// files.
 
 
+## 24. MultiMesh + Material Setup in Godot 4.3 (Hard-Earned Lessons)
+Godot 4.3’s GDScript parser is extremely picky with material classes when used inside MultiMesh setups. These rules were battle-tested during the DecorationManager implementation.
+24.1 Never assume StandardMaterial2D is always recognized
+Even when the class exists in the project, the parser frequently throws:
+"Identifier 'StandardMaterial2D' not declared in the current scope."
+Correct patterns (in order of preference):
+gdscript# Best: Use ClassDB.instantiate (most parser-resistant)
+var material = ClassDB.instantiate("StandardMaterial2D")
+material.shading_mode = 0          # UNSHADED
+material.transparency = 1          # ALPHA
+material.albedo_texture = texture
+
+# Alternative: Pure CanvasItemMaterial (always safe, limited features)
+var material := CanvasItemMaterial.new()
+material.blend_mode = CanvasItemMaterial.BLEND_MODE_MIX
+# Note: CanvasItemMaterial does NOT have albedo_texture
+24.2 Never use albedo_texture on CanvasItemMaterial
+This causes runtime Nil assignment errors. Only StandardMaterial2D supports albedo_texture.
+24.3 Always set material properties before assigning to MultiMesh
+gdscriptmultimesh.mesh.surface_set_material(0, material)
+24.4 Sprite2D Fallback Rule (Emergency)
+When MultiMesh material setup fails repeatedly, fall back to individual Sprite2D nodes with:
+
+z_index = -5 or higher (above ground at -10)
+centered = true
+texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+
+This guarantees visibility while debugging.
+24.5 General Recommendation for Decorations
+For high-density static decorations:
+
+Prefer MultiMeshInstance2D with StandardMaterial2D (best performance)
+Use ClassDB.instantiate("StandardMaterial2D") to bypass parser issues
+Always test with restart Godot editor after material changes
+
