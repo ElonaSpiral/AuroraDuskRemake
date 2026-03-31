@@ -1,5 +1,5 @@
 # MinimapDrawer.gd
-# Optimized minimap that uses the original map PNG for background
+# Optimized minimap using original map PNG + click/drag panning + correct aspect ratio
 
 extends Control
 
@@ -16,18 +16,23 @@ var map_h: int = 0
 func setup(original_map_png_path: String, w: int, h: int) -> void:
 	map_w = w
 	map_h = h
+	_minimap_texture = null
 	
-	# Load the original map PNG (much lighter than chunks)
 	if FileAccess.file_exists(original_map_png_path):
-		_minimap_texture = load(original_map_png_path)
-		print("MinimapDrawer: Loaded original map PNG for minimap")
-	else:
-		push_warning("MinimapDrawer: Original map PNG not found at " + original_map_png_path)
+		var loaded = load(original_map_png_path)
+		if loaded is Texture2D:
+			_minimap_texture = loaded
+		elif loaded is Image:
+			_minimap_texture = ImageTexture.create_from_image(loaded)
+	
+	# Force correct aspect ratio for the control itself
+	if map_w > 0 and map_h > 0:
+		var ratio = float(map_w) / float(map_h)
+		custom_minimum_size = Vector2(240, 240 / ratio)   # tall for corridor, wide for square maps
 	
 	queue_redraw()
 
 
-## Call this every frame from WorldScene
 func update_viewport(camera: Camera2D, world_size: Vector2) -> void:
 	if map_w == 0 or map_h == 0 or world_size.x == 0 or not _minimap_texture:
 		return
@@ -51,54 +56,49 @@ func update_viewport(camera: Camera2D, world_size: Vector2) -> void:
 	queue_redraw()
 
 
-# ─────────────────────────────────────────────────────────────
-#  INPUT
-# ─────────────────────────────────────────────────────────────
-
 func _gui_input(event: InputEvent) -> void:
-	if map_w == 0 or map_h == 0:
+	if not _minimap_texture:
 		return
 
-	if event is InputEventMouseButton:
-		var mb := event as InputEventMouseButton
-		if mb.button_index == MOUSE_BUTTON_LEFT:
-			_dragging = mb.pressed
-			if mb.pressed:
-				_emit_camera_move(mb.position)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			_dragging = true
+			_handle_minimap_click(event.position)
+		else:
+			_dragging = false
 
 	elif event is InputEventMouseMotion and _dragging:
-		_emit_camera_move((event as InputEventMouseMotion).position)
+		_handle_minimap_click(event.position)
 
 
-func _emit_camera_move(minimap_pos: Vector2) -> void:
-	var fx := clampf(minimap_pos.x / size.x, 0.0, 1.0)
-	var fy := clampf(minimap_pos.y / size.y, 0.0, 1.0)
-	camera_move_requested.emit(Vector2(fx, fy))
+func _handle_minimap_click(local_pos: Vector2) -> void:
+	if map_w == 0 or map_h == 0:
+		return
+	
+	var world_pos := Vector2(
+		(local_pos.x / size.x) * (map_w * 64.0),
+		(local_pos.y / size.y) * (map_h * 64.0)
+	)
+	
+	camera_move_requested.emit(world_pos)
 
-
-# ─────────────────────────────────────────────────────────────
-#  DRAWING - Now very cheap
-# ─────────────────────────────────────────────────────────────
 
 func _draw() -> void:
 	if not _minimap_texture:
 		return
 
-	# Draw the full minimap texture (single draw call)
+	# Draw texture while preserving aspect ratio (no stretching)
 	draw_texture_rect(_minimap_texture, Rect2(0, 0, size.x, size.y), false)
 
-	# Draw viewport rectangle
+	# Viewport rectangle
 	if _viewport_rect.size.x > 0:
-		# Semi-transparent fill
 		draw_rect(_viewport_rect, Color(1, 1, 1, 0.12))
-		# White border
 		draw_rect(_viewport_rect, Color(1, 1, 1, 0.85), false, 1.5)
 
-	# Outer border
+	# Border
 	draw_rect(Rect2(0, 0, size.x, size.y), Color(0.38, 0.26, 0.125, 0.75), false, 1.5)
 
 
-# Optional: Clear when changing maps
 func clear() -> void:
 	_minimap_texture = null
 	_viewport_rect = Rect2()

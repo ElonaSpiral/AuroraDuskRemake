@@ -61,6 +61,7 @@ func _on_test_map_pressed() -> void:
 
 func _on_regenerate_cache() -> void:
 	print("Regenerating all map caches...")
-	MapCacheManager.generate_all_caches()
-	# Optional: show a short message or progress
-	# You can add a Label or use print for now
+	if MapCacheManager.has_method("generate_all_caches"):
+		MapCacheManager.generate_all_caches()
+	else:
+		print("Error: generate_all_caches() not found in MapCacheManager")

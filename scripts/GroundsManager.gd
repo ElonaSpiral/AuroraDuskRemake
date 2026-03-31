@@ -53,27 +53,68 @@ func get_terrain_at(x: int, y: int) -> String:
 func get_decoration_rate(terrain_id: String) -> float:
 	if not _grounds_data.has(terrain_id):
 		return 0.0
-	return _grounds_data[terrain_id].get("decoration_rate", 0.0)
+	
+	var list = _grounds_data[terrain_id].get("random_decorations", [])
+	if list.is_empty():
+		return 0.0
+	
+	# Sum all rates in the array (your JSON uses per-decoration rates)
+	var total_rate: float = 0.0
+	for entry in list:
+		total_rate += entry.get("rate", 0.0)
+	return total_rate
 
 
-func get_decoration_target_count(terrain_id: String, map_width: int, map_height: int) -> int:
+func get_decoration_target_count(terrain_id: String, _map_width: int, _map_height: int) -> int:
 	var rate = get_decoration_rate(terrain_id)
-	return int(map_width * map_height * rate)
+	if rate <= 0.0:
+		return 0
+	
+	var tile_count = get_tiles_of_terrain(terrain_id).size()
+	return int(tile_count * rate)
 
 
 func pick_random_decoration(terrain_id: String) -> String:
 	if not _grounds_data.has(terrain_id):
 		return ""
-	var list = _grounds_data[terrain_id].get("decorations", [])
+	
+	var list: Array = _grounds_data[terrain_id].get("random_decorations", [])
 	if list.is_empty():
 		return ""
-	return list[randi() % list.size()]
+	
+	# Weighted random selection
+	var total_rate: float = 0.0
+	for entry in list:
+		total_rate += entry.get("rate", 0.0)
+	
+	if total_rate <= 0.0:
+		return ""
+	
+	var roll: float = randf() * total_rate
+	var current: float = 0.0
+	
+	for entry in list:
+		current += entry.get("rate", 0.0)
+		if roll <= current:
+			var file: String = entry.get("file", "")   # ← This is the correct key
+			if not file.is_empty():
+				# Build full path: assets/grounds/random/...
+				var full_path = "res://assets/grounds/" + file
+				return full_path
+			break  # safety
+	
+	return ""
 
 
 func get_tiles_of_terrain(terrain_id: String) -> Array[Vector2i]:
 	if _terrain_tile_cache.has(terrain_id):
-		return _terrain_tile_cache[terrain_id]
-	return []
+		# Godot 4.3 parser quirk workaround: build a fresh typed array
+		var raw: Array = _terrain_tile_cache[terrain_id]
+		var typed: Array[Vector2i] = []
+		typed.append_array(raw)
+		return typed
+	
+	return [] as Array[Vector2i]
 
 
 func get_all_terrain_ids() -> Array:
@@ -150,11 +191,24 @@ func get_speed(terrain_id: String) -> float:
 
 func get_texture(terrain_id: String) -> Texture2D:
 	if not _grounds_data.has(terrain_id):
+		push_warning("GroundsManager: No data for terrain '" + terrain_id + "'")
 		return null
-	var path = _grounds_data[terrain_id].get("texture_path", "")
-	if path.is_empty():
+	
+	var filename = _grounds_data[terrain_id].get("texture", "")
+	if filename.is_empty():
+		push_warning("GroundsManager: No 'texture' field for '" + terrain_id + "'")
 		return null
-	return load(path) as Texture2D
+	
+	var full_path = "res://assets/grounds/" + filename
+	
+	if not ResourceLoader.exists(full_path):
+		push_warning("GroundsManager: Texture not found: " + full_path)
+		return null
+	
+	var tex = load(full_path) as Texture2D
+	if tex == null:
+		push_warning("GroundsManager: Failed to load texture: " + full_path)
+	return tex
 	
 func _ready() -> void:
 	load_grounds_json()

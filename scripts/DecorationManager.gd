@@ -1,16 +1,13 @@
 # DecorationManager.gd
-# High-performance decoration system using MultiMeshInstance2D
-# Child of WorldRenderer (NOT autoload)
+# Stable decoration system using Sprite2D (reliable in Godot 4.3)
+# Child of WorldRenderer
 
 extends Node2D
 class_name DecorationManager
 
-@export var max_instances: int = 3000
 @export var tile_size: float = 64.0
 
-var _multimeshes: Dictionary = {}           # texture_path -> MultiMeshInstance2D
-var _decoration_entries: Array[Dictionary] = []
-
+var _sprites: Array[Sprite2D] = []
 var _grounds_manager: GroundsManager = null
 
 
@@ -29,21 +26,15 @@ func initialize(grounds_manager: GroundsManager, map_width_tiles: int, map_heigh
 	print("DecorationManager: Generating decorations for %dx%d map..." % [map_width_tiles, map_height_tiles])
 	
 	_generate_all_decorations(map_width_tiles, map_height_tiles)
-	_build_multimeshes()
 	
-	print("DecorationManager: Completed - %d decorations | %d MultiMesh instances" % [_decoration_entries.size(), _multimeshes.size()])
+	print("DecorationManager: Completed - %d decorations created" % _sprites.size())
 
 
 func clear_all() -> void:
-	for mm_instance in _multimeshes.values():
-		mm_instance.queue_free()
-	_multimeshes.clear()
-	_decoration_entries.clear()
+	for sprite in _sprites:
+		sprite.queue_free()
+	_sprites.clear()
 
-
-# ================================================================
-# GENERATION
-# ================================================================
 
 func _generate_all_decorations(map_w: int, map_h: int) -> void:
 	for terrain_id in _grounds_manager.get_all_terrain_ids():
@@ -71,63 +62,25 @@ func _generate_all_decorations(map_w: int, map_h: int) -> void:
 			if texture_path.is_empty():
 				continue
 				
-			_decoration_entries.append({
-				"position": world_pos,
-				"texture_path": texture_path,
-				"rotation": randf_range(-0.28, 0.28),
-				"scale": randf_range(0.88, 1.18)
-			})
+			var sprite = Sprite2D.new()
+			sprite.texture = load(texture_path) as Texture2D
+			if sprite.texture == null:
+				continue
+				
+			sprite.position = world_pos
+			sprite.rotation = randf_range(-0.28, 0.28)
+			sprite.scale = Vector2(randf_range(0.88, 1.18), randf_range(0.88, 1.18))
+			sprite.z_index = 0                    # Must be >= 0 to stay visible above ground
+			sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+			sprite.centered = true
+			
+			add_child(sprite)
+			_sprites.append(sprite)
 
-
-func _build_multimeshes() -> void:
-	var groups: Dictionary = {}
-	
-	for deco in _decoration_entries:
-		if not groups.has(deco.texture_path):
-			groups[deco.texture_path] = []
-		groups[deco.texture_path].append(deco)
-	
-	for tex_path in groups:
-		var entries: Array = groups[tex_path]
-		var mm_instance := MultiMeshInstance2D.new()
-		var multimesh := MultiMesh.new()
-		
-		multimesh.transform_format = MultiMesh.TRANSFORM_2D
-		multimesh.mesh = QuadMesh.new()
-		multimesh.instance_count = entries.size()
-		multimesh.visible_instance_count = entries.size()
-		
-		# === MATERIAL SETUP (fixed shadowing warning) ===
-		var canvas_material := CanvasItemMaterial.new()
-		canvas_material.blend_mode = CanvasItemMaterial.BLEND_MODE_MIX
-		canvas_material.light_mode = CanvasItemMaterial.LIGHT_MODE_NORMAL
-		
-		multimesh.mesh.surface_set_material(0, canvas_material)
-		
-		# Set texture
-		var texture = load(tex_path)
-		if texture:
-			multimesh.mesh.surface_set_texture(0, texture)
-		
-		mm_instance.multimesh = multimesh
-		add_child(mm_instance)
-		
-		_multimeshes[tex_path] = mm_instance
-		
-		# Apply transforms
-		for i in entries.size():
-			var e: Dictionary = entries[i]
-			var t := Transform2D(e.rotation, Vector2(e.scale, e.scale), 0.0, e.position)
-			multimesh.set_instance_transform_2d(i, t)
-
-
-# ================================================================
-# PUBLIC API
-# ================================================================
 
 func regenerate(grounds_manager: GroundsManager, map_width_tiles: int, map_height_tiles: int) -> void:
 	initialize(grounds_manager, map_width_tiles, map_height_tiles)
 
 
 func get_total_count() -> int:
-	return _decoration_entries.size()
+	return _sprites.size()

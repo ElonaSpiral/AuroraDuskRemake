@@ -71,6 +71,11 @@ var maps_by_mode : Dictionary = {
 	"debug":       [],
 }
 
+var current_map_width: int = 0
+var current_map_height: int = 0
+var last_parse_result: Dictionary = {}
+var current_map_id: String = ""
+var last_map_id: String = ""
 
 # ─────────────────────────────────────────────────────────────
 func _ready() -> void:
@@ -402,9 +407,11 @@ func parse_map(map_id: String) -> Dictionary:
 	# Enrichment spawn points override auto-detected ones
 	var meta_spawns : Array = Array(m.get("spawn_points", []))
 	var final_spawns : Array = meta_spawns if not meta_spawns.is_empty() else spawns
-	
+
 	var result = {"grid": grid, "spawns": final_spawns, "width": w, "height": h}
 	
+	# Save for WorldRenderer to use
+	current_map_id = map_id
 	current_map_width = w
 	current_map_height = h
 	last_parse_result = result
@@ -474,13 +481,6 @@ func _is_spawn_pixel(r: int, g: int, b: int) -> bool:
 		return true
 	return false
 
-# Add these at the bottom of MapManager.gd
-
-var current_map_width: int = 0
-var current_map_height: int = 0
-var last_parse_result: Dictionary = {}
-
-# Add at the bottom of MapManager.gd
 
 func get_current_map_width() -> int:
 	return current_map_width

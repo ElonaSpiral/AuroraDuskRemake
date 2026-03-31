@@ -2,11 +2,6 @@
 extends Node2D
 class_name WorldScene
 
-# ─────────────────────────────────────────────────────────────
-#  Aurora Dusk: Steam Age — World Scene (Updated)
-#  Now uses optimized DecorationManager + lightweight MinimapDrawer
-# ─────────────────────────────────────────────────────────────
-
 const SCENE_MAIN     := "res://scenes/MainMenu.tscn"
 const SCENE_GAMEMODE := "res://scenes/GameModeScene.tscn"
 const SCENE_DEBUG    := "res://scenes/DebugScene.tscn"
@@ -57,6 +52,12 @@ func _ready() -> void:
 	SpriteManager.initialize($VisualRoot if has_node("VisualRoot") else null)
 	print("WorldScene ready - SpriteManager initialized")
 
+	# Connect minimap signals
+	if has_node("HUDLayer/HUD/Minimap"):
+		var minimap_node = $HUDLayer/HUD/Minimap
+		if minimap_node.has_signal("camera_move_requested"):
+			minimap_node.camera_move_requested.connect(_on_minimap_camera_move_requested)
+
 	var is_debug_test := (GameState.selected_mode == "debug" and GameState.selected_map_id == "test_map_auto")
 
 	if is_debug_test:
@@ -75,13 +76,10 @@ func _ready() -> void:
 
 	modulate.a = 0.0
 	create_tween().tween_property(self, "modulate:a", 1.0, 0.40)
-	
-	if minimap and minimap.has_signal("camera_move_requested"):
-		minimap.camera_move_requested.connect(_on_minimap_camera_move)
 
 
 # ================================================================
-# MAP LOADING (Updated)
+# MAP LOADING
 # ================================================================
 
 func _populate_map_picker() -> void:
@@ -123,27 +121,28 @@ func _load_map(map_id: String) -> void:
 	_map_width    = result.width
 	_map_height   = result.height
 
-	# === NEW: Pass map to WorldRenderer (handles chunks + decorations) ===
-	renderer.load_map(MapManager)
+	# Pass map to WorldRenderer (chunks + decorations)
+	renderer.load_map(result)
 
-	# Calculate world size for camera & minimap
+	# Calculate world size
 	world_size_px = Vector2(_map_width * 64.0, _map_height * 64.0)
 
-# === NEW: Setup optimized Minimap using ORIGINAL PNG ===
-	var folder = MapManager.get_map_data(map_id).get("folder", "1")
+	# Setup minimap with original PNG (preserves aspect ratio)
+	var folder = mdata.get("folder", "1")
 	var original_png_path = "res://assets/maps/" + folder + "/" + map_id + ".png"
 	
-	if minimap.has_method("setup"):
-		minimap.setup(original_png_path, _map_width, _map_height)
-	else:
-		print("Warning: MinimapDrawer.setup() method not found")
+	if has_node("HUDLayer/HUD/Minimap"):
+		var minimap_node = $HUDLayer/HUD/Minimap
+		if minimap_node.has_method("setup"):
+			minimap_node.setup(original_png_path, _map_width, _map_height)
 
+	# Setup RTS controller
 	var ctrl := rts_controller as RTSController
 	if ctrl:
 		ctrl.setup(camera, units_layer, _terrain_grid, _map_width, _map_height)
 
 	lbl_map.text = str(mdata.get("name", map_id))
-	_centre_camera()
+	_centre_camera_on_load()
 
 	print("WorldScene: Loaded map '" + map_id + "' | Decorations & Minimap initialized")
 
@@ -172,17 +171,29 @@ func _load_first_test_map() -> void:
 func _setup_camera() -> void:
 	camera.zoom = Vector2(1.0, 1.0)
 
-func _centre_camera() -> void:
-	if world_size_px.x > 0:
-		camera.position = world_size_px * 0.5
+
+func _centre_camera_on_load() -> void:
+	if world_size_px.x == 0:
+		return
+		
+	var _viewport_size = get_viewport_rect().size
+	
+	# Center the map — especially important for thin/corridor maps
+	camera.position = world_size_px * 0.5
+	
+	# Clamp immediately so thin maps don't sit off-screen
+	_clamp_camera()
+
 
 func _process(delta: float) -> void:
 	_handle_keyboard_pan(delta)
 	_update_terrain_label()
 	
-	# Update minimap viewport rectangle every frame
-	if minimap and minimap.has_method("update_viewport"):
-		minimap.update_viewport(camera, world_size_px)
+	# Update minimap viewport
+	if has_node("HUDLayer/HUD/Minimap"):
+		var minimap_node = $HUDLayer/HUD/Minimap
+		if minimap_node.has_method("update_viewport"):
+			minimap_node.update_viewport(camera, world_size_px)
 
 
 func _handle_keyboard_pan(delta: float) -> void:
@@ -198,13 +209,14 @@ func _handle_keyboard_pan(delta: float) -> void:
 
 
 func _clamp_camera() -> void:
-	if world_size_px.x == 0: return
+	if world_size_px.x == 0: 
+		return
+		
 	var half := get_viewport_rect().size * 0.5 / camera.zoom
 	camera.position.x = clampf(camera.position.x, half.x, maxf(world_size_px.x - half.x, half.x))
 	camera.position.y = clampf(camera.position.y, half.y, maxf(world_size_px.y - half.y, half.y))
 
 
-# (Rest of your input, zoom, and HUD functions remain unchanged)
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		var mb := event as InputEventMouseButton
@@ -232,9 +244,8 @@ func _zoom_by(delta: float) -> void:
 	_clamp_camera()
 
 
-func _on_minimap_camera_move(fraction: Vector2) -> void:
-	if world_size_px.x == 0: return
-	camera.position = fraction * world_size_px
+func _on_minimap_camera_move_requested(world_pos: Vector2) -> void:
+	camera.position = world_pos
 	_clamp_camera()
 
 
@@ -255,11 +266,14 @@ func _setup_hud() -> void:
 
 
 func _update_terrain_label() -> void:
-	if _terrain_grid.is_empty(): return
+	if _terrain_grid.is_empty(): 
+		return
+		
 	var mp := get_viewport().get_mouse_position()
 	var wp := get_viewport().get_canvas_transform().affine_inverse() * mp
 	var tx := int(wp.x / 64)
 	var ty := int(wp.y / 64)
+	
 	if tx >= 0 and tx < _map_width and ty >= 0 and ty < _map_height:
 		var tid := MapManager.get_terrain_at(_terrain_grid, tx, ty)
 		lbl_terrain.text = "%s ×%.2f%s" % [tid.capitalize(), GroundsManager.get_speed(tid), " 🏗" if GroundsManager.is_buildable(tid) else ""]
@@ -284,9 +298,5 @@ func _on_toggle_grid() -> void:
 
 
 func _on_map_selected(idx: int) -> void:
-	_load_map_by_idx(idx)
-
-
-func _load_map_by_idx(idx: int) -> void:
 	var mid := str(map_picker.get_item_metadata(idx))
 	_load_map(mid)
