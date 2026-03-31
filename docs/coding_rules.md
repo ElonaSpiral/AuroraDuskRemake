@@ -454,3 +454,10 @@ Performance Rule:
 
 Prefer 1–4 large textured layers over many small Sprite2D/TileMap cells for ground.
 Use MultiMeshInstance2D or GPUParticles2D for dense static decorations if needed.
+
+## 22. Node Property Access Rules
+
+Never use node.get("property", default_value) on a Node (it only accepts 1 argument).
+Use if "property" in node: or node.has_method("get_property") instead.
+For simple variables, direct access (node.my_var) is preferred when possible.
+Always prefer explicit helper methods (get_current_map_id()) over raw property access when dealing with autoloads.
