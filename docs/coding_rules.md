@@ -339,6 +339,20 @@ aurora_dusk/
 | `camera.get_screen_transform()` gives wrong screen→world coords | Returns only the canvas-layer transform, ignoring camera position/zoom; causes large offset mismatch for click/drag input | Use `get_viewport().get_canvas_transform().affine_inverse() * screen_pos` for all screen→world conversions |
 | `"Not a PNG file"` / `ERR_FILE_CORRUPT` on a PNG that exists | File was processed by Godot's importer and stored internally; `Image.load(abs_path)` reads raw bytes which are no longer plain PNG | Use a two-stage loader: try `Image.load(abs_path)` first (raw PNGs); on failure fall back to `ResourceLoader.load(res_path) as Texture2D` then `.get_image()`. Both cases must be handled for a project that mixes imported and unimported assets |
 
+### Variable Declaration Order (Godot 4.3 Parser Quirk)
+- Declare **all** local variables at the **very top** of the function, before any `if`, `return`, or control flow.
+- Never declare a variable after a possible early return.
+- Good:
+```gdscript
+  func example(res_path: String):
+      var path: String = ""
+      if res_path.is_empty():
+          return null
+      path = ...
+```
+- Bad: declaring var path after the if block.
+
+
 ---
 
 ## 13. Map Discovery — Folder-Scan Architecture
@@ -508,4 +522,3 @@ For high-density static decorations:
 Prefer MultiMeshInstance2D with StandardMaterial2D (best performance)
 Use ClassDB.instantiate("StandardMaterial2D") to bypass parser issues
 Always test with restart Godot editor after material changes
-
