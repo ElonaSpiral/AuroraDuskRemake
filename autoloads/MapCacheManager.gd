@@ -7,7 +7,7 @@ const CACHE_DIR := "user://map_cache/"
 const CHUNK_SIZE_TILES := 32
 const TILE_SIZE := 64
 
-var _manifest: Dictionary = {}
+#var _manifest: Dictionary = {}   # or simply delete the line if it's truly unused
 
 
 func _ready() -> void:
@@ -178,16 +178,21 @@ func generate_all_caches() -> void:
 # ================================================================
 
 func _load_map_image(res_path: String) -> Image:
+	var path: String = ""  # declare at the very top of the function
+
 	if res_path.is_empty():
 		return null
-	var abs_path = ProjectSettings.globalize_path(res_path)
+
+	path = ProjectSettings.globalize_path(res_path)
 	var img := Image.new()
-	if img.load(abs_path) == OK:
+	if img.load(path) == OK:
 		return img
-	# Fallback for imported textures
+
+	# Fallback for Godot-imported textures
 	var tex = load(res_path) as Texture2D
 	if tex:
 		return tex.get_image()
+
 	return null
 
 
