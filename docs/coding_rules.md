@@ -343,8 +343,8 @@ aurora_dusk/
 - Declare **all** local variables at the **very top** of the function, before any `if`, `return`, or control flow.
 - Never declare a variable after a possible early return.
 - Good:
-gdscript
-```
+
+```gdscript
   func example(res_path: String):
       var path: String = ""
       if res_path.is_empty():
@@ -357,8 +357,7 @@ gdscript
 
 JSON.parse_string() returns Variant. To avoid "variable type is being inferred from a Variant value" error:
 
-gdscript
-```
+```gdscript
 var parsed = JSON.parse_string(json_text)  # no explicit type here
 if parsed is Dictionary:
     return parsed
@@ -485,6 +484,12 @@ Performance Rule:
 Prefer 1–4 large textured layers over many small Sprite2D/TileMap cells for ground.
 Use MultiMeshInstance2D or GPUParticles2D for dense static decorations if needed.
 
+
+### Super Chunk Culling
+
+On current map sizes (≤512×256), full loading of all Super Chunks is faster than per-frame culling.
+Only enable culling when we have maps significantly larger than 512×512 tiles.
+
 ## 22. Safe Property Access on Nodes / Autoloads
 
 Never use node.get("property", default_value) on a Node (it only accepts 1 argument).
@@ -538,3 +543,5 @@ For high-density static decorations:
 Prefer MultiMeshInstance2D with StandardMaterial2D (best performance)
 Use ClassDB.instantiate("StandardMaterial2D") to bypass parser issues
 Always test with restart Godot editor after material changes
+
+
