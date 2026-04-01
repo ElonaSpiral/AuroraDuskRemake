@@ -3,6 +3,8 @@ extends Node2D
 
 @onready var decoration_manager: DecorationManager
 
+const CHUNK_SIZE_PX := 4096        # 64 tiles × 64 px = Super Chunk
+
 var _chunk_sprites: Dictionary = {}     # "x_y" -> Sprite2D
 var _loaded_chunks: Dictionary = {}     # "x_y" -> bool
 
@@ -13,7 +15,7 @@ var _map_height_tiles: int = 0
 
 func _ready() -> void:
 	if not has_node("DecorationManager"):
-		var dm = DecorationManager.new()
+		var dm := DecorationManager.new()
 		dm.name = "DecorationManager"
 		add_child(dm)
 		print("WorldRenderer: Created DecorationManager child node")
@@ -66,38 +68,37 @@ func _generate_chunks() -> void:
 	if map_id.is_empty():
 		map_id = "unknown"
 	
-	var manifest = MapCacheManager.get_manifest(map_id)
+	var manifest := MapCacheManager.get_manifest(map_id)
 	
 	if manifest.is_empty() or not manifest.has("chunks"):
 		push_warning("WorldRenderer: No chunk manifest found for map '" + map_id + "'")
 		return
 	
-	print("WorldRenderer: Loading ", manifest.chunks.size(), " chunks from manifest for ", map_id)
+	print("WorldRenderer: Loading ", manifest.chunks.size(), " Super Chunks from manifest for ", map_id)
 	
-	for chunk_key in manifest.get("chunks", []):
-		var cx = chunk_key.get("x", 0)
-		var cy = chunk_key.get("y", 0)
+	for chunk_data in manifest.get("chunks", []):
+		var cx: int = chunk_data.get("x", 0)
+		var cy: int = chunk_data.get("y", 0)
 		_load_chunk(map_id, cx, cy)
 
 
 func _load_chunk(map_id: String, chunk_x: int, chunk_y: int) -> void:
-	var key = "%d_%d" % [chunk_x, chunk_y]
+	var key := "%d_%d" % [chunk_x, chunk_y]
 	if _loaded_chunks.has(key):
 		return
 	
-	var texture_path = MapCacheManager.get_chunk_texture_path(map_id, chunk_x, chunk_y)
+	var texture_path := MapCacheManager.get_chunk_texture_path(map_id, chunk_x, chunk_y)
 	
 	if not FileAccess.file_exists(texture_path):
-		push_warning("WorldRenderer: Chunk texture not found: " + texture_path)
+		push_warning("WorldRenderer: Super Chunk texture not found: " + texture_path)
 		return
 	
-	# Safe loading for user:// PNG files
-	var img = Image.load_from_file(texture_path)
+	var img := Image.load_from_file(texture_path)
 	if img:
-		var sprite = Sprite2D.new()
+		var sprite := Sprite2D.new()
 		sprite.texture = ImageTexture.create_from_image(img)
 		sprite.centered = false
-		sprite.position = Vector2(chunk_x * 2048, chunk_y * 2048)
+		sprite.position = Vector2(chunk_x * CHUNK_SIZE_PX, chunk_y * CHUNK_SIZE_PX)
 		sprite.z_index = -10
 		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		
@@ -105,16 +106,11 @@ func _load_chunk(map_id: String, chunk_x: int, chunk_y: int) -> void:
 		_chunk_sprites[key] = sprite
 		_loaded_chunks[key] = true
 	else:
-		push_warning("WorldRenderer: Failed to load image from " + texture_path)
+		push_warning("WorldRenderer: Failed to load Super Chunk from " + texture_path)
 
 
 func _process(_delta: float) -> void:
-	if _camera:
-		_update_visible_chunks()
-
-
-func _update_visible_chunks() -> void:
-	pass  # Aggressive culling can be added later
+	pass  # No culling — all Super Chunks stay loaded (buttery smooth)
 
 
 func get_map_width_px() -> float:
