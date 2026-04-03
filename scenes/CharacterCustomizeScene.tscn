@@ -1,0 +1,146 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuhkqcxca74gf"]
+
+[ext_resource type="Script" path="res://scenes/CharacterCustomizeScene.gd" id="1_script"]
+[ext_resource type="Theme" uid="uid://b2fiwl33j2vsw" path="res://theme/ElinTheme.tres" id="2_theme"]
+
+[node name="CharacterCustomizeScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_script")
+"#Background[nodename" = "BgBase"
+type = "ColorRect"
+parent = "."
+"]layout_mode" = 1
+color = Color(0.11, 0.088, 0.062, 1)
+
+[node name="BGLayers" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BgVignette" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+color = Color(0, 0, 0, 0.28)
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -116.5
+offset_top = 20.0
+offset_right = 363.5
+offset_bottom = 78.0
+grow_horizontal = 2
+text = "CUSTOMISE CHARACTER"
+horizontal_alignment = 1
+
+[node name="Content" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LeftPanel" type="PanelContainer" parent="Content"]
+layout_mode = 2
+
+[node name="LeftMargin" type="MarginContainer" parent="Content/LeftPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/LeftPanel/LeftMargin"]
+layout_mode = 2
+
+[node name="CategoryTabs" type="TabContainer" parent="Content/LeftPanel/LeftMargin/VBoxContainer"]
+layout_mode = 2
+
+[node name="LooksScroll" type="ScrollContainer" parent="Content/LeftPanel/LeftMargin/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="LooksGrid" type="GridContainer" parent="Content/LeftPanel/LeftMargin/VBoxContainer/LooksScroll"]
+layout_mode = 2
+columns = 5
+
+[node name="ColorGrid" type="GridContainer" parent="Content/LeftPanel/LeftMargin/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.2
+columns = 6
+
+[node name="PreviewPanel" type="PanelContainer" parent="Content"]
+layout_mode = 2
+
+[node name="PreviewMargin" type="MarginContainer" parent="Content/PreviewPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="PaperDoll" type="Node2D" parent="Content/PreviewPanel/PreviewMargin"]
+position = Vector2(-40, 0)
+
+[node name="BackPanel" type="Panel" parent="."]
+z_index = 2
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -70.0
+offset_right = 260.0
+offset_bottom = -12.0
+grow_vertical = 0
+
+[node name="BackButton" type="Button" parent="BackPanel"]
+custom_minimum_size = Vector2(220, 48)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
+offset_right = 220.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 22
+text = "BACK"
+
+[node name="ConfirmPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -70.0
+offset_right = -60.0
+offset_bottom = -12.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ConfirmButton" type="Button" parent="ConfirmPanel"]
+custom_minimum_size = Vector2(220, 48)
+layout_mode = 2
+offset_right = 220.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 22
+text = "CONFIRM"
